@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-namespace Gladius
+namespace Aspen
 {
 namespace Log
 {
@@ -26,6 +26,6 @@ extern Log Info;
 extern Log Warning;
 extern Log Error;
 } // namespace Log
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

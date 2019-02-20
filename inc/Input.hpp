@@ -2,7 +2,7 @@
 #define __INPUT_HPP
 #include <SDL2/SDL.h>
 
-namespace Gladius
+namespace Aspen
 {
 namespace Input
 {
@@ -21,6 +21,6 @@ bool KeyHeld(SDL_Keycode k);
 bool KeyPressed(SDL_Keycode k);
 bool KeyReleased(SDL_Keycode k);
 } // namespace Input
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

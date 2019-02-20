@@ -1,11 +1,11 @@
 #ifndef __STUB_HPP
 #define __STUB_HPP
-namespace Gladius
+namespace Aspen
 {
 namespace Stub
 {
 
 } // namespace Stub
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

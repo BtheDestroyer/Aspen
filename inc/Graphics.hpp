@@ -5,7 +5,7 @@
 #include "Log.hpp"
 #include "Object.hpp"
 
-namespace Gladius
+namespace Aspen
 {
 namespace Graphics
 {
@@ -48,6 +48,6 @@ public:
   void End();
 };
 } // namespace Graphics
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

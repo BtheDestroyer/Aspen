@@ -5,7 +5,7 @@
 
 #undef __INPUT_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Input
 {
@@ -37,4 +37,4 @@ bool KeyReleased(SDL_Keycode k)
   return GetKey(k).released;
 }
 } // namespace Input
-} // namespace Gladius
+} // namespace Aspen

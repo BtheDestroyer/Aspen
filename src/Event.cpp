@@ -6,7 +6,7 @@
 
 #undef __EVENT_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Event
 {
@@ -114,4 +114,4 @@ void EventHandler::operator()()
 }
 
 } // namespace Event
-} // namespace Gladius
+} // namespace Aspen

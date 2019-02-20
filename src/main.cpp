@@ -1,7 +1,7 @@
 #include "Engine.hpp"
 #include "Log.hpp"
 
-using namespace Gladius;
+using namespace Aspen;
 
 int main(int argc, char **argv)
 {

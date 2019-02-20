@@ -5,7 +5,7 @@
 
 #undef __ENGINE_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Engine
 {
@@ -179,4 +179,4 @@ void Engine::RemoveChild(int index)
   }
 }
 } // namespace Engine
-} // namespace Gladius
+} // namespace Aspen

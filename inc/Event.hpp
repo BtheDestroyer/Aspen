@@ -3,7 +3,7 @@
 #include "Object.hpp"
 #include <SDL2/SDL.h>
 
-namespace Gladius
+namespace Aspen
 {
 namespace Event
 {
@@ -48,6 +48,6 @@ public:
   void operator()();
 };
 } // namespace Event
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

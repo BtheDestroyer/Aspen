@@ -7,7 +7,7 @@
 
 #undef __OBJECT_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Object
 {
@@ -128,4 +128,4 @@ void Object::End()
 }
 
 } // namespace Object
-} // namespace Gladius
+} // namespace Aspen

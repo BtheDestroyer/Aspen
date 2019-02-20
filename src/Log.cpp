@@ -7,7 +7,7 @@
 
 #undef __LOG_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Log
 {
@@ -53,4 +53,4 @@ Log Warning = Log("\e[93mWAR: \e[39m");
 Log Error = Log("\e[91mERR: \e[39m");
 #endif
 } // namespace Log
-} // namespace Gladius
+} // namespace Aspen

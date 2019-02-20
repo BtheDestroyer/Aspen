@@ -7,7 +7,7 @@
 
 #undef __GRAPHICS_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Graphics
 {
@@ -149,4 +149,4 @@ SDL_Surface *Sprite::GetSurface()
 }
 
 } // namespace Graphics
-} // namespace Gladius
+} // namespace Aspen

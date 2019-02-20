@@ -3,7 +3,7 @@
 #include "Graphics.hpp"
 #include "Event.hpp"
 
-namespace Gladius
+namespace Aspen
 {
 namespace Engine
 {
@@ -40,6 +40,6 @@ public:
   void RemoveChild(int index);
 };
 } // namespace Engine
-} // namespace Gladius
+} // namespace Aspen
 
 #endif

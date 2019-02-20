@@ -4,10 +4,10 @@
 
 #undef __STUB_CPP
 
-namespace Gladius
+namespace Aspen
 {
 namespace Stub
 {
 
 } // namespace Stub
-} // namespace Gladius
+} // namespace Aspen

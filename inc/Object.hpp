@@ -2,7 +2,7 @@
 #define __OBJECT_HPP
 #include <vector>
 
-namespace Gladius
+namespace Aspen
 {
 namespace Object
 {
@@ -58,6 +58,6 @@ public:
   void End();
 };
 } // namespace Object
-} // namespace Gladius
+} // namespace Aspen
 
 #endif
