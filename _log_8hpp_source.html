@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -69,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -93,37 +94,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>Aspen</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>Log</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_aspen_1_1_log_1_1_log.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">int</span> _line;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  std::string _pre;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  std::string _suf;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">bool</span> _print;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a>(std::string prefix = <span class="stringliteral">&quot;&quot;</span>, std::string suffix = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">bool</span> print = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">void</span> operator()(<span class="keyword">const</span> std::string &amp;format, ...);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">void</span> operator()(<span class="keyword">const</span> std::stringstream &amp;message) { operator()(message.str()); }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keywordtype">void</span> TogglePrint();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a> Debug;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a> Info;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a> Warning;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">extern</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a> Error;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace Log</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace Aspen</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_aspen_1_1_log_1_1_log_html"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html">Aspen::Log::Log</a></div><div class="ttdef"><b>Definition:</b> Log.hpp:10</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Aspen</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespace_aspen_1_1_log.html">   11</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_aspen_1_1_log_1_1_log.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_log_1_1_log.html">Log</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">int</span> _line;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  std::string _pre;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  std::string _suf;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordtype">bool</span> _print;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="class_aspen_1_1_log_1_1_log.html#a7cd40b18a98f7849ffd0445b1a601634">Log</a>(std::string prefix = <span class="stringliteral">&quot;&quot;</span>, std::string suffix = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">bool</span> print = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html#a00c59066f5b3e9385b4ed23d5f75092b">operator()</a>(<span class="keyword">const</span> std::string &amp;format, ...);</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">   38</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">operator()</a>(<span class="keyword">const</span> std::stringstream &amp;message) { <a class="code" href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">operator()</a>(message.str()); }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_log_1_1_log.html#a7aa60eb49286c091b56062c96dc09abf">TogglePrint</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">extern</span> Log <a class="code" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b">Debug</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">extern</span> Log <a class="code" href="namespace_aspen_1_1_log.html#af62a95f18d98a318e428b4c66e34a0f8">Info</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">extern</span> Log <a class="code" href="namespace_aspen_1_1_log.html#a9dd5912438b92897359e4733778e5e82">Warning</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">extern</span> Log <a class="code" href="namespace_aspen_1_1_log.html#a7e12106a7c3e1195824d3b7bcda5845c">Error</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// namespace Log</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace Aspen</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_aspen_1_1_log_1_1_log_html"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html">Aspen::Log::Log</a></div><div class="ttdoc">Log functor class Used for logging information to the console. </div><div class="ttdef"><b>Definition:</b> Log.hpp:15</div></div>
+<div class="ttc" id="class_aspen_1_1_log_1_1_log_html_a00c59066f5b3e9385b4ed23d5f75092b"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html#a00c59066f5b3e9385b4ed23d5f75092b">Aspen::Log::Log::operator()</a></div><div class="ttdeci">void operator()(const std::string &amp;format,...)</div><div class="ttdoc">Log request Functions similarly to printf. </div></div>
+<div class="ttc" id="class_aspen_1_1_log_1_1_log_html_a0afd4a9bebc71be10b94a8d910d99336"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">Aspen::Log::Log::operator()</a></div><div class="ttdeci">void operator()(const std::stringstream &amp;message)</div><div class="ttdoc">Log request. </div><div class="ttdef"><b>Definition:</b> Log.hpp:38</div></div>
+<div class="ttc" id="class_aspen_1_1_log_1_1_log_html_a7aa60eb49286c091b56062c96dc09abf"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html#a7aa60eb49286c091b56062c96dc09abf">Aspen::Log::Log::TogglePrint</a></div><div class="ttdeci">void TogglePrint()</div><div class="ttdoc">Toggles _print. </div></div>
+<div class="ttc" id="namespace_aspen_1_1_log_html_a7e12106a7c3e1195824d3b7bcda5845c"><div class="ttname"><a href="namespace_aspen_1_1_log.html#a7e12106a7c3e1195824d3b7bcda5845c">Aspen::Log::Error</a></div><div class="ttdeci">Log Error</div><div class="ttdoc">Used for logging errors. </div></div>
+<div class="ttc" id="namespace_aspen_1_1_log_html_a9dd5912438b92897359e4733778e5e82"><div class="ttname"><a href="namespace_aspen_1_1_log.html#a9dd5912438b92897359e4733778e5e82">Aspen::Log::Warning</a></div><div class="ttdeci">Log Warning</div><div class="ttdoc">Used for logging warnings. </div></div>
+<div class="ttc" id="namespace_aspen_1_1_log_html_af62a95f18d98a318e428b4c66e34a0f8"><div class="ttname"><a href="namespace_aspen_1_1_log.html#af62a95f18d98a318e428b4c66e34a0f8">Aspen::Log::Info</a></div><div class="ttdeci">Log Info</div><div class="ttdoc">Used for logging general info. </div></div>
+<div class="ttc" id="namespace_aspen_1_1_log_html_ad6a082e9097a93151b93666c131fc03b"><div class="ttname"><a href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b">Aspen::Log::Debug</a></div><div class="ttdeci">Log Debug</div><div class="ttdoc">Used for logging debug info. </div></div>
+<div class="ttc" id="class_aspen_1_1_log_1_1_log_html_a7cd40b18a98f7849ffd0445b1a601634"><div class="ttname"><a href="class_aspen_1_1_log_1_1_log.html#a7cd40b18a98f7849ffd0445b1a601634">Aspen::Log::Log::Log</a></div><div class="ttdeci">Log(std::string prefix=&quot;&quot;, std::string suffix=&quot;&quot;, bool print=true)</div><div class="ttdoc">Constructor. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 01:15:54 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 20 2019 01:35:52 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
