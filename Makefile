@@ -28,7 +28,7 @@ OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
 ###############################################################
 
-all: $(OUTPUT)
+all: $(OUTPUT) docs
 
 setup: $(SOURCES) $(HEADERS) $(BUILD)
 
@@ -98,6 +98,9 @@ $(BUILD):
 
 clean:
 	rm -rf $(BUILD)
+
+docs:
+	@doxygen Doxyfile
 
 test: $(OUTPUT)
 	$(OUTPUT)
