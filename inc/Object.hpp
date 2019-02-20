@@ -2,8 +2,11 @@
 #define __OBJECT_HPP
 #include <vector>
 
+/// \brief Aspen engine namespace
 namespace Aspen
 {
+/// \brief Stub namespace
+///        To be replaced after running `make newfile NEWFILE=file`
 namespace Object
 {
 class Object

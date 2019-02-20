@@ -5,8 +5,11 @@
 #include "Log.hpp"
 #include "Object.hpp"
 
+/// \brief Aspen engine namespace
 namespace Aspen
 {
+/// \brief Stub namespace
+///        To be replaced after running `make newfile NEWFILE=file`
 namespace Graphics
 {
 extern const int DEFAULT_WINDOW_WIDTH;

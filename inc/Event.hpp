@@ -3,8 +3,11 @@
 #include "Object.hpp"
 #include <SDL2/SDL.h>
 
+/// \brief Aspen engine namespace
 namespace Aspen
 {
+/// \brief Stub namespace
+///        To be replaced after running `make newfile NEWFILE=file`
 namespace Event
 {
 class EventListener : public Object::Object

@@ -3,8 +3,11 @@
 #include "Graphics.hpp"
 #include "Event.hpp"
 
+/// \brief Aspen engine namespace
 namespace Aspen
 {
+/// \brief Stub namespace
+///        To be replaced after running `make newfile NEWFILE=file`
 namespace Engine
 {
 namespace START_FLAGS
