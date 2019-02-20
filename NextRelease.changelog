@@ -17,7 +17,7 @@
     \... Gets root ancestor Object.
     + virtual void operator()();
     \... Acts as an Update() function.
-    \... Redefined by base classes.
+    \... Redefined by derived classes.
     \... Redefinitions should call Object::operator()() at some point to update children.
     + void AddChild(Object *child)
     \... Useful for creating new objects with parameters: object.AddChild(new MyObject("param0"));
