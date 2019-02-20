@@ -29,7 +29,7 @@ protected:
 
 public:
   /// \brief Constructor
-  ///        Derived classes should call this in their constructors' initialization list
+  ///        Derived must should call this in their constructors' initialization list
   /// \param parent Parent Object creating this Object
   Object(Object *parent = nullptr);
   /// \brief Destructor
