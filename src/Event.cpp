@@ -11,7 +11,7 @@ namespace Aspen
 namespace Event
 {
 EventListener::EventListener()
-    : Object()
+    : Object(), _name("EventListener")
 {
 }
 

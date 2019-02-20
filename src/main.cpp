@@ -13,6 +13,8 @@ int main(int argc, char **argv)
   engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp"));
   engine.Graphics()->AddChild(new Graphics::Sprite("resources/mario.bmp"));
 
+  engine.PrintTree();
+  
   while (engine)
     engine();
   return 0;

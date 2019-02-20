@@ -10,7 +10,7 @@ namespace Aspen
 namespace Engine
 {
 Engine::Engine(int flags)
-    : Object()
+    : Object(), _name("Engine")
 {
   std::stringstream str;
   str << "Creating Engine with the following flags:";

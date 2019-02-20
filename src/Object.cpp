@@ -14,11 +14,11 @@ namespace Object
 int Object::_count = 0;
 
 Object::Object(Object *parent)
-    : _parent(parent)
+    : _name("Object"), _parent(parent)
 {
   ++_count;
   std::stringstream str;
-  str << std::setw(32) << std::setfill(' ') << std::left << "Creating Object: " << this << "  ";
+  str << std::setw(32) << std::setfill(' ') << std::left << "Creating " << _name << ": " << this << "  ";
   str << _count;
   Log::Debug(str);
   _valid = true;
@@ -28,7 +28,7 @@ Object::~Object()
 {
   --_count;
   std::stringstream str;
-  str << std::setw(32) << std::setfill(' ') << std::left << "Destroying Object: " << this << "  ";
+  str << std::setw(32) << std::setfill(' ') << std::left << "Destroying " << _name << ": " << this << "  ";
   str << _count;
   Log::Debug(str);
   if (_count == 0)
@@ -125,6 +125,18 @@ void Object::End()
   for (Object *child : _children)
     child->End();
   _valid = false;
+}
+
+void Object::PrintTree(Log::Log log)
+{
+  static std::string indentation = "";
+  log("%s\\... %s (%p)", indentation.c_str(), _name.c_str(), this);
+  indentation = "| " + indentation;
+  for (Object *child : _children)
+  {
+    child->PrintTree(log);
+  }
+  indentation = indentation.substr(3);
 }
 
 } // namespace Object

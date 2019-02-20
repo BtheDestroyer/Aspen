@@ -16,7 +16,8 @@ const int DEFAULT_WINDOW_HEIGHT = 480;
 
 Graphics::Graphics() : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) {}
 
-Graphics::Graphics(int w, int h) : Object()
+Graphics::Graphics(int w, int h)
+    : Object(), _name("Graphics")
 {
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
   {

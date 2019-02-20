@@ -1,6 +1,7 @@
 #ifndef __OBJECT_HPP
 #define __OBJECT_HPP
 #include <vector>
+#include "Log.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -14,6 +15,8 @@ namespace Object
 class Object
 {
 protected:
+  /// \brief Name of object
+  std::string _name;
   /// \brief Total number of Objects in existence
   static int _count;
   /// \brief Parent/owner of this Object
@@ -125,6 +128,11 @@ public:
   /// \brief Shuts down and invalidates Object and all of its children
   ///        An invalid child Object will be deleted by their parent after they update
   void End();
+
+  /// \brief Uses Log::Log to print the parent/children tree of this Object
+  /// \param log Log::Log to use
+  ///            Defaults to Log::Debug
+  void PrintTree(Log::Log log = Log::Debug);
 };
 } // namespace Object
 } // namespace Aspen

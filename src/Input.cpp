@@ -11,7 +11,8 @@ namespace Input
 {
 std::map<SDL_Keycode, Key> keys;
 
-Key::Key() : held(false), pressed(false), released(false)
+Key::Key()
+    : held(false), pressed(false), released(false)
 {
 }
 
