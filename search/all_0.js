@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['aspen',['Aspen',['../namespace_aspen.html',1,'']]],
-  ['engine',['Engine',['../namespace_aspen_1_1_engine.html',1,'Aspen']]],
-  ['event',['Event',['../namespace_aspen_1_1_event.html',1,'Aspen']]],
-  ['graphics',['Graphics',['../namespace_aspen_1_1_graphics.html',1,'Aspen']]],
-  ['input',['Input',['../namespace_aspen_1_1_input.html',1,'Aspen']]],
-  ['log',['Log',['../namespace_aspen_1_1_log.html',1,'Aspen']]],
-  ['object',['Object',['../namespace_aspen_1_1_object.html',1,'Aspen']]]
+  ['_5fline',['_line',['../class_aspen_1_1_log_1_1_log.html#ab55feb33b8b72e94f7407ccda132e5f8',1,'Aspen::Log::Log']]],
+  ['_5fpre',['_pre',['../class_aspen_1_1_log_1_1_log.html#a89e31fa388bf48be58e19a78413794b4',1,'Aspen::Log::Log']]],
+  ['_5fprint',['_print',['../class_aspen_1_1_log_1_1_log.html#a337a25e02afdf2e333ca96f322cd7035',1,'Aspen::Log::Log']]],
+  ['_5fsuf',['_suf',['../class_aspen_1_1_log_1_1_log.html#a8e59241a2e8a969c23bc7f4f076c1472',1,'Aspen::Log::Log']]]
 ];

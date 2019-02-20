@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warning',['Warning',['../namespace_aspen_1_1_log.html#a9dd5912438b92897359e4733778e5e82',1,'Aspen::Log']]]
+  ['info',['Info',['../namespace_aspen_1_1_log.html#af62a95f18d98a318e428b4c66e34a0f8',1,'Aspen::Log']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['key',['Key',['../class_aspen_1_1_input_1_1_key.html',1,'Aspen::Input']]],
-  ['keyeventlistener',['KeyEventListener',['../class_aspen_1_1_event_1_1_key_event_listener.html',1,'Aspen::Event']]]
+  ['info',['Info',['../namespace_aspen_1_1_log.html#af62a95f18d98a318e428b4c66e34a0f8',1,'Aspen::Log']]]
 ];
