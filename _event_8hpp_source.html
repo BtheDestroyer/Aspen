@@ -98,59 +98,73 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespace_aspen_1_1_event.html">   11</a></span>&#160;<span class="keyword">namespace </span>Event</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_event_listener.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object::Object</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  ~<a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">void</span> operator()(SDL_Event *event = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Handle(SDL_Event *event);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_quit_event_listener.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html">QuitEventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html">QuitEventListener</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  ~<a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html">QuitEventListener</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">void</span> Handle(SDL_Event *event);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_key_event_listener.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html">KeyEventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  SDL_Keycode _key;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html">KeyEventListener</a>(SDL_Keycode k = SDLK_UNKNOWN);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ~<a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html">KeyEventListener</a>();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> SetKey(SDL_Keycode k);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">void</span> Handle(SDL_Event *event);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_event_handler.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object::Object</a></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  ~<a class="code" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">void</span> operator()();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <span class="comment">// namespace Event</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// namespace Aspen</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_event_listener.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object::Object</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html#aeb4a50b61bdba5a8b2c82824912b5e28">EventListener</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html#a5e2cf403e81c231873859bf23c158fa2">~EventListener</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">operator()</a>(SDL_Event *event = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html#ae5c631c56d6086ea145e75c3b2a6da3e">Handle</a>(SDL_Event *event);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_quit_event_listener.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html">QuitEventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html#a83df3340bd7d7ceb15372b7fe39e53fd">QuitEventListener</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html#a096ab198a63420a996ec167c18a4ac85">~QuitEventListener</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_event_1_1_quit_event_listener.html#a58d965225baf29089b4abb738d2c9a57">Handle</a>(SDL_Event *event);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_key_event_listener.html">   51</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html">KeyEventListener</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_event_1_1_event_listener.html">EventListener</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_key_event_listener.html#a4a030c8d1cd584157f4607da62dd35fb">   54</a></span>&#160;  SDL_Keycode <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html#a4a030c8d1cd584157f4607da62dd35fb">_key</a>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html">Aspen::Event::KeyEventListener</a></div><div class="ttdef"><b>Definition:</b> Event.hpp:33</div></div>
-<div class="ttc" id="class_aspen_1_1_object_1_1_object_html"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></div><div class="ttdef"><b>Definition:</b> Object.hpp:12</div></div>
-<div class="ttc" id="class_aspen_1_1_event_1_1_quit_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_quit_event_listener.html">Aspen::Event::QuitEventListener</a></div><div class="ttdef"><b>Definition:</b> Event.hpp:24</div></div>
-<div class="ttc" id="class_aspen_1_1_event_1_1_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_listener.html">Aspen::Event::EventListener</a></div><div class="ttdef"><b>Definition:</b> Event.hpp:13</div></div>
-<div class="ttc" id="class_aspen_1_1_event_1_1_event_handler_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_handler.html">Aspen::Event::EventHandler</a></div><div class="ttdef"><b>Definition:</b> Event.hpp:46</div></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html#a0affd7ca59069ef53b50cf6af6194c33">KeyEventListener</a>(SDL_Keycode k = SDLK_UNKNOWN);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html#a43ff3e369d5e99d63421db0c3c27fc60">~KeyEventListener</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html#a76cd7f4e6b5bd314740c419bbd5e2cc7">SetKey</a>(SDL_Keycode k);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_event_1_1_key_event_listener.html#aea2a17c4e1c8720a18c8c08c21510cad">Handle</a>(SDL_Event *event);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_aspen_1_1_event_1_1_event_handler.html">   74</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a> : <span class="keyword">public</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object::Object</a></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_handler.html#a077cb4542485daf1df39e27acb6a6966">EventHandler</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="class_aspen_1_1_event_1_1_event_handler.html#ac07fe4266cf23e3758a33a0b5253fed8">~EventHandler</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_event_1_1_event_handler.html#a5d13a2e6bcd952adc6961222627159f7">operator()</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <span class="comment">// namespace Event</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;} <span class="comment">// namespace Aspen</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html_a4a030c8d1cd584157f4607da62dd35fb"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html#a4a030c8d1cd584157f4607da62dd35fb">Aspen::Event::KeyEventListener::_key</a></div><div class="ttdeci">SDL_Keycode _key</div><div class="ttdoc">Key to pass Input::GetKey() </div><div class="ttdef"><b>Definition:</b> Event.hpp:54</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html">Aspen::Event::KeyEventListener</a></div><div class="ttdoc">KeyEventListener class Controls Input::Keys from Input::GetKey() </div><div class="ttdef"><b>Definition:</b> Event.hpp:51</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></div><div class="ttdoc">General base class Allows for parent/child relationship trees. </div><div class="ttdef"><b>Definition:</b> Object.hpp:14</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_quit_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_quit_event_listener.html">Aspen::Event::QuitEventListener</a></div><div class="ttdoc">QuitEventListener class. </div><div class="ttdef"><b>Definition:</b> Event.hpp:36</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_handler_html_ac07fe4266cf23e3758a33a0b5253fed8"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_handler.html#ac07fe4266cf23e3758a33a0b5253fed8">Aspen::Event::EventHandler::~EventHandler</a></div><div class="ttdeci">~EventHandler()</div><div class="ttdoc">Destructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html_aea2a17c4e1c8720a18c8c08c21510cad"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html#aea2a17c4e1c8720a18c8c08c21510cad">Aspen::Event::KeyEventListener::Handle</a></div><div class="ttdeci">void Handle(SDL_Event *event)</div><div class="ttdoc">Controls the state of Input::Key in the map obtained by Input::GetKey(_key) Does nothing if _key == S...</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html_a76cd7f4e6b5bd314740c419bbd5e2cc7"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html#a76cd7f4e6b5bd314740c419bbd5e2cc7">Aspen::Event::KeyEventListener::SetKey</a></div><div class="ttdeci">void SetKey(SDL_Keycode k)</div><div class="ttdoc">Sets _key. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_listener_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_listener.html">Aspen::Event::EventListener</a></div><div class="ttdoc">EventListener class Parented by EventHandler and used to moduly handle SDL_Events. </div><div class="ttdef"><b>Definition:</b> Event.hpp:15</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_listener_html_a5e2cf403e81c231873859bf23c158fa2"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_listener.html#a5e2cf403e81c231873859bf23c158fa2">Aspen::Event::EventListener::~EventListener</a></div><div class="ttdeci">~EventListener()</div><div class="ttdoc">Destructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_quit_event_listener_html_a096ab198a63420a996ec167c18a4ac85"><div class="ttname"><a href="class_aspen_1_1_event_1_1_quit_event_listener.html#a096ab198a63420a996ec167c18a4ac85">Aspen::Event::QuitEventListener::~QuitEventListener</a></div><div class="ttdeci">~QuitEventListener()</div><div class="ttdoc">Destructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_listener_html_ae5c631c56d6086ea145e75c3b2a6da3e"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_listener.html#ae5c631c56d6086ea145e75c3b2a6da3e">Aspen::Event::EventListener::Handle</a></div><div class="ttdeci">virtual void Handle(SDL_Event *event)</div><div class="ttdoc">Handles event passed by operator() Redefined by inheriting classes. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_listener_html_aeb4a50b61bdba5a8b2c82824912b5e28"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_listener.html#aeb4a50b61bdba5a8b2c82824912b5e28">Aspen::Event::EventListener::EventListener</a></div><div class="ttdeci">EventListener()</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html_a43ff3e369d5e99d63421db0c3c27fc60"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html#a43ff3e369d5e99d63421db0c3c27fc60">Aspen::Event::KeyEventListener::~KeyEventListener</a></div><div class="ttdeci">~KeyEventListener()</div><div class="ttdoc">Destructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_handler_html"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_handler.html">Aspen::Event::EventHandler</a></div><div class="ttdoc">EventHandler class Passes SDL_Events to children EventListeners. </div><div class="ttdef"><b>Definition:</b> Event.hpp:74</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_quit_event_listener_html_a83df3340bd7d7ceb15372b7fe39e53fd"><div class="ttname"><a href="class_aspen_1_1_event_1_1_quit_event_listener.html#a83df3340bd7d7ceb15372b7fe39e53fd">Aspen::Event::QuitEventListener::QuitEventListener</a></div><div class="ttdeci">QuitEventListener()</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_handler_html_a5d13a2e6bcd952adc6961222627159f7"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_handler.html#a5d13a2e6bcd952adc6961222627159f7">Aspen::Event::EventHandler::operator()</a></div><div class="ttdeci">void operator()()</div><div class="ttdoc">Polls SDL_Events and passes them to all child EventListeners. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_key_event_listener_html_a0affd7ca59069ef53b50cf6af6194c33"><div class="ttname"><a href="class_aspen_1_1_event_1_1_key_event_listener.html#a0affd7ca59069ef53b50cf6af6194c33">Aspen::Event::KeyEventListener::KeyEventListener</a></div><div class="ttdeci">KeyEventListener(SDL_Keycode k=SDLK_UNKNOWN)</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_quit_event_listener_html_a58d965225baf29089b4abb738d2c9a57"><div class="ttname"><a href="class_aspen_1_1_event_1_1_quit_event_listener.html#a58d965225baf29089b4abb738d2c9a57">Aspen::Event::QuitEventListener::Handle</a></div><div class="ttdeci">void Handle(SDL_Event *event)</div><div class="ttdoc">Calls Root()-&gt;End() to shutdown the entire Object tree if passed an SDL_QUIT event. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_ae827d63a640435d6cf84ef81cd9d1547"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">Aspen::Object::Object::operator()</a></div><div class="ttdeci">virtual void operator()()</div><div class="ttdoc">Updates this object and all of its children Derived classes should call this at some point in their o...</div></div>
+<div class="ttc" id="class_aspen_1_1_event_1_1_event_handler_html_a077cb4542485daf1df39e27acb6a6966"><div class="ttname"><a href="class_aspen_1_1_event_1_1_event_handler.html#a077cb4542485daf1df39e27acb6a6966">Aspen::Event::EventHandler::EventHandler</a></div><div class="ttdeci">EventHandler()</div><div class="ttdoc">Constructor. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 01:45:03 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

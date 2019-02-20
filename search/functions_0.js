@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log',['Log',['../class_aspen_1_1_log_1_1_log.html#a7cd40b18a98f7849ffd0445b1a601634',1,'Aspen::Log::Log']]]
+  ['addchild',['AddChild',['../class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971',1,'Aspen::Object::Object']]]
 ];

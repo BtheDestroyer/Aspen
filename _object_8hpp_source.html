@@ -97,66 +97,84 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_aspen_1_1_object.html">   10</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">int</span> _count;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *_parent;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  std::vector&lt;Object *&gt; _children;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">bool</span> _valid = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keywordtype">void</span> SetParent(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a>(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *Parent();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *Root();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> operator()();</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e">   18</a></span>&#160;  <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e">_count</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">   20</a></span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *<a class="code" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">_parent</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">   22</a></span>&#160;  std::vector&lt;Object *&gt; <a class="code" href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">_children</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">   25</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">_valid</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#aa7b58f0e55a3035f9ab1c958343e5857">SetParent</a>(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">void</span> AddChild(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  T *CreateChild()</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    T *o = <span class="keyword">new</span> T;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    AddChild(o);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> o;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">void</span> RemoveChild(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">void</span> RemoveChild(<span class="keywordtype">int</span> index);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *operator[](<span class="keywordtype">int</span> index);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  T *FindChildOfType()</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child : _children)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">if</span> (child &amp;&amp; dynamic_cast&lt;T *&gt;(child))</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>T *<span class="keyword">&gt;</span>(child);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  std::vector&lt;T *&gt; FindChildrenOfType()</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::vector&lt;T *&gt; vec;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child : _children)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordflow">if</span> (child &amp;&amp; dynamic_cast&lt;T *&gt;(child))</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        vec.push_back(dynamic_cast&lt;T *&gt;(child));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> vec;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;Valid() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">operator</span> bool() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> End();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">// namespace Object</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace Aspen</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_aspen_1_1_object_1_1_object_html"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></div><div class="ttdef"><b>Definition:</b> Object.hpp:12</div></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html#abba0c3ac64269eb95646b1a07cd3ffae">Object</a>(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">virtual</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a1f5c327106d554e043ddcff2ca9bb532">~Object</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *<a class="code" href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Parent</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *<a class="code" href="class_aspen_1_1_object_1_1_object.html#a15247881a7c8816de3bdc9099e8cbe65">Root</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">operator()</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">AddChild</a>(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">   63</a></span>&#160;  T *<a class="code" href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">CreateChild</a>()</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    T *o = <span class="keyword">new</span> T;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">AddChild</a>(o);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> o;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">RemoveChild</a>(<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">RemoveChild</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *<a class="code" href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">operator[]</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">   91</a></span>&#160;  T *<a class="code" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a>()</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child : <a class="code" href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">_children</a>)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">if</span> (child &amp;&amp; dynamic_cast&lt;T *&gt;(child))</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>T *<span class="keyword">&gt;</span>(child);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">  105</a></span>&#160;  std::vector&lt;T *&gt; <a class="code" href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">FindChildrenOfType</a>()</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::vector&lt;T *&gt; vec;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child : <a class="code" href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">_children</a>)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      <span class="keywordflow">if</span> (child &amp;&amp; dynamic_cast&lt;T *&gt;(child))</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        vec.push_back(dynamic_cast&lt;T *&gt;(child));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">return</span> vec;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;<a class="code" href="class_aspen_1_1_object_1_1_object.html#a2d5e6269408df50277e9377a0ea620de">Valid</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keyword">operator</span> bool() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">End</a>();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;} <span class="comment">// namespace Object</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;} <span class="comment">// namespace Aspen</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></div><div class="ttdoc">General base class Allows for parent/child relationship trees. </div><div class="ttdef"><b>Definition:</b> Object.hpp:14</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a3cd9bdc4ee7d3b1ad7ad5a3fcffef228"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">Aspen::Object::Object::_parent</a></div><div class="ttdeci">Object * _parent</div><div class="ttdoc">Parent/owner of this Object. </div><div class="ttdef"><b>Definition:</b> Object.hpp:20</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_ac0bd3a26e078850907748692d727230b"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">Aspen::Object::Object::FindChildrenOfType</a></div><div class="ttdeci">std::vector&lt; T * &gt; FindChildrenOfType()</div><div class="ttdoc">Finds all children Objects of a type applicable to that which was requested. </div><div class="ttdef"><b>Definition:</b> Object.hpp:105</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a60955e31c71d4171274d28f6f8b38e3c"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">Aspen::Object::Object::operator[]</a></div><div class="ttdeci">Object * operator[](int index)</div><div class="ttdoc">Gets the child at index from this Object&#39;s list of children. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a31d1f3ee496a6247a73d24aac9120c61"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">Aspen::Object::Object::RemoveChild</a></div><div class="ttdeci">void RemoveChild(Object *child)</div><div class="ttdoc">Removes child from this Object&#39;s list of children This will also set child&#39;s _parent to nullptr This ...</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a758956ae85bfe1316609888657092bd5"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">Aspen::Object::Object::_valid</a></div><div class="ttdeci">bool _valid</div><div class="ttdoc">Determines if the Object is valid Derived classes can set this to false in their Constructors if they...</div><div class="ttdef"><b>Definition:</b> Object.hpp:25</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a077c6f008bd36517042170c3d589ebfb"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">Aspen::Object::Object::FindChildOfType</a></div><div class="ttdeci">T * FindChildOfType()</div><div class="ttdoc">Finds the first child Object of a type applicable to that which was requested. </div><div class="ttdef"><b>Definition:</b> Object.hpp:91</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_abba0c3ac64269eb95646b1a07cd3ffae"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#abba0c3ac64269eb95646b1a07cd3ffae">Aspen::Object::Object::Object</a></div><div class="ttdeci">Object(Object *parent=nullptr)</div><div class="ttdoc">Constructor Derived must should call this in their constructors&#39; initialization list. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a512d17c7915076e4e15ca73cfbd67971"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">Aspen::Object::Object::AddChild</a></div><div class="ttdeci">void AddChild(Object *child)</div><div class="ttdoc">Adds child to this Object&#39;s list of children This will also set child&#39;s _parent to this This will do ...</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_aa7b58f0e55a3035f9ab1c958343e5857"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#aa7b58f0e55a3035f9ab1c958343e5857">Aspen::Object::Object::SetParent</a></div><div class="ttdeci">void SetParent(Object *parent)</div><div class="ttdoc">Sets _parent to the given Object Used by AddChild, CreateChild, etc. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_ab24f1c4ca5364dc22f4be183c945f437"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">Aspen::Object::Object::CreateChild</a></div><div class="ttdeci">T * CreateChild()</div><div class="ttdoc">Creates a new child of type T Useful for creating an object with no constructor parameters and/or mod...</div><div class="ttdef"><b>Definition:</b> Object.hpp:63</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a2d5e6269408df50277e9377a0ea620de"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a2d5e6269408df50277e9377a0ea620de">Aspen::Object::Object::Valid</a></div><div class="ttdeci">const bool &amp; Valid() const </div><div class="ttdoc">Determines if the Object is valid. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a16b58bad3a22150f56ecc37efd19081e"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e">Aspen::Object::Object::_count</a></div><div class="ttdeci">static int _count</div><div class="ttdoc">Total number of Objects in existence. </div><div class="ttdef"><b>Definition:</b> Object.hpp:18</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a0ad096111db6a0a09fdd5e113d066866"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">Aspen::Object::Object::_children</a></div><div class="ttdeci">std::vector&lt; Object * &gt; _children</div><div class="ttdoc">List of children Objects. </div><div class="ttdef"><b>Definition:</b> Object.hpp:22</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a056bfac305482ed281a5d850a2b2754c"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">Aspen::Object::Object::End</a></div><div class="ttdeci">void End()</div><div class="ttdoc">Shuts down and invalidates Object and all of its children An invalid child Object will be deleted by ...</div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a1f5c327106d554e043ddcff2ca9bb532"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a1f5c327106d554e043ddcff2ca9bb532">Aspen::Object::Object::~Object</a></div><div class="ttdeci">virtual ~Object()</div><div class="ttdoc">Destructor This will End and then delete all child Objects. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a8f224e3d221280d5031c7ddf8010eaa0"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Aspen::Object::Object::Parent</a></div><div class="ttdeci">Object * Parent()</div><div class="ttdoc">Gets the parent of this Object. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_a15247881a7c8816de3bdc9099e8cbe65"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#a15247881a7c8816de3bdc9099e8cbe65">Aspen::Object::Object::Root</a></div><div class="ttdeci">Object * Root()</div><div class="ttdoc">Gets the root Object of the parent/child tree this Object is a part of. </div></div>
+<div class="ttc" id="class_aspen_1_1_object_1_1_object_html_ae827d63a640435d6cf84ef81cd9d1547"><div class="ttname"><a href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">Aspen::Object::Object::operator()</a></div><div class="ttdeci">virtual void operator()()</div><div class="ttdoc">Updates this object and all of its children Derived classes should call this at some point in their o...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 01:45:03 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

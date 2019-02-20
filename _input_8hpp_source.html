@@ -97,29 +97,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_aspen_1_1_input.html">   10</a></span>&#160;<span class="keyword">namespace </span>Input</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_aspen_1_1_input_1_1_key.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_input_1_1_key.html">Key</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">bool</span> held;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">bool</span> pressed;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">bool</span> released;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="class_aspen_1_1_input_1_1_key.html">Key</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="class_aspen_1_1_input_1_1_key.html">Key</a> &amp;GetKey(SDL_Keycode k);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">bool</span> KeyHeld(SDL_Keycode k);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">bool</span> KeyPressed(SDL_Keycode k);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">bool</span> KeyReleased(SDL_Keycode k);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace Input</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace Aspen</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_aspen_1_1_input_1_1_key_html"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html">Aspen::Input::Key</a></div><div class="ttdef"><b>Definition:</b> Input.hpp:12</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_aspen_1_1_input_1_1_key.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_aspen_1_1_input_1_1_key.html">Key</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_aspen_1_1_input_1_1_key.html#aaa91fee2391f8dbf66eb14e069f2b84b">   17</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_aspen_1_1_input_1_1_key.html#aaa91fee2391f8dbf66eb14e069f2b84b">held</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_aspen_1_1_input_1_1_key.html#a9ff4633c508f52c4f9e966698dbda833">   19</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_aspen_1_1_input_1_1_key.html#a9ff4633c508f52c4f9e966698dbda833">pressed</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_aspen_1_1_input_1_1_key.html#a7e7572c54eb941dac3359c69f35a34d0">   21</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_aspen_1_1_input_1_1_key.html#a7e7572c54eb941dac3359c69f35a34d0">released</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="class_aspen_1_1_input_1_1_key.html#a06a15cb3ad13f228d63006748721d627">Key</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="class_aspen_1_1_input_1_1_key.html">Key</a> &amp;<a class="code" href="namespace_aspen_1_1_input.html#a5b75c6930821388f1fd7e7f1a141d58e">GetKey</a>(SDL_Keycode k);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespace_aspen_1_1_input.html#a98a0e5426b1c04ed00da5aeb3af76c83">KeyHeld</a>(SDL_Keycode k);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespace_aspen_1_1_input.html#a7baa90f4c85c1e7f8fd42a81a77c27ba">KeyPressed</a>(SDL_Keycode k);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespace_aspen_1_1_input.html#aa1e9e4abf234ae050789fd61b1113856">KeyReleased</a>(SDL_Keycode k);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;} <span class="comment">// namespace Input</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">// namespace Aspen</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_aspen_1_1_input_1_1_key_html_a9ff4633c508f52c4f9e966698dbda833"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html#a9ff4633c508f52c4f9e966698dbda833">Aspen::Input::Key::pressed</a></div><div class="ttdeci">bool pressed</div><div class="ttdoc">True for the first frame key is being pressed. </div><div class="ttdef"><b>Definition:</b> Input.hpp:19</div></div>
+<div class="ttc" id="namespace_aspen_1_1_input_html_aa1e9e4abf234ae050789fd61b1113856"><div class="ttname"><a href="namespace_aspen_1_1_input.html#aa1e9e4abf234ae050789fd61b1113856">Aspen::Input::KeyReleased</a></div><div class="ttdeci">bool KeyReleased(SDL_Keycode k)</div><div class="ttdoc">Gets the released state of a Key. </div></div>
+<div class="ttc" id="namespace_aspen_1_1_input_html_a7baa90f4c85c1e7f8fd42a81a77c27ba"><div class="ttname"><a href="namespace_aspen_1_1_input.html#a7baa90f4c85c1e7f8fd42a81a77c27ba">Aspen::Input::KeyPressed</a></div><div class="ttdeci">bool KeyPressed(SDL_Keycode k)</div><div class="ttdoc">Gets the pressed state of a Key. </div></div>
+<div class="ttc" id="class_aspen_1_1_input_1_1_key_html_a06a15cb3ad13f228d63006748721d627"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html#a06a15cb3ad13f228d63006748721d627">Aspen::Input::Key::Key</a></div><div class="ttdeci">Key()</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="class_aspen_1_1_input_1_1_key_html_a7e7572c54eb941dac3359c69f35a34d0"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html#a7e7572c54eb941dac3359c69f35a34d0">Aspen::Input::Key::released</a></div><div class="ttdeci">bool released</div><div class="ttdoc">True for the frame key is released. </div><div class="ttdef"><b>Definition:</b> Input.hpp:21</div></div>
+<div class="ttc" id="class_aspen_1_1_input_1_1_key_html"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html">Aspen::Input::Key</a></div><div class="ttdoc">Key status class. </div><div class="ttdef"><b>Definition:</b> Input.hpp:13</div></div>
+<div class="ttc" id="class_aspen_1_1_input_1_1_key_html_aaa91fee2391f8dbf66eb14e069f2b84b"><div class="ttname"><a href="class_aspen_1_1_input_1_1_key.html#aaa91fee2391f8dbf66eb14e069f2b84b">Aspen::Input::Key::held</a></div><div class="ttdeci">bool held</div><div class="ttdoc">True as long as the key is being pressed. </div><div class="ttdef"><b>Definition:</b> Input.hpp:17</div></div>
+<div class="ttc" id="namespace_aspen_1_1_input_html_a5b75c6930821388f1fd7e7f1a141d58e"><div class="ttname"><a href="namespace_aspen_1_1_input.html#a5b75c6930821388f1fd7e7f1a141d58e">Aspen::Input::GetKey</a></div><div class="ttdeci">Key &amp; GetKey(SDL_Keycode k)</div><div class="ttdoc">Gets a Key reference from a hidden map Creates a new Key reference if one does not yet exist for the ...</div></div>
+<div class="ttc" id="namespace_aspen_1_1_input_html_a98a0e5426b1c04ed00da5aeb3af76c83"><div class="ttname"><a href="namespace_aspen_1_1_input.html#a98a0e5426b1c04ed00da5aeb3af76c83">Aspen::Input::KeyHeld</a></div><div class="ttdeci">bool KeyHeld(SDL_Keycode k)</div><div class="ttdoc">Gets the held state of a Key. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 01:45:03 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
