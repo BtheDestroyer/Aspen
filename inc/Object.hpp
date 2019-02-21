@@ -34,6 +34,8 @@ public:
   /// \brief Constructor
   ///        Derived must should call this in their constructors' initialization list
   /// \param parent Parent Object creating this Object
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Object(Object *parent = nullptr, std::string name = "Object");
   /// \brief Destructor
   ///        This will End and then delete all child Objects
