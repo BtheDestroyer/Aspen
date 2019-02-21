@@ -6,7 +6,7 @@ PROJECT := sdl.exe
 OUTPUT := $(BUILD)/$(PROJECT)
 
 CXX := g++
-CXXFLAGS := -g -I$(HEADERS) -mwindows -D__WIN32
+CXXFLAGS := -g -I$(HEADERS) -Wall -Wextra -Wno-unused-parameter -mwindows -D__WIN32
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif

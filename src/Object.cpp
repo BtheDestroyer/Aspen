@@ -92,7 +92,7 @@ void Object::RemoveChild(Object *child)
   }
 }
 
-void Object::RemoveChild(int index)
+void Object::RemoveChild(unsigned index)
 {
   if (index < _children.size())
   {
@@ -101,9 +101,9 @@ void Object::RemoveChild(int index)
   }
 }
 
-Object *Object::operator[](int index)
+Object *Object::operator[](unsigned index)
 {
-  if (index > 0 && index < _children.size())
+  if (index < _children.size())
     return _children[index];
   return nullptr;
 }
@@ -179,7 +179,7 @@ void Object::PrintTree(Log::Log &log)
         indentation = newindent + indentation;
     }
   }
-  for (int i = 0; i < _children.size(); ++i)
+  for (unsigned i = 0; i < _children.size(); ++i)
     _children[i]->PrintTree(log);
   if (_children.size() > 0)
   {

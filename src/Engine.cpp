@@ -9,7 +9,7 @@ namespace Aspen
 {
 namespace Engine
 {
-const Version::Version version(0, 1, 0, PREALPHA);
+const Version::Version version(0, 1, 0, Version::TIER::PREALPHA);
 
 Engine::Engine(int flags)
     : Object(nullptr, "Engine")
@@ -169,7 +169,7 @@ void Engine::RemoveChild(Object *child)
   Object::RemoveChild(child);
 }
 
-void Engine::RemoveChild(int index)
+void Engine::RemoveChild(unsigned index)
 {
   if (_children.size() < index)
   {

@@ -66,7 +66,7 @@ std::string Version::ToString() const
 
 bool Version::operator==(Version &rhs) const
 {
-  return Major() == rhs.Major() | Minor() == rhs.Minor() | Revision() == rhs.Revision() | Tier() == rhs.Tier();
+  return (Major() == rhs.Major()) | (Minor() == rhs.Minor()) | (Revision() == rhs.Revision()) | (Tier() == rhs.Tier());
 }
 
 bool Version::operator!=(Version &rhs) const

@@ -80,12 +80,12 @@ public:
   ///        This will also set the child's _parent to nullptr
   ///        This will do nothing if index is out of range of the Object's list of children
   /// \param index Index of Object to remove from list of children
-  void RemoveChild(int index);
+  void RemoveChild(unsigned index);
   /// \brief Gets the child at index from this Object's list of children
   /// \param index Index of child Object to get
   /// \return Child object at index from this Object's list of children
   ///         This will return nullptr if index is out of range of the Object's list of children
-  Object *operator[](int index);
+  Object *operator[](unsigned index);
   /// \brief Gets the index of a given child in this Object's list of children
   /// \param child Child Object to get the index of
   /// \return Index of child

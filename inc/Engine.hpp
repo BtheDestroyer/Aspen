@@ -85,7 +85,7 @@ public:
   ///        Sets _graphics to nullptr if it's removed
   ///        Sets _eventhandler to nullptr if it's removed
   /// \param index Index of child to remove
-  void RemoveChild(int index);
+  void RemoveChild(unsigned index);
 };
 } // namespace Engine
 } // namespace Aspen
