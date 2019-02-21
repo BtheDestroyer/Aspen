@@ -9,6 +9,7 @@ var class_aspen_1_1_graphics_1_1_graphics =
     [ "GetWindow", "class_aspen_1_1_graphics_1_1_graphics.html#a8d9158217dd776323ad1073bddd90275", null ],
     [ "operator()", "class_aspen_1_1_graphics_1_1_graphics.html#aeb2ae0d78a810c9cebb2271b08a13e89", null ],
     [ "SetBGColor", "class_aspen_1_1_graphics_1_1_graphics.html#a7cf3a743431f37d570a7e214f9eccf32", null ],
+    [ "_gcount", "class_aspen_1_1_graphics_1_1_graphics.html#a73260a410d2f3be84af1896620d4536d", null ],
     [ "_surface", "class_aspen_1_1_graphics_1_1_graphics.html#a647af806e7f3d8ded3756d776e8e3754", null ],
     [ "_window", "class_aspen_1_1_graphics_1_1_graphics.html#a6007bfb78ce9877bc758469b1ca5d45a", null ]
 ];

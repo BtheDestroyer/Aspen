@@ -11,6 +11,7 @@ var searchData=
   ['operator_3d_3d',['operator==',['../class_aspen_1_1_version_1_1_version.html#abaa020ffe2f448a827f99760bcb321f2',1,'Aspen::Version::Version']]],
   ['operator_3e',['operator&gt;',['../class_aspen_1_1_version_1_1_version.html#af758e479a1511a721473125ab64ef0fb',1,'Aspen::Version::Version']]],
   ['operator_3e_3d',['operator&gt;=',['../class_aspen_1_1_version_1_1_version.html#abbcb0656f28996ab52e0bdaa6d050707',1,'Aspen::Version::Version']]],
-  ['operator_5b_5d',['operator[]',['../class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c',1,'Aspen::Object::Object::operator[](int index)'],['../class_aspen_1_1_object_1_1_object.html#a52f2afec6857a45140862ae95279921f',1,'Aspen::Object::Object::operator[](Object *child)']]],
+  ['operator_5b_5d',['operator[]',['../class_aspen_1_1_object_1_1_object.html#a6f06f5f0812a506cf3094cf782022a3c',1,'Aspen::Object::Object::operator[](unsigned index)'],['../class_aspen_1_1_object_1_1_object.html#a52f2afec6857a45140862ae95279921f',1,'Aspen::Object::Object::operator[](Object *child)']]],
+  ['optimizesurface',['OptimizeSurface',['../class_aspen_1_1_graphics_1_1_sprite.html#a835fb1e4940bce39d15f5667c98c7529',1,'Aspen::Graphics::Sprite']]],
   ['string',['string',['../class_aspen_1_1_version_1_1_version.html#a1e9f21f21f164c5ab17e186ab2dd880e',1,'Aspen::Version::Version']]]
 ];

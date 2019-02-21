@@ -141,6 +141,13 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#abaa66ca2d23fe08bc9b4941468bf9ebe">operator()</a> ()</td></tr>
 <tr class="memdesc:abaa66ca2d23fe08bc9b4941468bf9ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the sprite to the parent <a class="el" href="namespace_aspen_1_1_object.html" title="Object namespace Contains the Object base class for most classes of Aspen. ">Object</a>'s window if parent is of type <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class Holds other classes from Aspen::Graphics as children to draw them to the screen...">Graphics</a>. <br/></td></tr>
 <tr class="separator:abaa66ca2d23fe08bc9b4941468bf9ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7286df09dc29c567ad0ced36fb2b70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#aae7286df09dc29c567ad0ced36fb2b70">SetParent</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> *parent)</td></tr>
+<tr class="memdesc:aae7286df09dc29c567ad0ced36fb2b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for Object::SetParent.  <a href="#aae7286df09dc29c567ad0ced36fb2b70">More...</a><br/></td></tr>
+<tr class="separator:aae7286df09dc29c567ad0ced36fb2b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835fb1e4940bce39d15f5667c98c7529"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a835fb1e4940bce39d15f5667c98c7529"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a835fb1e4940bce39d15f5667c98c7529">OptimizeSurface</a> ()</td></tr>
+<tr class="memdesc:a835fb1e4940bce39d15f5667c98c7529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optimizes the <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. ">Sprite</a>'s _surface. <br/></td></tr>
+<tr class="separator:a835fb1e4940bce39d15f5667c98c7529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a465f0cab7f12bcf4c4ebc5de59446517"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a465f0cab7f12bcf4c4ebc5de59446517">GetPath</a> () const </td></tr>
 <tr class="memdesc:a465f0cab7f12bcf4c4ebc5de59446517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the path passed into the constructor.  <a href="#a465f0cab7f12bcf4c4ebc5de59446517">More...</a><br/></td></tr>
 <tr class="separator:a465f0cab7f12bcf4c4ebc5de59446517"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,12 +178,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a31d1f3ee496a6247a73d24aac9120c61 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">RemoveChild</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child)</td></tr>
 <tr class="memdesc:a31d1f3ee496a6247a73d24aac9120c61 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes child from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children This will also set child's _parent to nullptr This will do nothing if child is not in the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a31d1f3ee496a6247a73d24aac9120c61">More...</a><br/></td></tr>
 <tr class="separator:a31d1f3ee496a6247a73d24aac9120c61 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22293512e329cc43dd36f2538b2fdcb9 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a22293512e329cc43dd36f2538b2fdcb9">RemoveChild</a> (int index)</td></tr>
-<tr class="memdesc:a22293512e329cc43dd36f2538b2fdcb9 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the child at index from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children This will also set the child's _parent to nullptr This will do nothing if index is out of range of the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a22293512e329cc43dd36f2538b2fdcb9">More...</a><br/></td></tr>
-<tr class="separator:a22293512e329cc43dd36f2538b2fdcb9 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">operator[]</a> (int index)</td></tr>
-<tr class="memdesc:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the child at index from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a60955e31c71d4171274d28f6f8b38e3c">More...</a><br/></td></tr>
-<tr class="separator:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a888b0140404a454c1e508b429fb929fd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a888b0140404a454c1e508b429fb929fd">RemoveChild</a> (unsigned index)</td></tr>
+<tr class="memdesc:a888b0140404a454c1e508b429fb929fd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the child at index from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children This will also set the child's _parent to nullptr This will do nothing if index is out of range of the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a888b0140404a454c1e508b429fb929fd">More...</a><br/></td></tr>
+<tr class="separator:a888b0140404a454c1e508b429fb929fd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f06f5f0812a506cf3094cf782022a3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a6f06f5f0812a506cf3094cf782022a3c">operator[]</a> (unsigned index)</td></tr>
+<tr class="memdesc:a6f06f5f0812a506cf3094cf782022a3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the child at index from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a6f06f5f0812a506cf3094cf782022a3c">More...</a><br/></td></tr>
+<tr class="separator:a6f06f5f0812a506cf3094cf782022a3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a52f2afec6857a45140862ae95279921f">operator[]</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child)</td></tr>
 <tr class="memdesc:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the index of a given child in this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a52f2afec6857a45140862ae95279921f">More...</a><br/></td></tr>
 <tr class="separator:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -329,6 +336,30 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
+<a class="anchor" id="aae7286df09dc29c567ad0ced36fb2b70"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Graphics::Sprite::SetParent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> *&#160;</td>
+          <td class="paramname"><em>parent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper for Object::SetParent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>New parent </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>inc/<a class="el" href="_graphics_8hpp_source.html">Graphics.hpp</a></li>
 </ul>
@@ -338,7 +369,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_graphics.html">Graphics</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Sprite</a></li>
-    <li class="footer">Generated on Thu Feb 21 2019 02:23:35 for Aspen by
+    <li class="footer">Generated on Thu Feb 21 2019 03:39:01 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

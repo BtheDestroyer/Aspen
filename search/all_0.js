@@ -3,6 +3,7 @@ var searchData=
   ['_5fchildren',['_children',['../class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866',1,'Aspen::Object::Object']]],
   ['_5fcount',['_count',['../class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e',1,'Aspen::Object::Object']]],
   ['_5feventhandler',['_eventhandler',['../class_aspen_1_1_engine_1_1_engine.html#ad1b210e3c06677a89b752d84b7ed8417',1,'Aspen::Engine::Engine']]],
+  ['_5fgcount',['_gcount',['../class_aspen_1_1_graphics_1_1_graphics.html#a73260a410d2f3be84af1896620d4536d',1,'Aspen::Graphics::Graphics']]],
   ['_5fgraphics',['_graphics',['../class_aspen_1_1_engine_1_1_engine.html#a1c15b0cce6787c242a89939ee3a6f85e',1,'Aspen::Engine::Engine']]],
   ['_5fkey',['_key',['../class_aspen_1_1_event_1_1_key_event_listener.html#a4a030c8d1cd584157f4607da62dd35fb',1,'Aspen::Event::KeyEventListener']]],
   ['_5fline',['_line',['../class_aspen_1_1_log_1_1_log.html#ab55feb33b8b72e94f7407ccda132e5f8',1,'Aspen::Log::Log']]],
