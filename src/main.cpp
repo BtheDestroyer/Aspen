@@ -10,8 +10,8 @@ int main(int argc, char **argv)
       Engine::START_FLAGS::CREATE_EVENTHANDLER |
       Engine::START_FLAGS::CREATE_EVENT_ALL);
 
-  engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp"));
-  engine.Graphics()->AddChild(new Graphics::Sprite("resources/mario.bmp"));
+  engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.Graphics()));
+  engine.Graphics()->AddChild(new Graphics::Sprite("resources/mario.png", engine.Graphics()));
 
   engine.PrintTree();
   

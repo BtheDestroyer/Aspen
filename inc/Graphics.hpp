@@ -36,6 +36,12 @@ public:
   /// \brief Draws the sprite to the parent Object's window if parent is of type Graphics
   void operator()();
 
+  /// \brief Wrapper for Object::SetParent
+  /// \param parent New parent
+  void SetParent(Object *parent);
+  /// \brief Optimizes the Sprite's _surface
+  void OptimizeSurface();
+
   /// \brief Gets the path passed into the constructor
   /// \return Const reference to _path
   const std::string &GetPath() const;

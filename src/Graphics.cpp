@@ -4,6 +4,7 @@
 #include "Log.hpp"
 #include <sstream>
 #include <iomanip>
+#include <SDL2/SDL_image.h>
 
 #undef __GRAPHICS_CPP
 
@@ -25,7 +26,7 @@ Graphics::Graphics(int w, int h)
   {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-      Log::Error(std::string("Could not initialize SDL. SDL_Error: ") + SDL_GetError());
+      Log::Error("Could not initialize SDL. SDL_Error: %s", SDL_GetError());
       _valid = false;
       return;
     }
@@ -38,7 +39,18 @@ Graphics::Graphics(int w, int h)
         SDL_WINDOW_SHOWN);
     if (!_window)
     {
-      Log::Error(std::string("Could not initialize window. SDL_Error: ") + SDL_GetError());
+      Log::Error("Could not initialize window. SDL_Error: %s", SDL_GetError());
+      SDL_Quit();
+      _valid = false;
+      return;
+    }
+
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags))
+    {
+      Log::Error("Could not initialize SDL_Image. IMG_Error: %s", IMG_GetError());
+      SDL_DestroyWindow(_window);
+      _window = nullptr;
       SDL_Quit();
       _valid = false;
       return;
@@ -47,19 +59,15 @@ Graphics::Graphics(int w, int h)
     _surface = SDL_GetWindowSurface(_window);
     if (!_surface)
     {
-      Log::Error(std::string("Could not get window surface. SDL_Error: ") + SDL_GetError());
+      Log::Error("Could not get window surface. SDL_Error: %s", SDL_GetError());
       SDL_DestroyWindow(_window);
       _window = nullptr;
       SDL_Quit();
       _valid = false;
       return;
     }
-    _gcount++;
   }
-  else
-  {
-    _gcount++;
-  }
+  ++_gcount;
 }
 Graphics::~Graphics()
 {
@@ -119,24 +127,33 @@ Sprite::Sprite(std::string path, Object *parent)
     : Object(parent, "Sprite"), _path(path)
 {
   if (path.substr(path.length() - 4) == ".bmp")
+  {
     _surface = SDL_LoadBMP(path.c_str());
+    if (!_surface)
+    {
+      Log::Error("Unable to load BMP. SDL_Error: %s", SDL_GetError());
+      _valid = false;
+      return;
+    }
+  }
+  else if (path.substr(path.length() - 4) == ".png")
+  {
+    _surface = IMG_Load(path.c_str());
+    if (!_surface)
+    {
+      Log::Error("Unable to load PNG. IMG_Error: %s", IMG_GetError());
+      _valid = false;
+      return;
+    }
+  }
   else
   {
-    std::stringstream inf;
-    inf << "Unknown extension of path: " << path;
-    Log::Error(inf);
+    Log::Error("Unknown extension of path: %s", path);
     _valid = false;
     return;
   }
 
-  if (!_surface)
-  {
-    std::stringstream inf;
-    inf << "Failed to load sprite!";
-    Log::Error(inf);
-    _valid = false;
-    return;
-  }
+  OptimizeSurface();
 }
 
 Sprite::~Sprite()
@@ -145,6 +162,28 @@ Sprite::~Sprite()
     return;
 
   SDL_FreeSurface(_surface);
+}
+
+void Sprite::SetParent(Object *parent)
+{
+  Object::SetParent(parent);
+  OptimizeSurface();
+}
+
+void Sprite::OptimizeSurface()
+{
+  if (Valid() && _surface && dynamic_cast<Graphics *>(_parent))
+  {
+    SDL_Surface *temp = _surface;
+    _surface = SDL_ConvertSurface(temp, dynamic_cast<Graphics *>(_parent)->GetSurface()->format, 0);
+    if (!_surface)
+    {
+      Log::Error("Unable to convert surface format! Unconverted will be used. SDL_Error: %s", SDL_GetError());
+      _surface = temp;
+    }
+    else
+      SDL_FreeSurface(temp);
+  }
 }
 
 void Sprite::operator()()

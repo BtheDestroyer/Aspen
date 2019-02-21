@@ -81,6 +81,7 @@ ifeq ($(suffix $@), "a")
 	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)
 else
 	$(CXX) $(OBJFILES) $(LINKFLAGS) -o $(OUTPUT)
+	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 endif
 
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp
