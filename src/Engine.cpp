@@ -9,6 +9,8 @@ namespace Aspen
 {
 namespace Engine
 {
+const Version::Version version(0, 1, 0, PREALPHA);
+
 Engine::Engine(int flags)
     : Object(nullptr, "Engine")
 {

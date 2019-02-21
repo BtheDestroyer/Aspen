@@ -2,6 +2,7 @@
 #define __ENGINE_HPP
 #include "Graphics.hpp"
 #include "Event.hpp"
+#include "Version.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -10,6 +11,9 @@ namespace Aspen
 ///        Holds the core Engine class
 namespace Engine
 {
+/// \brief Current engine version
+extern const Version::Version version;
+
 /// \brief START_FLAGS namespace
 ///        Contains const ints to be passed to Engine's constructor
 ///        Combine START_FLAGS parameters by using logical or (param1 | param2)
