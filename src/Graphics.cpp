@@ -17,7 +17,7 @@ const int DEFAULT_WINDOW_HEIGHT = 480;
 Graphics::Graphics() : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) {}
 
 Graphics::Graphics(int w, int h)
-    : Object(), _name("Graphics")
+    : Object(nullptr, "Graphics")
 {
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
   {
@@ -101,7 +101,7 @@ void Graphics::DrawSprite(Sprite *sprite)
 }
 
 Sprite::Sprite(std::string path, Object *parent)
-    : Object(parent), _path(path)
+    : Object(parent, "Sprite"), _path(path)
 {
   if (path.substr(path.length() - 4) == ".bmp")
     _surface = SDL_LoadBMP(path.c_str());

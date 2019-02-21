@@ -13,12 +13,12 @@ namespace Object
 {
 int Object::_count = 0;
 
-Object::Object(Object *parent)
-    : _name("Object"), _parent(parent)
+Object::Object(Object *parent, std::string name)
+    : _name(name), _parent(parent)
 {
   ++_count;
   std::stringstream str;
-  str << std::setw(32) << std::setfill(' ') << std::left << "Creating " << _name << ": " << this << "  ";
+  str << "Creating " << _name << ": " << this << "  ";
   str << _count;
   Log::Debug(str);
   _valid = true;
@@ -28,7 +28,7 @@ Object::~Object()
 {
   --_count;
   std::stringstream str;
-  str << std::setw(32) << std::setfill(' ') << std::left << "Destroying " << _name << ": " << this << "  ";
+  str << "Destroying " << _name << ": " << this << "  ";
   str << _count;
   Log::Debug(str);
   if (_count == 0)
@@ -103,9 +103,36 @@ void Object::RemoveChild(int index)
 
 Object *Object::operator[](int index)
 {
-  if (index < _children.size())
+  if (index > 0 && index < _children.size())
     return _children[index];
   return nullptr;
+}
+
+int Object::operator[](Object *child)
+{
+  std::vector<Object *>::iterator it = std::find(_children.begin(), _children.end(), child);
+  if (it == _children.end())
+    return -1;
+  return _children.end() - _children.begin();
+}
+
+Object *Object::GetLastChild()
+{
+  if (_children.size() == 0)
+    return nullptr;
+  return _children[_children.size() - 1];
+}
+
+int Object::ParentCount()
+{
+  int i = 0;
+  Object *p = _parent;
+  while (p)
+  {
+    p = p->Parent();
+    ++i;
+  }
+  return i;
 }
 
 const bool &Object::Valid() const
@@ -127,17 +154,47 @@ void Object::End()
   _valid = false;
 }
 
-void Object::PrintTree(Log::Log log)
+void Object::PrintTree(Log::Log &log)
 {
   static std::string indentation = "";
-  log("%s\\... %s (%p)", indentation.c_str(), _name.c_str(), this);
-  indentation = "| " + indentation;
-  for (Object *child : _children)
+  static const std::string newindent = "  |    ";
+  if (indentation.length() == 0)
   {
-    child->PrintTree(log);
+    log("%s (%p) (%s)", _name.c_str(), this, Valid() ? "Valid" : "Ended");
+    if (_children.size() > 0)
+      indentation = "  ";
   }
-  indentation = indentation.substr(3);
+  else
+  {
+    if (this == _parent->GetLastChild())
+    {
+      log("%s\\... %s (%p) (%s)", indentation.c_str(), _name.c_str(), this, Valid() ? "Valid" : "Ended");
+      if (_children.size() > 0)
+        indentation = "       " + indentation;
+    }
+    else
+    {
+      log("%s+--- %s (%p) (%s)", indentation.c_str(), _name.c_str(), this, Valid() ? "Valid" : "Ended");
+      if (_children.size() > 0)
+        indentation = newindent + indentation;
+    }
+  }
+  for (int i = 0; i < _children.size(); ++i)
+    _children[i]->PrintTree(log);
+  if (_children.size() > 0)
+  {
+    if (_parent)
+      log("%s", indentation.c_str());
+    if (indentation.length() > newindent.length())
+      indentation = indentation.substr(newindent.length());
+    else
+      indentation = "";
+  }
 }
 
+void Object::PrintTree()
+{
+  PrintTree(Log::Debug);
+}
 } // namespace Object
 } // namespace Aspen

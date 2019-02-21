@@ -17,6 +17,9 @@ class EventListener : public Object::Object
 public:
   /// \brief Constructor
   EventListener();
+  /// \brief Constructor
+  /// \param name Object name (Same as type)
+  EventListener(std::string name);
   /// \brief Destructor
   ~EventListener();
 

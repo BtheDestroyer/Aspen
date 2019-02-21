@@ -11,7 +11,12 @@ namespace Aspen
 namespace Event
 {
 EventListener::EventListener()
-    : Object(), _name("EventListener")
+    : Object(nullptr, "EventListener")
+{
+}
+
+EventListener::EventListener(std::string name)
+    : Object(nullptr, name)
 {
 }
 
@@ -32,7 +37,7 @@ void EventListener::Handle(SDL_Event *event)
 }
 
 QuitEventListener::QuitEventListener()
-    : EventListener()
+    : EventListener("QuitEventListener")
 {
 }
 
@@ -47,7 +52,7 @@ void QuitEventListener::Handle(SDL_Event *event)
 }
 
 KeyEventListener::KeyEventListener(SDL_Keycode k)
-    : EventListener(), _key(k)
+    : EventListener("KeyEventListener"), _key(k)
 {
 }
 
@@ -93,7 +98,7 @@ void KeyEventListener::Handle(SDL_Event *event)
 }
 
 EventHandler::EventHandler()
-    : Object()
+    : Object(nullptr, "EventHandler")
 {
 }
 

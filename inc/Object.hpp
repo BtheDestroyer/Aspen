@@ -16,7 +16,7 @@ class Object
 {
 protected:
   /// \brief Name of object
-  std::string _name;
+  const std::string _name;
   /// \brief Total number of Objects in existence
   static int _count;
   /// \brief Parent/owner of this Object
@@ -34,7 +34,7 @@ public:
   /// \brief Constructor
   ///        Derived must should call this in their constructors' initialization list
   /// \param parent Parent Object creating this Object
-  Object(Object *parent = nullptr);
+  Object(Object *parent = nullptr, std::string name = "Object");
   /// \brief Destructor
   ///        This will End and then delete all child Objects
   virtual ~Object();
@@ -82,8 +82,20 @@ public:
   /// \brief Gets the child at index from this Object's list of children
   /// \param index Index of child Object to get
   /// \return Child object at index from this Object's list of children
-  ///        This will return nullptr if index is out of range of the Object's list of children
+  ///         This will return nullptr if index is out of range of the Object's list of children
   Object *operator[](int index);
+  /// \brief Gets the index of a given child in this Object's list of children
+  /// \param child Child Object to get the index of
+  /// \return Index of child
+  ///         This will return -1 if child is not in the Object's list of children
+  int operator[](Object *child);
+  /// \brief Gets the youngest child from this Object's list of children
+  /// \return Last child of Object
+  ///         This will return nullptr if the Object has no children
+  Object *GetLastChild();
+  /// \brief Determines the generation of this object in the parent/child tree
+  /// \return Generation index of this Object (0 = root)
+  int ParentCount();
   /// \brief Finds the first child Object of a type applicable to that which was requested
   /// \tparam T Type of child to find
   ///           Must inherit Object
@@ -131,8 +143,10 @@ public:
 
   /// \brief Uses Log::Log to print the parent/children tree of this Object
   /// \param log Log::Log to use
-  ///            Defaults to Log::Debug
-  void PrintTree(Log::Log log = Log::Debug);
+  void PrintTree(Log::Log &log);
+  /// \brief Uses Log::Log to print the parent/children tree of this Object
+  ///        Uses Log::Debug
+  void PrintTree();
 };
 } // namespace Object
 } // namespace Aspen
