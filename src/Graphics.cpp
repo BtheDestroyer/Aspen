@@ -14,41 +14,51 @@ namespace Graphics
 const int DEFAULT_WINDOW_WIDTH = 640;
 const int DEFAULT_WINDOW_HEIGHT = 480;
 
+unsigned Graphics::_gcount = 0;
+
 Graphics::Graphics() : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) {}
 
 Graphics::Graphics(int w, int h)
     : Object(nullptr, "Graphics")
 {
-  if (SDL_Init(SDL_INIT_VIDEO) < 0)
+  if (_gcount == 0)
   {
-    Log::Error(std::string("Could not initialize SDL. SDL_Error: ") + SDL_GetError());
-    _valid = false;
-    return;
-  }
-  _window = SDL_CreateWindow(
-      "SDL Tutorial",
-      SDL_WINDOWPOS_UNDEFINED,
-      SDL_WINDOWPOS_UNDEFINED,
-      w,
-      h,
-      SDL_WINDOW_SHOWN);
-  if (!_window)
-  {
-    Log::Error(std::string("Could not initialize window. SDL_Error: ") + SDL_GetError());
-    SDL_Quit();
-    _valid = false;
-    return;
-  }
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+      Log::Error(std::string("Could not initialize SDL. SDL_Error: ") + SDL_GetError());
+      _valid = false;
+      return;
+    }
+    _window = SDL_CreateWindow(
+        "SDL Tutorial",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        w,
+        h,
+        SDL_WINDOW_SHOWN);
+    if (!_window)
+    {
+      Log::Error(std::string("Could not initialize window. SDL_Error: ") + SDL_GetError());
+      SDL_Quit();
+      _valid = false;
+      return;
+    }
 
-  _surface = SDL_GetWindowSurface(_window);
-  if (!_surface)
+    _surface = SDL_GetWindowSurface(_window);
+    if (!_surface)
+    {
+      Log::Error(std::string("Could not get window surface. SDL_Error: ") + SDL_GetError());
+      SDL_DestroyWindow(_window);
+      _window = nullptr;
+      SDL_Quit();
+      _valid = false;
+      return;
+    }
+    _gcount++;
+  }
+  else
   {
-    Log::Error(std::string("Could not get window surface. SDL_Error: ") + SDL_GetError());
-    SDL_DestroyWindow(_window);
-    _window = nullptr;
-    SDL_Quit();
-    _valid = false;
-    return;
+    _gcount++;
   }
 }
 Graphics::~Graphics()
@@ -67,13 +77,18 @@ void Graphics::operator()()
 
 void Graphics::End()
 {
-  if (_window)
+  if (!Valid())
+    return;
+  if (_gcount-- == 1)
   {
-    SDL_DestroyWindow(_window);
-    _window = nullptr;
+    if (_window)
+    {
+      SDL_DestroyWindow(_window);
+      _window = nullptr;
+    }
+    _surface = nullptr;
+    SDL_Quit();
   }
-  _surface = nullptr;
-  SDL_Quit();
   Object::End();
 }
 

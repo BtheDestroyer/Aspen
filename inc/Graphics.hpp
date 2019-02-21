@@ -48,6 +48,9 @@ public:
 ///        Holds other classes from Aspen::Graphics as children to draw them to the screen
 class Graphics : public Object::Object
 {
+  /// \brief Number of Graphics Objects created
+  ///        Used for determining if SDL should be initialized or closed
+  static unsigned _gcount;
   /// \brief Window to be displayed
   SDL_Window *_window = NULL;
   /// \brief Surface of _window
