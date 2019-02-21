@@ -152,6 +152,7 @@ Graphics::Graphics(int w, int h)
       _valid = false;
       return;
     }
+    SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
   }
   else
   {
@@ -337,6 +338,7 @@ void Sprite::GenerateTexture()
     if (!_tex)
       Log::Error("Unable to generate texture! SDL_Error: %s", SDL_GetError());
   }
+    SDL_SetTextureBlendMode(_tex, SDL_BLENDMODE_BLEND);
 }
 
 void Sprite::operator()()
