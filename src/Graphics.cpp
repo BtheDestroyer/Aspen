@@ -273,6 +273,18 @@ void Graphics::DrawRectangle(Rectangle *rect)
   }
 }
 
+void Graphics::DrawRectangle(SDL_Rect *rect, int r, int g, int b, int a, bool fill)
+{
+  if (rect)
+  {
+    SDL_SetRenderDrawColor(_renderer, r, g, b, a);
+    if (fill)
+      SDL_RenderFillRect(_renderer, rect);
+    else
+      SDL_RenderDrawRect(_renderer, rect);
+  }
+}
+
 void Graphics::DrawSprite(Sprite *sprite)
 {
   if (sprite && sprite->GetTexture())
@@ -330,21 +342,24 @@ void Sprite::SetParent(Object *parent)
 
 void Sprite::GenerateTexture()
 {
-  if (Valid() && _surface && dynamic_cast<Graphics *>(_parent))
+  if (Valid() && _surface && FindAncestorOfType<Graphics>())
   {
     if (_tex)
       SDL_DestroyTexture(_tex);
-    _tex = SDL_CreateTextureFromSurface(dynamic_cast<Graphics *>(_parent)->GetRenderer(), _surface);
+    _tex = SDL_CreateTextureFromSurface(FindAncestorOfType<Graphics>()->GetRenderer(), _surface);
     if (!_tex)
+    {
       Log::Error("Unable to generate texture! SDL_Error: %s", SDL_GetError());
-  }
+      return;
+    }
     SDL_SetTextureBlendMode(_tex, SDL_BLENDMODE_BLEND);
+  }
 }
 
 void Sprite::operator()()
 {
-  if (Valid() && _parent && dynamic_cast<Graphics *>(_parent))
-    dynamic_cast<Graphics *>(_parent)->DrawSprite(this);
+  if (Valid() && _parent && FindAncestorOfType<Graphics>())
+    FindAncestorOfType<Graphics>()->DrawSprite(this);
 
   Object::operator()();
 }

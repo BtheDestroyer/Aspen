@@ -98,6 +98,19 @@ public:
   /// \brief Determines the generation of this object in the parent/child tree
   /// \return Generation index of this Object (0 = root)
   int ParentCount();
+
+  template <typename T>
+  T *FindAncestorOfType()
+  {
+    Object *p = _parent;
+    while (p)
+    {
+      if (dynamic_cast<T *>(p))
+        return dynamic_cast<T *>(p);
+      p = p->Parent();
+    }
+    return nullptr;
+  }
   /// \brief Finds the first child Object of a type applicable to that which was requested
   /// \tparam T Type of child to find
   ///           Must inherit Object

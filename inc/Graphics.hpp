@@ -132,6 +132,7 @@ public:
   SDL_Renderer *GetRenderer();
 
   void DrawRectangle(Rectangle *rect);
+  void DrawRectangle(SDL_Rect *rect, int r, int g, int b, int a, bool fill = true);
   /// \brief Draws a given Sprite at 0, 0
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
