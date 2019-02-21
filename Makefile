@@ -101,7 +101,7 @@ $(BUILD):
 clean:
 	rm -rf $(BUILD)
 
-docs: $(BUILD)
+docs:
 	@doxygen Doxyfile
 
 test: $(OUTPUT)
