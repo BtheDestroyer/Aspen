@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -68,12 +75,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_aspen_1_1_event_1_1_event_handler.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,11 +104,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_event.html">Event</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -125,9 +142,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a5d13a2e6bcd952adc6961222627159f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls SDL_Events and passes them to all child EventListeners. <br/></td></tr>
 <tr class="separator:a5d13a2e6bcd952adc6961222627159f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_aspen_1_1_object_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_aspen_1_1_object_1_1_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td></tr>
-<tr class="memitem:abba0c3ac64269eb95646b1a07cd3ffae inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abba0c3ac64269eb95646b1a07cd3ffae">Object</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent=nullptr)</td></tr>
-<tr class="memdesc:abba0c3ac64269eb95646b1a07cd3ffae inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Derived must should call this in their constructors' initialization list.  <a href="#abba0c3ac64269eb95646b1a07cd3ffae">More...</a><br/></td></tr>
-<tr class="separator:abba0c3ac64269eb95646b1a07cd3ffae inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3d684c39106f1424bb948046fc38d70 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent=nullptr, std::string name=&quot;Object&quot;)</td></tr>
+<tr class="memdesc:aa3d684c39106f1424bb948046fc38d70 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Derived must should call this in their constructors' initialization list.  <a href="#aa3d684c39106f1424bb948046fc38d70">More...</a><br/></td></tr>
+<tr class="separator:aa3d684c39106f1424bb948046fc38d70 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f5c327106d554e043ddcff2ca9bb532 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f5c327106d554e043ddcff2ca9bb532"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a1f5c327106d554e043ddcff2ca9bb532">~Object</a> ()</td></tr>
 <tr class="memdesc:a1f5c327106d554e043ddcff2ca9bb532 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor This will End and then delete all child Objects. <br/></td></tr>
@@ -154,6 +171,15 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">operator[]</a> (int index)</td></tr>
 <tr class="memdesc:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the child at index from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a60955e31c71d4171274d28f6f8b38e3c">More...</a><br/></td></tr>
 <tr class="separator:a60955e31c71d4171274d28f6f8b38e3c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a52f2afec6857a45140862ae95279921f">operator[]</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child)</td></tr>
+<tr class="memdesc:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the index of a given child in this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a52f2afec6857a45140862ae95279921f">More...</a><br/></td></tr>
+<tr class="separator:a52f2afec6857a45140862ae95279921f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b7c46c48ffc8d44ea3f62dd3fd42b6 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa5b7c46c48ffc8d44ea3f62dd3fd42b6">GetLastChild</a> ()</td></tr>
+<tr class="memdesc:aa5b7c46c48ffc8d44ea3f62dd3fd42b6 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the youngest child from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#aa5b7c46c48ffc8d44ea3f62dd3fd42b6">More...</a><br/></td></tr>
+<tr class="separator:aa5b7c46c48ffc8d44ea3f62dd3fd42b6 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a> ()</td></tr>
+<tr class="memdesc:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the generation of this object in the parent/child tree.  <a href="#abead808465c7004c343fc322e76faa9d">More...</a><br/></td></tr>
+<tr class="separator:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a> ()</td></tr>
 <tr class="memdesc:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a077c6f008bd36517042170c3d589ebfb">More...</a><br/></td></tr>
@@ -173,6 +199,13 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">End</a> ()</td></tr>
 <tr class="memdesc:a056bfac305482ed281a5d850a2b2754c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down and invalidates <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> and all of its children An invalid child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> will be deleted by their parent after they update. <br/></td></tr>
 <tr class="separator:a056bfac305482ed281a5d850a2b2754c inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee42bd2031d9e08828046cce044459b inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a4ee42bd2031d9e08828046cce044459b">PrintTree</a> (<a class="el" href="class_aspen_1_1_log_1_1_log.html">Log::Log</a> &amp;log)</td></tr>
+<tr class="memdesc:a4ee42bd2031d9e08828046cce044459b inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#a4ee42bd2031d9e08828046cce044459b">More...</a><br/></td></tr>
+<tr class="separator:a4ee42bd2031d9e08828046cce044459b inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dee1d560eb341422441065654f516e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a> ()</td></tr>
+<tr class="memdesc:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
+<tr class="separator:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -182,6 +215,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aa7b58f0e55a3035f9ab1c958343e5857 inherit pro_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets _parent to the given <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Used by AddChild, CreateChild, etc. <br/></td></tr>
 <tr class="separator:aa7b58f0e55a3035f9ab1c958343e5857 inherit pro_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_aspen_1_1_object_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_aspen_1_1_object_1_1_object')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td></tr>
+<tr class="memitem:a383e46c38cb4e9a8eee71e972815d0fd inherit pro_attribs_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a383e46c38cb4e9a8eee71e972815d0fd"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a383e46c38cb4e9a8eee71e972815d0fd">_name</a></td></tr>
+<tr class="memdesc:a383e46c38cb4e9a8eee71e972815d0fd inherit pro_attribs_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of object. <br/></td></tr>
+<tr class="separator:a383e46c38cb4e9a8eee71e972815d0fd inherit pro_attribs_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cd9bdc4ee7d3b1ad7ad5a3fcffef228 inherit pro_attribs_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3cd9bdc4ee7d3b1ad7ad5a3fcffef228"></a>
 <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">_parent</a></td></tr>
 <tr class="memdesc:a3cd9bdc4ee7d3b1ad7ad5a3fcffef228 inherit pro_attribs_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parent/owner of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. <br/></td></tr>
@@ -206,11 +243,15 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <li>inc/<a class="el" href="_event_8hpp_source.html">Event.hpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_event.html">Event</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a></li>
+    <li class="footer">Generated on Thu Feb 21 2019 02:23:35 for Aspen by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -68,12 +75,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_aspen_1_1_graphics_1_1_sprite.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,11 +104,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_graphics.html">Graphics</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Sprite</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Aspen::Graphics::Sprite Member List</div>  </div>
@@ -97,22 +114,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866">_children</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e">_count</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">_parent</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a75e9a2b123db4bd9e1fae4887f86c310">_path</a></td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a96c15ac570832739a0048f1e96e368ff">_surface</a></td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">_valid</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">AddChild</a>(Object *child)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">CreateChild</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">End</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">FindChildrenOfType</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a383e46c38cb4e9a8eee71e972815d0fd">_name</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">_parent</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a75e9a2b123db4bd9e1fae4887f86c310">_path</a></td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a96c15ac570832739a0048f1e96e368ff">_surface</a></td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">_valid</a></td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">AddChild</a>(Object *child)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">CreateChild</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">End</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">FindChildrenOfType</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa5b7c46c48ffc8d44ea3f62dd3fd42b6">GetLastChild</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a465f0cab7f12bcf4c4ebc5de59446517">GetPath</a>() const </td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a4e2dbcf2dd4ec0760adb048b0713fa3c">GetSurface</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abba0c3ac64269eb95646b1a07cd3ffae">Object</a>(Object *parent=nullptr)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a>(Object *parent=nullptr, std::string name=&quot;Object&quot;)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8ca48323f4ac70852f6abdd33042a5b3">operator bool</a>() const </td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#abaa66ca2d23fe08bc9b4941468bf9ebe">operator()</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">operator[]</a>(int index)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Parent</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a52f2afec6857a45140862ae95279921f">operator[]</a>(Object *child)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Parent</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a4ee42bd2031d9e08828046cce044459b">PrintTree</a>(Log::Log &amp;log)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">RemoveChild</a>(Object *child)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a22293512e329cc43dd36f2538b2fdcb9">RemoveChild</a>(int index)</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a15247881a7c8816de3bdc9099e8cbe65">Root</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"></td></tr>
@@ -122,11 +145,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr class="even"><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a1f5c327106d554e043ddcff2ca9bb532">~Object</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Aspen::Object::Object</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a99a5744ec1642049eb86df2b8ff443be">~Sprite</a>()</td><td class="entry"><a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Aspen::Graphics::Sprite</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Thu Feb 21 2019 02:23:35 for Aspen by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['end',['End',['../class_aspen_1_1_graphics_1_1_graphics.html#aa1c1efd3d5185a65ce78521064ef5b68',1,'Aspen::Graphics::Graphics::End()'],['../class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c',1,'Aspen::Object::Object::End()']]],
-  ['engine',['Engine',['../class_aspen_1_1_engine_1_1_engine.html',1,'Aspen::Engine']]],
-  ['engine',['Engine',['../class_aspen_1_1_engine_1_1_engine.html#ac247ab960080cb55b3b3a6202d91259a',1,'Aspen::Engine::Engine']]],
-  ['error',['Error',['../namespace_aspen_1_1_log.html#a7e12106a7c3e1195824d3b7bcda5845c',1,'Aspen::Log']]],
-  ['eventhandler',['EventHandler',['../class_aspen_1_1_event_1_1_event_handler.html',1,'Aspen::Event']]],
-  ['eventhandler',['EventHandler',['../class_aspen_1_1_engine_1_1_engine.html#a9e5adc83ecc59c18a27da85e4d7b7653',1,'Aspen::Engine::Engine::EventHandler()'],['../class_aspen_1_1_event_1_1_event_handler.html#a077cb4542485daf1df39e27acb6a6966',1,'Aspen::Event::EventHandler::EventHandler()']]],
-  ['eventlistener',['EventListener',['../class_aspen_1_1_event_1_1_event_listener.html#aeb4a50b61bdba5a8b2c82824912b5e28',1,'Aspen::Event::EventListener']]],
-  ['eventlistener',['EventListener',['../class_aspen_1_1_event_1_1_event_listener.html',1,'Aspen::Event']]]
+  ['debug',['Debug',['../namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b',1,'Aspen::Log']]],
+  ['default_5fwindow_5fheight',['DEFAULT_WINDOW_HEIGHT',['../namespace_aspen_1_1_graphics.html#ab62e6f5934b2faa93d88c0674b6a3ea7',1,'Aspen::Graphics']]],
+  ['default_5fwindow_5fwidth',['DEFAULT_WINDOW_WIDTH',['../namespace_aspen_1_1_graphics.html#a987c853ce7e6cedd0fec5cab4cbb1ddc',1,'Aspen::Graphics']]],
+  ['drawsprite',['DrawSprite',['../class_aspen_1_1_graphics_1_1_graphics.html#adca0e0af6e335deccadc1576a7f4d88a',1,'Aspen::Graphics::Graphics']]]
 ];

@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -86,6 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_k"><span>k</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_q"><span>q</span></a></li>
@@ -97,12 +105,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -164,6 +186,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>GetLastChild()
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#aa5b7c46c48ffc8d44ea3f62dd3fd42b6">Aspen::Object::Object</a>
+</li>
 <li>GetPath()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a465f0cab7f12bcf4c4ebc5de59446517">Aspen::Graphics::Sprite</a>
 </li>
@@ -176,7 +201,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>Graphics()
 : <a class="el" href="class_aspen_1_1_engine_1_1_engine.html#a14d74ed385c359ecb771843b4af54f21">Aspen::Engine::Engine</a>
-, <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a5a579f9b4a32a45a1647e493d0d7f08a">Aspen::Graphics::Graphics</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a4e4c5af4991e132829df834fff21e9bd">Aspen::Graphics::Graphics</a>
 </li>
 </ul>
 
@@ -207,20 +232,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 
 
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>Major()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a382aeddae3e2601254794c90cde1e633">Aspen::Version::Version</a>
+</li>
+<li>Minor()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a9f987116a68021df63834aa922720776">Aspen::Version::Version</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>Object()
-: <a class="el" href="class_aspen_1_1_object_1_1_object.html#abba0c3ac64269eb95646b1a07cd3ffae">Aspen::Object::Object</a>
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Aspen::Object::Object</a>
 </li>
 <li>operator bool()
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a8ca48323f4ac70852f6abdd33042a5b3">Aspen::Object::Object</a>
+</li>
+<li>operator double()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a9b730ea12c5e58a87db591f9a3e9e146">Aspen::Version::Version</a>
+</li>
+<li>operator float()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a628763e8fae9ff6e42073bcf0a813568">Aspen::Version::Version</a>
+</li>
+<li>operator std::string()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a1e9f21f21f164c5ab17e186ab2dd880e">Aspen::Version::Version</a>
+</li>
+<li>operator!=()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#af539575a3da3bbf317d5774ef1512eb4">Aspen::Version::Version</a>
 </li>
 <li>operator()()
 : <a class="el" href="class_aspen_1_1_event_1_1_event_handler.html#a5d13a2e6bcd952adc6961222627159f7">Aspen::Event::EventHandler</a>
 , <a class="el" href="class_aspen_1_1_event_1_1_event_listener.html#a06c80f778a67dbf5216384799f8c9a37">Aspen::Event::EventListener</a>
 , <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#aeb2ae0d78a810c9cebb2271b08a13e89">Aspen::Graphics::Graphics</a>
 , <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#abaa66ca2d23fe08bc9b4941468bf9ebe">Aspen::Graphics::Sprite</a>
-, <a class="el" href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">Aspen::Log::Log</a>
+, <a class="el" href="class_aspen_1_1_log_1_1_log.html#a00c59066f5b3e9385b4ed23d5f75092b">Aspen::Log::Log</a>
 , <a class="el" href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">Aspen::Object::Object</a>
+</li>
+<li>operator&lt;()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a4069025dd1a73f0cee2c96074dcc3bf0">Aspen::Version::Version</a>
+</li>
+<li>operator&lt;=()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a6e2b240ab3c9c9755974a84c95fa65e8">Aspen::Version::Version</a>
+</li>
+<li>operator==()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#abaa020ffe2f448a827f99760bcb321f2">Aspen::Version::Version</a>
+</li>
+<li>operator&gt;()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#af758e479a1511a721473125ab64ef0fb">Aspen::Version::Version</a>
+</li>
+<li>operator&gt;=()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#abbcb0656f28996ab52e0bdaa6d050707">Aspen::Version::Version</a>
 </li>
 <li>operator[]()
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a60955e31c71d4171274d28f6f8b38e3c">Aspen::Object::Object</a>
@@ -231,6 +293,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>Parent()
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Aspen::Object::Object</a>
+</li>
+<li>ParentCount()
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">Aspen::Object::Object</a>
+</li>
+<li>PrintTree()
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#a4ee42bd2031d9e08828046cce044459b">Aspen::Object::Object</a>
 </li>
 </ul>
 
@@ -250,8 +318,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_aspen_1_1_engine_1_1_engine.html#afb12d005248a08442a76c2fffd1ad080">Aspen::Engine::Engine</a>
 </li>
 <li>RemoveChild()
-: <a class="el" href="class_aspen_1_1_engine_1_1_engine.html#a2a77300f19cece8e61a52ed4cc1526fe">Aspen::Engine::Engine</a>
-, <a class="el" href="class_aspen_1_1_object_1_1_object.html#a22293512e329cc43dd36f2538b2fdcb9">Aspen::Object::Object</a>
+: <a class="el" href="class_aspen_1_1_engine_1_1_engine.html#ab357ce5c8feff1fc480a3db4173ae835">Aspen::Engine::Engine</a>
+, <a class="el" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">Aspen::Object::Object</a>
+</li>
+<li>Revision()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a53d5db45b62b65b7e20ed3c911068733">Aspen::Version::Version</a>
 </li>
 <li>Root()
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a15247881a7c8816de3bdc9099e8cbe65">Aspen::Object::Object</a>
@@ -276,8 +347,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>Tier()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#ad669161669b31ea681318badbc557d8b">Aspen::Version::Version</a>
+</li>
 <li>TogglePrint()
 : <a class="el" href="class_aspen_1_1_log_1_1_log.html#a7aa60eb49286c091b56062c96dc09abf">Aspen::Log::Log</a>
+</li>
+<li>ToString()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a27aae0cff50813778eda4cd802293723">Aspen::Version::Version</a>
 </li>
 </ul>
 
@@ -285,6 +362,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
 <li>Valid()
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a2d5e6269408df50277e9377a0ea620de">Aspen::Object::Object</a>
+</li>
+<li>Version()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a5acb4cf7ccd574380a0d0fe59005d38b">Aspen::Version::Version</a>
 </li>
 </ul>
 
@@ -314,13 +394,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>~Sprite()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a99a5744ec1642049eb86df2b8ff443be">Aspen::Graphics::Sprite</a>
 </li>
+<li>~Version()
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a3368f55e9a8ca619683cc03c9ab81aa2">Aspen::Version::Version</a>
+</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Thu Feb 21 2019 02:23:35 for Aspen by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

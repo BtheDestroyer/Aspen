@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -76,12 +83,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_vars.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,6 +131,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>_line
 : <a class="el" href="class_aspen_1_1_log_1_1_log.html#ab55feb33b8b72e94f7407ccda132e5f8">Aspen::Log::Log</a>
 </li>
+<li>_major
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a9202e1b4f6b57229e1b511804861b6c0">Aspen::Version::Version</a>
+</li>
+<li>_minor
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#af1764af8daee8dd155d2adde7fea36c5">Aspen::Version::Version</a>
+</li>
+<li>_name
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#a383e46c38cb4e9a8eee71e972815d0fd">Aspen::Object::Object</a>
+</li>
 <li>_parent
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a3cd9bdc4ee7d3b1ad7ad5a3fcffef228">Aspen::Object::Object</a>
 </li>
@@ -122,12 +152,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>_print
 : <a class="el" href="class_aspen_1_1_log_1_1_log.html#a337a25e02afdf2e333ca96f322cd7035">Aspen::Log::Log</a>
 </li>
+<li>_revision
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#af13a3a2aa1a8fbaa90d8ddd55bb6aceb">Aspen::Version::Version</a>
+</li>
 <li>_suf
 : <a class="el" href="class_aspen_1_1_log_1_1_log.html#a8e59241a2e8a969c23bc7f4f076c1472">Aspen::Log::Log</a>
 </li>
 <li>_surface
 : <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a647af806e7f3d8ded3756d776e8e3754">Aspen::Graphics::Graphics</a>
 , <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a96c15ac570832739a0048f1e96e368ff">Aspen::Graphics::Sprite</a>
+</li>
+<li>_tier
+: <a class="el" href="class_aspen_1_1_version_1_1_version.html#a7f4d79f4a2d3ab74a11811fce9f2df4f">Aspen::Version::Version</a>
 </li>
 <li>_valid
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">Aspen::Object::Object</a>
@@ -146,11 +182,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 20 2019 03:03:15 for Aspen by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Thu Feb 21 2019 02:23:35 for Aspen by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>
