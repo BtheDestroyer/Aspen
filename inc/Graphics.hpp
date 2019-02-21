@@ -17,6 +17,41 @@ extern const int DEFAULT_WINDOW_WIDTH;
 /// \brief Default created window height
 extern const int DEFAULT_WINDOW_HEIGHT;
 
+class Geometry : public Object::Object
+{
+protected:
+  int _r;
+  int _g;
+  int _b;
+  int _a;
+  bool _fill;
+
+public:
+  Geometry(std::string name = "Geometry", Object *parent = nullptr);
+  Geometry(std::string name, Object *parent, int r, int g, int b, int a = 0xFF, bool fill = false);
+  ~Geometry();
+
+  void SetColor(int r, int g, int b, int a);
+  int Red();
+  int Green();
+  int Blue();
+  int Alpha();
+  bool Fill();
+};
+
+class Rectangle : public Geometry
+{
+  SDL_Rect _rect;
+
+public:
+  Rectangle(Object *parent = nullptr, SDL_Rect rect = {0, 0, 1, 1});
+  ~Rectangle();
+
+  void operator()();
+
+  SDL_Rect &Rect();
+};
+
 /// \brief Sprite class
 class Sprite : public Object::Object
 {
@@ -24,6 +59,8 @@ class Sprite : public Object::Object
   std::string _path;
   /// \brief Surface loaded from _path
   SDL_Surface *_surface;
+  /// \brief Texture generated from _surface
+  SDL_Texture *_tex;
 
 public:
   /// \brief Constructor
@@ -39,15 +76,18 @@ public:
   /// \brief Wrapper for Object::SetParent
   /// \param parent New parent
   void SetParent(Object *parent);
-  /// \brief Optimizes the Sprite's _surface
-  void OptimizeSurface();
+
+  void GenerateTexture();
 
   /// \brief Gets the path passed into the constructor
   /// \return Const reference to _path
   const std::string &GetPath() const;
-  /// \brief Gets the surface loaded by the constructor
+  /// \brief Gets the loaded surface
   /// \return _surface
   SDL_Surface *GetSurface();
+  /// \brief Gets the generated texture
+  /// \return _tex
+  SDL_Texture *GetTexture();
 };
 
 /// \brief Graphics class
@@ -58,9 +98,10 @@ class Graphics : public Object::Object
   ///        Used for determining if SDL should be initialized or closed
   static unsigned _gcount;
   /// \brief Window to be displayed
-  SDL_Window *_window = NULL;
+  SDL_Window *_window = nullptr;
   /// \brief Surface of _window
-  SDL_Surface *_surface = NULL;
+  SDL_Surface *_surface = nullptr;
+  SDL_Renderer *_renderer = nullptr;
 
 public:
   /// \brief Constructor
@@ -88,6 +129,9 @@ public:
   /// \brief Gets the window
   /// \return _window
   SDL_Window *GetWindow();
+  SDL_Renderer *GetRenderer();
+
+  void DrawRectangle(Rectangle *rect);
   /// \brief Draws a given Sprite at 0, 0
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
