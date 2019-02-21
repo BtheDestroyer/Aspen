@@ -28,7 +28,9 @@ OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
 ###############################################################
 
-all: $(OUTPUT) docs
+all: project docs
+
+project: $(OUTPUT)
 
 setup: $(SOURCES) $(HEADERS) $(BUILD)
 
