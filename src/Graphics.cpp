@@ -208,7 +208,7 @@ void Graphics::operator()()
   if (!Valid())
     return;
 
-  SetBGColor(0xFF, 0x00, 0x00);
+  SetBGColor(0xFF, 0xFF, 0xFF);
 
   Object::operator()();
 
