@@ -46,6 +46,8 @@ const int CREATE_EVENT_KEYS_ALL      = 0b0000000001111000;
 /// \brief Synonym for (CREATE_EVENT_QUIT | CREATE_EVENT_KEYS_ALL)
 ///        Must be passed with CREATE_EVENTHANDLER
 const int CREATE_EVENT_ALL           = 0b0000000001111100;
+/// \brief Determines if children of the engine should debug
+const int DEBUGGING_ON               = 0b0000000010000000;
 /// \brief Synonym for all START_FLAGS
 const int ALL                        = 0b1111111111111111;
 } // namespace START_FLAGS
@@ -57,6 +59,7 @@ class Engine : public Object::Object
   Graphics::Graphics *_graphics;
   /// \brief Primary EventHandler child
   Event::EventHandler *_eventhandler;
+  bool _debugging = false;
 
 public:
   /// \brief Constructor
@@ -86,6 +89,10 @@ public:
   ///        Sets _eventhandler to nullptr if it's removed
   /// \param index Index of child to remove
   void RemoveChild(unsigned index);
+
+  bool Debug();
+
+  bool Debug(bool newval);
 };
 } // namespace Engine
 } // namespace Aspen

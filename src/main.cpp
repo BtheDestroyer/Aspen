@@ -5,6 +5,8 @@ using namespace Aspen;
 
 int main(int argc, char **argv)
 {
+  Log::Log::SetFile("./Aspen.log");
+
   Engine::Engine engine(
       Engine::START_FLAGS::CREATE_GRAPHICS |
       Engine::START_FLAGS::CREATE_EVENTHANDLER |

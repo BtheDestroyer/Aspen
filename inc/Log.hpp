@@ -22,6 +22,8 @@ class Log
   std::string _suf;
   /// \brief Determines if calls to operator() are completed
   bool _print;
+  
+  static std::fstream _file;
 
 public:
   /// \brief Constructor
@@ -38,6 +40,8 @@ public:
   void operator()(const std::stringstream &message) { operator()(message.str().c_str()); }
   /// \brief Toggles _print
   void TogglePrint();
+
+  static bool SetFile(std::string path);
 };
 
 /// \brief Used for logging debug info.

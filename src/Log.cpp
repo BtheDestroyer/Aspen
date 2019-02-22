@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Log.hpp"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <stdarg.h>
 
@@ -12,6 +13,7 @@ namespace Aspen
 namespace Log
 {
 int Log::_line = 0;
+std::fstream Log::_file;
 
 Log::Log(std::string prefix, std::string suffix, bool print)
     : _pre(prefix), _suf(suffix), _print(print) {}
@@ -25,12 +27,22 @@ void Log::operator()(const char *format, ...)
   va_start(args, format);
   vsprintf(buffer, format, args);
   va_end(args);
-  std::cout << "[" << std::setw(4) << std::setfill('0') << (_line++) << std::setw(0) << "] " << _pre << buffer << _suf << std::endl;
+  std::stringstream output;
+  output << "[" << std::setw(4) << std::setfill('0') << (_line++) << std::setw(0) << "] " << _pre << buffer << _suf << std::endl;
+  std::cout << output.str();
+  if (_file.is_open())
+    _file << output.str();
 }
 
 void Log::TogglePrint()
 {
   _print = !_print;
+}
+
+bool Log::SetFile(std::string path)
+{
+  _file.open(path.c_str(), std::ios_base::out | std::ios_base::app | std::ios_base::ate);
+  return _file.is_open();
 }
 
 #ifdef __WIN32

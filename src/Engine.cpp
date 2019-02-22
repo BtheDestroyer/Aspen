@@ -51,7 +51,11 @@ Engine::Engine(int flags)
       if (!(flags & START_FLAGS::CREATE_EVENTHANDLER))
         Log::Warning("    This only works if you are using CREATE_EVENTHANDLER");
     }
+    if (flags & START_FLAGS::DEBUGGING_ON)
+      Log::Info("  DEBUGGING_ON");
 
+    if (flags & START_FLAGS::DEBUGGING_ON)
+      _debugging = true;
     if (flags & START_FLAGS::CREATE_GRAPHICS)
       _graphics = CreateChild<Graphics::Graphics>();
     if (flags & START_FLAGS::CREATE_EVENTHANDLER)
@@ -179,6 +183,17 @@ void Engine::RemoveChild(unsigned index)
       _eventhandler = nullptr;
     Object::RemoveChild(index);
   }
+}
+
+bool Engine::Debug()
+{
+  return _debugging;
+}
+
+bool Engine::Debug(bool newval)
+{
+  _debugging = newval;
+  return _debugging;
 }
 } // namespace Engine
 } // namespace Aspen
