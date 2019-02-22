@@ -61,6 +61,7 @@ class Sprite : public Object::Object
   SDL_Surface *_surface;
   /// \brief Texture generated from _surface
   SDL_Texture *_tex;
+  SDL_Rect _rect;
 
 public:
   /// \brief Constructor
@@ -69,6 +70,8 @@ public:
   Sprite(std::string path, Object *parent = nullptr);
   /// \brief Destructor
   ~Sprite();
+
+  void End();
 
   /// \brief Draws the sprite to the parent Object's window if parent is of type Graphics
   void operator()();
@@ -88,6 +91,8 @@ public:
   /// \brief Gets the generated texture
   /// \return _tex
   SDL_Texture *GetTexture();
+
+  SDL_Rect &Rect();
 };
 
 /// \brief Graphics class

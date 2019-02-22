@@ -32,10 +32,10 @@ public:
   /// \brief Log request
   ///        Functions similarly to printf
   /// \param format Format string to be passed to vsprintf
-  void operator()(const std::string &format, ...);
+  void operator()(const char *format, ...);
   /// \brief Log request
   /// \param message Message to be unwrapped as a string
-  void operator()(const std::stringstream &message) { operator()(message.str()); }
+  void operator()(const std::stringstream &message) { operator()(message.str().c_str()); }
   /// \brief Toggles _print
   void TogglePrint();
 };

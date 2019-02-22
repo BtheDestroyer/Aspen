@@ -1,5 +1,5 @@
 #define __LOG_CPP
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "Log.hpp"
 #include <iostream>
 #include <iomanip>
@@ -16,14 +16,14 @@ int Log::_line = 0;
 Log::Log(std::string prefix, std::string suffix, bool print)
     : _pre(prefix), _suf(suffix), _print(print) {}
 
-void Log::operator()(const std::string &format, ...)
+void Log::operator()(const char *format, ...)
 {
   if (!_print)
     return;
   char buffer[512];
   va_list args;
   va_start(args, format);
-  vsprintf(buffer, format.c_str(), args);
+  vsprintf(buffer, format, args);
   va_end(args);
   std::cout << "[" << std::setw(4) << std::setfill('0') << (_line++) << std::setw(0) << "] " << _pre << buffer << _suf << std::endl;
 }

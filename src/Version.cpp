@@ -112,7 +112,7 @@ bool Version::operator>=(Version &rhs) const
 
 Version::operator float() const
 {
-  float r = Minor();
+  float r = float(Minor());
   while (r > 0.0f)
     r /= 10.0f;
   return Major() + r;
@@ -120,7 +120,7 @@ Version::operator float() const
 
 Version::operator double() const
 {
-  double r = Minor();
+  double r = double(Minor());
   while (r > 0.0)
     r /= 10.0;
   return Major() + r;

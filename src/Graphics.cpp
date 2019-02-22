@@ -288,7 +288,7 @@ void Graphics::DrawRectangle(SDL_Rect *rect, int r, int g, int b, int a, bool fi
 void Graphics::DrawSprite(Sprite *sprite)
 {
   if (sprite && sprite->GetTexture())
-    SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, NULL);
+    SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, &sprite->Rect());
 }
 
 Sprite::Sprite(std::string path, Object *parent)
@@ -320,18 +320,31 @@ Sprite::Sprite(std::string path, Object *parent)
     _valid = false;
     return;
   }
+  Rect().x = 0;
+  Rect().y = 0;
+  Rect().w = _surface->w;
+  Rect().h = _surface->h;
   GenerateTexture();
 }
 
 Sprite::~Sprite()
 {
-  if (!Valid())
-    return;
+  End();
+}
 
+void Sprite::End()
+{
   if (_surface)
+  {
     SDL_FreeSurface(_surface);
+    _surface = nullptr;
+  }
   if (_tex)
+  {
     SDL_DestroyTexture(_tex);
+    _tex = nullptr;
+  }
+  Object::End();
 }
 
 void Sprite::SetParent(Object *parent)
@@ -375,6 +388,11 @@ SDL_Surface *Sprite::GetSurface()
 SDL_Texture *Sprite::GetTexture()
 {
   return _tex;
+}
+
+SDL_Rect &Sprite::Rect()
+{
+  return _rect;
 }
 } // namespace Graphics
 } // namespace Aspen
