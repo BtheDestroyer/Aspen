@@ -44,6 +44,7 @@
         "xutility": "cpp",
         "iostream": "cpp",
         "map": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "chrono": "cpp"
     }
 }

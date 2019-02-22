@@ -51,6 +51,8 @@ Engine::Engine(int flags)
       if (!(flags & START_FLAGS::CREATE_EVENTHANDLER))
         Log::Warning("    This only works if you are using CREATE_EVENTHANDLER");
     }
+    if (flags & START_FLAGS::CREATE_TIME)
+      Log::Info("  CREATE_TIME");
     if (flags & START_FLAGS::DEBUGGING_ON)
       Log::Info("  DEBUGGING_ON");
 
@@ -138,6 +140,8 @@ Engine::Engine(int flags)
         _eventhandler->AddChild(new Event::KeyEventListener(SDLK_F24));
       }
     }
+    if (flags & START_FLAGS::CREATE_TIME)
+      _time = CreateChild<Time::Time>();
   }
 }
 Engine::~Engine()
@@ -162,6 +166,16 @@ void Engine::RefreshEventHandler()
 Event::EventHandler *Engine::EventHandler()
 {
   return _eventhandler;
+}
+
+void Engine::RefreshTime()
+{
+  _time = FindChildOfType<Time::Time>();
+}
+
+Time::Time *Engine::Time()
+{
+  return _time;
 }
 
 void Engine::RemoveChild(Object *child)

@@ -3,6 +3,7 @@
 #include "Graphics.hpp"
 #include "Event.hpp"
 #include "Version.hpp"
+#include "Time.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -46,8 +47,10 @@ const int CREATE_EVENT_KEYS_ALL      = 0b0000000001111000;
 /// \brief Synonym for (CREATE_EVENT_QUIT | CREATE_EVENT_KEYS_ALL)
 ///        Must be passed with CREATE_EVENTHANDLER
 const int CREATE_EVENT_ALL           = 0b0000000001111100;
+/// \brief Creates an Time::Time Object as a child
+const int CREATE_TIME                = 0b0000000010000000;
 /// \brief Determines if children of the engine should debug
-const int DEBUGGING_ON               = 0b0000000010000000;
+const int DEBUGGING_ON               = 0b1000000000000000;
 /// \brief Synonym for all START_FLAGS
 const int ALL                        = 0b1111111111111111;
 } // namespace START_FLAGS
@@ -59,6 +62,7 @@ class Engine : public Object::Object
   Graphics::Graphics *_graphics;
   /// \brief Primary EventHandler child
   Event::EventHandler *_eventhandler;
+  Time::Time *_time;
   bool _debugging = false;
 
 public:
@@ -78,6 +82,8 @@ public:
   /// \brief Gets the primary EventHandler child
   /// \return _eventhandler
   Event::EventHandler *EventHandler();
+  void RefreshTime();
+  Time::Time *Time();
 
   /// \brief Wrapper for Object::RemoveChild(Object *child)
   ///        Sets _graphics to nullptr if it's removed
