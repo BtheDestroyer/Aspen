@@ -2,13 +2,28 @@ SOURCES := src
 HEADERS := inc
 BUILD := build
 OBJECTS := $(BUILD)/obj
+ifndef PROJECT
 PROJECT := sdl.exe
+endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
 CXX := g++
-CXXFLAGS := -g -I$(HEADERS) -Wall -Wextra -Wno-unused-parameter -mwindows -D__WIN32
+ifndef PLATFORM
+ifeq ($(OS),Windows_NT)
+PLATFORM :=__WIN32
+else
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+PLATFORM :=__LINUX
+endif
+ifeq ($(UNAME_S),Darwin)
+PLATFORM :=__OSX
+endif
+endif
+CXXFLAGS := -g -I$(HEADERS) -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
+endif
 endif
 LINKFLAGS :=-LC:/MinGW/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -static-libstdc++
 AR := ar
@@ -30,7 +45,11 @@ OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
 all: project docs
 
-project: $(OUTPUT)
+project:
+	@echo "Building objects..."
+	@$(MAKE) $(OBJFILES) -j4 -k
+	@echo "Building $(PROJECT)..."
+	@$(MAKE) $(OUTPUT)
 
 setup: $(SOURCES) $(HEADERS) $(BUILD)
 

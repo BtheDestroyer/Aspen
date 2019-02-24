@@ -26,6 +26,10 @@ public:
   double LastTime();
   double CurrentTime();
   double DeltaTime();
+  double FPS();
+
+  void Sleep(double time);
+  void Sleep(float time);
 };
 } // namespace Time
 } // namespace Aspen

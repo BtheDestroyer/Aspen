@@ -1,6 +1,12 @@
 #define __TIME_CPP
 
 #include "Time.hpp"
+#ifdef __LINUX
+#include <thread>
+#endif
+#ifdef __WIN32
+#include <windows.h>
+#endif
 
 #undef __TIME_CPP
 
@@ -29,9 +35,6 @@ void Time::operator()()
   _lastTime = _currentTime;
   _currentTime = GetTime();
   _deltaTime = _currentTime - _lastTime;
-  Log::Debug("last: %f %lld", LastTime(), _lastTime.count());
-  Log::Debug("curr: %f %lld", CurrentTime(), _currentTime.count());
-  Log::Debug("delt: %f %lld", DeltaTime(), _deltaTime.count());
 }
 
 double Time::StartTime()
@@ -52,6 +55,31 @@ double Time::CurrentTime()
 double Time::DeltaTime()
 {
   return double(_deltaTime.count()) / 1000000.0;
+}
+
+double Time::FPS()
+{
+  return 1.0 / DeltaTime();
+}
+
+void Time::Sleep(double time)
+{
+#ifdef __LINUX
+  std::this_thread::sleep_for(std::chrono::microseconds(long long(time * 1000000)));
+#endif
+#ifdef __WIN32
+  ::Sleep(DWORD(time * 1000));
+#endif
+}
+
+void Time::Sleep(float time)
+{
+#ifdef __LINUX
+  std::this_thread::sleep_for(std::chrono::microseconds(long long(time * 1000000)));
+#endif
+#ifdef __WIN32
+  ::Sleep(DWORD(time * 1000));
+#endif
 }
 } // namespace Time
 } // namespace Aspen
