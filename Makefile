@@ -76,6 +76,8 @@ endif
 $(HEADERS)/$(STUB).hpp:
 	@touch $@
 
+
+.NOTPARALLEL: $(OUTPUT)
 $(OUTPUT): $(OBJECTS) $(OBJFILES)
 ifeq ($(suffix $@), "a")
 	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)

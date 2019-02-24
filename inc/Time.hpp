@@ -1,6 +1,7 @@
 #ifndef __TIME_HPP
 #define __TIME_HPP
 #include "Object.hpp"
+#include <chrono>
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -10,16 +11,16 @@ namespace Time
 {
 class Time : public Object::Object
 {
-  float _lastTime;
-  float _currentTime;
-  float _deltaTime;
+  std::chrono::microseconds _lastTime;
+  std::chrono::microseconds _currentTime;
+  std::chrono::microseconds _deltaTime;
 public:
   Time();
   ~Time();
 
   void operator()();
 
-  float TimeLastUpdate();
+  float LastTime();
   float CurrentTime();
   float DeltaTime();
 };

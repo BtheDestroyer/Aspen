@@ -1,7 +1,6 @@
 #define __TIME_CPP
 
 #include "Time.hpp"
-#include <chrono>
 
 #undef __TIME_CPP
 
@@ -9,15 +8,17 @@ namespace Aspen
 {
 namespace Time
 {
-float TimeInSeconds()
+std::chrono::microseconds GetTime()
 {
-  return std::chrono::duration<float>(std::chrono::system_clock::now().time_since_epoch()).count();
+  auto tse = std::chrono::steady_clock::now().time_since_epoch();
+  return std::chrono::duration_cast<std::chrono::milliseconds>(tse);
 }
 
 Time::Time()
     : Object(nullptr, "Time"), _currentTime(0), _deltaTime(0)
 {
-  _lastTime = TimeInSeconds();
+  _currentTime = GetTime();
+  Log::Debug("%f", _currentTime);
 }
 
 Time::~Time()
@@ -26,26 +27,25 @@ Time::~Time()
 
 void Time::operator()()
 {
-  float temp = _currentTime;
-  _currentTime = TimeInSeconds();
+  _lastTime = _currentTime;
+  _currentTime = GetTime();
   _deltaTime = _currentTime - _lastTime;
-  _lastTime = temp;
-  Log::Debug("%f", _deltaTime);
+  Log::Debug("%.6f %.6f %.6f", LastTime(), CurrentTime(), DeltaTime());
 }
 
-float Time::TimeLastUpdate()
+float Time::LastTime()
 {
-  return _lastTime;
+  return float(_lastTime.count()) / 1000000.0f;
 }
 
 float Time::CurrentTime()
 {
-  return _currentTime;
+  return float(_currentTime.count()) / 1000000.0f;
 }
 
 float Time::DeltaTime()
 {
-  return _deltaTime;
+  return float(_deltaTime.count()) / 1000000.0f;
 }
 } // namespace Time
 } // namespace Aspen
