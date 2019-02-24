@@ -11,18 +11,21 @@ namespace Time
 {
 class Time : public Object::Object
 {
+  std::chrono::microseconds _startTime;
   std::chrono::microseconds _lastTime;
   std::chrono::microseconds _currentTime;
   std::chrono::microseconds _deltaTime;
+
 public:
   Time();
   ~Time();
 
   void operator()();
 
-  float LastTime();
-  float CurrentTime();
-  float DeltaTime();
+  double StartTime();
+  double LastTime();
+  double CurrentTime();
+  double DeltaTime();
 };
 } // namespace Time
 } // namespace Aspen

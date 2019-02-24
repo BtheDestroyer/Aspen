@@ -11,14 +11,13 @@ namespace Time
 std::chrono::microseconds GetTime()
 {
   auto tse = std::chrono::steady_clock::now().time_since_epoch();
-  return std::chrono::duration_cast<std::chrono::milliseconds>(tse);
+  return std::chrono::duration_cast<std::chrono::microseconds>(tse);
 }
 
 Time::Time()
-    : Object(nullptr, "Time"), _currentTime(0), _deltaTime(0)
+    : Object(nullptr, "Time"), _deltaTime(0)
 {
-  _currentTime = GetTime();
-  Log::Debug("%f", _currentTime);
+  _startTime = _currentTime = GetTime();
 }
 
 Time::~Time()
@@ -30,22 +29,29 @@ void Time::operator()()
   _lastTime = _currentTime;
   _currentTime = GetTime();
   _deltaTime = _currentTime - _lastTime;
-  Log::Debug("%.6f %.6f %.6f", LastTime(), CurrentTime(), DeltaTime());
+  Log::Debug("last: %f %lld", LastTime(), _lastTime.count());
+  Log::Debug("curr: %f %lld", CurrentTime(), _currentTime.count());
+  Log::Debug("delt: %f %lld", DeltaTime(), _deltaTime.count());
 }
 
-float Time::LastTime()
+double Time::StartTime()
 {
-  return float(_lastTime.count()) / 1000000.0f;
+  return double(_startTime.count()) / 1000000.0;
 }
 
-float Time::CurrentTime()
+double Time::LastTime()
 {
-  return float(_currentTime.count()) / 1000000.0f;
+  return double(_lastTime.count()) / 1000000.0;
 }
 
-float Time::DeltaTime()
+double Time::CurrentTime()
 {
-  return float(_deltaTime.count()) / 1000000.0f;
+  return double(_currentTime.count()) / 1000000.0;
+}
+
+double Time::DeltaTime()
+{
+  return double(_deltaTime.count()) / 1000000.0;
 }
 } // namespace Time
 } // namespace Aspen
