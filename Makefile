@@ -4,6 +4,11 @@ BUILD := build
 OBJECTS := $(BUILD)/obj
 ifndef PROJECT
 PROJECT := sdl.exe
+
+IMGUI_LIB := $(BUILD)/libimgui.a
+
+IMGUI_CPP := $(wildcard libraries/imgui/*.cpp)
+IMGUI_OBJ := $(patsubst libraries/imgui/%.cpp, $(OBJECTS)/%.o,$(IMGUI_CPP))
 endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
@@ -20,12 +25,12 @@ ifeq ($(UNAME_S),Darwin)
 PLATFORM :=__OSX
 endif
 endif
-CXXFLAGS := -g -I$(HEADERS) -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
+CXXFLAGS := -g -I$(HEADERS) -Ilibraries/imgui -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif
 endif
-LINKFLAGS :=-LC:/MinGW/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -static-libstdc++
+LINKFLAGS :=-LC:/MinGW/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -static-libstdc++ -Lbuild -limgui
 AR := ar
 ARFLAGS :=
 
@@ -43,14 +48,19 @@ OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
 ###############################################################
 
+.PHONY: all
 all: project docs
 
+.PHONY: project
 project: $(OUTPUT)
 
+.PHONY: setup
 setup: $(SOURCES) $(HEADERS) $(BUILD)
 
+.PHONY: newfile
 newfile: newcpp newhpp
 
+.PHONY: newcpp
 newcpp: $(SOURCES) $(SOURCES)/$(STUB).cpp
 ifdef NEWFILE
 ifeq (,$(wildcard $(SOURCES)/$(NEWFILE).cpp))
@@ -71,6 +81,7 @@ endif
 $(SOURCES)/$(STUB).cpp:
 	@touch $@
 
+.PHONY: newhpp
 newhpp: $(HEADERS) $(HEADERS)/$(STUB).hpp
 ifdef NEWFILE
 ifeq (,$(wildcard $(HEADERS)/$(NEWFILE).hpp))
@@ -91,9 +102,8 @@ endif
 $(HEADERS)/$(STUB).hpp:
 	@touch $@
 
-
 .NOTPARALLEL: $(OUTPUT)
-$(OUTPUT): $(OBJECTS) $(OBJFILES)
+$(OUTPUT): $(OBJECTS) $(OBJFILES) $(IMGUI_LIB)
 ifeq ($(suffix $@), "a")
 	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)
 else
@@ -107,33 +117,54 @@ $(OBJECTS)/%.o: $(SOURCES)/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 $(OBJECTS): $(BUILD)
-	@mkdir -p $(OBJECTS)
+	@mkdir -p $@
 
 $(SOURCES):
-	@mkdir -p $(SOURCES)
+	@mkdir -p $@
 
 $(HEADERS):
-	@mkdir -p $(HEADERS)
+	@mkdir -p $@
 
 $(BUILD):
-	@mkdir -p $(BUILD)
+	@mkdir -p $@
 
+###############################################################
+
+.PHONY: imgui
+imgui: $(IMGUI_LIB)
+
+.NOTPARALLEL: $(IMGUI_LIB)
+$(IMGUI_LIB): $(IMGUI_OBJ)
+	$(AR) rvs $(IMGUI_LIB) $(IMGUI_OBJ) $(ARFLAGS)
+
+$(OBJECTS)/%.o: libraries/imgui/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+###############################################################
+
+.PHONY: clean
 clean:
 	rm -rf $(BUILD)
 
+.PHONY: docs
 docs: doxygen
 
+.PHONY: doxygen
 doxygen:
 	@doxygen Doxyfile
 
-test: $(OUTPUT)
+.PHONY: run
+run: $(OUTPUT)
 	$(OUTPUT)
 
+.PHONY: test-mem
 test-mem: $(OUTPUT)
 	drmemory $(OUTPUT)
 
-test-dbg: $(OUTPUT)
+.PHONY: debug
+debug: $(OUTPUT)
 	gdb $(OUTPUT)
 
+.PHONY: count
 count:
 	@cloc $(SOURCES) $(HEADERS) Makefile --quiet
