@@ -3,6 +3,7 @@
 #include "Input.hpp"
 #include "Time.hpp"
 #include "Engine.hpp"
+#include <cmath>
 #include <map>
 
 #undef __INPUT_CPP
@@ -12,7 +13,7 @@ namespace Aspen
 namespace Input
 {
 Axis::Axis(Object *parent, std::string name)
-    : Axis(SDLK_UNKNOWN, SDLK_UNKNOWN, 0.1f, 0.1f, parent, name)
+    : Axis(SDLK_UNKNOWN, SDLK_UNKNOWN, 0.5f, 0.5f, parent, name)
 {
 }
 
@@ -26,22 +27,20 @@ void Axis::operator()()
   Time::Time *time = nullptr;
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
-  {
     time = engine->FindChildOfType<Time::Time>();
-  }
-  if (!time)
-    time = FindAncestorOfType<Time::Time>();
   if (!time) 
   {
     Log::Error("Axis Object can't find an Engine ancestor with a Time child or a Time ancestor!");
     return;
   }
-  float w = _weight * float(time->DeltaTime() * 60.0);
   float d = KeyHeld(_pos) ? 1.0f : 0.0f + KeyHeld(_neg) ? -1.0f : 0.0f;
   if (d != 0.0f)
-    _value = _value * (1 - w) + d * w;
+  {
+    float w = std::min(1.0f, _weight * float(time->DeltaTime() * 60));
+    _value = _value * (1.0f - w) + d * w;
+  }
   else
-    _value *= 1 - _gravity;
+    _value *= 1.0f - std::min(1.0f, _gravity * float(time->DeltaTime() * 60));
 }
 
 float Axis::GetValue()

@@ -34,7 +34,7 @@ class Axis : public Object::Object
 
 public:
   Axis(Object *parent = nullptr, std::string name = "Axis");
-  Axis(SDL_Keycode posiive = SDLK_UNKNOWN, SDL_Keycode negative = SDLK_UNKNOWN, float _gravity = 0.1f, float _weight = 0.1f, Object *parent = nullptr, std::string name = "Axis");
+  Axis(SDL_Keycode posiive = SDLK_UNKNOWN, SDL_Keycode negative = SDLK_UNKNOWN, float _gravity = 0.5f, float _weight = 0.5f, Object *parent = nullptr, std::string name = "Axis");
 
   void operator()();
 

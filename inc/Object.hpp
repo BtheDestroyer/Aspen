@@ -162,6 +162,8 @@ public:
   /// \brief Uses Log::Log to print the parent/children tree of this Object
   ///        Uses Log::Debug
   void PrintTree();
+
+  std::string Name();
 };
 } // namespace Object
 } // namespace Aspen

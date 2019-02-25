@@ -1,5 +1,6 @@
 #include "Engine.hpp"
 #include "Transform.hpp"
+#include "Controller.hpp"
 #include "Log.hpp"
 #include <math.h>
 
@@ -24,17 +25,15 @@ int main(int argc, char **argv)
 
   newSprite = new Graphics::Sprite("resources/mario.png", engine.FindChildOfType<Graphics::Graphics>());
   newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
-  newSprite->FindChildOfType<Transform::Transform>()->SetScale(0.5, 1);
-  newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
+  //newSprite->FindChildOfType<Transform::Transform>()->SetScale(0.5, 1);
+  //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
+  newSprite->AddChild(new Controller::PlayerController_8Way());
   gfx->AddChild(newSprite);
 
   engine.PrintTree();
 
   while (engine)
   {
-    double t = engine.FindChildOfType<Time::Time>()->CurrentTime();
-    newSprite->FindChildOfType<Transform::Transform>()->SetRotation(t * 5.0);
-    newSprite->FindChildOfType<Transform::Transform>()->SetXPosition(200 + 100 * sin(t));
     engine();
   }
   return 0;

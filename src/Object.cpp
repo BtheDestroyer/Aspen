@@ -194,5 +194,10 @@ void Object::PrintTree()
 {
   PrintTree(Log::Debug);
 }
+
+std::string Object::Name()
+{
+  return _name;
+}
 } // namespace Object
 } // namespace Aspen
