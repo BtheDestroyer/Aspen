@@ -60,8 +60,6 @@ void PlayerController_8Way::operator()()
     double dx = ah->GetValue() * _speed * time->DeltaTime() * 60;
     double dy = av->GetValue() * _speed * time->DeltaTime() * 60;
     tf->ModifyPosition(dx, dy);
-    if (std::fabs(ah->GetValue()) > 0.001 || std::fabs(av->GetValue()) > 0.001)
-      Log::Debug("PlayerController axis: %.4f, %.4f", ah->GetValue(), av->GetValue());
   }
   else
     tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
