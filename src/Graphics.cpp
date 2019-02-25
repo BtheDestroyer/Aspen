@@ -364,6 +364,8 @@ void Graphics::DrawSprite(Sprite *sprite)
       rect.y += tf->GetYPosition();
       angle += double(tf->GetRotation());
     }
+    if (angle == 0)
+      angle = 0.00000001;
     SDL_RenderCopyEx(_renderer, sprite->GetTexture(), NULL, &rect, angle, NULL, SDL_FLIP_NONE);
   }
 }
