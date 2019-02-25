@@ -1,4 +1,5 @@
 #include "Engine.hpp"
+#include "Transform.hpp"
 #include "Log.hpp"
 
 using namespace Aspen;
@@ -13,11 +14,15 @@ int main(int argc, char **argv)
       Engine::START_FLAGS::CREATE_EVENT_ALL |
       Engine::START_FLAGS::CREATE_TIME);
 
-  //engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.Graphics()));
-  engine.Graphics()->AddChild(new Graphics::Sprite("resources/mario.png", engine.Graphics()));
+  //engine.FindChildOfType<Graphics::Graphics>()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.FindChildOfType<Graphics::Graphics>()));
+  Graphics::Sprite *newSprite = new Graphics::Sprite("resources/mario.png", engine.FindChildOfType<Graphics::Graphics>());
+  Transform::Transform *tf = new Transform::Transform();
+  tf->SetPosition(100, 50);
+  newSprite->AddChild(tf);
+  engine.FindChildOfType<Graphics::Graphics>()->AddChild(newSprite);
 
   engine.PrintTree();
-  
+
   while (engine)
     engine();
   return 0;

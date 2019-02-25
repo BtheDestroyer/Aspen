@@ -58,11 +58,6 @@ const int ALL                        = 0b1111111111111111;
 /// \brief Engine class
 class Engine : public Object::Object
 {
-  /// \brief Primary Graphics child
-  Graphics::Graphics *_graphics;
-  /// \brief Primary EventHandler child
-  Event::EventHandler *_eventhandler;
-  Time::Time *_time;
   bool _debugging = false;
 
 public:
@@ -73,33 +68,8 @@ public:
   /// \brief Destructor
   ~Engine();
 
-  /// \brief Refreshes _graphics if necessary
-  void RefreshGraphics();
-  /// \brief Gets the primary Graphics child
-  /// \return _graphics
-  Graphics::Graphics *Graphics();
-  /// \brief Refreshes _eventhandler if necessary
-  void RefreshEventHandler();
-  /// \brief Gets the primary EventHandler child
-  /// \return _eventhandler
-  Event::EventHandler *EventHandler();
-  void RefreshTime();
-  Time::Time *Time();
-
-  /// \brief Wrapper for Object::RemoveChild(Object *child)
-  ///        Sets _graphics to nullptr if it's removed
-  ///        Sets _eventhandler to nullptr if it's removed
-  /// \param child Child to remove
-  void RemoveChild(Object *child);
-  /// \brief Wrapper for Object::RemoveChild(int index)
-  ///        Sets _graphics to nullptr if it's removed
-  ///        Sets _eventhandler to nullptr if it's removed
-  /// \param index Index of child to remove
-  void RemoveChild(unsigned index);
-
   bool Debug();
-
-  bool Debug(bool newval);
+  void Debug(bool newval);
 };
 } // namespace Engine
 } // namespace Aspen

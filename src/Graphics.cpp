@@ -2,6 +2,7 @@
 
 #include "Graphics.hpp"
 #include "Engine.hpp"
+#include "Transform.hpp"
 #include "Log.hpp"
 #include <sstream>
 #include <iomanip>
@@ -320,10 +321,19 @@ void Graphics::DrawRectangle(Rectangle *rect)
   if (rect)
   {
     SDL_SetRenderDrawColor(_renderer, rect->Color().Red(), rect->Color().Green(), rect->Color().Blue(), rect->Color().Alpha());
+    Transform::Transform *tf = rect->FindChildOfType<Transform::Transform>();
+    SDL_Rect rectangle = rect->Rect();
+    if (tf)
+    {
+      rectangle.x += tf->GetXPosition();
+      rectangle.y += tf->GetYPosition();
+      rectangle.w += tf->GetXScale();
+      rectangle.h += tf->GetYScale();
+    }
     if (rect->Fill())
-      SDL_RenderFillRect(_renderer, &rect->Rect());
+      SDL_RenderFillRect(_renderer, &rectangle);
     else
-      SDL_RenderDrawRect(_renderer, &rect->Rect());
+      SDL_RenderDrawRect(_renderer, &rectangle);
   }
 }
 
@@ -342,7 +352,18 @@ void Graphics::DrawRectangle(SDL_Rect *rect, Aspen::Graphics::Color c, bool fill
 void Graphics::DrawSprite(Sprite *sprite)
 {
   if (sprite && sprite->GetTexture())
-    SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, &sprite->Rect());
+  {
+    SDL_Rect rect = sprite->Rect();
+    Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
+    if (tf)
+    {
+      rect.x += tf->GetXPosition();
+      rect.y += tf->GetYPosition();
+      rect.w += tf->GetXScale();
+      rect.h += tf->GetYScale();
+    }
+    SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, &rect);
+  }
 }
 
 Sprite::Sprite(std::string path, Object *parent, std::string name)

@@ -151,6 +151,7 @@ void Object::PrintTree(Log::Log &log)
 {
   static std::string indentation = "";
   static const std::string newindent = "  |    ";
+  static bool madeSpace = false;
   if (indentation.length() == 0)
   {
     log("%s (%p) (%s)", _name.c_str(), this, Valid() ? "Valid" : "Ended");
@@ -163,7 +164,7 @@ void Object::PrintTree(Log::Log &log)
     {
       log("%s\\... %s (%p) (%s)", indentation.c_str(), _name.c_str(), this, Valid() ? "Valid" : "Ended");
       if (_children.size() > 0)
-        indentation = "       " + indentation;
+        indentation = indentation + "       ";
     }
     else
     {
@@ -172,12 +173,16 @@ void Object::PrintTree(Log::Log &log)
         indentation = newindent + indentation;
     }
   }
+  madeSpace = false;
   for (unsigned i = 0; i < _children.size(); ++i)
     _children[i]->PrintTree(log);
   if (_children.size() > 0)
   {
-    if (_parent)
+    if (_parent && !madeSpace)
+    {
       log("%s", indentation.c_str());
+      madeSpace = true;
+    }
     if (indentation.length() > newindent.length())
       indentation = indentation.substr(newindent.length());
     else
