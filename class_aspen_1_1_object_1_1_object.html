@@ -126,13 +126,16 @@ Inheritance diagram for Aspen::Object::Object:</div>
  <div class="center">
   <img src="class_aspen_1_1_object_1_1_object.png" usemap="#Aspen::Object::Object_map" alt=""/>
   <map id="Aspen::Object::Object_map" name="Aspen::Object::Object_map">
-<area href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. " alt="Aspen::Engine::Engine" shape="rect" coords="0,56,192,80"/>
-<area href="class_aspen_1_1_event_1_1_event_handler.html" title="EventHandler class Passes SDL_Events to children EventListeners. " alt="Aspen::Event::EventHandler" shape="rect" coords="202,56,394,80"/>
-<area href="class_aspen_1_1_event_1_1_event_listener.html" title="EventListener class Parented by EventHandler and used to moduly handle SDL_Events. " alt="Aspen::Event::EventListener" shape="rect" coords="404,56,596,80"/>
-<area href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class Holds other classes from Aspen::Graphics as children to draw them to the screen..." alt="Aspen::Graphics::Graphics" shape="rect" coords="606,56,798,80"/>
-<area href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. " alt="Aspen::Graphics::Sprite" shape="rect" coords="808,56,1000,80"/>
-<area href="class_aspen_1_1_event_1_1_key_event_listener.html" title="KeyEventListener class Controls Input::Keys from Input::GetKey() " alt="Aspen::Event::KeyEventListener" shape="rect" coords="303,112,495,136"/>
-<area href="class_aspen_1_1_event_1_1_quit_event_listener.html" title="QuitEventListener class. " alt="Aspen::Event::QuitEventListener" shape="rect" coords="505,112,697,136"/>
+<area href="class_aspen_1_1_controller_1_1_player_controller__8_way.html" alt="Aspen::Controller::PlayerController_8Way" shape="rect" coords="258,56,506,80"/>
+<area href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. " alt="Aspen::Engine::Engine" shape="rect" coords="258,112,506,136"/>
+<area href="class_aspen_1_1_event_1_1_event_handler.html" title="EventHandler class Passes SDL_Events to children EventListeners. " alt="Aspen::Event::EventHandler" shape="rect" coords="258,168,506,192"/>
+<area href="class_aspen_1_1_event_1_1_event_listener.html" title="EventListener class Parented by EventHandler and used to moduly handle SDL_Events. " alt="Aspen::Event::EventListener" shape="rect" coords="258,224,506,248"/>
+<area href="class_aspen_1_1_graphics_1_1_geometry.html" alt="Aspen::Graphics::Geometry" shape="rect" coords="258,280,506,304"/>
+<area href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class Holds other classes from Aspen::Graphics as children to draw them to the screen..." alt="Aspen::Graphics::Graphics" shape="rect" coords="258,336,506,360"/>
+<area href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. " alt="Aspen::Graphics::Sprite" shape="rect" coords="258,392,506,416"/>
+<area href="class_aspen_1_1_input_1_1_axis.html" alt="Aspen::Input::Axis" shape="rect" coords="258,448,506,472"/>
+<area href="class_aspen_1_1_time_1_1_time.html" alt="Aspen::Time::Time" shape="rect" coords="258,504,506,528"/>
+<area href="class_aspen_1_1_transform_1_1_transform.html" alt="Aspen::Transform::Transform" shape="rect" coords="258,560,506,584"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -180,6 +183,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:abead808465c7004c343fc322e76faa9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a> ()</td></tr>
 <tr class="memdesc:abead808465c7004c343fc322e76faa9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the generation of this object in the parent/child tree.  <a href="#abead808465c7004c343fc322e76faa9d">More...</a><br/></td></tr>
 <tr class="separator:abead808465c7004c343fc322e76faa9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memTemplParams" colspan="2"><a class="anchor" id="a58a6d5ff7eebf3f687c1a6b985054a81"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FindAncestorOfType</b> ()</td></tr>
+<tr class="separator:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a> ()</td></tr>
 <tr class="memdesc:a077c6f008bd36517042170c3d589ebfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a077c6f008bd36517042170c3d589ebfb">More...</a><br/></td></tr>
@@ -206,6 +213,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a> ()</td></tr>
 <tr class="memdesc:a3dee1d560eb341422441065654f516e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
 <tr class="separator:a3dee1d560eb341422441065654f516e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0911f0fac15417967f2d3cc43b78c86f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0911f0fac15417967f2d3cc43b78c86f"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> ()</td></tr>
+<tr class="separator:a0911f0fac15417967f2d3cc43b78c86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72178f06503de415423abc32d7cbc467"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72178f06503de415423abc32d7cbc467"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>ChildrenCount</b> ()</td></tr>
+<tr class="separator:a72178f06503de415423abc32d7cbc467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472c7b19ab8982bb8c4e8d25635972bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a472c7b19ab8982bb8c4e8d25635972bd"></a>
+std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Children</b> ()</td></tr>
+<tr class="separator:a472c7b19ab8982bb8c4e8d25635972bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -626,7 +642,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_object.html">Object</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a></li>
-    <li class="footer">Generated on Thu Feb 21 2019 03:39:01 for Aspen by
+    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

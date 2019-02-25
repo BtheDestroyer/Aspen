@@ -8,5 +8,6 @@ var searchData=
   ['create_5fevent_5fkeys_5fspecial',['CREATE_EVENT_KEYS_SPECIAL',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#af24c0c168eee1663c47d81f03714679e',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5fevent_5fquit',['CREATE_EVENT_QUIT',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#ac161010173e5dd3197872b36d878387a',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5feventhandler',['CREATE_EVENTHANDLER',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a40e2abf72f89722778dd8cb13650bbf2',1,'Aspen::Engine::START_FLAGS']]],
-  ['create_5fgraphics',['CREATE_GRAPHICS',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a5481e6de0f8f07c78bd3dbb8e4fdd854',1,'Aspen::Engine::START_FLAGS']]]
+  ['create_5fgraphics',['CREATE_GRAPHICS',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a5481e6de0f8f07c78bd3dbb8e4fdd854',1,'Aspen::Engine::START_FLAGS']]],
+  ['create_5ftime',['CREATE_TIME',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#ae59ce5a11c4371774fd7f9466c54f22e',1,'Aspen::Engine::START_FLAGS']]]
 ];

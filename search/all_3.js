@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['color',['Color',['../class_aspen_1_1_graphics_1_1_color.html',1,'Aspen::Graphics']]],
   ['create_5fevent_5fall',['CREATE_EVENT_ALL',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#aafd63d5784eaf1ba1f4b43554512226e',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5fevent_5fkeys_5fall',['CREATE_EVENT_KEYS_ALL',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a6a736e934c99581ec0b9f0e4c4a4c579',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5fevent_5fkeys_5falpha',['CREATE_EVENT_KEYS_ALPHA',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a98e6abe768c8e8ad5d98f97784c2dc1b',1,'Aspen::Engine::START_FLAGS']]],
@@ -9,5 +10,6 @@ var searchData=
   ['create_5fevent_5fquit',['CREATE_EVENT_QUIT',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#ac161010173e5dd3197872b36d878387a',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5feventhandler',['CREATE_EVENTHANDLER',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a40e2abf72f89722778dd8cb13650bbf2',1,'Aspen::Engine::START_FLAGS']]],
   ['create_5fgraphics',['CREATE_GRAPHICS',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#a5481e6de0f8f07c78bd3dbb8e4fdd854',1,'Aspen::Engine::START_FLAGS']]],
+  ['create_5ftime',['CREATE_TIME',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#ae59ce5a11c4371774fd7f9466c54f22e',1,'Aspen::Engine::START_FLAGS']]],
   ['createchild',['CreateChild',['../class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437',1,'Aspen::Object::Object']]]
 ];

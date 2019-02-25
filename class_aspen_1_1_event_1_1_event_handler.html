@@ -129,10 +129,10 @@ Inheritance diagram for Aspen::Event::EventHandler:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a077cb4542485daf1df39e27acb6a6966"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a077cb4542485daf1df39e27acb6a6966"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html#a077cb4542485daf1df39e27acb6a6966">EventHandler</a> ()</td></tr>
-<tr class="memdesc:a077cb4542485daf1df39e27acb6a6966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
-<tr class="separator:a077cb4542485daf1df39e27acb6a6966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7052ffa4904eb38d64d10fdbcad9b5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7052ffa4904eb38d64d10fdbcad9b5d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html#aa7052ffa4904eb38d64d10fdbcad9b5d">EventHandler</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> *parent=nullptr, std::string name=&quot;EventHandler&quot;)</td></tr>
+<tr class="memdesc:aa7052ffa4904eb38d64d10fdbcad9b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr class="separator:aa7052ffa4904eb38d64d10fdbcad9b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac07fe4266cf23e3758a33a0b5253fed8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac07fe4266cf23e3758a33a0b5253fed8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html#ac07fe4266cf23e3758a33a0b5253fed8">~EventHandler</a> ()</td></tr>
 <tr class="memdesc:ac07fe4266cf23e3758a33a0b5253fed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
@@ -180,6 +180,10 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a> ()</td></tr>
 <tr class="memdesc:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the generation of this object in the parent/child tree.  <a href="#abead808465c7004c343fc322e76faa9d">More...</a><br/></td></tr>
 <tr class="separator:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplParams" colspan="2"><a class="anchor" id="a58a6d5ff7eebf3f687c1a6b985054a81"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FindAncestorOfType</b> ()</td></tr>
+<tr class="separator:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a> ()</td></tr>
 <tr class="memdesc:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a077c6f008bd36517042170c3d589ebfb">More...</a><br/></td></tr>
@@ -206,6 +210,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a> ()</td></tr>
 <tr class="memdesc:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
 <tr class="separator:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0911f0fac15417967f2d3cc43b78c86f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0911f0fac15417967f2d3cc43b78c86f"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> ()</td></tr>
+<tr class="separator:a0911f0fac15417967f2d3cc43b78c86f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72178f06503de415423abc32d7cbc467 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72178f06503de415423abc32d7cbc467"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>ChildrenCount</b> ()</td></tr>
+<tr class="separator:a72178f06503de415423abc32d7cbc467 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472c7b19ab8982bb8c4e8d25635972bd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a472c7b19ab8982bb8c4e8d25635972bd"></a>
+std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Children</b> ()</td></tr>
+<tr class="separator:a472c7b19ab8982bb8c4e8d25635972bd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -248,7 +261,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_event.html">Event</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_event_1_1_event_handler.html">EventHandler</a></li>
-    <li class="footer">Generated on Thu Feb 21 2019 03:39:01 for Aspen by
+    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

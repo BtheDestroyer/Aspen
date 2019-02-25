@@ -1,13 +1,9 @@
 var class_aspen_1_1_engine_1_1_engine =
 [
-    [ "Engine", "class_aspen_1_1_engine_1_1_engine.html#ac247ab960080cb55b3b3a6202d91259a", null ],
+    [ "Engine", "class_aspen_1_1_engine_1_1_engine.html#a21a6cb8b03fcf8baef176c7e19f1b4db", null ],
+    [ "Engine", "class_aspen_1_1_engine_1_1_engine.html#a2ff16dc68896a1e4b67c066f6fc011bd", null ],
     [ "~Engine", "class_aspen_1_1_engine_1_1_engine.html#a1789938320d74c7eaf91b99c2cc3ad23", null ],
-    [ "EventHandler", "class_aspen_1_1_engine_1_1_engine.html#a9e5adc83ecc59c18a27da85e4d7b7653", null ],
-    [ "Graphics", "class_aspen_1_1_engine_1_1_engine.html#a14d74ed385c359ecb771843b4af54f21", null ],
-    [ "RefreshEventHandler", "class_aspen_1_1_engine_1_1_engine.html#ad89a5fe88e9424fa67ce36b764dc55b3", null ],
-    [ "RefreshGraphics", "class_aspen_1_1_engine_1_1_engine.html#afb12d005248a08442a76c2fffd1ad080", null ],
-    [ "RemoveChild", "class_aspen_1_1_engine_1_1_engine.html#ab357ce5c8feff1fc480a3db4173ae835", null ],
-    [ "RemoveChild", "class_aspen_1_1_engine_1_1_engine.html#a76028eb2e17bef520fa41a326812991d", null ],
-    [ "_eventhandler", "class_aspen_1_1_engine_1_1_engine.html#ad1b210e3c06677a89b752d84b7ed8417", null ],
-    [ "_graphics", "class_aspen_1_1_engine_1_1_engine.html#a1c15b0cce6787c242a89939ee3a6f85e", null ]
+    [ "Debug", "class_aspen_1_1_engine_1_1_engine.html#a02f1ce0e8eed466119933ccb79629789", null ],
+    [ "Debug", "class_aspen_1_1_engine_1_1_engine.html#af3bb4989ba7525194fa75be83c20f801", null ],
+    [ "_debugging", "class_aspen_1_1_engine_1_1_engine.html#ade8b6f1caf400c6d146503f432f03c80", null ]
 ];

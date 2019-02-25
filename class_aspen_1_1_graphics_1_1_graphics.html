@@ -131,14 +131,14 @@ Inheritance diagram for Aspen::Graphics::Graphics:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4e4c5af4991e132829df834fff21e9bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e4c5af4991e132829df834fff21e9bd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a4e4c5af4991e132829df834fff21e9bd">Graphics</a> ()</td></tr>
-<tr class="memdesc:a4e4c5af4991e132829df834fff21e9bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Calls Graphics::Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) <br/></td></tr>
-<tr class="separator:a4e4c5af4991e132829df834fff21e9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a579f9b4a32a45a1647e493d0d7f08a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a579f9b4a32a45a1647e493d0d7f08a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a5a579f9b4a32a45a1647e493d0d7f08a">Graphics</a> (int w, int h)</td></tr>
-<tr class="memdesc:a5a579f9b4a32a45a1647e493d0d7f08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Sets up SDL Creates a window with width w and height h. <br/></td></tr>
-<tr class="separator:a5a579f9b4a32a45a1647e493d0d7f08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a458de01d3de7aa6ca7b615d97e488447"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a458de01d3de7aa6ca7b615d97e488447"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a458de01d3de7aa6ca7b615d97e488447">Graphics</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> *parent=nullptr, std::string name=&quot;Graphics&quot;)</td></tr>
+<tr class="memdesc:a458de01d3de7aa6ca7b615d97e488447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Calls Graphics::Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) <br/></td></tr>
+<tr class="separator:a458de01d3de7aa6ca7b615d97e488447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f9d21b1790d48988300a539222eaf36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f9d21b1790d48988300a539222eaf36"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a7f9d21b1790d48988300a539222eaf36">Graphics</a> (int w, int h, <a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> *parent=nullptr, std::string name=&quot;Graphics&quot;)</td></tr>
+<tr class="memdesc:a7f9d21b1790d48988300a539222eaf36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Sets up SDL Creates a window with width w and height h. <br/></td></tr>
+<tr class="separator:a7f9d21b1790d48988300a539222eaf36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddda5958905c4581e7cfea29f2b1016"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ddda5958905c4581e7cfea29f2b1016"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a0ddda5958905c4581e7cfea29f2b1016">~Graphics</a> ()</td></tr>
 <tr class="memdesc:a0ddda5958905c4581e7cfea29f2b1016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
@@ -156,6 +156,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a8d9158217dd776323ad1073bddd90275"><td class="memItemLeft" align="right" valign="top">SDL_Window *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a8d9158217dd776323ad1073bddd90275">GetWindow</a> ()</td></tr>
 <tr class="memdesc:a8d9158217dd776323ad1073bddd90275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the window.  <a href="#a8d9158217dd776323ad1073bddd90275">More...</a><br/></td></tr>
 <tr class="separator:a8d9158217dd776323ad1073bddd90275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227633c48b4f81181677800397d26d3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a227633c48b4f81181677800397d26d3b"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenderer</b> ()</td></tr>
+<tr class="separator:a227633c48b4f81181677800397d26d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5db28ef2ef24774cdebffeab6f6312b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5db28ef2ef24774cdebffeab6f6312b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRectangle</b> (<a class="el" href="class_aspen_1_1_graphics_1_1_rectangle.html">Rectangle</a> *rect)</td></tr>
+<tr class="separator:a5db28ef2ef24774cdebffeab6f6312b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac17c3a4d5dc8658b72547f1761133b35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac17c3a4d5dc8658b72547f1761133b35"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRectangle</b> (SDL_Rect *rect, <a class="el" href="class_aspen_1_1_graphics_1_1_color.html">Color</a> c, bool fill=true)</td></tr>
+<tr class="separator:ac17c3a4d5dc8658b72547f1761133b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adca0e0af6e335deccadc1576a7f4d88a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#adca0e0af6e335deccadc1576a7f4d88a">DrawSprite</a> (<a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html">Sprite</a> *sprite)</td></tr>
 <tr class="memdesc:adca0e0af6e335deccadc1576a7f4d88a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a given <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. ">Sprite</a> at 0, 0.  <a href="#adca0e0af6e335deccadc1576a7f4d88a">More...</a><br/></td></tr>
 <tr class="separator:adca0e0af6e335deccadc1576a7f4d88a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,6 +211,10 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a> ()</td></tr>
 <tr class="memdesc:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the generation of this object in the parent/child tree.  <a href="#abead808465c7004c343fc322e76faa9d">More...</a><br/></td></tr>
 <tr class="separator:abead808465c7004c343fc322e76faa9d inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplParams" colspan="2"><a class="anchor" id="a58a6d5ff7eebf3f687c1a6b985054a81"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FindAncestorOfType</b> ()</td></tr>
+<tr class="separator:a58a6d5ff7eebf3f687c1a6b985054a81 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a> ()</td></tr>
 <tr class="memdesc:a077c6f008bd36517042170c3d589ebfb inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a077c6f008bd36517042170c3d589ebfb">More...</a><br/></td></tr>
@@ -228,17 +241,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a> ()</td></tr>
 <tr class="memdesc:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
 <tr class="separator:a3dee1d560eb341422441065654f516e1 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0911f0fac15417967f2d3cc43b78c86f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0911f0fac15417967f2d3cc43b78c86f"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> ()</td></tr>
+<tr class="separator:a0911f0fac15417967f2d3cc43b78c86f inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72178f06503de415423abc32d7cbc467 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72178f06503de415423abc32d7cbc467"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>ChildrenCount</b> ()</td></tr>
+<tr class="separator:a72178f06503de415423abc32d7cbc467 inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472c7b19ab8982bb8c4e8d25635972bd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a472c7b19ab8982bb8c4e8d25635972bd"></a>
+std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Children</b> ()</td></tr>
+<tr class="separator:a472c7b19ab8982bb8c4e8d25635972bd inherit pub_methods_class_aspen_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a6007bfb78ce9877bc758469b1ca5d45a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6007bfb78ce9877bc758469b1ca5d45a"></a>
-SDL_Window *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a6007bfb78ce9877bc758469b1ca5d45a">_window</a> = NULL</td></tr>
+SDL_Window *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a6007bfb78ce9877bc758469b1ca5d45a">_window</a> = nullptr</td></tr>
 <tr class="memdesc:a6007bfb78ce9877bc758469b1ca5d45a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Window to be displayed. <br/></td></tr>
 <tr class="separator:a6007bfb78ce9877bc758469b1ca5d45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647af806e7f3d8ded3756d776e8e3754"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a647af806e7f3d8ded3756d776e8e3754"></a>
-SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a647af806e7f3d8ded3756d776e8e3754">_surface</a> = NULL</td></tr>
+SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a647af806e7f3d8ded3756d776e8e3754">_surface</a> = nullptr</td></tr>
 <tr class="memdesc:a647af806e7f3d8ded3756d776e8e3754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surface of _window. <br/></td></tr>
 <tr class="separator:a647af806e7f3d8ded3756d776e8e3754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef279b20fb0bbc540e09b0a1d2eb169"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abef279b20fb0bbc540e09b0a1d2eb169"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>_renderer</b> = nullptr</td></tr>
+<tr class="separator:abef279b20fb0bbc540e09b0a1d2eb169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae946b0a8d9c0c10e8a9bc9784ae4bb9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae946b0a8d9c0c10e8a9bc9784ae4bb9b"></a>
+<a class="el" href="class_aspen_1_1_graphics_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_background</b></td></tr>
+<tr class="separator:ae946b0a8d9c0c10e8a9bc9784ae4bb9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -391,7 +419,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_graphics.html">Graphics</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html">Graphics</a></li>
-    <li class="footer">Generated on Thu Feb 21 2019 03:39:01 for Aspen by
+    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

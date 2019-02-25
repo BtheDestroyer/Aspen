@@ -107,6 +107,7 @@ $(document).ready(function(){initNavTree('class_aspen_1_1_log_1_1_log.html','');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_aspen_1_1_log_1_1_log-members.html">List of all members</a>  </div>
@@ -125,9 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7cd40b18a98f7849ffd0445b1a601634"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a7cd40b18a98f7849ffd0445b1a601634">Log</a> (std::string prefix=&quot;&quot;, std::string suffix=&quot;&quot;, bool print=true)</td></tr>
 <tr class="memdesc:a7cd40b18a98f7849ffd0445b1a601634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a7cd40b18a98f7849ffd0445b1a601634">More...</a><br/></td></tr>
 <tr class="separator:a7cd40b18a98f7849ffd0445b1a601634"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00c59066f5b3e9385b4ed23d5f75092b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a00c59066f5b3e9385b4ed23d5f75092b">operator()</a> (const std::string &amp;format,...)</td></tr>
-<tr class="memdesc:a00c59066f5b3e9385b4ed23d5f75092b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log</a> request Functions similarly to printf.  <a href="#a00c59066f5b3e9385b4ed23d5f75092b">More...</a><br/></td></tr>
-<tr class="separator:a00c59066f5b3e9385b4ed23d5f75092b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ede1d4aadb263991aec1b2943898fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a13ede1d4aadb263991aec1b2943898fb">operator()</a> (const char *format,...)</td></tr>
+<tr class="memdesc:a13ede1d4aadb263991aec1b2943898fb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log</a> request Functions similarly to printf.  <a href="#a13ede1d4aadb263991aec1b2943898fb">More...</a><br/></td></tr>
+<tr class="separator:a13ede1d4aadb263991aec1b2943898fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0afd4a9bebc71be10b94a8d910d99336"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a0afd4a9bebc71be10b94a8d910d99336">operator()</a> (const std::stringstream &amp;message)</td></tr>
 <tr class="memdesc:a0afd4a9bebc71be10b94a8d910d99336"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log</a> request.  <a href="#a0afd4a9bebc71be10b94a8d910d99336">More...</a><br/></td></tr>
 <tr class="separator:a0afd4a9bebc71be10b94a8d910d99336"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,6 +136,12 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a7aa60eb49286c091b56062c96dc09abf">TogglePrint</a> ()</td></tr>
 <tr class="memdesc:a7aa60eb49286c091b56062c96dc09abf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles _print. <br/></td></tr>
 <tr class="separator:a7aa60eb49286c091b56062c96dc09abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a97410aa2d712164d125a8f2811d2677e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97410aa2d712164d125a8f2811d2677e"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetFile</b> (std::string path)</td></tr>
+<tr class="separator:a97410aa2d712164d125a8f2811d2677e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -157,6 +164,9 @@ Static Private Attributes</h2></td></tr>
 static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#ab55feb33b8b72e94f7407ccda132e5f8">_line</a></td></tr>
 <tr class="memdesc:ab55feb33b8b72e94f7407ccda132e5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current line number. <br/></td></tr>
 <tr class="separator:ab55feb33b8b72e94f7407ccda132e5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2adac4891202cc519d90f6acd7de85f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2adac4891202cc519d90f6acd7de85f6"></a>
+static std::fstream&#160;</td><td class="memItemRight" valign="bottom"><b>_file</b></td></tr>
+<tr class="separator:a2adac4891202cc519d90f6acd7de85f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log</a> functor class Used for logging information to the console. </p>
@@ -204,14 +214,14 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a00c59066f5b3e9385b4ed23d5f75092b"></a>
+<a class="anchor" id="a13ede1d4aadb263991aec1b2943898fb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Aspen::Log::Log::operator() </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>format</em>, </td>
         </tr>
         <tr>
@@ -279,7 +289,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_log.html">Log</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_log_1_1_log.html">Log</a></li>
-    <li class="footer">Generated on Thu Feb 21 2019 03:39:01 for Aspen by
+    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

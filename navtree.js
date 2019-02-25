@@ -29,7 +29,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_engine_8hpp_source.html"
+"_controller_8hpp_source.html",
+"namespace_aspen_1_1_input.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

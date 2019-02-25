@@ -2,9 +2,7 @@ var searchData=
 [
   ['_5fchildren',['_children',['../class_aspen_1_1_object_1_1_object.html#a0ad096111db6a0a09fdd5e113d066866',1,'Aspen::Object::Object']]],
   ['_5fcount',['_count',['../class_aspen_1_1_object_1_1_object.html#a16b58bad3a22150f56ecc37efd19081e',1,'Aspen::Object::Object']]],
-  ['_5feventhandler',['_eventhandler',['../class_aspen_1_1_engine_1_1_engine.html#ad1b210e3c06677a89b752d84b7ed8417',1,'Aspen::Engine::Engine']]],
   ['_5fgcount',['_gcount',['../class_aspen_1_1_graphics_1_1_graphics.html#a73260a410d2f3be84af1896620d4536d',1,'Aspen::Graphics::Graphics']]],
-  ['_5fgraphics',['_graphics',['../class_aspen_1_1_engine_1_1_engine.html#a1c15b0cce6787c242a89939ee3a6f85e',1,'Aspen::Engine::Engine']]],
   ['_5fkey',['_key',['../class_aspen_1_1_event_1_1_key_event_listener.html#a4a030c8d1cd584157f4607da62dd35fb',1,'Aspen::Event::KeyEventListener']]],
   ['_5fline',['_line',['../class_aspen_1_1_log_1_1_log.html#ab55feb33b8b72e94f7407ccda132e5f8',1,'Aspen::Log::Log']]],
   ['_5fmajor',['_major',['../class_aspen_1_1_version_1_1_version.html#a9202e1b4f6b57229e1b511804861b6c0',1,'Aspen::Version::Version']]],
@@ -17,6 +15,7 @@ var searchData=
   ['_5frevision',['_revision',['../class_aspen_1_1_version_1_1_version.html#af13a3a2aa1a8fbaa90d8ddd55bb6aceb',1,'Aspen::Version::Version']]],
   ['_5fsuf',['_suf',['../class_aspen_1_1_log_1_1_log.html#a8e59241a2e8a969c23bc7f4f076c1472',1,'Aspen::Log::Log']]],
   ['_5fsurface',['_surface',['../class_aspen_1_1_graphics_1_1_sprite.html#a96c15ac570832739a0048f1e96e368ff',1,'Aspen::Graphics::Sprite::_surface()'],['../class_aspen_1_1_graphics_1_1_graphics.html#a647af806e7f3d8ded3756d776e8e3754',1,'Aspen::Graphics::Graphics::_surface()']]],
+  ['_5ftex',['_tex',['../class_aspen_1_1_graphics_1_1_sprite.html#a9223b5e8bb26a80a00a5d9b7488193b2',1,'Aspen::Graphics::Sprite']]],
   ['_5ftier',['_tier',['../class_aspen_1_1_version_1_1_version.html#a7f4d79f4a2d3ab74a11811fce9f2df4f',1,'Aspen::Version::Version']]],
   ['_5fvalid',['_valid',['../class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5',1,'Aspen::Object::Object']]],
   ['_5fwindow',['_window',['../class_aspen_1_1_graphics_1_1_graphics.html#a6007bfb78ce9877bc758469b1ca5d45a',1,'Aspen::Graphics::Graphics']]]
