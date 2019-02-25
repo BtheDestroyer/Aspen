@@ -1,4 +1,4 @@
-# Aspen
+# Aspen ![Icon](https://github.com/BtheDestroyer/Aspen/raw/master/Aspen_Logo.32.png)
 
 2D C++ Class-Based Object Oriented Game Engine
 
