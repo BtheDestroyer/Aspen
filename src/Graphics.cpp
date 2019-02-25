@@ -15,6 +15,58 @@ namespace Graphics
 {
 const int DEFAULT_WINDOW_WIDTH = 640;
 const int DEFAULT_WINDOW_HEIGHT = 480;
+Color::Color(int color)
+    : _c(color)
+{
+}
+Color::Color(int r, int g, int b, int a)
+    : _c(0)
+{
+  Red(r);
+  Green(g);
+  Blue(b);
+  Alpha(a);
+}
+
+int Color::Red()
+{
+  return (COLOR_MASK::RED & _c) >> (8 * 3);
+}
+
+int Color::Green()
+{
+  return (COLOR_MASK::GREEN & _c) >> (8 * 2);
+}
+
+int Color::Blue()
+{
+  return (COLOR_MASK::BLUE & _c) >> 8;
+}
+
+int Color::Alpha()
+{
+  return COLOR_MASK::ALPHA & _c;
+}
+
+void Color::Red(int r)
+{
+  _c |= (r << (8 * 3) | (_c & (COLOR_MASK::BLUE | COLOR_MASK::GREEN | COLOR_MASK::ALPHA)));
+}
+
+void Color::Green(int g)
+{
+  _c |= (g << (8 * 2) | (_c & (COLOR_MASK::RED | COLOR_MASK::BLUE | COLOR_MASK::ALPHA)));
+}
+
+void Color::Blue(int b)
+{
+  _c |= (b << 8 | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::ALPHA)));
+}
+
+void Color::Alpha(int a)
+{
+  _c |= (a | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::BLUE)));
+}
 
 Geometry::Geometry(std::string name, Object *parent)
     : Geometry(name, parent, 0xFF, 0xFF, 0xFF, 0xFF, false)
@@ -22,7 +74,7 @@ Geometry::Geometry(std::string name, Object *parent)
 }
 
 Geometry::Geometry(std::string name, Object *parent, int r, int g, int b, int a, bool fill)
-    : Object(parent, name), _r(r), _g(g), _b(b), _a(a), _fill(fill)
+    : Object(parent, name), _c(r, g, b, a), _fill(fill)
 {
 }
 
@@ -30,32 +82,22 @@ Geometry::~Geometry()
 {
 }
 
-void Geometry::SetColor(int r, int g, int b, int a)
+Color &Geometry::Color()
 {
-  _r = r;
-  _g = g;
-  _b = b;
-  _a = a;
+  return _c;
 }
 
-int Geometry::Red()
+void Geometry::Color(Aspen::Graphics::Color c)
 {
-  return _r;
+  _c = c;
 }
 
-int Geometry::Green()
+void Geometry::Color(int r, int g, int b, int a)
 {
-  return _g;
-}
-
-int Geometry::Blue()
-{
-  return _b;
-}
-
-int Geometry::Alpha()
-{
-  return _a;
+  _c.Red(r);
+  _c.Green(g);
+  _c.Blue(b);
+  _c.Alpha(a);
 }
 
 bool Geometry::Fill()
@@ -265,7 +307,7 @@ void Graphics::DrawRectangle(Rectangle *rect)
 {
   if (rect)
   {
-    SDL_SetRenderDrawColor(_renderer, rect->Red(), rect->Green(), rect->Blue(), rect->Alpha());
+    SDL_SetRenderDrawColor(_renderer, rect->Color().Red(), rect->Color().Green(), rect->Color().Blue(), rect->Color().Alpha());
     if (rect->Fill())
       SDL_RenderFillRect(_renderer, &rect->Rect());
     else

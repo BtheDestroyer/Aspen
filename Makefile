@@ -45,11 +45,7 @@ OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
 all: project docs
 
-project:
-	@echo "Building objects..."
-	@$(MAKE) $(OBJFILES) -j4 -k
-	@echo "Building $(PROJECT)..."
-	@$(MAKE) $(OUTPUT)
+project: $(OUTPUT)
 
 setup: $(SOURCES) $(HEADERS) $(BUILD)
 
@@ -103,6 +99,8 @@ ifeq ($(suffix $@), "a")
 else
 	$(CXX) $(OBJFILES) $(LINKFLAGS) -o $(OUTPUT)
 	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
+	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
+	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
 endif
 
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp

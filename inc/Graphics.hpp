@@ -17,13 +17,38 @@ extern const int DEFAULT_WINDOW_WIDTH;
 /// \brief Default created window height
 extern const int DEFAULT_WINDOW_HEIGHT;
 
+enum COLOR_MASK
+{
+  RED = 0xFF000000,
+  GREEN = 0x00FF0000,
+  BLUE = 0x0000FF00,
+  ALPHA = 0x000000FF
+};
+
+class Color
+{
+protected:
+  int _c;
+
+public:
+  Color(int color = 0xFFFFFFFF);
+  Color(int r, int g, int b, int a = 0xFF);
+
+  int Red();
+  int Green();
+  int Blue();
+  int Alpha();
+
+  void Red(int r);
+  void Green(int g);
+  void Blue(int b);
+  void Alpha(int a);
+};
+
 class Geometry : public Object::Object
 {
 protected:
-  int _r;
-  int _g;
-  int _b;
-  int _a;
+  Color _c;
   bool _fill;
 
 public:
@@ -31,11 +56,9 @@ public:
   Geometry(std::string name, Object *parent, int r, int g, int b, int a = 0xFF, bool fill = false);
   ~Geometry();
 
-  void SetColor(int r, int g, int b, int a);
-  int Red();
-  int Green();
-  int Blue();
-  int Alpha();
+  Color &Color();
+  void Color(Aspen::Graphics::Color c);
+  void Color(int r, int g, int b, int a);
   bool Fill();
 };
 
