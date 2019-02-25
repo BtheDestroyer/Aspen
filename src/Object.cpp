@@ -17,25 +17,20 @@ Object::Object(Object *parent, std::string name)
     : _name(name), _parent(parent)
 {
   ++_count;
-  std::stringstream str;
-  str << "Creating " << _name << ": " << this << "  ";
-  str << _count;
-  Log::Debug(str);
+  Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
   _valid = true;
 }
 
 Object::~Object()
 {
   --_count;
-  std::stringstream str;
-  str << "Destroying " << _name << ": " << this << "  ";
-  str << _count;
-  Log::Debug(str);
+  Log::Debug("Destroying %s:  %p  %d", _name.c_str(), this, _count);
   if (_count == 0)
     Log::Debug("All clean :D");
   End();
   for (Object *child : _children)
     delete child;
+  _children.clear();
 }
 
 Object *Object::Parent()
@@ -149,8 +144,6 @@ void Object::End()
   if (!Valid())
     return;
 
-  for (Object *child : _children)
-    child->End();
   _valid = false;
 }
 

@@ -238,11 +238,14 @@ Graphics::Graphics(int w, int h)
       return;
     }
   }
-
+  SetBGColor(0xFF, 0xFF, 0xFF);
   ++_gcount;
 }
 Graphics::~Graphics()
 {
+  for (Object *child : _children)
+    delete child;
+  _children.clear();
   End();
 }
 
@@ -251,7 +254,8 @@ void Graphics::operator()()
   if (!Valid())
     return;
 
-  SetBGColor(0xFF, 0xFF, 0xFF);
+  SDL_SetRenderDrawColor(_renderer, _background.Red(), _background.Green(), _background.Blue(), _background.Alpha());
+  SDL_RenderClear(_renderer);
 
   Object::operator()();
 
@@ -262,19 +266,19 @@ void Graphics::End()
 {
   if (!Valid())
     return;
+  if (_renderer)
+  {
+    SDL_DestroyRenderer(_renderer);
+    _renderer = nullptr;
+  }
+  if (_window)
+  {
+    SDL_DestroyWindow(_window);
+    _window = nullptr;
+  }
+  _surface = nullptr;
   if (_gcount-- == 1)
   {
-    if (_renderer)
-    {
-      SDL_DestroyRenderer(_renderer);
-      _renderer = nullptr;
-    }
-    if (_window)
-    {
-      SDL_DestroyWindow(_window);
-      _window = nullptr;
-    }
-    _surface = nullptr;
     SDL_Quit();
   }
   Object::End();
@@ -284,8 +288,7 @@ void Graphics::SetBGColor(int r, int g, int b)
 {
   if (!Valid())
     return;
-  SDL_SetRenderDrawColor(_renderer, r, g, b, 0xFF);
-  SDL_RenderClear(_renderer);
+  _background = Color(r, g, b);
 }
 
 SDL_Surface *Graphics::GetSurface()

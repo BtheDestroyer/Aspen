@@ -28,7 +28,7 @@ enum COLOR_MASK
 class Color
 {
 protected:
-  int _c;
+  unsigned _c;
 
 public:
   Color(int color = 0xFFFFFFFF);
@@ -130,6 +130,7 @@ class Graphics : public Object::Object
   /// \brief Surface of _window
   SDL_Surface *_surface = nullptr;
   SDL_Renderer *_renderer = nullptr;
+  Color _background;
 
 public:
   /// \brief Constructor
