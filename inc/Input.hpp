@@ -33,8 +33,9 @@ class Axis : public Object::Object
   float _value;
 
 public:
-  Axis(Key posiive = SDLK_UNKNOWN, Key negative = SDLK_UNKNOWN, _gravity = 0.1f, _weight = 0.1f);
-  
+  Axis(Object *parent = nullptr, std::string name = "Axis");
+  Axis(SDL_Keycode posiive = SDLK_UNKNOWN, SDL_Keycode negative = SDLK_UNKNOWN, float _gravity = 0.1f, float _weight = 0.1f, Object *parent = nullptr, std::string name = "Axis");
+
   void operator()();
 
   float GetValue();

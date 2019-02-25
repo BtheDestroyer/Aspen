@@ -20,10 +20,10 @@ std::chrono::microseconds GetTime()
   return std::chrono::duration_cast<std::chrono::microseconds>(tse);
 }
 
-Time::Time()
-    : Object(nullptr, "Time"), _deltaTime(0)
+Time::Time(Object *parent, std::string name)
+    : Object(parent, name), _deltaTime(0)
 {
-  _startTime = _currentTime = GetTime();
+  _startTime = _lastTime = _currentTime = GetTime();
 }
 
 Time::~Time()

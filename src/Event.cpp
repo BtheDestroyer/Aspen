@@ -10,13 +10,8 @@ namespace Aspen
 {
 namespace Event
 {
-EventListener::EventListener()
-    : Object(nullptr, "EventListener")
-{
-}
-
-EventListener::EventListener(std::string name)
-    : Object(nullptr, name)
+EventListener::EventListener(Object *parent, std::string name)
+    : Object(parent, name)
 {
 }
 
@@ -36,8 +31,8 @@ void EventListener::Handle(SDL_Event *event)
 {
 }
 
-QuitEventListener::QuitEventListener()
-    : EventListener("QuitEventListener")
+QuitEventListener::QuitEventListener(Object *parent, std::string name)
+    : EventListener(parent, name)
 {
 }
 
@@ -51,8 +46,13 @@ void QuitEventListener::Handle(SDL_Event *event)
     Root()->End();
 }
 
-KeyEventListener::KeyEventListener(SDL_Keycode k)
-    : EventListener("KeyEventListener"), _key(k)
+KeyEventListener::KeyEventListener(Object *parent, std::string name)
+    : EventListener(parent, name), _key(SDLK_UNKNOWN)
+{
+}
+
+KeyEventListener::KeyEventListener(SDL_Keycode k, Object *parent, std::string name)
+    : EventListener(parent, name), _key(k)
 {
 }
 
@@ -97,8 +97,8 @@ void KeyEventListener::Handle(SDL_Event *event)
   }
 }
 
-EventHandler::EventHandler()
-    : Object(nullptr, "EventHandler")
+EventHandler::EventHandler(Object *parent, std::string name)
+    : Object(parent, name)
 {
 }
 

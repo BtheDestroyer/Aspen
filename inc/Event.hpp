@@ -16,10 +16,8 @@ class EventListener : public Object::Object
 {
 public:
   /// \brief Constructor
-  EventListener();
-  /// \brief Constructor
   /// \param name Object name (Same as type)
-  EventListener(std::string name);
+  EventListener(Object *parent = nullptr, std::string name = "EventListener");
   /// \brief Destructor
   ~EventListener();
 
@@ -40,7 +38,7 @@ class QuitEventListener : public EventListener
 {
 public:
   /// \brief Constructor
-  QuitEventListener();
+  QuitEventListener(Object *parent = nullptr, std::string name = "QuitEventListener");
   /// \brief Destructor
   ~QuitEventListener();
 
@@ -59,7 +57,8 @@ class KeyEventListener : public EventListener
 public:
   /// \brief Constructor
   /// \param k Which Key's states to control
-  KeyEventListener(SDL_Keycode k = SDLK_UNKNOWN);
+  KeyEventListener(Object *parent = nullptr, std::string name = "EventListener");
+  KeyEventListener(SDL_Keycode k = SDLK_UNKNOWN, Object *parent = nullptr, std::string name = "KeyEventListener");
   /// \brief Destructor
   ~KeyEventListener();
 
@@ -78,7 +77,7 @@ class EventHandler : public Object::Object
 {
 public:
   /// \brief Constructor
-  EventHandler();
+  EventHandler(Object *parent = nullptr, std::string name = "EventHandler");
   /// \brief Destructor
   ~EventHandler();
   /// \brief Polls SDL_Events and passes them to all child EventListeners

@@ -68,13 +68,13 @@ void Color::Alpha(int a)
   _c |= (a | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::BLUE)));
 }
 
-Geometry::Geometry(std::string name, Object *parent)
-    : Geometry(name, parent, 0xFF, 0xFF, 0xFF, 0xFF, false)
+Geometry::Geometry(Object *parent, std::string name)
+    : Geometry(0xFFFFFFFF, false, parent, name)
 {
 }
 
-Geometry::Geometry(std::string name, Object *parent, int r, int g, int b, int a, bool fill)
-    : Object(parent, name), _c(r, g, b, a), _fill(fill)
+Geometry::Geometry(Aspen::Graphics::Color c, bool fill, Object *parent, std::string name)
+    : Object(parent, name), _c(c), _fill(fill)
 {
 }
 
@@ -105,8 +105,13 @@ bool Geometry::Fill()
   return _fill;
 }
 
-Rectangle::Rectangle(Object *parent, SDL_Rect rect)
-    : Geometry("Rectangle", parent), _rect(rect)
+Rectangle::Rectangle(Object *parent, std::string name)
+    : Rectangle(SDL_Rect{0, 0, 1, 1}, Aspen::Graphics::Color(), false, parent, name)
+{
+}
+
+Rectangle::Rectangle(SDL_Rect rect, Aspen::Graphics::Color c, bool fill, Object *parent, std::string name)
+    : Geometry(c, fill, parent, "Rectangle"), _rect(rect)
 {
 }
 
@@ -130,10 +135,13 @@ SDL_Rect &Rectangle::Rect()
 
 unsigned Graphics::_gcount = 0;
 
-Graphics::Graphics() : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT) {}
+Graphics::Graphics(Object *parent, std::string name)
+    : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, parent, name)
+{
+}
 
-Graphics::Graphics(int w, int h)
-    : Object(nullptr, "Graphics")
+Graphics::Graphics(int w, int h, Object *parent, std::string name)
+    : Object(parent, name)
 {
   if (_gcount == 0)
   {
@@ -241,6 +249,7 @@ Graphics::Graphics(int w, int h)
   SetBGColor(0xFF, 0xFF, 0xFF);
   ++_gcount;
 }
+
 Graphics::~Graphics()
 {
   for (Object *child : _children)
@@ -318,11 +327,11 @@ void Graphics::DrawRectangle(Rectangle *rect)
   }
 }
 
-void Graphics::DrawRectangle(SDL_Rect *rect, int r, int g, int b, int a, bool fill)
+void Graphics::DrawRectangle(SDL_Rect *rect, Aspen::Graphics::Color c, bool fill)
 {
   if (rect)
   {
-    SDL_SetRenderDrawColor(_renderer, r, g, b, a);
+    SDL_SetRenderDrawColor(_renderer, c.Red(), c.Green(), c.Blue(), c.Alpha());
     if (fill)
       SDL_RenderFillRect(_renderer, rect);
     else
@@ -336,8 +345,8 @@ void Graphics::DrawSprite(Sprite *sprite)
     SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, &sprite->Rect());
 }
 
-Sprite::Sprite(std::string path, Object *parent)
-    : Object(parent, "Sprite"), _path(path), _surface(nullptr), _tex(nullptr)
+Sprite::Sprite(std::string path, Object *parent, std::string name)
+    : Object(parent, name), _path(path), _surface(nullptr), _tex(nullptr)
 {
   if (path.substr(path.length() - 4) == ".bmp")
   {

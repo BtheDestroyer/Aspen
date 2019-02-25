@@ -68,7 +68,8 @@ class Engine : public Object::Object
 public:
   /// \brief Constructor
   /// \param flags START_FLAGS to instantiate the Engine with
-  Engine(int flags = START_FLAGS::NONE);
+  Engine(Object *parent = nullptr, std::string name = "Engine");
+  Engine(int flags = START_FLAGS::NONE, Object *parent = nullptr, std::string name = "Engine");
   /// \brief Destructor
   ~Engine();
 

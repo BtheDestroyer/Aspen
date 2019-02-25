@@ -11,8 +11,13 @@ namespace Engine
 {
 const Version::Version version(0, 1, 0, Version::TIER::PREALPHA);
 
-Engine::Engine(int flags)
-    : Object(nullptr, "Engine")
+Engine::Engine(Object *parent, std::string name)
+  : Engine(START_FLAGS::NONE, parent, name)
+{
+
+}
+Engine::Engine(int flags, Object *parent, std::string name)
+    : Object(parent, name)
 {
   std::stringstream str;
   str << "Creating Engine with the following flags:";

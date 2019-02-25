@@ -11,19 +11,24 @@ namespace Aspen
 {
 namespace Input
 {
-Axis::Axis(Key posiive, Key negative, float gravity, float weight)
-    : _pos(positive), _neg(negative), _gravity(gravity), _weight(weight), _value(0)
+Axis::Axis(Object *parent, std::string name)
+    : Axis(SDLK_UNKNOWN, SDLK_UNKNOWN, 0.1f, 0.1f, parent, name)
+{
+}
+
+Axis::Axis(SDL_Keycode positive, SDL_Keycode negative, float gravity, float weight, Object *parent, std::string name)
+    : Object(parent, name), _pos(positive), _neg(negative), _gravity(gravity), _weight(weight), _value(0)
 {
 }
 
 void Axis::operator()()
 {
-  Time *time = FindAncestorOfType<Time::Time>();
+  Time::Time *time = FindAncestorOfType<Time::Time>();
   if (!time)
     time = FindAncestorOfType<Engine::Engine>()->Time();
   float w = _weight * float(time->DeltaTime() * 60.0);
-  float d = KeyHeld(_pos) ? 1 : 0 + KeyHeld(_neg) ? -1 : 0;
-  if (d != 0)
+  float d = KeyHeld(_pos) ? 1.0f : 0.0f + KeyHeld(_neg) ? -1.0f : 0.0f;
+  if (d != 0.0f)
     _value = _value * (1 - w) + d * w;
   else
     _value *= 1 - _gravity;

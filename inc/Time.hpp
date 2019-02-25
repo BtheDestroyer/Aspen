@@ -17,7 +17,7 @@ class Time : public Object::Object
   std::chrono::microseconds _deltaTime;
 
 public:
-  Time();
+  Time(Object *parent = nullptr, std::string name = "EventListener");
   ~Time();
 
   void operator()();

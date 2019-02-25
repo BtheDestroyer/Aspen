@@ -52,8 +52,8 @@ protected:
   bool _fill;
 
 public:
-  Geometry(std::string name = "Geometry", Object *parent = nullptr);
-  Geometry(std::string name, Object *parent, int r, int g, int b, int a = 0xFF, bool fill = false);
+  Geometry(Object *parent = nullptr, std::string name = "Geometry");
+  Geometry(Color c, bool fill = false, Object *parent = nullptr, std::string name = "Graphics");
   ~Geometry();
 
   Color &Color();
@@ -67,7 +67,8 @@ class Rectangle : public Geometry
   SDL_Rect _rect;
 
 public:
-  Rectangle(Object *parent = nullptr, SDL_Rect rect = {0, 0, 1, 1});
+  Rectangle(Object *parent = nullptr, std::string name = "Rectangle");
+  Rectangle(SDL_Rect rect = {0, 0, 1, 1}, Aspen::Graphics::Color c = Aspen::Graphics::Color(), bool fill = false, Object *parent = nullptr, std::string name = "Rectangle");
   ~Rectangle();
 
   void operator()();
@@ -87,10 +88,11 @@ class Sprite : public Object::Object
   SDL_Rect _rect;
 
 public:
+  Sprite(Object *parent = nullptr, std::string name = "Sprite");
   /// \brief Constructor
   /// \param path Path of file to load
   /// \param parent Parent Object to be passed to Object constructor
-  Sprite(std::string path, Object *parent = nullptr);
+  Sprite(std::string path, Object *parent = nullptr, std::string name = "Sprite");
   /// \brief Destructor
   ~Sprite();
 
@@ -135,11 +137,11 @@ class Graphics : public Object::Object
 public:
   /// \brief Constructor
   ///        Calls Graphics::Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)
-  Graphics();
+  Graphics(Object *parent = nullptr, std::string name = "Graphics");
   /// \brief Constructor
   ///        Sets up SDL
   ///        Creates a window with width w and height h
-  Graphics(int w, int h);
+  Graphics(int w, int h, Object *parent = nullptr, std::string name = "Graphics");
   /// \brief Destructor
   ~Graphics();
 
@@ -161,7 +163,7 @@ public:
   SDL_Renderer *GetRenderer();
 
   void DrawRectangle(Rectangle *rect);
-  void DrawRectangle(SDL_Rect *rect, int r, int g, int b, int a, bool fill = true);
+  void DrawRectangle(SDL_Rect *rect, Color c, bool fill = true);
   /// \brief Draws a given Sprite at 0, 0
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
