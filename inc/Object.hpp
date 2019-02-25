@@ -164,6 +164,9 @@ public:
   void PrintTree();
 
   std::string Name();
+
+  unsigned ChildrenCount();
+  std::vector<Object*> Children();
 };
 } // namespace Object
 } // namespace Aspen

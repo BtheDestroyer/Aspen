@@ -199,5 +199,15 @@ std::string Object::Name()
 {
   return _name;
 }
+
+unsigned Object::ChildrenCount()
+{
+  return _children.size();
+}
+
+std::vector<Object *> Object::Children()
+{
+  return _children;
+}
 } // namespace Object
 } // namespace Aspen

@@ -39,3 +39,5 @@ docs/
 lib/
 
 *.log
+
+imgui\.ini

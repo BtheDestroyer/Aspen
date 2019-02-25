@@ -54,7 +54,7 @@ double Time::CurrentTime()
 
 double Time::DeltaTime()
 {
-  return double(_deltaTime.count()) / 1000000.0;
+  return std::max(0.0, double(_deltaTime.count()) / 1000000.0);
 }
 
 double Time::FPS()
