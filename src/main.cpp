@@ -16,9 +16,7 @@ int main(int argc, char **argv)
 
   //engine.FindChildOfType<Graphics::Graphics>()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.FindChildOfType<Graphics::Graphics>()));
   Graphics::Sprite *newSprite = new Graphics::Sprite("resources/mario.png", engine.FindChildOfType<Graphics::Graphics>());
-  Transform::Transform *tf = new Transform::Transform();
-  tf->SetPosition(100, 50);
-  newSprite->AddChild(tf);
+  newSprite->FindChildOfType<Transform::Transform>()->SetPosition(100, 50);
   engine.FindChildOfType<Graphics::Graphics>()->AddChild(newSprite);
 
   engine.PrintTree();

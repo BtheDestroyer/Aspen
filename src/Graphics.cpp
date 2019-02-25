@@ -400,6 +400,7 @@ Sprite::Sprite(std::string path, Object *parent, std::string name)
   Rect().w = _surface->w;
   Rect().h = _surface->h;
   GenerateTexture();
+  CreateChild<Transform::Transform>();
 }
 
 Sprite::~Sprite()
