@@ -354,15 +354,17 @@ void Graphics::DrawSprite(Sprite *sprite)
   if (sprite && sprite->GetTexture())
   {
     SDL_Rect rect = sprite->Rect();
+    double angle = 0.0;
     Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
     if (tf)
     {
+      rect.w *= tf->GetXScale();
+      rect.h *= tf->GetYScale();
       rect.x += tf->GetXPosition();
       rect.y += tf->GetYPosition();
-      rect.w += tf->GetXScale();
-      rect.h += tf->GetYScale();
+      angle += double(tf->GetRotation());
     }
-    SDL_RenderCopy(_renderer, sprite->GetTexture(), NULL, &rect);
+    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), NULL, &rect, angle, NULL, SDL_FLIP_NONE);
   }
 }
 

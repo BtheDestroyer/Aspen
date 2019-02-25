@@ -14,7 +14,7 @@ class Transform : public Object::Object
 {
   float _posx;
   float _posy;
-  float _r;
+  double _r;
   float _scalex;
   float _scaley;
 public:
@@ -23,7 +23,7 @@ public:
   void SetPosition(float x, float y);
   void SetXPosition(float x);
   void SetYPosition(float y);
-  void SetRotation(float r);
+  void SetRotation(double r);
   void SetScale(float x, float y);
   void SetXScale(float x);
   void SetYScale(float y);
@@ -31,14 +31,14 @@ public:
   void ModifyPosition(float x, float y);
   void ModifyXPosition(float x);
   void ModifyYPosition(float y);
-  void ModifyRotation(float r);
+  void ModifyRotation(double r);
   void ModifyScale(float x, float y);
   void ModifyXScale(float x);
   void ModifyYScale(float y);
 
   float GetXPosition() const;
   float GetYPosition() const;
-  float GetRotation() const;
+  double GetRotation() const;
   float GetXScale() const;
   float GetYScale() const;
 

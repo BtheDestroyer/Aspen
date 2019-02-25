@@ -1,6 +1,7 @@
 #define __TRANSFORM_CPP
 
 #include "Transform.hpp"
+#include <cmath>
 
 #undef __TRANSFORM_CPP
 
@@ -29,9 +30,9 @@ void Transform::SetYPosition(float y)
   _posy = y;
 }
 
-void Transform::SetRotation(float r)
+void Transform::SetRotation(double r)
 {
-  _r = r;
+  _r = std::fmod(r, 360.0);
 }
 
 void Transform::SetScale(float x, float y)
@@ -66,13 +67,9 @@ void Transform::ModifyYPosition(float y)
   _posy += y;
 }
 
-void Transform::ModifyRotation(float r)
+void Transform::ModifyRotation(double r)
 {
-  _r += r;
-  while (_r > 360.0f)
-    _r -= 360.0f;
-  while (_r < 0.0f)
-    _r += 360.0f;
+  _r = std::fmod(_r + r, 360.0);
 }
 
 void Transform::ModifyScale(float x, float y)
@@ -123,9 +120,9 @@ float Transform::GetYPosition() const
   return r;
 }
 
-float Transform::GetRotation() const
+double Transform::GetRotation() const
 {
-  float r = _r;
+  double r = _r;
   Object *p = _parent;
   while (p)
   {
@@ -136,11 +133,7 @@ float Transform::GetRotation() const
       r += tf->_r;
     p = p->Parent();
   }
-  while (r > 360.0f)
-    r -= 360.0f;
-  while (r < 0.0f)
-    r += 360.0f;
-  return r;
+  return std::fmod(r, 360.0);
 }
 
 float Transform::GetXScale() const
