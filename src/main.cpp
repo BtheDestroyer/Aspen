@@ -13,7 +13,7 @@ int main(int argc, char **argv)
       Engine::START_FLAGS::CREATE_EVENT_ALL |
       Engine::START_FLAGS::CREATE_TIME);
 
-  engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.Graphics()));
+  //engine.Graphics()->AddChild(new Graphics::Sprite("resources/hello_world.bmp", engine.Graphics()));
   engine.Graphics()->AddChild(new Graphics::Sprite("resources/mario.png", engine.Graphics()));
 
   engine.PrintTree();

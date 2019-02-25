@@ -1,6 +1,7 @@
 #ifndef __INPUT_HPP
 #define __INPUT_HPP
 #include <SDL2/SDL.h>
+#include "Object.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -21,6 +22,22 @@ public:
   bool released;
   /// \brief Constructor
   Key();
+};
+
+class Axis : public Object::Object
+{
+  SDL_Keycode _pos;
+  SDL_Keycode _neg;
+  float _gravity;
+  float _weight;
+  float _value;
+
+public:
+  Axis(Key posiive = SDLK_UNKNOWN, Key negative = SDLK_UNKNOWN, _gravity = 0.1f, _weight = 0.1f);
+  
+  void operator()();
+
+  float GetValue();
 };
 
 /// \brief Gets a Key reference from a hidden map
