@@ -6,9 +6,10 @@ ifndef PROJECT
 PROJECT := sdl.exe
 
 IMGUI_LIB := $(BUILD)/libimgui.a
-
 IMGUI_CPP := $(wildcard libraries/imgui/*.cpp)
 IMGUI_OBJ := $(patsubst libraries/imgui/%.cpp, $(OBJECTS)/%.o,$(IMGUI_CPP))
+IMGUI_SDL_CPP := $(filter-out libraries/imgui_sdl/example.cpp,$(wildcard libraries/imgui_sdl/*.cpp))
+IMGUI_SDL_OBJ := $(patsubst libraries/imgui_sdl/%.cpp, $(OBJECTS)/%.o,$(IMGUI_SDL_CPP))
 endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
@@ -25,7 +26,7 @@ ifeq ($(UNAME_S),Darwin)
 PLATFORM :=__OSX
 endif
 endif
-CXXFLAGS := -g -I$(HEADERS) -Ilibraries/imgui -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
+CXXFLAGS := -g -I$(HEADERS) -Ilibraries/imgui -Ilibraries/imgui_sdl -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif
@@ -134,11 +135,14 @@ $(BUILD):
 imgui: $(IMGUI_LIB)
 
 .NOTPARALLEL: $(IMGUI_LIB)
-$(IMGUI_LIB): $(IMGUI_OBJ)
-	$(AR) rvs $(IMGUI_LIB) $(IMGUI_OBJ) $(ARFLAGS)
+$(IMGUI_LIB): $(IMGUI_OBJ) $(IMGUI_SDL_OBJ)
+	$(AR) rvs $(IMGUI_LIB) $(IMGUI_OBJ) $(IMGUI_SDL_OBJ) $(ARFLAGS)
 
 $(OBJECTS)/%.o: libraries/imgui/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(OBJECTS)/%.o: libraries/imgui_sdl/%.cpp
+	$(CXX) -c $(CXXFLAGS) -IC:/MinGW/include/SDL2 $< -o $@
 
 ###############################################################
 
