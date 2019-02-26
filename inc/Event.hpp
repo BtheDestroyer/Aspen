@@ -58,7 +58,7 @@ public:
   /// \brief Constructor
   /// \param k Which Key's states to control
   KeyEventListener(Object *parent = nullptr, std::string name = "EventListener");
-  KeyEventListener(SDL_Keycode k = SDLK_UNKNOWN, Object *parent = nullptr, std::string name = "KeyEventListener");
+  KeyEventListener(SDL_Keycode k, Object *parent = nullptr, std::string name = "KeyEventListener");
   /// \brief Destructor
   ~KeyEventListener();
 

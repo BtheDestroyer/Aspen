@@ -38,24 +38,31 @@ void Debug::Setup()
 
 void Debug::operator()()
 {
-  //TODO: Get input from an Input wrapper
-  int mouseX, mouseY;
-  const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
-  Time::Time *time = FindAncestorOfType<Engine::Engine>()->FindChildOfType<Time::Time>();
-  if (time)
-    _io->DeltaTime = std::max(0.000001, time->DeltaTime());
-  else
-    _io->DeltaTime = 1.0f / 60.0f;
-  _io->MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
-  _io->MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-  _io->MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+  Object::operator()();
 
-  ImGui::NewFrame();
-  ImGui::Begin("Object Tree", NULL, ImVec2(400, 400));
-  MakeTree(Root());
-  ImGui::End();
-  ImGui::Render();
-  ImGuiSDL::Render(ImGui::GetDrawData());
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine && engine->Debug())
+  {
+    //TODO: Get input from an Input wrapper
+    int mouseX,
+        mouseY;
+    const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+    Time::Time *time = engine->FindChildOfType<Time::Time>();
+    if (time)
+      _io->DeltaTime = std::max(0.000001, time->DeltaTime());
+    else
+      _io->DeltaTime = 1.0f / 60.0f;
+    _io->MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
+    _io->MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+    _io->MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+
+    ImGui::NewFrame();
+    ImGui::Begin("Object Tree", NULL, ImVec2(400, 400));
+    MakeTree(Root());
+    ImGui::End();
+    ImGui::Render();
+    ImGuiSDL::Render(ImGui::GetDrawData());
+  }
 }
 
 void Debug::MakeTree(Object *o)

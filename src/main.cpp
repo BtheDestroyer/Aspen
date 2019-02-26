@@ -17,7 +17,8 @@ int main(int argc, char **argv)
       Engine::START_FLAGS::CREATE_GRAPHICS |
       Engine::START_FLAGS::CREATE_EVENTHANDLER |
       Engine::START_FLAGS::CREATE_EVENT_ALL |
-      Engine::START_FLAGS::CREATE_TIME);
+      Engine::START_FLAGS::CREATE_TIME |
+      Engine::START_FLAGS::DEBUGGING_ON);
 
   Graphics::Graphics *gfx = engine.FindChildOfType<Graphics::Graphics>();
 
@@ -26,7 +27,7 @@ int main(int argc, char **argv)
   int w, h;
   SDL_GetWindowSize(gfx->GetWindow(), &w, &h);
 
-  newSprite = new Graphics::Sprite("resources/mario.png", engine.FindChildOfType<Graphics::Graphics>());
+  newSprite = new Graphics::Sprite("resources/mario.png", gfx);
   newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
   //newSprite->FindChildOfType<Transform::Transform>()->SetScale(0.5, 1);
   //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);

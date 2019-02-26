@@ -14,6 +14,7 @@ class Debug : public Object::Object
 {
   ImGuiIO *_io;
   static unsigned _dcount;
+
 public:
   Debug(Object *parent = nullptr, std::string name = "Debug");
   void Setup();

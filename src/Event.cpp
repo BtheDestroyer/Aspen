@@ -3,6 +3,7 @@
 #include "Event.hpp"
 #include "Log.hpp"
 #include "Input.hpp"
+#include "Engine.hpp"
 
 #undef __EVENT_CPP
 
@@ -81,17 +82,15 @@ void KeyEventListener::Handle(SDL_Event *event)
       {
         k.pressed = true;
         k.held = true;
-        std::stringstream str;
-        str << "Key down: " << SDL_GetKeyName(_key);
-        Log::Debug(str);
+        if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+          Log::Debug("Key down: %s", SDL_GetKeyName(_key));
       }
       else if (event->type == SDL_KEYUP && k.held)
       {
         k.held = false;
         k.released = true;
-        std::stringstream str;
-        str << "Key up: " << SDL_GetKeyName(_key);
-        Log::Debug(str);
+        if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+          Log::Debug("Key up: %s", SDL_GetKeyName(_key));
       }
     }
   }

@@ -2,6 +2,7 @@
 
 #include "Object.hpp"
 #include "Log.hpp"
+#include "Engine.hpp"
 #include <algorithm>
 #include <iomanip>
 
@@ -17,16 +18,20 @@ Object::Object(Object *parent, std::string name)
     : _name(name), _parent(parent)
 {
   ++_count;
-  Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
+  if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+    Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
   _valid = true;
 }
 
 Object::~Object()
 {
   --_count;
-  Log::Debug("Destroying %s:  %p  %d", _name.c_str(), this, _count);
-  if (_count == 0)
-    Log::Debug("All clean :D");
+  if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+  {
+    Log::Debug("Destroying %s:  %p  %d", _name.c_str(), this, _count);
+    if (_count == 0)
+      Log::Debug("All clean :D");
+  }
   End();
   for (Object *child : _children)
     delete child;
