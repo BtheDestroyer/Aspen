@@ -7,6 +7,7 @@
 #include "Log.hpp"
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 #include <SDL2/SDL_image.h>
 
 #undef __GRAPHICS_CPP
@@ -17,6 +18,9 @@ namespace Graphics
 {
 const int DEFAULT_WINDOW_WIDTH = 640;
 const int DEFAULT_WINDOW_HEIGHT = 480;
+
+/////////////////////////////////////////////////////////
+
 Color::Color(int color)
     : _c(color)
 {
@@ -70,6 +74,8 @@ void Color::Alpha(int a)
   _c |= (a | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::BLUE)));
 }
 
+/////////////////////////////////////////////////////////
+
 Geometry::Geometry(Object *parent, std::string name)
     : Geometry(0xFFFFFFFF, false, parent, name)
 {
@@ -78,6 +84,7 @@ Geometry::Geometry(Object *parent, std::string name)
 Geometry::Geometry(Aspen::Graphics::Color c, bool fill, Object *parent, std::string name)
     : Object(parent, name), _c(c), _fill(fill)
 {
+  CreateChild<Transform::Transform>();
 }
 
 Geometry::~Geometry()
@@ -107,13 +114,15 @@ bool Geometry::Fill()
   return _fill;
 }
 
+/////////////////////////////////////////////////////////
+
 Rectangle::Rectangle(Object *parent, std::string name)
     : Rectangle(SDL_Rect{0, 0, 1, 1}, Aspen::Graphics::Color(), false, parent, name)
 {
 }
 
 Rectangle::Rectangle(SDL_Rect rect, Aspen::Graphics::Color c, bool fill, Object *parent, std::string name)
-    : Geometry(c, fill, parent, "Rectangle"), _rect(rect)
+    : Geometry(c, fill, parent, name), _rect(rect)
 {
 }
 
@@ -125,15 +134,85 @@ void Rectangle::operator()()
 {
   if (!Valid())
     return;
-  if (static_cast<Graphics *>(_parent))
-    static_cast<Graphics *>(_parent)->DrawRectangle(this);
+  Graphics *gfx = FindAncestorOfType<Graphics>();
+  if (gfx)
+    gfx->DrawRectangle(this);
   Object::operator()();
 }
 
-SDL_Rect &Rectangle::Rect()
+SDL_Rect &Rectangle::GetRect()
 {
   return _rect;
 }
+
+/////////////////////////////////////////////////////////
+
+Point::Point(Object *parent, std::string name)
+    : Point(SDL_Point{0, 0}, Aspen::Graphics::Color(), parent, name)
+{
+}
+
+Point::Point(SDL_Point point, Aspen::Graphics::Color c, Object *parent, std::string name)
+    : Geometry(c, false, parent, name), _point(point)
+{
+}
+
+Point::~Point()
+{
+}
+
+void Point::operator()()
+{
+  if (!Valid())
+    return;
+  Graphics *gfx = FindAncestorOfType<Graphics>();
+  if (gfx)
+    gfx->DrawPoint(this);
+  Object::operator()();
+}
+
+SDL_Point &Point::GetPoint()
+{
+  return _point;
+}
+
+/////////////////////////////////////////////////////////
+
+Line::Line(Object *parent, std::string name)
+    : Line({0, 0}, {0, 0}, Aspen::Graphics::Color(), parent, name)
+{
+}
+
+Line::Line(SDL_Point start, SDL_Point end, Aspen::Graphics::Color c, Object *parent, std::string name)
+    : Geometry(c, false, parent, name), _start(start), _end(end)
+{
+}
+
+Line::~Line()
+{
+}
+
+void Line::operator()()
+{
+  if (!Valid())
+    return;
+  Graphics *gfx = FindAncestorOfType<Graphics>();
+  if (gfx)
+    gfx->DrawLine(this);
+  Object::operator()();
+}
+
+SDL_Point &Line::GetStart()
+{
+  return _start;
+}
+
+SDL_Point &Line::GetEnd()
+{
+  return _end;
+}
+
+/////////////////////////////////////////////////////////
 
 unsigned Graphics::_gcount = 0;
 
@@ -346,7 +425,7 @@ void Graphics::DrawRectangle(Rectangle *rect)
   {
     SDL_SetRenderDrawColor(_renderer, rect->Color().Red(), rect->Color().Green(), rect->Color().Blue(), rect->Color().Alpha());
     Transform::Transform *tf = rect->FindChildOfType<Transform::Transform>();
-    SDL_Rect rectangle = rect->Rect();
+    SDL_Rect rectangle = rect->GetRect();
     if (tf)
     {
       rectangle.x += tf->GetXPosition();
@@ -373,11 +452,69 @@ void Graphics::DrawRectangle(SDL_Rect *rect, Aspen::Graphics::Color c, bool fill
   }
 }
 
+void Graphics::DrawPoint(Point *point)
+{
+  if (point)
+  {
+    SDL_SetRenderDrawColor(_renderer, point->Color().Red(), point->Color().Green(), point->Color().Blue(), point->Color().Alpha());
+    Transform::Transform *tf = point->FindChildOfType<Transform::Transform>();
+    SDL_Point p = point->GetPoint();
+    if (tf)
+    {
+      p.x += tf->GetXPosition();
+      p.y += tf->GetYPosition();
+    }
+    SDL_RenderDrawPoint(_renderer, p.x, p.y);
+  }
+}
+
+void Graphics::DrawPoint(SDL_Point *point, Color c)
+{
+  if (point)
+  {
+    SDL_SetRenderDrawColor(_renderer, c.Red(), c.Green(), c.Blue(), c.Alpha());
+    SDL_RenderDrawPoint(_renderer, point->x, point->y);
+  }
+}
+
+void Graphics::DrawLine(Line *line)
+{
+  if (line)
+  {
+    SDL_SetRenderDrawColor(_renderer, line->Color().Red(), line->Color().Green(), line->Color().Blue(), line->Color().Alpha());
+    Transform::Transform *tf = line->FindChildOfType<Transform::Transform>();
+    SDL_Point start = line->GetStart();
+    SDL_Point end = line->GetEnd();
+    if (tf)
+    {
+      double angle = tf->GetRotation();
+      SDL_Point center = {(end.x + start.x) / 2,
+                          (end.y + start.y) / 2};
+      SDL_Point d = {int((center.x - start.x) * tf->GetXScale() * std::cos(angle)),
+                     int((center.y - start.y) * tf->GetYScale() * std::sin(angle))};
+      start.x = center.x - d.x;
+      start.y = center.y - d.y;
+      end.x = center.x + d.x;
+      end.y = center.y + d.y;
+    }
+    SDL_RenderDrawLine(_renderer, start.x, start.y, end.x, end.y);
+  }
+}
+
+void Graphics::DrawLine(SDL_Point *start, SDL_Point *end, Color c)
+{
+  if (start && end)
+  {
+    SDL_SetRenderDrawColor(_renderer, c.Red(), c.Green(), c.Blue(), c.Alpha());
+    SDL_RenderDrawLine(_renderer, start->x, start->y, end->x, end->y);
+  }
+}
+
 void Graphics::DrawSprite(Sprite *sprite)
 {
   if (sprite && sprite->GetTexture())
   {
-    SDL_Rect rect = sprite->Rect();
+    SDL_Rect rect = sprite->GetRect();
     double angle = 0.0;
     Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
     if (tf)
@@ -393,6 +530,8 @@ void Graphics::DrawSprite(Sprite *sprite)
     SDL_RenderCopyEx(_renderer, sprite->GetTexture(), NULL, &rect, angle, NULL, SDL_FLIP_NONE);
   }
 }
+
+/////////////////////////////////////////////////////////
 
 Sprite::Sprite(std::string path, Object *parent, std::string name)
     : Object(parent, name), _path(path), _surface(nullptr), _tex(nullptr)
@@ -423,10 +562,10 @@ Sprite::Sprite(std::string path, Object *parent, std::string name)
     _valid = false;
     return;
   }
-  Rect().x = 0;
-  Rect().y = 0;
-  Rect().w = _surface->w;
-  Rect().h = _surface->h;
+  GetRect().x = 0;
+  GetRect().y = 0;
+  GetRect().w = _surface->w;
+  GetRect().h = _surface->h;
   GenerateTexture();
   CreateChild<Transform::Transform>();
 }
@@ -494,7 +633,7 @@ SDL_Texture *Sprite::GetTexture()
   return _tex;
 }
 
-SDL_Rect &Sprite::Rect()
+SDL_Rect &Sprite::GetRect()
 {
   return _rect;
 }

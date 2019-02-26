@@ -68,12 +68,42 @@ class Rectangle : public Geometry
 
 public:
   Rectangle(Object *parent = nullptr, std::string name = "Rectangle");
-  Rectangle(SDL_Rect rect = {0, 0, 1, 1}, Aspen::Graphics::Color c = Aspen::Graphics::Color(), bool fill = false, Object *parent = nullptr, std::string name = "Rectangle");
+  Rectangle(SDL_Rect rect, Aspen::Graphics::Color c = Aspen::Graphics::Color(), bool fill = false, Object *parent = nullptr, std::string name = "Rectangle");
   ~Rectangle();
 
   void operator()();
 
-  SDL_Rect &Rect();
+  SDL_Rect &GetRect();
+};
+
+class Point : public Geometry
+{
+  SDL_Point _point;
+
+public:
+  Point(Object *parent = nullptr, std::string name = "Point");
+  Point(SDL_Point point, Aspen::Graphics::Color c = Aspen::Graphics::Color(), Object *parent = nullptr, std::string name = "Point");
+  ~Point();
+
+  void operator()();
+
+  SDL_Point &GetPoint();
+};
+
+class Line : public Geometry
+{
+  SDL_Point _start;
+  SDL_Point _end;
+
+public:
+  Line(Object *parent = nullptr, std::string name = "Line");
+  Line(SDL_Point start, SDL_Point end, Aspen::Graphics::Color c = Aspen::Graphics::Color(), Object *parent = nullptr, std::string name = "Line");
+  ~Line();
+
+  void operator()();
+
+  SDL_Point &GetStart();
+  SDL_Point &GetEnd();
 };
 
 /// \brief Sprite class
@@ -117,7 +147,7 @@ public:
   /// \return _tex
   SDL_Texture *GetTexture();
 
-  SDL_Rect &Rect();
+  SDL_Rect &GetRect();
 };
 
 /// \brief Graphics class
@@ -164,6 +194,12 @@ public:
 
   void DrawRectangle(Rectangle *rect);
   void DrawRectangle(SDL_Rect *rect, Color c, bool fill = true);
+
+  void DrawPoint(Point *point);
+  void DrawPoint(SDL_Point *point, Color c);
+
+  void DrawLine(Line *line);
+  void DrawLine(SDL_Point *start, SDL_Point *end, Color c);
   /// \brief Draws a given Sprite at 0, 0
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
