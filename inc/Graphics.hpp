@@ -163,7 +163,6 @@ public:
   void PopulateDebugger();
 };
 
-/// \brief Sprite class
 class UniformSpritesheet : public Sprite
 {
   SDL_Rect _frame;
@@ -180,11 +179,32 @@ public:
   /// \brief Destructor
   ~UniformSpritesheet();
 
-  /// \brief Draws the sprite to the parent Object's window if parent is of type Graphics
   void operator()();
 
   int GetFrameCount();
   SDL_Rect GetClipRectangle(int frame);
+
+  void PopulateDebugger();
+};
+
+class Animation : public Object::Object
+{
+  int _currentFrame;
+  float _delay;
+  float _remainingDelay;
+
+public:
+  Animation(Object *parent = nullptr, std::string name = "Animation");
+  /// \brief Constructor
+  /// \param path Path of file to load
+  /// \param parent Parent Object to be passed to Object constructor
+  Animation(UniformSpritesheet *spritesheet, float frameDelay = 0.05f, Object *parent = nullptr, std::string name = "Animation");
+  /// \brief Destructor
+  ~Animation();
+
+  void operator()();
+
+  int GetFrameCount();
 
   void PopulateDebugger();
 };

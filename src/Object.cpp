@@ -77,6 +77,8 @@ void Object::operator()()
 
 void Object::AddChild(Object *child)
 {
+  if (!child)
+    return;
   if (std::find(_children.begin(), _children.end(), child) == _children.end())
   {
     child->SetParent(this);

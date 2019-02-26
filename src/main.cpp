@@ -30,18 +30,20 @@ int main(int argc, char **argv)
   //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
   newSprite->AddChild(new Controller::PlayerController_8Way());
   gfx->AddChild(newSprite);
-  
-  gfx->AddChild(new Graphics::UniformSpriteSheet("resources/anim.png", 4, gfx));
 
   gfx->AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, gfx));
   gfx->AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, gfx));
+
+  Graphics::Animation *anim = new Graphics::Animation(new Graphics::UniformSpritesheet("resources/anim.png", 4, gfx), 0.16f, gfx);
+  anim->FindChildOfType<Transform::Transform>()->SetPosition(50, 0);
+  
   Graphics::Line *line = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.5f, 0x0000FFFF, gfx);
   line->FindChildOfType<Transform::Transform>()->SetPosition(100, 100);
-  line->FindChildOfType<Transform::Transform>()->SetRotation(M_PI_4);
   gfx->AddChild(line);
   Graphics::Line *line2 = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.0f, 0xFF0000FF, gfx);
   line2->FindChildOfType<Transform::Transform>()->SetPosition(25, 0);
   line->AddChild(line2);
+  line2->AddChild(anim);
 
   while (engine)
   {
@@ -49,7 +51,7 @@ int main(int argc, char **argv)
     line->FindChildOfType<Transform::Transform>()
         ->SetRotation(dt);
     line2->FindChildOfType<Transform::Transform>()
-         ->SetRotation(2.0 * dt);
+        ->SetRotation(2.0 * dt);
 
     engine();
   }

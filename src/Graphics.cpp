@@ -578,9 +578,11 @@ void Graphics::DrawSprite(Sprite *sprite)
       rect.y += tf->GetYPosition();
       angle += double(tf->GetRotation());
     }
+    rect.x -= rect.w / 2;
+    rect.y -= rect.h / 2;
     if (angle == 0)
       angle = 0.00000001;
-    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), NULL, &rect, angle, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), NULL, &rect, (angle / M_PI) * 180.0, NULL, SDL_FLIP_NONE);
   }
 }
 
@@ -599,9 +601,11 @@ void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
       rect.y += tf->GetYPosition();
       angle += double(tf->GetRotation());
     }
+    rect.x -= rect.w / 2;
+    rect.y -= rect.h / 2;
     if (angle == 0)
       angle = 0.00000001;
-    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), &clip, &rect, angle, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), &clip, &rect, (angle / M_PI) * 180.0, NULL, SDL_FLIP_NONE);
   }
 }
 
@@ -744,10 +748,14 @@ UniformSpritesheet::UniformSpritesheet(Object *parent, std::string name)
 }
 
 UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameCount, Object *parent, std::string name)
-    : Sprite(path, parent, name), _framecount(frameCount)
+    : Sprite(path, parent, name), _frame({0, 0, 0, 0}), _framecount(frameCount)
 {
-  _frame.w = GetSurface() ? GetSurface()->h / frameCount : 0;
-  _frame.h = GetSurface() ? GetSurface()->h : 0;
+  SDL_Surface *s = GetSurface();
+  if (s)
+  {
+    _frame.w = s->w / frameCount;
+    _frame.h = s->h;
+  }
 }
 
 UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, Object *parent, std::string name)
@@ -756,7 +764,7 @@ UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameWidth, un
 }
 
 UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, unsigned frameCount, Object *parent, std::string name)
-    : Sprite(path, parent, name), _framecount(frameCount)
+    : Sprite(path, parent, name), _frame({0, 0, 0, 0}), _framecount(frameCount)
 {
   _frame.w = frameWidth;
   _frame.h = frameHeight;
@@ -768,8 +776,8 @@ UniformSpritesheet::~UniformSpritesheet()
 
 void UniformSpritesheet::operator()()
 {
-  //if (Valid() && FindAncestorOfType<Graphics>())
-  //  FindAncestorOfType<Graphics>()->DrawSprite(this, GetClipRectangle(0));
+  if (Valid() && FindAncestorOfType<Graphics>())
+    FindAncestorOfType<Graphics>()->DrawSprite(this, GetClipRectangle(0));
 
   Object::operator()();
 }
@@ -795,6 +803,114 @@ void UniformSpritesheet::PopulateDebugger()
   ImGui::Text("Frame height: %d", _frame.h);
   ImGui::Text("Frame count: %d", _framecount);
   Sprite::PopulateDebugger();
+}
+
+/////////////////////////////////////////////////////////
+
+Animation::Animation(Object *parent, std::string name)
+    : Animation(nullptr, 0.05f, parent, name)
+{
+}
+
+Animation::Animation(UniformSpritesheet *spritesheet, float frameDelay, Object *parent, std::string name)
+    : Object(parent, name), _currentFrame(0), _delay(frameDelay), _remainingDelay(_delay)
+{
+  AddChild(spritesheet);
+  CreateChild<Transform::Transform>();
+}
+
+Animation::~Animation()
+{
+}
+
+void Animation::operator()()
+{
+  if (!Valid())
+    return;
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Time::Time *time = engine->FindAncestorOfType<Time::Time>();
+    float dt;
+    if (time)
+      dt = time->DeltaTime();
+    else
+      dt = 1 / 60.0f;
+
+    _remainingDelay -= dt;
+    while (_remainingDelay <= 0.0f)
+    {
+      _remainingDelay += _delay;
+      if (++_currentFrame >= GetFrameCount())
+        _currentFrame = 0;
+    }
+
+    Graphics *gfx = FindAncestorOfType<Graphics>();
+    if (gfx && _currentFrame >= 0)
+    {
+      int f = _currentFrame;
+      for (Object *child : _children)
+      {
+        if (dynamic_cast<UniformSpritesheet *>(child))
+        {
+          if (f >= 0)
+          {
+            UniformSpritesheet *uss = dynamic_cast<UniformSpritesheet *>(child);
+            if (f - uss->GetFrameCount() >= 0)
+              f -= uss->GetFrameCount();
+            else
+            {
+              gfx->DrawSprite(uss, uss->GetClipRectangle(f));
+              f = -1;
+            }
+          }
+        }
+        else if (dynamic_cast<Sprite *>(child))
+        {
+          if (f >= 0)
+          {
+            Sprite *s = dynamic_cast<Sprite *>(child);
+            if (f > 0)
+              --f;
+            else
+            {
+              gfx->DrawSprite(s);
+              f = -1;
+            }
+          }
+        }
+        else
+          (*child)();
+
+        if (!child->Valid())
+        {
+          RemoveChild(child);
+          delete child;
+        }
+      }
+    }
+  }
+}
+
+int Animation::GetFrameCount()
+{
+  int count = 0;
+  for (Object *child : _children)
+  {
+    if (dynamic_cast<UniformSpritesheet *>(child))
+      count += dynamic_cast<UniformSpritesheet *>(child)->GetFrameCount();
+    else if (dynamic_cast<Sprite *>(child))
+      ++count;
+  }
+  return count;
+}
+
+void Animation::PopulateDebugger()
+{
+  ImGui::Text("Current Frame: %d / %d", _currentFrame, GetFrameCount());
+  ImGui::Text("Frame Delay: %f", _delay);
+  ImGui::Text("Time till next frame: %f", _remainingDelay);
+  Object::PopulateDebugger();
 }
 } // namespace Graphics
 } // namespace Aspen
