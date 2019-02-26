@@ -35,6 +35,8 @@ public:
 
   unsigned TargetFramerate();
   void TargetFramerate(unsigned targetFramerate);
+
+  void PopulateDebugger();
 };
 } // namespace Time
 } // namespace Aspen

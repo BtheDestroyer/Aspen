@@ -85,6 +85,7 @@ void Debug::MakeTree(Object *o)
     unsigned i = 0;
     Object *child = (*o)[i];
     sprintf(buffer, "End##%p", o);
+    o->PopulateDebugger();
     if (o->Valid() && ImGui::Button(buffer))
       o->End();
     while (child)
@@ -92,8 +93,6 @@ void Debug::MakeTree(Object *o)
       MakeTree(child);
       child = (*o)[++i];
     }
-    if (i == 0)
-      ImGui::Text("No children...");
     ImGui::TreePop();
   }
 }
@@ -105,6 +104,13 @@ Debug::~Debug()
     ImGuiSDL::Deinitialize();
     ImGui::DestroyContext();
   }
+}
+
+void Debug::PopulateDebugger()
+{
+  ImGui::Text("ImGuiIO: %p", _io);
+  ImGui::Text("Debugger Count: %d", _dcount);
+  Object::PopulateDebugger();
 }
 } // namespace Debug
 } // namespace Aspen

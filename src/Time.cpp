@@ -7,6 +7,7 @@
 #ifdef __WIN32
 #include <windows.h>
 #endif
+#include "imgui.h"
 
 #undef __TIME_CPP
 
@@ -102,6 +103,16 @@ unsigned Time::TargetFramerate()
 void Time::TargetFramerate(unsigned targetFramerate)
 {
   _targetFramerate = targetFramerate;
+}
+
+void Time::PopulateDebugger()
+{
+  ImGui::Text("Start Time: %f", StartTime());
+  ImGui::Text("Last Time: %f", LastTime());
+  ImGui::Text("Current Time: %f", CurrentTime());
+  ImGui::Text("Delta Time: %f", DeltaTime());
+  ImGui::Text("Target Framerate: %d", TargetFramerate());
+  Object::PopulateDebugger();
 }
 } // namespace Time
 } // namespace Aspen

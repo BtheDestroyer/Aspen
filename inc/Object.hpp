@@ -167,6 +167,8 @@ public:
 
   unsigned ChildrenCount();
   std::vector<Object*> Children();
+
+  virtual void PopulateDebugger();
 };
 } // namespace Object
 } // namespace Aspen

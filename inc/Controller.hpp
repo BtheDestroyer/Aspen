@@ -23,6 +23,8 @@ public:
 
   void Speed(double speed);
   double Speed();
+
+  void PopulateDebugger();
 };
 } // namespace Controller
 } // namespace Aspen

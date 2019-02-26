@@ -71,6 +71,8 @@ public:
 
   bool Debug();
   void Debug(bool newval);
+
+  void PopulateDebugger();
 };
 } // namespace Engine
 } // namespace Aspen

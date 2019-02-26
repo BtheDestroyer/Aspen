@@ -21,6 +21,8 @@ public:
   void operator()();
   void MakeTree(Object *o);
   ~Debug();
+
+  void PopulateDebugger();
 };
 } // namespace Debug
 } // namespace Aspen

@@ -60,6 +60,8 @@ public:
   void Color(Aspen::Graphics::Color c);
   void Color(int r, int g, int b, int a);
   bool Fill();
+
+  void PopulateDebugger();
 };
 
 class Rectangle : public Geometry
@@ -74,6 +76,8 @@ public:
   void operator()();
 
   SDL_Rect &GetRect();
+
+  void PopulateDebugger();
 };
 
 class Point : public Geometry
@@ -88,6 +92,8 @@ public:
   void operator()();
 
   SDL_Point &GetPoint();
+
+  void PopulateDebugger();
 };
 
 class Line : public Geometry
@@ -107,6 +113,8 @@ public:
   SDL_Point &GetEnd();
   float &GetCenter();
   void SetCenter(float center);
+
+  void PopulateDebugger();
 };
 
 /// \brief Sprite class
@@ -151,6 +159,8 @@ public:
   SDL_Texture *GetTexture();
 
   SDL_Rect &GetRect();
+
+  void PopulateDebugger();
 };
 
 /// \brief Graphics class
@@ -209,6 +219,8 @@ public:
 
   /// \brief Frees the Window and shuts down SDL
   void End();
+
+  void PopulateDebugger();
 };
 } // namespace Graphics
 } // namespace Aspen

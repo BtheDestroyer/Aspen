@@ -6,6 +6,7 @@
 #include "Transform.hpp"
 #include "Input.hpp"
 #include <cmath>
+#include "imgui.h"
 
 #undef __CONTROLLER_CPP
 
@@ -50,7 +51,10 @@ void PlayerController_8Way::operator()()
       break;
   }
   if (!ah || !av)
+  {
+    End();
     return;
+  }
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   Time::Time *time = nullptr;
   if (engine)
@@ -73,6 +77,12 @@ void PlayerController_8Way::Speed(double speed)
 double PlayerController_8Way::Speed()
 {
   return _speed;
+}
+
+void PlayerController_8Way::PopulateDebugger()
+{
+  ImGui::Text("Speed: %f", _speed);
+  Object::PopulateDebugger();
 }
 } // namespace Controller
 } // namespace Aspen

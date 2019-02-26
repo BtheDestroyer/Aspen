@@ -31,6 +31,8 @@ public:
   ///        Redefined by inheriting classes
   /// \param event Event to handle
   virtual void Handle(SDL_Event *event);
+
+  void PopulateDebugger();
 };
 
 /// \brief QuitEventListener class
@@ -45,6 +47,8 @@ public:
   /// \brief Calls Root()->End() to shutdown the entire Object tree if passed an SDL_QUIT event
   /// \param event Event to handle
   void Handle(SDL_Event *event);
+
+  void PopulateDebugger();
 };
 
 /// \brief KeyEventListener class
@@ -69,6 +73,8 @@ public:
   ///        Does nothing if _key == SDLK_UNKNOWN
   /// \param event Event to handle
   void Handle(SDL_Event *event);
+
+  void PopulateDebugger();
 };
 
 /// \brief EventHandler class
@@ -82,6 +88,8 @@ public:
   ~EventHandler();
   /// \brief Polls SDL_Events and passes them to all child EventListeners
   void operator()();
+
+  void PopulateDebugger();
 };
 } // namespace Event
 } // namespace Aspen

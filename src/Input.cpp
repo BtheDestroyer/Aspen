@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include <cmath>
 #include <map>
+#include "imgui.h"
 
 #undef __INPUT_CPP
 
@@ -46,6 +47,16 @@ void Axis::operator()()
 float Axis::GetValue()
 {
   return _value;
+}
+
+void Axis::PopulateDebugger()
+{
+  ImGui::Text("Positive Key: %s", SDL_GetKeyName(_pos));
+  ImGui::Text("Negative Key: %s", SDL_GetKeyName(_neg));
+  ImGui::Text("Gravity: %f", _gravity);
+  ImGui::Text("Weight: %f", _weight);
+  ImGui::Text("Value: %f", GetValue());
+  Object::PopulateDebugger();
 }
 
 std::map<SDL_Keycode, Key> keys;

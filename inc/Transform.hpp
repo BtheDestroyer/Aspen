@@ -44,6 +44,8 @@ public:
 
   Transform operator+(const Transform &rhs);
   Transform &operator+=(const Transform &rhs);
+
+  void PopulateDebugger();
 };
 } // namespace Transform
 } // namespace Aspen

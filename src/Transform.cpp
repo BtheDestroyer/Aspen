@@ -2,6 +2,7 @@
 
 #include "Transform.hpp"
 #include <cmath>
+#include "imgui.h"
 
 #undef __TRANSFORM_CPP
 
@@ -240,6 +241,16 @@ Transform &Transform::operator+=(const Transform &rhs)
   ModifyRotation(rhs.GetRotation());
   ModifyScale(rhs.GetXScale(), rhs.GetYScale());
   return *this;
+}
+
+void Transform::PopulateDebugger()
+{
+  ImGui::Text("X Pos: %f (%f)", _posx, GetXPosition());
+  ImGui::Text("Y Pos: %f (%f)", _posy, GetYPosition());
+  ImGui::Text("Rotation: %f (%f)", _r, GetRotation());
+  ImGui::Text("X Scale: %f (%f)", _scalex, GetXScale());
+  ImGui::Text("Y Scale: %f (%f)", _scaley, GetYScale());
+  Object::PopulateDebugger();
 }
 } // namespace Transform
 } // namespace Aspen

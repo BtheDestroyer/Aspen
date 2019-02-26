@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <iomanip>
 
+#include "imgui.h"
+
 #undef __OBJECT_CPP
 
 namespace Aspen
@@ -215,6 +217,11 @@ unsigned Object::ChildrenCount()
 std::vector<Object *> Object::Children()
 {
   return _children;
+}
+
+void Object::PopulateDebugger()
+{
+  ImGui::Text("Children: %d", ChildrenCount());
 }
 } // namespace Object
 } // namespace Aspen

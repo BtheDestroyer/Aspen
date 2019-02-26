@@ -4,6 +4,7 @@
 #include "Log.hpp"
 #include "Input.hpp"
 #include "Engine.hpp"
+#include "imgui.h"
 
 #undef __EVENT_CPP
 
@@ -32,6 +33,11 @@ void EventListener::Handle(SDL_Event *event)
 {
 }
 
+void EventListener::PopulateDebugger()
+{
+  Object::PopulateDebugger();
+}
+
 QuitEventListener::QuitEventListener(Object *parent, std::string name)
     : EventListener(parent, name)
 {
@@ -45,6 +51,11 @@ void QuitEventListener::Handle(SDL_Event *event)
 {
   if (event && event->type == SDL_QUIT)
     Root()->End();
+}
+
+void QuitEventListener::PopulateDebugger()
+{
+  EventListener::PopulateDebugger();
 }
 
 KeyEventListener::KeyEventListener(Object *parent, std::string name)
@@ -96,6 +107,12 @@ void KeyEventListener::Handle(SDL_Event *event)
   }
 }
 
+void KeyEventListener::PopulateDebugger()
+{
+  ImGui::Text("Key: %s", SDL_GetKeyName(_key));
+  EventListener::PopulateDebugger();
+}
+
 EventHandler::EventHandler(Object *parent, std::string name)
     : Object(parent, name)
 {
@@ -117,5 +134,9 @@ void EventHandler::operator()()
       (*el)(&event);
 }
 
+void EventHandler::PopulateDebugger()
+{
+  Object::PopulateDebugger();
+}
 } // namespace Event
 } // namespace Aspen

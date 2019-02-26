@@ -39,6 +39,8 @@ public:
   void operator()();
 
   float GetValue();
+
+  void PopulateDebugger();
 };
 
 /// \brief Gets a Key reference from a hidden map

@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <cmath>
 #include <SDL2/SDL_image.h>
+#include "imgui.h"
 
 #undef __GRAPHICS_CPP
 
@@ -114,6 +115,16 @@ bool Geometry::Fill()
   return _fill;
 }
 
+void Geometry::PopulateDebugger()
+{
+  ImGui::Text("Red: 0x%x", _c.Red());
+  ImGui::Text("Green: 0x%x", _c.Green());
+  ImGui::Text("Blue: 0x%x", _c.Blue());
+  ImGui::Text("Alpha: 0x%x", _c.Alpha());
+  ImGui::Text("Fill: %s", _fill ? "True" : "False");
+  Object::PopulateDebugger();
+}
+
 /////////////////////////////////////////////////////////
 
 Rectangle::Rectangle(Object *parent, std::string name)
@@ -145,6 +156,15 @@ SDL_Rect &Rectangle::GetRect()
   return _rect;
 }
 
+void Rectangle::PopulateDebugger()
+{
+  ImGui::Text("X Pos: %d", _rect.x);
+  ImGui::Text("Y Pos: %d", _rect.y);
+  ImGui::Text("Width: %d", _rect.w);
+  ImGui::Text("Height: %d", _rect.h);
+  Geometry::PopulateDebugger();
+}
+
 /////////////////////////////////////////////////////////
 
 Point::Point(Object *parent, std::string name)
@@ -174,6 +194,13 @@ void Point::operator()()
 SDL_Point &Point::GetPoint()
 {
   return _point;
+}
+
+void Point::PopulateDebugger()
+{
+  ImGui::Text("X Pos: %d", _point.x);
+  ImGui::Text("Y Pos: %d", _point.y);
+  Geometry::PopulateDebugger();
 }
 
 /////////////////////////////////////////////////////////
@@ -220,6 +247,16 @@ float &Line::GetCenter()
 void Line::SetCenter(float center)
 {
   _center = center;
+}
+
+void Line::PopulateDebugger()
+{
+  ImGui::Text("Start X Pos: %d", _start.x);
+  ImGui::Text("Start Y Pos: %d", _start.y);
+  ImGui::Text("End X Pos: %d", _end.x);
+  ImGui::Text("End Y Pos: %d", _end.y);
+  ImGui::Text("Center: %f", _center);
+  Geometry::PopulateDebugger();
 }
 
 /////////////////////////////////////////////////////////
@@ -547,6 +584,19 @@ void Graphics::DrawSprite(Sprite *sprite)
   }
 }
 
+void Graphics::PopulateDebugger()
+{
+  ImGui::Text("Graphics count: %d", _gcount);
+  ImGui::Text("Window: 0x%p", _window);
+  ImGui::Text("Surface: 0x%p", _surface);
+  ImGui::Text("Renderer: 0x%p", _renderer);
+  ImGui::Text("Background Red: 0x%x", _background.Red());
+  ImGui::Text("Background Green: 0x%x", _background.Green());
+  ImGui::Text("Background Blue: 0x%x", _background.Blue());
+  ImGui::Text("Background Alpha: 0x%x", _background.Alpha());
+  Object::PopulateDebugger();
+}
+
 /////////////////////////////////////////////////////////
 
 Sprite::Sprite(std::string path, Object *parent, std::string name)
@@ -652,6 +702,17 @@ SDL_Texture *Sprite::GetTexture()
 SDL_Rect &Sprite::GetRect()
 {
   return _rect;
+}
+
+void Sprite::PopulateDebugger()
+{
+  ImGui::Text("Path: %s", _path.c_str());
+  ImGui::Text("Surface: 0x%p", _surface);
+  ImGui::Text("Texture: 0x%p", _tex);
+  ImGui::Text("X Pos: %d", _rect.x);
+  ImGui::Text("Y Pos: %d", _rect.y);
+  ImGui::Text("Size: (%d, %d)", _rect.w, _rect.h);
+  Object::PopulateDebugger();
 }
 } // namespace Graphics
 } // namespace Aspen

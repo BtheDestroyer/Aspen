@@ -5,6 +5,7 @@
 #include "Event.hpp"
 #include "Debug.hpp"
 #include "Log.hpp"
+#include "imgui.h"
 
 #undef __ENGINE_CPP
 
@@ -170,6 +171,12 @@ bool Engine::Debug()
 void Engine::Debug(bool newval)
 {
   _debugging = newval;
+}
+
+void Engine::PopulateDebugger()
+{
+  ImGui::Text("Debugging: %s", Debug() ? "True" : "False");
+  Object::PopulateDebugger();
 }
 } // namespace Engine
 } // namespace Aspen
