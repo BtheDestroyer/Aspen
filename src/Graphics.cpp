@@ -3,6 +3,7 @@
 #include "Graphics.hpp"
 #include "Engine.hpp"
 #include "Transform.hpp"
+#include "Debug.hpp"
 #include "Log.hpp"
 #include <sstream>
 #include <iomanip>
@@ -267,7 +268,30 @@ void Graphics::operator()()
   SDL_SetRenderDrawColor(_renderer, _background.Red(), _background.Green(), _background.Blue(), _background.Alpha());
   SDL_RenderClear(_renderer);
 
-  Object::operator()();
+  std::vector<Debug::Debug *> debuggers;
+  for (Object *child : _children)
+  {
+    if (dynamic_cast<Debug::Debug *>(child))
+      debuggers.push_back(dynamic_cast<Debug::Debug *>(child));
+    else
+    {
+      (*child)();
+      if (!child->Valid())
+      {
+        RemoveChild(child);
+        delete child;
+      }
+    }
+  }
+  for (Debug::Debug *debugger : debuggers)
+  {
+    (*debugger)();
+    if (!debugger->Valid())
+    {
+      RemoveChild(debugger);
+      delete debugger;
+    }
+  }
 
   SDL_RenderPresent(_renderer);
 }

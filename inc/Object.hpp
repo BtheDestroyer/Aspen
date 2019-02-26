@@ -67,7 +67,7 @@ public:
   template <typename T>
   T *CreateChild()
   {
-    T *o = new T;
+    T *o = new T(this);
     AddChild(o);
     return o;
   }

@@ -3,6 +3,7 @@
 #include "Engine.hpp"
 #include "Graphics.hpp"
 #include "Event.hpp"
+#include "Debug.hpp"
 #include "Log.hpp"
 
 #undef __ENGINE_CPP
@@ -30,6 +31,12 @@ Engine::Engine(int flags, Object *parent, std::string name)
   {
     if (flags & START_FLAGS::CREATE_GRAPHICS)
       Log::Info("  CREATE_GRAPHICS");
+    if (flags & START_FLAGS::CREATE_GRAPHICS_DEBUGGER)
+    {
+      Log::Info("  CREATE_GRAPHICS_DEBUGGER");
+      if (!(flags & START_FLAGS::CREATE_GRAPHICS))
+        Log::Warning("    This only works if you are using CREATE_GRAPHICS");
+    }
     if (flags & START_FLAGS::CREATE_EVENTHANDLER)
       Log::Info("  CREATE_EVENTHANDLER");
     if (flags & START_FLAGS::CREATE_EVENT_QUIT)
@@ -64,7 +71,11 @@ Engine::Engine(int flags, Object *parent, std::string name)
       Log::Info("  DEBUGGING_ON");
 
     if (flags & START_FLAGS::CREATE_GRAPHICS)
-      CreateChild<Graphics::Graphics>();
+    {
+      Graphics::Graphics *gfx = CreateChild<Graphics::Graphics>();
+      if (flags & START_FLAGS::CREATE_GRAPHICS)
+        gfx->CreateChild<Debug::Debug>();
+    }
     if (flags & START_FLAGS::CREATE_EVENTHANDLER)
     {
       Event::EventHandler *eh = CreateChild<Event::EventHandler>();

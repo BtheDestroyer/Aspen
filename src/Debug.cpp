@@ -38,7 +38,10 @@ void Debug::Setup()
 
 void Debug::operator()()
 {
-  Object::operator()();
+  if (Valid())
+    Object::operator()();
+  else
+    return;
 
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine && engine->Debug())

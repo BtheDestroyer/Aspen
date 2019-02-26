@@ -13,12 +13,7 @@ int main(int argc, char **argv)
   Log::Log::SetFile("./Aspen.log");
 
   Engine::Engine engine(
-      Engine::START_FLAGS::CREATE_GRAPHICS |
-      Engine::START_FLAGS::CREATE_GRAPHICS |
-      Engine::START_FLAGS::CREATE_EVENTHANDLER |
-      Engine::START_FLAGS::CREATE_EVENT_ALL |
-      Engine::START_FLAGS::CREATE_TIME |
-      Engine::START_FLAGS::DEBUGGING_ON);
+      Engine::START_FLAGS::ALL);
 
   Graphics::Graphics *gfx = engine.FindChildOfType<Graphics::Graphics>();
 
@@ -33,7 +28,6 @@ int main(int argc, char **argv)
   //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
   newSprite->AddChild(new Controller::PlayerController_8Way());
   gfx->AddChild(newSprite);
-  gfx->AddChild(new Debug::Debug(gfx));
 
   //engine.PrintTree();
 
