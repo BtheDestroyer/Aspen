@@ -44,6 +44,9 @@ NEWFILE_LOW := $(shell tr '[:upper:]' '[:lower:]' <<< $(NEWFILE))
 endif
 
 CPPFILES := $(filter-out $(SOURCES)/$(STUB).cpp, $(wildcard $(SOURCES)/*.cpp))
+ifeq ($(suffix $(PROJECT)),.a)
+CPPFILES := $(filter-out $(SOURCES)/main.cpp, $(CPPFILES))
+endif
 HPPFILES := $(filter-out $(HEADERS)/$(STUB).hpp, $(wildcard $(HEADERS)/*.hpp))
 OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
 
@@ -105,7 +108,7 @@ $(HEADERS)/$(STUB).hpp:
 
 .NOTPARALLEL: $(OUTPUT)
 $(OUTPUT): $(OBJECTS) $(OBJFILES) $(IMGUI_LIB)
-ifeq ($(suffix $@), "a")
+ifeq ($(suffix $(PROJECT)),.a)
 	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)
 else
 	$(CXX) $(OBJFILES) $(LINKFLAGS) -o $(OUTPUT)

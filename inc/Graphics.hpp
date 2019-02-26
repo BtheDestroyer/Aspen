@@ -163,6 +163,32 @@ public:
   void PopulateDebugger();
 };
 
+/// \brief Sprite class
+class UniformSpritesheet : public Sprite
+{
+  SDL_Rect _frame;
+  int _framecount;
+
+public:
+  UniformSpritesheet(Object *parent = nullptr, std::string name = "UniformSpritesheet");
+  /// \brief Constructor
+  /// \param path Path of file to load
+  /// \param parent Parent Object to be passed to Object constructor
+  UniformSpritesheet(std::string path, unsigned frameCount, Object *parent = nullptr, std::string name = "UniformSpritesheet");
+  UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, Object *parent = nullptr, std::string name = "UniformSpritesheet");
+  UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, unsigned frameCount, Object *parent = nullptr, std::string name = "UniformSpritesheet");
+  /// \brief Destructor
+  ~UniformSpritesheet();
+
+  /// \brief Draws the sprite to the parent Object's window if parent is of type Graphics
+  void operator()();
+
+  int GetFrameCount();
+  SDL_Rect GetClipRectangle(int frame);
+
+  void PopulateDebugger();
+};
+
 /// \brief Graphics class
 ///        Holds other classes from Aspen::Graphics as children to draw them to the screen
 class Graphics : public Object::Object
@@ -216,6 +242,7 @@ public:
   /// \brief Draws a given Sprite at 0, 0
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
+  void DrawSprite(Sprite *sprite, SDL_Rect clip);
 
   /// \brief Frees the Window and shuts down SDL
   void End();

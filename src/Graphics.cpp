@@ -584,6 +584,27 @@ void Graphics::DrawSprite(Sprite *sprite)
   }
 }
 
+void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
+{
+  if (sprite && sprite->GetTexture())
+  {
+    SDL_Rect rect = sprite->GetRect();
+    double angle = 0.0;
+    Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
+    if (tf)
+    {
+      rect.w = clip.w * tf->GetXScale();
+      rect.h = clip.h * tf->GetYScale();
+      rect.x += tf->GetXPosition();
+      rect.y += tf->GetYPosition();
+      angle += double(tf->GetRotation());
+    }
+    if (angle == 0)
+      angle = 0.00000001;
+    SDL_RenderCopyEx(_renderer, sprite->GetTexture(), &clip, &rect, angle, NULL, SDL_FLIP_NONE);
+  }
+}
+
 void Graphics::PopulateDebugger()
 {
   ImGui::Text("Graphics count: %d", _gcount);
@@ -680,7 +701,7 @@ void Sprite::GenerateTexture()
 
 void Sprite::operator()()
 {
-  if (Valid() && _parent && FindAncestorOfType<Graphics>())
+  if (Valid() && FindAncestorOfType<Graphics>())
     FindAncestorOfType<Graphics>()->DrawSprite(this);
 
   Object::operator()();
@@ -713,6 +734,67 @@ void Sprite::PopulateDebugger()
   ImGui::Text("Y Pos: %d", _rect.y);
   ImGui::Text("Size: (%d, %d)", _rect.w, _rect.h);
   Object::PopulateDebugger();
+}
+
+/////////////////////////////////////////////////////////
+
+UniformSpritesheet::UniformSpritesheet(Object *parent, std::string name)
+    : UniformSpritesheet::UniformSpritesheet("", 0, parent, name)
+{
+}
+
+UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameCount, Object *parent, std::string name)
+    : Sprite(path, parent, name), _framecount(frameCount)
+{
+  _frame.w = GetSurface() ? GetSurface()->h / frameCount : 0;
+  _frame.h = GetSurface() ? GetSurface()->h : 0;
+}
+
+UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, Object *parent, std::string name)
+    : UniformSpritesheet::UniformSpritesheet(path, 0, 0, 0, parent, name)
+{
+}
+
+UniformSpritesheet::UniformSpritesheet(std::string path, unsigned frameWidth, unsigned frameHeight, unsigned frameCount, Object *parent, std::string name)
+    : Sprite(path, parent, name), _framecount(frameCount)
+{
+  _frame.w = frameWidth;
+  _frame.h = frameHeight;
+}
+
+UniformSpritesheet::~UniformSpritesheet()
+{
+}
+
+void UniformSpritesheet::operator()()
+{
+  //if (Valid() && FindAncestorOfType<Graphics>())
+  //  FindAncestorOfType<Graphics>()->DrawSprite(this, GetClipRectangle(0));
+
+  Object::operator()();
+}
+
+int UniformSpritesheet::GetFrameCount()
+{
+  return _framecount;
+}
+
+SDL_Rect UniformSpritesheet::GetClipRectangle(int frame)
+{
+  if (frame < _framecount && _framecount >= 0)
+  {
+    int hframes = GetSurface()->w / _frame.w;
+    return SDL_Rect{_frame.w * (frame % hframes), _frame.h * (frame / hframes), _frame.w, _frame.h};
+  }
+  return SDL_Rect{0, 0, 0, 0};
+}
+
+void UniformSpritesheet::PopulateDebugger()
+{
+  ImGui::Text("Frame width: %d", _frame.w);
+  ImGui::Text("Frame height: %d", _frame.h);
+  ImGui::Text("Frame count: %d", _framecount);
+  Sprite::PopulateDebugger();
 }
 } // namespace Graphics
 } // namespace Aspen

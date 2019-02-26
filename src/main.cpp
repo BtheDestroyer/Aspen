@@ -30,6 +30,8 @@ int main(int argc, char **argv)
   //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
   newSprite->AddChild(new Controller::PlayerController_8Way());
   gfx->AddChild(newSprite);
+  
+  gfx->AddChild(new Graphics::UniformSpriteSheet("resources/anim.png", 4, gfx));
 
   gfx->AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, gfx));
   gfx->AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, gfx));
