@@ -1,6 +1,8 @@
 #define __ENGINE_CPP
 
 #include "Engine.hpp"
+#include "Graphics.hpp"
+#include "Event.hpp"
 #include "Log.hpp"
 
 #undef __ENGINE_CPP

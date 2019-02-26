@@ -1,7 +1,5 @@
 #ifndef __ENGINE_HPP
 #define __ENGINE_HPP
-#include "Graphics.hpp"
-#include "Event.hpp"
 #include "Version.hpp"
 #include "Time.hpp"
 
