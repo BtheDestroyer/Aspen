@@ -61,6 +61,12 @@ void Debug::operator()()
 
     ImGui::NewFrame();
     ImGui::Begin("Object Tree", NULL, ImVec2(400, 400));
+    char buffer[256];
+    if (time)
+      sprintf(buffer, "FPS: %f", time->FPS());
+    else
+      sprintf(buffer, "FPS: ???");
+    ImGui::Text(buffer);
     MakeTree(Root());
     ImGui::End();
     ImGui::Render();

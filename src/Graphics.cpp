@@ -179,12 +179,12 @@ SDL_Point &Point::GetPoint()
 /////////////////////////////////////////////////////////
 
 Line::Line(Object *parent, std::string name)
-    : Line({0, 0}, {0, 0}, Aspen::Graphics::Color(), parent, name)
+    : Line({0, 0}, {0, 0}, 0.5f, Aspen::Graphics::Color(), parent, name)
 {
 }
 
-Line::Line(SDL_Point start, SDL_Point end, Aspen::Graphics::Color c, Object *parent, std::string name)
-    : Geometry(c, false, parent, name), _start(start), _end(end)
+Line::Line(SDL_Point start, SDL_Point end, float center, Aspen::Graphics::Color c, Object *parent, std::string name)
+    : Geometry(c, false, parent, name), _start(start), _end(end), _center(center)
 {
 }
 
@@ -210,6 +210,11 @@ SDL_Point &Line::GetStart()
 SDL_Point &Line::GetEnd()
 {
   return _end;
+}
+
+float Line::GetCenter()
+{
+  return std::min(std::max(_center, 0.0f), 1.0f);
 }
 
 /////////////////////////////////////////////////////////
@@ -488,14 +493,16 @@ void Graphics::DrawLine(Line *line)
     if (tf)
     {
       double angle = tf->GetRotation();
-      SDL_Point center = {(end.x + start.x) / 2,
-                          (end.y + start.y) / 2};
-      SDL_Point d = {int((center.x - start.x) * tf->GetXScale() * std::cos(angle)),
-                     int((center.y - start.y) * tf->GetYScale() * std::sin(angle))};
-      start.x = center.x - d.x;
-      start.y = center.y - d.y;
-      end.x = center.x + d.x;
-      end.y = center.y + d.y;
+      SDL_Point center = {int(end.x * line->GetCenter() + start.x * (1.0f - line->GetCenter())),
+                          int(end.y * line->GetCenter() + start.y * (1.0f - line->GetCenter()))};
+      SDL_Point ds = {int((center.x - start.x) * tf->GetXScale() * std::cos(angle) + (center.y - start.y) * tf->GetYScale() * -1 * std::sin(angle)),
+                      int((center.x - start.x) * tf->GetXScale() * std::sin(angle) + (center.y - start.y) * tf->GetYScale() * std::cos(angle))};
+      SDL_Point de = {int((end.x - center.x) * tf->GetXScale() * std::cos(angle) + (end.y - center.y) * tf->GetYScale() * -1 * std::sin(angle)),
+                      int((end.x - center.x) * tf->GetXScale() * std::sin(angle) + (end.y - center.y) * tf->GetYScale() * std::cos(angle))};
+      start.x = center.x - ds.x;
+      start.y = center.y - ds.y;
+      end.x = center.x + de.x;
+      end.y = center.y + de.y;
     }
     SDL_RenderDrawLine(_renderer, start.x, start.y, end.x, end.y);
   }

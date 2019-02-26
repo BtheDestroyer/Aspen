@@ -94,16 +94,18 @@ class Line : public Geometry
 {
   SDL_Point _start;
   SDL_Point _end;
+  float _center;
 
 public:
   Line(Object *parent = nullptr, std::string name = "Line");
-  Line(SDL_Point start, SDL_Point end, Aspen::Graphics::Color c = Aspen::Graphics::Color(), Object *parent = nullptr, std::string name = "Line");
+  Line(SDL_Point start, SDL_Point end, float center = 0.5f, Aspen::Graphics::Color c = Aspen::Graphics::Color(), Object *parent = nullptr, std::string name = "Line");
   ~Line();
 
   void operator()();
 
   SDL_Point &GetStart();
   SDL_Point &GetEnd();
+  float GetCenter();
 };
 
 /// \brief Sprite class

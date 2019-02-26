@@ -21,7 +21,12 @@ std::chrono::microseconds GetTime()
 }
 
 Time::Time(Object *parent, std::string name)
-    : Object(parent, name), _deltaTime(0)
+    : Time(0xFFFFFFFF, parent, name)
+{
+}
+
+Time::Time(unsigned targetFramerate, Object *parent, std::string name)
+    : Object(parent, name), _deltaTime(0), _targetFramerate(targetFramerate)
 {
   _startTime = _lastTime = _currentTime = GetTime();
 }
@@ -35,6 +40,12 @@ void Time::operator()()
   _lastTime = _currentTime;
   _currentTime = GetTime();
   _deltaTime = _currentTime - _lastTime;
+  if (FPS() > double(_targetFramerate))
+  {
+    Sleep((1.0 / double(_targetFramerate)) - DeltaTime());
+    _currentTime = GetTime();
+    _deltaTime = _currentTime - _lastTime;
+  }
 }
 
 double Time::StartTime()
@@ -59,7 +70,8 @@ double Time::DeltaTime()
 
 double Time::FPS()
 {
-  return 1.0 / DeltaTime();
+  double r = 1.0 / std::max(DeltaTime(), 0.00000001);
+  return r;
 }
 
 void Time::Sleep(double time)
@@ -80,6 +92,16 @@ void Time::Sleep(float time)
 #ifdef __WIN32
   ::Sleep(DWORD(time * 1000));
 #endif
+}
+
+unsigned Time::TargetFramerate()
+{
+  return _targetFramerate;
+}
+
+void Time::TargetFramerate(unsigned targetFramerate)
+{
+  _targetFramerate = targetFramerate;
 }
 } // namespace Time
 } // namespace Aspen
