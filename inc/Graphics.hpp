@@ -105,7 +105,8 @@ public:
 
   SDL_Point &GetStart();
   SDL_Point &GetEnd();
-  float GetCenter();
+  float &GetCenter();
+  void SetCenter(float center);
 };
 
 /// \brief Sprite class

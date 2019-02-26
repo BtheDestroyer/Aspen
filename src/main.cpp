@@ -33,16 +33,21 @@ int main(int argc, char **argv)
 
   gfx->AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, gfx));
   gfx->AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, gfx));
-  Graphics::Line *line = new Graphics::Line(SDL_Point{100, 100}, SDL_Point{150, 50}, 0.1f, 0x0000FFFF, gfx);
+  Graphics::Line *line = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.5f, 0x0000FFFF, gfx);
+  line->FindChildOfType<Transform::Transform>()->SetPosition(100, 100);
+  line->FindChildOfType<Transform::Transform>()->SetRotation(M_PI_4);
   gfx->AddChild(line);
-  Graphics::Line *line2 = new Graphics::Line(SDL_Point{150, 50}, SDL_Point{200, 50}, 0.5f, 0xFF0000FF, gfx);
+  Graphics::Line *line2 = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.0f, 0xFF0000FF, gfx);
+  line2->FindChildOfType<Transform::Transform>()->SetPosition(25, 0);
   line->AddChild(line2);
 
   while (engine)
   {
-    double dt = engine.FindChildOfType<Time::Time>()->CurrentTime();
+    double dt = M_PI_2 * engine.FindChildOfType<Time::Time>()->CurrentTime();
     line->FindChildOfType<Transform::Transform>()
         ->SetRotation(dt);
+    line2->FindChildOfType<Transform::Transform>()
+         ->SetRotation(2.0 * dt);
 
     engine();
   }

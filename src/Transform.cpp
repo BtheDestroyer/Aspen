@@ -90,7 +90,9 @@ void Transform::ModifyYScale(float y)
 
 float Transform::GetXPosition() const
 {
-  float r = _posx;
+  float cx = 0;
+  float cy = 0;
+  std::vector<Transform *> tfs;
   Object *p = _parent;
   while (p)
   {
@@ -98,15 +100,45 @@ float Transform::GetXPosition() const
     if (!tf)
       tf = p->FindChildOfType<Transform>();
     if (tf && tf != this)
-      r += tf->_posx;
+      tfs.push_back(tf);
     p = p->Parent();
   }
-  return r;
+  for (unsigned i = tfs.size(); i > 0; --i)
+  {
+    Transform *tf = tfs[i - 1];
+    if (i < tfs.size())
+    {
+      float tx = cx + tf->_posx * std::cos(tfs[i]->GetRotation()) - tf->_posy * std::sin(tfs[i]->GetRotation());
+      float ty = cy + tf->_posx * std::sin(tfs[i]->GetRotation()) + tf->_posy * std::cos(tfs[i]->GetRotation());
+      cx = tx;
+      cy = ty;
+    }
+    else
+    {
+      cx = tf->_posx;
+      cy = tf->_posy;
+    }
+  }
+  if (tfs.size() > 0)
+  {
+    float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
+    float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
+    cx = tx;
+    cy = ty;
+  }
+  else
+  {
+    cx = _posx;
+    cy = _posy;
+  }
+  return cx;
 }
 
 float Transform::GetYPosition() const
 {
-  float r = _posy;
+  float cx = 0;
+  float cy = 0;
+  std::vector<Transform *> tfs;
   Object *p = _parent;
   while (p)
   {
@@ -114,10 +146,38 @@ float Transform::GetYPosition() const
     if (!tf)
       tf = p->FindChildOfType<Transform>();
     if (tf && tf != this)
-      r += tf->_posy;
+      tfs.push_back(tf);
     p = p->Parent();
   }
-  return r;
+  for (unsigned i = tfs.size(); i > 0; --i)
+  {
+    Transform *tf = tfs[i - 1];
+    if (i < tfs.size())
+    {
+      float tx = cx + tf->_posx * std::cos(tfs[i]->GetRotation()) - tf->_posy * std::sin(tfs[i]->GetRotation());
+      float ty = cy + tf->_posx * std::sin(tfs[i]->GetRotation()) + tf->_posy * std::cos(tfs[i]->GetRotation());
+      cx = tx;
+      cy = ty;
+    }
+    else
+    {
+      cx = tf->_posx;
+      cy = tf->_posy;
+    }
+  }
+  if (tfs.size() > 0)
+  {
+    float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
+    float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
+    cx = tx;
+    cy = ty;
+  }
+  else
+  {
+    cx = _posx;
+    cy = _posy;
+  }
+  return cy;
 }
 
 double Transform::GetRotation() const

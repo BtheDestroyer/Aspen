@@ -212,9 +212,14 @@ SDL_Point &Line::GetEnd()
   return _end;
 }
 
-float Line::GetCenter()
+float &Line::GetCenter()
 {
-  return std::min(std::max(_center, 0.0f), 1.0f);
+  return _center;
+}
+
+void Line::SetCenter(float center)
+{
+  _center = center;
 }
 
 /////////////////////////////////////////////////////////
@@ -495,14 +500,18 @@ void Graphics::DrawLine(Line *line)
       double angle = tf->GetRotation();
       SDL_Point center = {int(end.x * line->GetCenter() + start.x * (1.0f - line->GetCenter())),
                           int(end.y * line->GetCenter() + start.y * (1.0f - line->GetCenter()))};
-      SDL_Point ds = {int((center.x - start.x) * tf->GetXScale() * std::cos(angle) + (center.y - start.y) * tf->GetYScale() * -1 * std::sin(angle)),
-                      int((center.x - start.x) * tf->GetXScale() * std::sin(angle) + (center.y - start.y) * tf->GetYScale() * std::cos(angle))};
-      SDL_Point de = {int((end.x - center.x) * tf->GetXScale() * std::cos(angle) + (end.y - center.y) * tf->GetYScale() * -1 * std::sin(angle)),
-                      int((end.x - center.x) * tf->GetXScale() * std::sin(angle) + (end.y - center.y) * tf->GetYScale() * std::cos(angle))};
-      start.x = center.x - ds.x;
-      start.y = center.y - ds.y;
-      end.x = center.x + de.x;
-      end.y = center.y + de.y;
+      SDL_Point ds = {int((start.x - center.x) * tf->GetXScale()),
+                      int((start.y - center.y) * tf->GetYScale())};
+      SDL_Point de = {int((end.x - center.x) * tf->GetXScale()),
+                      int((end.y - center.y) * tf->GetYScale())};
+      ds = {int(ds.x * std::cos(angle) - ds.y * std::sin(angle)),
+            int(ds.x * std::sin(angle) + ds.y * std::cos(angle))};
+      de = {int(de.x * std::cos(angle) - de.y * std::sin(angle)),
+            int(de.x * std::sin(angle) + de.y * std::cos(angle))};
+      start.x = ds.x + tf->GetXPosition();
+      start.y = ds.y + tf->GetYPosition();
+      end.x = de.x + tf->GetXPosition();
+      end.y = de.y + tf->GetYPosition();
     }
     SDL_RenderDrawLine(_renderer, start.x, start.y, end.x, end.y);
   }
