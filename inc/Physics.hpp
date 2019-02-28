@@ -77,8 +77,10 @@ public:
   void SetAccelerationStrength(double strength);
   void SetAccelerationDirection(double direction);
   void SetAcceleration(double x, double y);
+  void SetCartesianAcceleration(double strength, double direction);
 
   void ApplyForce(double force, double angle);
+  void ApplyCartesianForce(double x, double y);
 };
 } // namespace Physics
 } // namespace Aspen

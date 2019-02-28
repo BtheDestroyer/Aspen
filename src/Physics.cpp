@@ -218,9 +218,14 @@ void Rigidbody::SetAccelerationDirection(double direction)
   _accelerationDirection = direction;
 }
 
-void Rigidbody::SetAcceleration(double x, double y)
+void Rigidbody::SetAcceleration(double strength, double direction)
 {
+  _accelerationDirection = direction;
+  _accelerationStrength = strength;
+}
 
+void Rigidbody::SetCartesianAcceleration(double x, double y)
+{
   _accelerationDirection = std::atan2(x, y);
   _accelerationStrength = std::sqrt(x * x + y * y);
 }
@@ -231,6 +236,11 @@ void Rigidbody::ApplyForce(double force, double angle)
   double fx = std::cos(angle) * force;
   double fy = std::sin(angle) * force;
   SetAcceleration(GetAccelerationX() + fx, GetAccelerationY() + fy);
+}
+
+void Rigidbody::ApplyCartesianForce(double x, double y)
+{
+  SetAcceleration(GetAccelerationX() + x / _mass, GetAccelerationY() + y / _mass);
 }
 } // namespace Physics
 } // namespace Aspen
