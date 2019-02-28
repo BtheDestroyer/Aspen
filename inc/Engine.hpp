@@ -1,7 +1,6 @@
 #ifndef __ENGINE_HPP
 #define __ENGINE_HPP
 #include "Version.hpp"
-#include "Time.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -50,6 +49,8 @@ const int CREATE_EVENT_KEYS_ALL      = 0b0000000011110000;
 const int CREATE_EVENT_ALL           = 0b0000000011111000;
 /// \brief Creates an Time::Time Object as a child
 const int CREATE_TIME                = 0b0000000100000000;
+/// \brief Creates an Physics::Physics Object as a child
+const int CREATE_PHYSICS             = 0b0000001000000000;
 /// \brief Determines if children of the engine should debug
 const int DEBUGGING_ON               = 0b1000000000000000;
 /// \brief Synonym for all START_FLAGS

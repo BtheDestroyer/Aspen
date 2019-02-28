@@ -1,6 +1,7 @@
 #define __ENGINE_CPP
 
 #include "Engine.hpp"
+#include "Time.hpp"
 #include "Graphics.hpp"
 #include "Event.hpp"
 #include "Debug.hpp"
@@ -66,6 +67,8 @@ Engine::Engine(int flags, Object *parent, std::string name)
     }
     if (flags & START_FLAGS::CREATE_TIME)
       Log::Info("  CREATE_TIME");
+    if (flags & START_FLAGS::CREATE_PHYSICS)
+      Log::Info("  CREATE_PHYSICS");
     if (flags & START_FLAGS::DEBUGGING_ON)
       Log::Info("  DEBUGGING_ON");
 
@@ -157,6 +160,8 @@ Engine::Engine(int flags, Object *parent, std::string name)
     }
     if (flags & START_FLAGS::CREATE_TIME)
       CreateChild<Time::Time>();
+    if (flags & START_FLAGS::CREATE_PHYSICS)
+      CreateChild<Physics::Physics>();
   }
 }
 Engine::~Engine()

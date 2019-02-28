@@ -2,6 +2,7 @@
 #include "Graphics.hpp"
 #include "Transform.hpp"
 #include "Controller.hpp"
+#include "Physics.hpp"
 #include "Log.hpp"
 #include "Debug.hpp"
 #include <cmath>
@@ -15,6 +16,7 @@ int main(int argc, char **argv)
   Engine::Engine engine(
       Engine::START_FLAGS::ALL);
 
+  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(0);
   engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 
   Graphics::Graphics *gfx = engine.FindChildOfType<Graphics::Graphics>();

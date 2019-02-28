@@ -112,18 +112,19 @@ void Rigidbody::operator()()
 
         SetVelocity(GetVelocityX() + GetAccelerationX() * dt, GetVelocityY() + GetAccelerationY() * dt);
         _accelerationStrength *= physics->GetDrag() * dt;
+        SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
 
         Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();
         if (tf)
           tf->ModifyPosition(GetVelocityX(), GetVelocityY());
         else
-          Log::Warning("Rigidbody requires a parent with a Transform child!");
+          Log::Warning("%s requires a parent with a Transform child!", Name().c_str());
       }
       else
-        Log::Warning("Rigidbody requires an ancestor Engine with a Physics child!");
+        Log::Error("%s requires an ancestor Engine with a Physics child!", Name().c_str());
     }
     else
-      Log::Warning("Rigidbody requires an ancestor Engine with a Physics child!");
+      Log::Error("%s requires an ancestor Engine with a Physics child!", Name().c_str());
   }
 
   Object::operator()();

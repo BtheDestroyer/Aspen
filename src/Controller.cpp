@@ -30,7 +30,10 @@ PlayerController_8Way::PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, S
 void PlayerController_8Way::operator()()
 {
   if (!_parent)
+  {
+    Log::Error("%s needs a parent!", Name().c_str());
     return;
+  }
   Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>()
   if (!rb)
   {
@@ -56,7 +59,7 @@ void PlayerController_8Way::operator()()
   }
   if (!ah || !av)
   {
-    Log::Error("%s requires two children of type Axis named Axis-Vertical and Axis-Horizontal!", Name());
+    Log::Error("%s requires two children of type Axis named Axis-Vertical and Axis-Horizontal!", Name().c_str());
     return;
   }
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
