@@ -23,6 +23,8 @@ Object::Object(Object *parent, std::string name)
   if ((dynamic_cast<Engine::Engine *>(this) && dynamic_cast<Engine::Engine *>(this)->Debug()) ||
       (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug()))
     Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
+
+  Start();
   _valid = true;
 }
 
@@ -64,13 +66,18 @@ Object *Object::Root()
 
 void Object::operator()()
 {
-  for (Object *child : _children)
+  if (!Active())
+    return;
+  OnUpdate();
+  for (unsigned i = 0; i < _children.size(); ++i)
   {
+    Object *child = _children[i];
     (*child)();
     if (!child->Valid())
     {
       RemoveChild(child);
       delete child;
+      --i;
     }
   }
 }
@@ -145,9 +152,45 @@ const bool &Object::Valid() const
 {
   return _valid;
 }
+
+const bool &Object::Active() const
+{
+  return _valid && _active;
+}
+
+void Object::SetActive(bool active)
+{
+  if (_active != active)
+  {
+    if (active)
+      OnActivate();
+    else
+      OnDeactivate();
+    _active = active;
+  }
+}
+
+void Object::Activate()
+{
+  if (!_active)
+  {
+    OnActivate();
+    _active = true;
+  }
+}
+
+void Object::Deactivate()
+{
+  if (_active)
+  {
+    OnDeactivate();
+    _active = false;
+  }
+}
+
 Object::operator bool() const
 {
-  return Valid();
+  return Active();
 }
 
 void Object::End()
@@ -155,6 +198,7 @@ void Object::End()
   if (!Valid())
     return;
 
+  OnEnd();
   _valid = false;
 }
 
@@ -216,7 +260,7 @@ unsigned Object::ChildrenCount()
   return _children.size();
 }
 
-std::vector<Object *> Object::Children()
+std::vector<Object *> &Object::Children()
 {
   return _children;
 }
@@ -224,6 +268,26 @@ std::vector<Object *> Object::Children()
 void Object::PopulateDebugger()
 {
   ImGui::Text("Children: %d", ChildrenCount());
+}
+
+void Object::OnStart()
+{
+}
+
+void Object::OnActivate()
+{
+}
+
+void Object::OnUpdate()
+{
+}
+
+void Object::OnDeactivate()
+{
+}
+
+void Object::OnEnd()
+{
 }
 } // namespace Object
 } // namespace Aspen

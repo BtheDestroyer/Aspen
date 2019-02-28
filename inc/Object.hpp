@@ -26,6 +26,7 @@ protected:
   /// \brief Determines if the Object is valid
   ///        Derived classes can set this to false in their Constructors if they couldn't be created properly
   bool _valid = false;
+  bool _active = true;
   /// \brief Sets _parent to the given Object
   ///        Used by AddChild, CreateChild, etc.
   void SetParent(Object *parent);
@@ -144,6 +145,9 @@ public:
   /// \brief Determines if the Object is valid
   /// \return Const reference to _valid
   const bool &Valid() const;
+  const bool &Active() const;
+  void Activate();
+  void Deactivate();
   /// \brief Converts Object to bool by calling Valid
   ///        Example:
   ///        ```
@@ -166,9 +170,15 @@ public:
   std::string Name();
 
   unsigned ChildrenCount();
-  std::vector<Object*> Children();
+  std::vector<Object*> &Children();
 
   virtual void PopulateDebugger();
+
+  virtual void OnStart();
+  virtual void OnActivate();
+  virtual void OnUpdate();
+  virtual void OnDeactivate();
+  virtual void OnEnd();
 };
 } // namespace Object
 } // namespace Aspen
