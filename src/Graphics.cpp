@@ -145,9 +145,17 @@ void Rectangle::operator()()
 {
   if (!Valid())
     return;
-  Graphics *gfx = FindAncestorOfType<Graphics>();
-  if (gfx)
-    gfx->DrawRectangle(this);
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    if (gfx)
+      gfx->DrawRectangle(this);
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
+  else
+    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
   Object::operator()();
 }
 
@@ -185,9 +193,17 @@ void Point::operator()()
 {
   if (!Valid())
     return;
-  Graphics *gfx = FindAncestorOfType<Graphics>();
-  if (gfx)
-    gfx->DrawPoint(this);
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    if (gfx)
+      gfx->DrawPoint(this);
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
+  else
+    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
   Object::operator()();
 }
 
@@ -223,9 +239,17 @@ void Line::operator()()
 {
   if (!Valid())
     return;
-  Graphics *gfx = FindAncestorOfType<Graphics>();
-  if (gfx)
-    gfx->DrawLine(this);
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    if (gfx)
+      gfx->DrawLine(this);
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
+  else
+    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
   Object::operator()();
 }
 
@@ -689,25 +713,51 @@ void Sprite::SetParent(Object *parent)
 
 void Sprite::GenerateTexture()
 {
-  if (Valid() && _surface && FindAncestorOfType<Graphics>())
+  if (Valid() && _surface)
   {
     if (_tex)
-      SDL_DestroyTexture(_tex);
-    _tex = SDL_CreateTextureFromSurface(FindAncestorOfType<Graphics>()->GetRenderer(), _surface);
-    if (!_tex)
     {
-      Log::Error("Unable to generate texture! SDL_Error: %s", SDL_GetError());
-      return;
+      SDL_DestroyTexture(_tex);
+      _tex = nullptr;
     }
-    SDL_SetTextureBlendMode(_tex, SDL_BLENDMODE_BLEND);
+    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    if (engine)
+    {
+      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      if (gfx)
+      {
+        _tex = SDL_CreateTextureFromSurface(gfx->GetRenderer(), _surface);
+        if (!_tex)
+        {
+          Log::Error("%s was unable to generate texture! SDL_Error: %s", Name().c_str(), SDL_GetError());
+          return;
+        }
+        SDL_SetTextureBlendMode(_tex, SDL_BLENDMODE_BLEND);
+      }
+      else
+        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    }
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
   }
 }
 
 void Sprite::operator()()
 {
-  if (Valid() && FindAncestorOfType<Graphics>())
-    FindAncestorOfType<Graphics>()->DrawSprite(this);
-
+  if (Valid())
+  {
+    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    if (engine)
+    {
+      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      if (gfx)
+        gfx->DrawSprite(this);
+      else
+        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    }
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
   Object::operator()();
 }
 const std::string &Sprite::GetPath() const
@@ -776,8 +826,20 @@ UniformSpritesheet::~UniformSpritesheet()
 
 void UniformSpritesheet::operator()()
 {
-  if (Valid() && FindAncestorOfType<Graphics>())
-    FindAncestorOfType<Graphics>()->DrawSprite(this, GetClipRectangle(0));
+  if (Valid())
+  {
+    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    if (engine)
+    {
+      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      if (gfx)
+        gfx->DrawSprite(this, GetClipRectangle(0));
+      else
+        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    }
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
 
   Object::operator()();
 }
@@ -845,7 +907,7 @@ void Animation::operator()()
         _currentFrame = 0;
     }
 
-    Graphics *gfx = FindAncestorOfType<Graphics>();
+    Graphics *gfx = engine->FindChildOfType<Graphics>();
     if (gfx && _currentFrame >= 0)
     {
       int f = _currentFrame;
@@ -889,7 +951,16 @@ void Animation::operator()()
         }
       }
     }
+  else
+  {
+    if (!gfx)
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    else
+      Log::Error("%s's current frame is less than 0! (%d)", Name().c_str(), _currentFrame);
   }
+  }
+  else
+    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
 }
 
 int Animation::GetFrameCount()
