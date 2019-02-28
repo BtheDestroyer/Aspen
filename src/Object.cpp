@@ -77,7 +77,7 @@ void Object::operator()()
 
 void Object::AddChild(Object *child)
 {
-  if (!child)
+  if (!child || this == child)
     return;
   if (std::find(_children.begin(), _children.end(), child) == _children.end())
   {
@@ -88,7 +88,7 @@ void Object::AddChild(Object *child)
 
 void Object::RemoveChild(Object *child)
 {
-  if (!child)
+  if (!child || this == child)
     return;
   std::vector<Object *>::iterator it = std::find(_children.begin(), _children.end(), child);
   if (it != _children.end())
