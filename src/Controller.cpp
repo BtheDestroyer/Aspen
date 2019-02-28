@@ -4,6 +4,7 @@
 #include "Engine.hpp"
 #include "Time.hpp"
 #include "Transform.hpp"
+#include "Physics.hpp"
 #include "Input.hpp"
 #include <cmath>
 #include "imgui.h"
@@ -30,15 +31,18 @@ void PlayerController_8Way::operator()()
 {
   if (!_parent)
     return;
-  Transform::Transform *tf = dynamic_cast<Transform::Transform *>(_parent);
-  if (!tf)
-    tf = _parent->FindChildOfType<Transform::Transform>();
-  if (!tf)
-    return;
+  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>()
+  if (!rb)
+  {
+    Transform::Transform *tf = dynamic_cast<Transform::Transform *>(_parent);
+    if (!tf)
+      tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return;
+  }
 
   Object::operator()();
 
-  //TODO: Replace with Physics simulation
   Input::Axis *av = nullptr;
   Input::Axis *ah = nullptr;
   for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
@@ -52,7 +56,7 @@ void PlayerController_8Way::operator()()
   }
   if (!ah || !av)
   {
-    End();
+    Log::Error("%s requires two children of type Axis named Axis-Vertical and Axis-Horizontal!", Name());
     return;
   }
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
@@ -63,10 +67,16 @@ void PlayerController_8Way::operator()()
   {
     double dx = ah->GetValue() * _speed * time->DeltaTime() * 60;
     double dy = av->GetValue() * _speed * time->DeltaTime() * 60;
-    tf->ModifyPosition(dx, dy);
+    if (!rb)
+      tf->ModifyPosition(dx, dy);
+    else
+      rb->SetCartesianAcceleration(dx, dy);
   }
   else
-    tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
+    if (!rb)
+      tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
+    else
+      rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
 }
 
 void PlayerController_8Way::Speed(double speed)
