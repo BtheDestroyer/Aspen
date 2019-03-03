@@ -54,7 +54,7 @@ double Physics::GetGravityY()
 
 void Physics::SetGravityStrength(double strength)
 {
-  _gravStrength = strength;
+  _gravStrength = -1 * strength;
 }
 
 void Physics::SetGravityDirection(double direction)
@@ -64,7 +64,7 @@ void Physics::SetGravityDirection(double direction)
 
 void Physics::SetGravity(double x, double y)
 {
-  _gravDirection = std::atan2(x, y);
+  _gravDirection = std::atan2(y, x);
   _gravStrength = std::sqrt(x * x + y * y);
 }
 
@@ -111,16 +111,21 @@ void Rigidbody::operator()()
       Physics *physics = engine->FindChildOfType<Physics>();
       if (physics)
       {
-        Time::Time *time = engine->FindChildOfType<Time::Time>();
+        Time::Time *time = nullptr; //engine->FindChildOfType<Time::Time>();
         double dt;
         if (time)
           dt = time->DeltaTime() * 60.0;
         else
           dt = 1.0;
 
-        _velocityStrength *= physics->GetDrag() * dt;
-        SetVelocity(GetVelocityX() + GetAccelerationX() * dt, GetVelocityY() + GetAccelerationY() * dt);
-        SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
+        //_velocityStrength *= physics->GetDrag() * dt;
+        //SetCartesianVelocity(GetVelocityX() + GetAccelerationX() * dt, GetVelocityY() + GetAccelerationY() * dt);
+        //SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
+        double vx = GetVelocityX() * (1 - physics->GetDrag());
+        double vy = GetVelocityY() * (1 - physics->GetDrag());
+        double ax = (GetAccelerationX() + physics->GetGravityX()) * dt;
+        double ay = (GetAccelerationY() + physics->GetGravityY()) * dt;
+        SetCartesianVelocity(vx + ax, vy + ay);
 
         Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();
         if (tf)
@@ -178,9 +183,15 @@ void Rigidbody::SetVelocityDirection(double direction)
   _velocityDirection = direction;
 }
 
-void Rigidbody::SetVelocity(double x, double y)
+void Rigidbody::SetVelocity(double strength, double direction)
 {
-  _velocityDirection = std::atan2(x, y);
+  _velocityStrength = strength;
+  _velocityDirection = direction;
+}
+
+void Rigidbody::SetCartesianVelocity(double x, double y)
+{
+  _velocityDirection = std::atan2(y, x);
   _velocityStrength = std::sqrt(x * x + y * y);
 }
 
@@ -222,7 +233,7 @@ void Rigidbody::SetAcceleration(double strength, double direction)
 
 void Rigidbody::SetCartesianAcceleration(double x, double y)
 {
-  _accelerationDirection = std::atan2(x, y);
+  _accelerationDirection = std::atan2(y, x);
   _accelerationStrength = std::sqrt(x * x + y * y);
 }
 
@@ -242,7 +253,7 @@ void Rigidbody::ApplyCartesianForce(double x, double y)
 void Rigidbody::PopulateDebugger()
 {
   ImGui::Text("Mass: %f", _mass);
-  ImGui::Text("Velocity: %.4f, %.4f", _velocityStrength, _velocityDirection);
+  ImGui::Text("Velocity: %.4f, %.4f (%.4f, %.4f)", _velocityStrength, _velocityDirection, GetVelocityX(), GetVelocityY());
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
   {

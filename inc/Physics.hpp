@@ -70,7 +70,8 @@ public:
   double GetVelocityY();
   void SetVelocityStrength(double strength);
   void SetVelocityDirection(double direction);
-  void SetVelocity(double x, double y);
+  void SetVelocity(double strength, double direction);
+  void SetCartesianVelocity(double x, double y);
 
   double GetAccelerationStrength();
   double GetAccelerationDirection();
@@ -78,8 +79,8 @@ public:
   double GetAccelerationY();
   void SetAccelerationStrength(double strength);
   void SetAccelerationDirection(double direction);
-  void SetAcceleration(double x, double y);
-  void SetCartesianAcceleration(double strength, double direction);
+  void SetAcceleration(double strength, double direction);
+  void SetCartesianAcceleration(double x, double y);
 
   void ApplyForce(double force, double angle);
   void ApplyCartesianForce(double x, double y);
