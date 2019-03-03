@@ -237,6 +237,9 @@ public:
   /// \brief Clears the window, updates all children, then swaps the framebuffers
   void operator()();
 
+  void OnEarlyUpdate();
+  void OnLateUpdate();
+
   /// \brief Sets the window's background color
   /// \param r Red value from 0x00 to 0xFF
   /// \param g Green value from 0x00 to 0xFF

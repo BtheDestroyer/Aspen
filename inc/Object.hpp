@@ -66,7 +66,14 @@ public:
   ///           Must inherit Object
   /// \return Newly created Object
   template <typename T>
-  T *CreateChild(std::string name = "")
+  T *CreateChild()
+  {
+    T *o = new T(this);
+    AddChild(o);
+    return o;
+  }
+  template <typename T>
+  T *CreateChild(std::string name)
   {
     T *o = new T(this, name);
     AddChild(o);
@@ -178,6 +185,8 @@ public:
   virtual void OnStart();
   virtual void OnActivate();
   virtual void OnUpdate();
+  virtual void OnEarlyUpdate();
+  virtual void OnLateUpdate();
   virtual void OnDeactivate();
   virtual void OnEnd();
 };

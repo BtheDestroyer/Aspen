@@ -16,8 +16,6 @@ class GameState : public Object::Object
 public:
   GameState(Object *parent = nullptr, std::string name = "GameState");
 
-  void UnloadState();
-
   const std::string StateName();
   void StateName(std::string state);
 };
@@ -28,18 +26,20 @@ public:
   GameStateManager(Object *parent = nullptr, std::string name = "GameStateManager");
 
   template <typename T>
-  GameState *LoadState(bool active = true)
+  GameState *LoadState(bool active = false)
   {
-    T *temp = new T;
-    GameState *state = nullptr;
-    if (dynamic_cast<GameState*>(temp))
-      state = CreateChild<T>();
-    delete temp;
+    T *temp = new T(this);
+    GameState *state = dynamic_cast<GameState *>(temp);
+    if (state)
+    {
+      AddChild(state);
+      state->SetActive(active);
+    }
     return state;
   }
 
-  void GetState(unsigned i);
-  void GetState(std::string name);
+  GameState *GetState(unsigned i);
+  GameState *GetState(std::string name);
 
   void UnloadAllStates();
   void UnloadState(unsigned i);

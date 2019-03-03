@@ -38,6 +38,8 @@ Time::~Time()
 
 void Time::operator()()
 {
+  if (!Active())
+    return;
   _lastTime = _currentTime;
   _currentTime = GetTime();
   _deltaTime = _currentTime - _lastTime;
@@ -47,6 +49,7 @@ void Time::operator()()
     _currentTime = GetTime();
     _deltaTime = _currentTime - _lastTime;
   }
+  Object::operator()();
 }
 
 double Time::StartTime()

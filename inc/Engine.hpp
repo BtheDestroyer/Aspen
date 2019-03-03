@@ -71,6 +71,8 @@ public:
   /// \brief Destructor
   ~Engine();
 
+  void operator()();
+
   bool Debug();
   void Debug(bool newval);
 

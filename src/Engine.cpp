@@ -165,9 +165,20 @@ Engine::Engine(int flags, Object *parent, std::string name)
       CreateChild<Physics::Physics>();
   }
 }
+
 Engine::~Engine()
 {
 }
+
+void Engine::operator()()
+{
+  if (!Active())
+    return;
+  OnEarlyUpdate();
+  Object::operator()();
+  OnLateUpdate();
+}
+
 
 bool Engine::Debug()
 {

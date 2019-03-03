@@ -416,15 +416,9 @@ void Graphics::operator()()
   if (!Active())
     return;
 
-  SDL_SetRenderDrawColor(_renderer, _background.Red(), _background.Green(), _background.Blue(), _background.Alpha());
-  SDL_RenderClear(_renderer);
-
-  std::vector<Debug::Debug *> debuggers;
   for (Object *child : _children)
   {
-    if (dynamic_cast<Debug::Debug *>(child))
-      debuggers.push_back(dynamic_cast<Debug::Debug *>(child));
-    else
+    if (!dynamic_cast<Debug::Debug *>(child))
     {
       (*child)();
       if (!child->Valid())
@@ -434,17 +428,31 @@ void Graphics::operator()()
       }
     }
   }
-  for (Debug::Debug *debugger : debuggers)
+}
+
+void Graphics::OnEarlyUpdate()
+{
+  SDL_SetRenderDrawColor(_renderer, _background.Red(), _background.Green(), _background.Blue(), _background.Alpha());
+  SDL_RenderClear(_renderer);
+  Object::OnEarlyUpdate();
+}
+
+void Graphics::OnLateUpdate()
+{
+  for (Object *child : _children)
   {
-    (*debugger)();
-    if (!debugger->Valid())
+    if (dynamic_cast<Debug::Debug *>(child))
     {
-      RemoveChild(debugger);
-      delete debugger;
+      (*child)();
+      if (!child->Valid())
+      {
+        RemoveChild(child);
+        delete child;
+      }
     }
   }
-
   SDL_RenderPresent(_renderer);
+  Object::OnLateUpdate();
 }
 
 void Graphics::End()

@@ -279,6 +279,22 @@ void Object::OnUpdate()
 {
 }
 
+void Object::OnEarlyUpdate()
+{
+  if (!Active())
+    return;
+  for (unsigned i = 0; i < _children.size(); ++i)
+    _children[i]->OnEarlyUpdate();
+}
+
+void Object::OnLateUpdate()
+{
+  if (!Active())
+    return;
+  for (unsigned i = 0; i < _children.size(); ++i)
+    _children[i]->OnLateUpdate();
+}
+
 void Object::OnDeactivate()
 {
 }

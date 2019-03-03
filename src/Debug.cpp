@@ -86,10 +86,16 @@ void Debug::MakeTree(Object *o)
     unsigned i = 0;
     Object *child = (*o)[i];
     ImGui::Text(o->Active() ? "Active" : "Inactive");
+    sprintf(buffer, "Activate##%p", o);
+    if (ImGui::Button(buffer))
+      o->Activate();
+    sprintf(buffer, "Deactivate##%p", o);
+    if (ImGui::Button(buffer))
+      o->Deactivate();
     sprintf(buffer, "End##%p", o);
-    o->PopulateDebugger();
     if (ImGui::Button(buffer))
       o->End();
+    o->PopulateDebugger();
     while (child)
     {
       MakeTree(child);
