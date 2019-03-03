@@ -123,7 +123,6 @@ float Transform::GetXPosition() const
   if (tfs.size() > 0)
   {
     float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
-    float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
     cx = tx;
   }
   else
@@ -166,7 +165,6 @@ float Transform::GetYPosition() const
   }
   if (tfs.size() > 0)
   {
-    float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
     float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
     cy = ty;
   }
