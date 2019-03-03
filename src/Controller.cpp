@@ -16,7 +16,7 @@ namespace Aspen
 namespace Controller
 {
 PlayerController_8Way::PlayerController_8Way(Object *parent, std::string name)
-    : PlayerController_8Way(SDLK_s, SDLK_w, SDLK_a, SDLK_d, 4.0, parent, name)
+    : PlayerController_8Way(SDLK_s, SDLK_w, SDLK_a, SDLK_d, 1.0, parent, name)
 {
 }
 
