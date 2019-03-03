@@ -124,7 +124,7 @@ EventHandler::~EventHandler()
 
 void EventHandler::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
   Object::operator()();
   SDL_Event event;

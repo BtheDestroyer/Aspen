@@ -39,7 +39,7 @@ void Debug::Setup()
 
 void Debug::operator()()
 {
-  if (Valid())
+  if (Active())
     Object::operator()();
   else
     return;
@@ -80,14 +80,15 @@ void Debug::MakeTree(Object *o)
   char buffer[128];
   if (!o)
     return;
-  sprintf(buffer, "%s (%p) (%s)", o->Name().c_str(), o, o->Valid() ? "Valid" : "Ended");
+  sprintf(buffer, "%s (%p)", o->Name().c_str(), o);
   if (ImGui::TreeNode(buffer))
   {
     unsigned i = 0;
     Object *child = (*o)[i];
+    ImGui::Text(o->Active() ? "Active" : "Inactive");
     sprintf(buffer, "End##%p", o);
     o->PopulateDebugger();
-    if (o->Valid() && ImGui::Button(buffer))
+    if (ImGui::Button(buffer))
       o->End();
     while (child)
     {

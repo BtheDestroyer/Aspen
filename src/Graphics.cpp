@@ -144,7 +144,7 @@ Rectangle::~Rectangle()
 
 void Rectangle::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
@@ -192,7 +192,7 @@ Point::~Point()
 
 void Point::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
@@ -238,7 +238,7 @@ Line::~Line()
 
 void Line::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
@@ -413,7 +413,7 @@ Graphics::~Graphics()
 
 void Graphics::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
 
   SDL_SetRenderDrawColor(_renderer, _background.Red(), _background.Green(), _background.Blue(), _background.Alpha());
@@ -745,7 +745,7 @@ void Sprite::GenerateTexture()
 
 void Sprite::operator()()
 {
-  if (Valid())
+  if (Active())
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
     if (engine)
@@ -758,8 +758,8 @@ void Sprite::operator()()
     }
     else
       Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    Object::operator()();
   }
-  Object::operator()();
 }
 const std::string &Sprite::GetPath() const
 {
@@ -827,7 +827,7 @@ UniformSpritesheet::~UniformSpritesheet()
 
 void UniformSpritesheet::operator()()
 {
-  if (Valid())
+  if (Active())
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
     if (engine)
@@ -840,9 +840,8 @@ void UniformSpritesheet::operator()()
     }
     else
       Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    Object::operator()();
   }
-
-  Object::operator()();
 }
 
 int UniformSpritesheet::GetFrameCount()
@@ -888,7 +887,7 @@ Animation::~Animation()
 
 void Animation::operator()()
 {
-  if (!Valid())
+  if (!Active())
     return;
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
