@@ -69,27 +69,12 @@ void PlayerController_8Way::operator()()
     Log::Error("%s requires two children of type Axis named Axis-Vertical and Axis-Horizontal!", Name().c_str());
     return;
   }
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
-  Time::Time *time = nullptr;
-  if (engine)
-    time = engine->FindChildOfType<Time::Time>();
-  if (time)
-  {
-    double dx = ah->GetValue() * _speed * time->DeltaTime() * 60;
-    double dy = av->GetValue() * _speed * time->DeltaTime() * 60;
-    if (!rb)
-      tf->ModifyPosition(dx, dy);
-    else
-      rb->SetCartesianAcceleration(dx, dy);
-  }
+  double dx = ah->GetValue() * _speed;
+  double dy = av->GetValue() * _speed;
+  if (!rb)
+    tf->ModifyPosition(dx, dy);
   else
-  {
-    Log::Warning("%s works better when the root Engine::Engine with a child Time::Time!", Name().c_str());
-    if (!rb)
-      tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
-    else
-      rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
-  }
+    rb->SetCartesianAcceleration(dx, dy);
 }
 
 void PlayerController_8Way::Speed(double speed)
@@ -105,6 +90,28 @@ double PlayerController_8Way::Speed()
 void PlayerController_8Way::PopulateDebugger()
 {
   ImGui::Text("Speed: %f", _speed);
+  if (_parent)
+  {
+    Input::Axis *av = nullptr;
+    Input::Axis *ah = nullptr;
+    double dx;
+    double dy;
+    for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
+    {
+      if (!av && a->Name() == "Axis-Vertical")
+        av = a;
+      else if (!ah && a->Name() == "Axis-Horizontal")
+        ah = a;
+      if (ah && av)
+        break;
+    }
+    if (av && ah)
+    {
+      dx = ah->GetValue() * _speed;
+      dy = av->GetValue() * _speed;
+      ImGui::Text("Input: (%.3f, %.3f)", dx, dy);
+    }
+  }
   Object::PopulateDebugger();
 }
 } // namespace Controller
