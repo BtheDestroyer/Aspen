@@ -26,7 +26,7 @@ ifeq ($(UNAME_S),Darwin)
 PLATFORM :=__OSX
 endif
 endif
-CXXFLAGS := -g -I$(HEADERS) -Ilibraries/imgui -Ilibraries/imgui_sdl -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
+CXXFLAGS := -g -I$(HEADERS) -Ilibraries/imgui -Ilibraries/imgui_sdl -Ilibraries/json/include -Wall -Wextra -Wno-unused-parameter -mwindows -D$(PLATFORM)
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif
