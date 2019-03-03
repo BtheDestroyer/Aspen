@@ -2,7 +2,7 @@
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bthedestroyer/aspen.svg?style=plastic)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bthedestroyer/aspen.svg?style=plastic)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f660bad40cb46558391d92946369704)](https://www.codacy.com/app/BtheDestroyer/Aspen?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BtheDestroyer/Aspen&amp;utm_campaign=Badge_Grade)
+[![Codacy grade](https://img.shields.io/codacy/grade/77c6f55e7ada41da977afdb7f5398ee9.svg?style=plastic)](https://www.codacy.com/app/BtheDestroyer/Aspen?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BtheDestroyer/Aspen&amp;utm_campaign=Badge_Grade)
 [![GitHub release](https://img.shields.io/github/release/bthedestroyer/aspen.svg?style=plastic)](https://github.com/bthedestroyer/aspen/releases)
 ![GitHub Release Date](https://img.shields.io/github/release-date/bthedestroyer/aspen.svg?style=plastic)
 
