@@ -7,7 +7,7 @@
                 "${myDefaultIncludePath}",
                 "${workdspaceFolder}/inc",
                 "${workdspaceFolder}/libraries/imgui",
-                "${workdspaceFolder}/libraries/imgui_sdl",
+                "${workdspaceFolder}/libraries/imgui_sdl"
             ],
             "defines": [
                 "__WIN32"
