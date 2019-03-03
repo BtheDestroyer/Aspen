@@ -110,8 +110,8 @@ void Rigidbody::operator()()
         else
           dt = 1.0;
 
+        _velocityStrength *= physics->GetDrag() * dt;
         SetVelocity(GetVelocityX() + GetAccelerationX() * dt, GetVelocityY() + GetAccelerationY() * dt);
-        _accelerationStrength *= physics->GetDrag() * dt;
         SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
 
         Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();

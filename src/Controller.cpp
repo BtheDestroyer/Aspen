@@ -82,10 +82,14 @@ void PlayerController_8Way::operator()()
     else
       rb->SetCartesianAcceleration(dx, dy);
   }
-  else if (!rb)
-    tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
   else
-    rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
+  {
+    Log::Warning("%s works better when the root Engine::Engine with a child Time::Time!", Name().c_str());
+    if (!rb)
+      tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
+    else
+      rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
+  }
 }
 
 void PlayerController_8Way::Speed(double speed)

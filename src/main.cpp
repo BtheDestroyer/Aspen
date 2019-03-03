@@ -31,7 +31,8 @@ int main(int argc, char **argv)
   newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
   //newSprite->FindChildOfType<Transform::Transform>()->SetScale(0.5, 1);
   //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
-  newSprite->AddChild(new Controller::PlayerController_8Way());
+  newSprite->CreateChild<Physics::Rigidbody>();
+  newSprite->CreateChild<Controller::PlayerController_8Way>();
   gfx->AddChild(newSprite);
 
   gfx->AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, gfx));
