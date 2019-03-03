@@ -66,9 +66,9 @@ public:
   ///           Must inherit Object
   /// \return Newly created Object
   template <typename T>
-  T *CreateChild()
+  T *CreateChild(std::string name = "")
   {
-    T *o = new T(this);
+    T *o = new T(this, name);
     AddChild(o);
     return o;
   }

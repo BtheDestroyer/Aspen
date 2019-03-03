@@ -1,11 +1,9 @@
 #define __OBJECT_CPP
 
 #include "Object.hpp"
-#include "Log.hpp"
 #include "Engine.hpp"
 #include <algorithm>
 #include <iomanip>
-
 #include "imgui.h"
 
 #undef __OBJECT_CPP
@@ -24,8 +22,8 @@ Object::Object(Object *parent, std::string name)
       (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug()))
     Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
 
-  OnStart();
   _valid = true;
+  OnStart();
 }
 
 Object::~Object()
