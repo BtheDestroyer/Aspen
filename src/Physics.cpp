@@ -111,7 +111,7 @@ void Rigidbody::operator()()
       Physics *physics = engine->FindChildOfType<Physics>();
       if (physics)
       {
-        Time::Time *time = nullptr; //engine->FindChildOfType<Time::Time>();
+        Time::Time *time = engine->FindChildOfType<Time::Time>();
         double dt;
         if (time)
           dt = time->DeltaTime() * 60.0;
