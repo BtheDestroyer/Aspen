@@ -1,6 +1,7 @@
 #define __DEBUG_CPP
 
 #include "Debug.hpp"
+#include "Time.hpp"
 #include "Engine.hpp"
 #include "Graphics.hpp"
 #include "imgui_sdl.h"

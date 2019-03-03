@@ -24,7 +24,7 @@ Object::Object(Object *parent, std::string name)
       (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug()))
     Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
 
-  Start();
+  OnStart();
   _valid = true;
 }
 
@@ -153,7 +153,7 @@ const bool &Object::Valid() const
   return _valid;
 }
 
-const bool &Object::Active() const
+bool Object::Active() const
 {
   return _valid && _active;
 }
@@ -166,7 +166,6 @@ void Object::SetActive(bool active)
       OnActivate();
     else
       OnDeactivate();
-    _active = active;
   }
 }
 

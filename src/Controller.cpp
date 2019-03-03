@@ -34,14 +34,21 @@ void PlayerController_8Way::operator()()
     Log::Error("%s needs a parent!", Name().c_str());
     return;
   }
-  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>()
-  if (!rb)
+  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>();
+  Transform::Transform *tf = nullptr;
+  if (rb)
   {
-    Transform::Transform *tf = dynamic_cast<Transform::Transform *>(_parent);
+    tf = _parent->FindChildOfType<Transform::Transform>();
     if (!tf)
-      tf = _parent->FindChildOfType<Transform::Transform>();
-    if (!tf)
+    {
+      Log::Error("%s needs a parent with a child Transform::Transform!", Name().c_str());
       return;
+    }
+  }
+  else
+  {
+    Log::Warning("%s works better with a parent with a child Physics::Rigidbody!", Name().c_str());
+    return;
   }
 
   Object::operator()();
@@ -75,11 +82,10 @@ void PlayerController_8Way::operator()()
     else
       rb->SetCartesianAcceleration(dx, dy);
   }
+  else if (!rb)
+    tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
   else
-    if (!rb)
-      tf->ModifyPosition(ah->GetValue() * _speed, av->GetValue() * _speed);
-    else
-      rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
+    rb->SetCartesianAcceleration(ah->GetValue() * _speed, av->GetValue() * _speed);
 }
 
 void PlayerController_8Way::Speed(double speed)

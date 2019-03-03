@@ -1,6 +1,7 @@
 #ifndef __ENGINE_HPP
 #define __ENGINE_HPP
 #include "Version.hpp"
+#include "Object.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen

@@ -4,6 +4,7 @@
 #include "Time.hpp"
 #include "Graphics.hpp"
 #include "Event.hpp"
+#include "Physics.hpp"
 #include "Debug.hpp"
 #include "Log.hpp"
 #include "imgui.h"
@@ -22,7 +23,7 @@ Engine::Engine(Object *parent, std::string name)
 
 }
 Engine::Engine(int flags, Object *parent, std::string name)
-    : _debugging(flags & START_FLAGS::DEBUGGING_ON), Object(parent, name)
+    : Object(parent, name), _debugging(flags & START_FLAGS::DEBUGGING_ON)
 {
   Log::Info("Creating Engine with the following flags:");
   if (flags == START_FLAGS::NONE)

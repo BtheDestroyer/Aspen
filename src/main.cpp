@@ -3,6 +3,7 @@
 #include "Transform.hpp"
 #include "Controller.hpp"
 #include "Physics.hpp"
+#include "Time.hpp"
 #include "Log.hpp"
 #include "Debug.hpp"
 #include <cmath>

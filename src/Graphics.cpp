@@ -4,6 +4,7 @@
 #include "Engine.hpp"
 #include "Transform.hpp"
 #include "Debug.hpp"
+#include "Time.hpp"
 #include "Log.hpp"
 #include <sstream>
 #include <iomanip>

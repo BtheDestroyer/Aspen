@@ -121,9 +121,9 @@ public:
   template <typename T>
   T *FindChildOfType()
   {
-    for (Object *child : _children)
-      if (child && dynamic_cast<T *>(child))
-        return dynamic_cast<T *>(child);
+    for (unsigned i = 0; i < _children.size(); ++i)
+      if (_children[i] && dynamic_cast<T *>(_children[i]))
+        return dynamic_cast<T *>(_children[i]);
     return nullptr;
   }
   /// \brief Finds all children Objects of a type applicable to that which was requested
@@ -136,16 +136,17 @@ public:
   std::vector<T *> FindChildrenOfType()
   {
     std::vector<T *> vec;
-    for (Object *child : _children)
-      if (child && dynamic_cast<T *>(child))
-        vec.push_back(dynamic_cast<T *>(child));
+    for (unsigned i = 0; i < _children.size(); ++i)
+      if (_children[i] && dynamic_cast<T *>(_children[i]))
+        vec.push_back(dynamic_cast<T *>(_children[i]));
     return vec;
   }
 
   /// \brief Determines if the Object is valid
   /// \return Const reference to _valid
   const bool &Valid() const;
-  const bool &Active() const;
+  bool Active() const;
+  void SetActive(bool active);
   void Activate();
   void Deactivate();
   /// \brief Converts Object to bool by calling Valid
@@ -170,7 +171,7 @@ public:
   std::string Name();
 
   unsigned ChildrenCount();
-  std::vector<Object*> &Children();
+  std::vector<Object *> &Children();
 
   virtual void PopulateDebugger();
 
