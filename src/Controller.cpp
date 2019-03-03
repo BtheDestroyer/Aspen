@@ -94,8 +94,6 @@ void PlayerController_8Way::PopulateDebugger()
   {
     Input::Axis *av = nullptr;
     Input::Axis *ah = nullptr;
-    double dx;
-    double dy;
     for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
     {
       if (!av && a->Name() == "Axis-Vertical")
@@ -107,8 +105,8 @@ void PlayerController_8Way::PopulateDebugger()
     }
     if (av && ah)
     {
-      dx = ah->GetValue() * _speed;
-      dy = av->GetValue() * _speed;
+      double dx = ah->GetValue() * _speed;
+      double dy = av->GetValue() * _speed;
       ImGui::Text("Input: (%.3f, %.3f)", dx, dy);
     }
   }
