@@ -125,12 +125,10 @@ float Transform::GetXPosition() const
     float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
     float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
     cx = tx;
-    cy = ty;
   }
   else
   {
     cx = _posx;
-    cy = _posy;
   }
   return cx;
 }
@@ -170,12 +168,10 @@ float Transform::GetYPosition() const
   {
     float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
     float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
-    cx = tx;
     cy = ty;
   }
   else
   {
-    cx = _posx;
     cy = _posy;
   }
   return cy;

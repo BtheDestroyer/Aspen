@@ -34,7 +34,7 @@ void Axis::operator()()
     Log::Error("Axis Object can't find an Engine ancestor with a Time child or a Time ancestor!");
     return;
   }
-  float d = KeyHeld(_pos) ? 1.0f : 0.0f + KeyHeld(_neg) ? -1.0f : 0.0f;
+  float d = (KeyHeld(_pos) ? 1.0f : 0.0f) + (KeyHeld(_neg) ? -1.0f : 0.0f);
   if (d != 0.0f)
   {
     float w = std::min(1.0f, _weight * float(time->DeltaTime() * 60));

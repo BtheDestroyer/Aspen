@@ -23,7 +23,7 @@ int main(int argc, char **argv)
   Graphics::Graphics *gfx = engine.FindChildOfType<Graphics::Graphics>();
 
   Graphics::Sprite *newSprite = new Graphics::Sprite("resources/hello_world.bmp", gfx);
-  gfx->AddChild(new Graphics::Sprite("resources/hello_world.bmp", gfx));
+  gfx->AddChild(newSprite);
   int w, h;
   SDL_GetWindowSize(gfx->GetWindow(), &w, &h);
 
