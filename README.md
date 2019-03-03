@@ -14,8 +14,8 @@
 
 [![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg)](#backends)
 [![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg)](#backends)
-[![Input](https://img.shields.io/badge/input-SDL-green.svg)](#backends)
-[![File IO](https://img.shields.io/badge/file_io-SDL-orange.svg)](#backends)
+[![Input](https://img.shields.io/badge/input-SDL_(keyboard)-green.svg)](#backends)
+[![Audio](https://img.shields.io/badge/audio-N/A-orange.svg)](#backends)
 
 ## Prerequisites
 
