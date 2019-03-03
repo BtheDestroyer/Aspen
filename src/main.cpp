@@ -64,10 +64,9 @@ int main(int argc, char **argv)
 {
   Log::Log::SetFile("./Aspen.log");
 
-  Engine::Engine engine(
-      Engine::START_FLAGS::ALL);
-  engine.CreateChild<GameState::GameStateManager>()->LoadState<MyState>(true);
+  Engine::Engine engine(Engine::START_FLAGS::ALL);
 
+  engine.FindChildOfType<GameState::GameStateManager>()->LoadState<MyState>(true);
   engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(0);
   engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 

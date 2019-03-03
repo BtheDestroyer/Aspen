@@ -5,6 +5,7 @@
 #include "Transform.hpp"
 #include "Time.hpp"
 #include "Log.hpp"
+#include "imgui.h"
 
 #undef __PHYSICS_CPP
 
@@ -77,6 +78,13 @@ void Physics::SetDrag(double drag)
   _drag = drag;
 }
 
+void Physics::PopulateDebugger()
+{
+  ImGui::Text("Gravity: %.4f, %.4f", _gravStrength, _gravDirection);
+  ImGui::Text("Drag: %f", _drag);
+  Object::PopulateDebugger();
+}
+
 /////////////////////////////////////////////////////////
 
 Rigidbody::Rigidbody(Object *parent, std::string name)
@@ -85,7 +93,7 @@ Rigidbody::Rigidbody(Object *parent, std::string name)
 }
 
 Rigidbody::Rigidbody(double mass, Object *parent, std::string name)
-    : Object(parent, name), _mass(mass)
+    : Object(parent, name), _mass(mass), _velocityStrength(0), _velocityDirection(0), _accelerationStrength(0), _accelerationDirection(0)
 {
 }
 
@@ -142,80 +150,67 @@ void Rigidbody::SetMass(double mass)
 
 double Rigidbody::GetVelocityStrength()
 {
-
   return _velocityStrength;
 }
 
 double Rigidbody::GetVelocityDirection()
 {
-
   return _velocityDirection;
 }
 
 double Rigidbody::GetVelocityX()
 {
-
   return _velocityStrength * std::cos(_velocityDirection);
 }
 
 double Rigidbody::GetVelocityY()
 {
-
   return _velocityStrength * std::sin(_velocityDirection);
 }
 
 void Rigidbody::SetVelocityStrength(double strength)
 {
-
   _velocityStrength = strength;
 }
 
 void Rigidbody::SetVelocityDirection(double direction)
 {
-
   _velocityDirection = direction;
 }
 
 void Rigidbody::SetVelocity(double x, double y)
 {
-
   _velocityDirection = std::atan2(x, y);
   _velocityStrength = std::sqrt(x * x + y * y);
 }
 
 double Rigidbody::GetAccelerationStrength()
 {
-
   return _accelerationStrength;
 }
 
 double Rigidbody::GetAccelerationDirection()
 {
-
   return _accelerationDirection;
 }
 
 double Rigidbody::GetAccelerationX()
 {
-
   return _accelerationStrength * std::cos(_accelerationDirection);
 }
 
 double Rigidbody::GetAccelerationY()
 {
-
   return _accelerationStrength * std::sin(_accelerationDirection);
 }
 
 void Rigidbody::SetAccelerationStrength(double strength)
 {
-
   _accelerationStrength = strength;
 }
 
 void Rigidbody::SetAccelerationDirection(double direction)
 {
-
   _accelerationDirection = direction;
 }
 
@@ -242,6 +237,21 @@ void Rigidbody::ApplyForce(double force, double angle)
 void Rigidbody::ApplyCartesianForce(double x, double y)
 {
   SetAcceleration(GetAccelerationX() + x / _mass, GetAccelerationY() + y / _mass);
+}
+
+void Rigidbody::PopulateDebugger()
+{
+  ImGui::Text("Mass: %f", _mass);
+  ImGui::Text("Velocity: %.4f, %.4f", _velocityStrength, _velocityDirection);
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Physics *physics = engine->FindChildOfType<Physics>();
+    if (physics)
+      ImGui::Text("VDrag: %.4f", _velocityStrength * physics->GetDrag());
+  }
+  ImGui::Text("Acceleration: %.4f, %.4f", _accelerationStrength, _accelerationDirection);
+  Object::PopulateDebugger();
 }
 } // namespace Physics
 } // namespace Aspen

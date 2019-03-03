@@ -42,6 +42,8 @@ public:
 
   double GetDrag();
   void SetDrag(double drag);
+
+  void PopulateDebugger();
 };
 
 class Rigidbody : public Object::Object
@@ -81,6 +83,8 @@ public:
 
   void ApplyForce(double force, double angle);
   void ApplyCartesianForce(double x, double y);
+  
+  void PopulateDebugger();
 };
 } // namespace Physics
 } // namespace Aspen

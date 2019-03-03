@@ -1,17 +1,6 @@
 #define __GAMESTATE_CPP
 
 #include "GameState.hpp"
-#include "Controller.hpp"
-#include "Debug.hpp"
-#include "Engine.hpp"
-#include "Event.hpp"
-#include "Graphics.hpp"
-#include "Input.hpp"
-#include "Log.hpp"
-#include "Object.hpp"
-#include "Physics.hpp"
-#include "Time.hpp"
-#include "Transform.hpp"
 #include <fstream>
 
 #undef __GAMESTATE_CPP
