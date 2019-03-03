@@ -4,6 +4,3 @@
 [submodule "libraries/imgui_sdl"]
 	path = libraries/imgui_sdl
 	url = https://github.com/Tyyppi77/imgui_sdl
-[submodule "libraries/json"]
-	path = libraries/json
-	url = https://github.com/nlohmann/json.git

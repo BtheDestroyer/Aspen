@@ -15,6 +15,7 @@ namespace Controller
 class PlayerController_8Way : public Object::Object
 {
   double _speed;
+
 public:
   PlayerController_8Way(Object *parent = nullptr, std::string name = "PlayerController_8Way");
   PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, SDL_Keycode left, SDL_Keycode right, double speed, Object *parent = nullptr, std::string name = "PlayerController_8Way");

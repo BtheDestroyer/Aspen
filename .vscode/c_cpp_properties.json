@@ -5,7 +5,9 @@
             "intelliSenseMode": "${default}",
             "includePath": [
                 "${myDefaultIncludePath}",
-                "${workdspaceFolder}/inc"
+                "${workdspaceFolder}/inc",
+                "${workdspaceFolder}/libraries/imgui",
+                "${workdspaceFolder}/libraries/imgui_sdl",
             ],
             "defines": [
                 "__WIN32"
