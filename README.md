@@ -15,10 +15,11 @@
 [![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg)](#backends)
 [![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg)](#backends)
 [![Input](https://img.shields.io/badge/input-SDL_(keyboard)-green.svg)](#backends)
-[![Audio](https://img.shields.io/badge/audio-N/A-orange.svg)](#backends)
+[![Audio](https://img.shields.io/badge/audio-SDL-orange.svg)](#backends)
 
 ## Prerequisites
 
 * [SDL2 Development Libraries](https://www.libsdl.org/download-2.0.php)
 * [SDL2_image Development Libraries](https://www.libsdl.org/projects/SDL_image/)
 * [SDL2_ttf Development Libraries](https://www.libsdl.org/projects/SDL_ttf/)
+* [SDL_mixer Development Libraries](https://www.libsdl.org/projects/SDL_mixer/)

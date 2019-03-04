@@ -39,7 +39,7 @@ ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif
 endif
-LINKFLAGS :=-LC:/MinGW/lib -Lbuild -limgui -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -static-libstdc++
+LINKFLAGS :=-LC:/MinGW/lib -Lbuild -limgui -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -static-libstdc++
 ifeq ($(OS),Windows_NT)
 LINKFLAGS += -mwindows
 endif
@@ -127,6 +127,7 @@ else
 	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2_ttf.dll $(BUILD)/
+	cp C:/MinGW/bin/SDL2_mixer.dll $(BUILD)/
 endif
 
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp

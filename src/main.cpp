@@ -6,6 +6,7 @@
 #include "Time.hpp"
 #include "Log.hpp"
 #include "Debug.hpp"
+#include "Audio.hpp"
 #include "GameState.hpp"
 #include <cmath>
 
@@ -21,6 +22,7 @@ public:
       : GameState(parent, name)
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Audio::Audio *audio = engine->CreateChild<Audio::Audio>();
     Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
     Graphics::FontCache *fc = gfx->FindChildOfType<Graphics::FontCache>();
     fc->LoadFont("resources/ABeeZee-Regular.ttf", "abz");

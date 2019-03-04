@@ -532,14 +532,14 @@ Graphics::Graphics(int w, int h, Object *parent, std::string name)
 {
   if (_gcount == 0)
   {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_WasInit(Engine::SDL_INIT_FLAGS) != Engine::SDL_INIT_FLAGS)
     {
-      Log::Error("Could not initialize SDL. SDL_Error: %s", SDL_GetError());
+      Log::Error("SDL is not yet initialized! SDL_Error: %s", SDL_GetError());
       _valid = false;
       return;
     }
     std::stringstream title;
-    title << "Aspen Engine - " << Engine::version.ToString();
+    title << "Aspen Engine - " << Engine::VERSION.ToString();
     _window = SDL_CreateWindow(
         title.str().c_str(),
         SDL_WINDOWPOS_UNDEFINED,
@@ -601,7 +601,7 @@ Graphics::Graphics(int w, int h, Object *parent, std::string name)
   else
   {
     std::stringstream title;
-    title << "Aspen Engine - " << Engine::version.ToString();
+    title << "Aspen Engine - " << Engine::VERSION.ToString();
     _window = SDL_CreateWindow(
         title.str().c_str(),
         SDL_WINDOWPOS_UNDEFINED,
@@ -712,9 +712,7 @@ void Graphics::End()
   }
   _surface = nullptr;
   if (_gcount-- == 1)
-  {
-    SDL_Quit();
-  }
+    IMG_Quit();
   Object::End();
 }
 

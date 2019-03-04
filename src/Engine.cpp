@@ -9,6 +9,7 @@
 #include "Log.hpp"
 #include "GameState.hpp"
 #include "imgui.h"
+#include <SDL2/SDL.h>
 
 #undef __ENGINE_CPP
 
@@ -16,7 +17,10 @@ namespace Aspen
 {
 namespace Engine
 {
-const Version::Version version(0, 1, 0, Version::TIER::PREALPHA);
+const Version::Version VERSION(0, 1, 0, Version::TIER::PREALPHA);
+const unsigned SDL_INIT_FLAGS = SDL_INIT_VIDEO | SDL_INIT_AUDIO;
+
+unsigned Engine::_ecount = 0;
 
 Engine::Engine(Object *parent, std::string name)
     : Engine(START_FLAGS::NONE, parent, name)
@@ -25,6 +29,16 @@ Engine::Engine(Object *parent, std::string name)
 Engine::Engine(int flags, Object *parent, std::string name)
     : Object(parent, name), _debugging(flags & START_FLAGS::DEBUGGING_ON)
 {
+  if (_ecount == 0)
+  {
+    if (SDL_Init(SDL_INIT_FLAGS) < 0)
+    {
+      Log::Error("Could not initialize SDL. SDL_Error: %s", SDL_GetError());
+      _valid = false;
+      return;
+    }
+  }
+
   Log::Info("Creating Engine with the following flags:");
   if (flags == START_FLAGS::NONE)
     Log::Info("  NONE");
@@ -184,10 +198,18 @@ Engine::Engine(int flags, Object *parent, std::string name)
     if (flags & START_FLAGS::CREATE_GAMESTATE_MANAGER)
       CreateChild<GameState::GameStateManager>();
   }
+
+  ++_ecount;
 }
 
 Engine::~Engine()
 {
+  for (Object *child : _children)
+    delete child;
+  _children.clear();
+  if (_ecount-- == 1 && SDL_WasInit(SDL_INIT_FLAGS) == SDL_INIT_FLAGS)
+    SDL_Quit();
+  End();
 }
 
 void Engine::operator()()

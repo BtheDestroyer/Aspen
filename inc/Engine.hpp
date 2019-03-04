@@ -11,7 +11,9 @@ namespace Aspen
 namespace Engine
 {
 /// \brief Current engine version
-extern const Version::Version version;
+extern const Version::Version VERSION;
+
+extern const unsigned SDL_INIT_FLAGS;
 
 /// \brief START_FLAGS namespace
 ///        Contains const ints to be passed to Engine's constructor
@@ -70,6 +72,7 @@ const int ALL                        = 0b1111111111111111;
 class Engine : public Object::Object
 {
   bool _debugging = false;
+  static unsigned _ecount;
 
 public:
   /// \brief Constructor

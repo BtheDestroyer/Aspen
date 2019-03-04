@@ -166,7 +166,7 @@ public:
   operator bool() const;
   /// \brief Shuts down and invalidates Object and all of its children
   ///        An invalid child Object will be deleted by their parent after they update
-  void End();
+  virtual void End();
 
   /// \brief Uses Log::Log to print the parent/children tree of this Object
   /// \param log Log::Log to use
