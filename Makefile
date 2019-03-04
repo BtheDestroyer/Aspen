@@ -82,7 +82,7 @@ project: $(OUTPUT)
 .PHONY: library
 library: $(BUILD)/lib$(LIBRARY).a
 
-$(BUILD)/lib$(LIBRARY).a:
+$(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
 	$(MAKE) project PROJECT=lib$(LIBRARY).a
 
 .PHONY: setup
