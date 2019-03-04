@@ -329,8 +329,7 @@ void FontCache::UnloadFont(std::string name)
       --i;
     }
   }
-  if (_paths.find(name) != _paths.end())
-    _paths.erase(name);
+  _paths.erase(name);
 }
 
 TTF_Font *FontCache::GetFont(std::string name, int size)
