@@ -66,6 +66,8 @@ public:
   KeyEventListener(SDL_Keycode k, Object *parent = nullptr, std::string name = "KeyEventListener");
   /// \brief Destructor
   ~KeyEventListener();
+  
+  void operator()();
 
   /// \brief Sets _key
   /// \param k Key to control

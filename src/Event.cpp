@@ -72,6 +72,15 @@ KeyEventListener::~KeyEventListener()
 {
 }
 
+void KeyEventListener::operator()()
+{
+  Input::Key &k = Input::GetKey(_key);
+  if (k.pressed)
+    k.pressed = false;
+  if (k.released)
+    k.released = false;
+}
+
 void KeyEventListener::SetKey(SDL_Keycode k)
 {
   _key = k;
@@ -82,11 +91,6 @@ void KeyEventListener::Handle(SDL_Event *event)
   if (event && _key != SDLK_UNKNOWN)
   {
     Input::Key &k = Input::GetKey(_key);
-    if (k.pressed)
-      k.pressed = false;
-    if (k.released)
-      k.released = false;
-
     if (event->key.keysym.sym == _key)
     {
       if (event->type == SDL_KEYDOWN && !k.held)

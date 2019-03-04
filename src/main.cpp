@@ -5,8 +5,8 @@
 #include "Physics.hpp"
 #include "Time.hpp"
 #include "Log.hpp"
-#include "Debug.hpp"
 #include "Audio.hpp"
+#include "Input.hpp"
 #include "GameState.hpp"
 #include <cmath>
 
@@ -16,6 +16,7 @@ class MyState : public GameState::GameState
 {
   Graphics::Line *line = nullptr;
   Graphics::Line *line2 = nullptr;
+  Audio::SoundEffect *sound = nullptr;
 
 public:
   MyState(Object *parent = nullptr, std::string name = "MyState")
@@ -59,9 +60,12 @@ public:
     text->CreateChild<Transform::Transform>()->SetPosition(w / 2, h / 2);
     AddChild(text);
 
-    Audio::Music *music = new Audio::Music("resources/accf.wav", this);
+    Audio::Music *music = new Audio::Music("resources/mus.ogg", this);
     AddChild(music);
     music->Play(true, 2.0);
+
+    sound = new Audio::SoundEffect("resources/pop.wav", this);
+    AddChild(sound);
   }
 
   void OnUpdate()
@@ -70,6 +74,8 @@ public:
     double dt = M_PI_2 * engine->FindChildOfType<Time::Time>()->CurrentTime();
     line->FindChildOfType<Transform::Transform>()->SetRotation(dt);
     line2->FindChildOfType<Transform::Transform>()->SetRotation(2.0 * dt);
+    if (Input::KeyPressed(SDLK_p))
+      sound->Play();
   }
 };
 

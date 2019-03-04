@@ -28,7 +28,7 @@ public:
   Mix_Chunk *GetSound();
 
   bool Load();
-  void Play();
+  void Play(int channel = -1);
   bool IsPlaying();
 };
 

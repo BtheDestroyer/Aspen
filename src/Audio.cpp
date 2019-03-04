@@ -48,11 +48,13 @@ void SoundEffect::End()
     Mix_FreeChunk(_sound);
     _sound = nullptr;
   }
+  Object::End();
 }
 
 void SoundEffect::SetPath(std::string path)
 {
   _path = path;
+  Load();
 }
 
 std::string SoundEffect::GetPath()
@@ -84,8 +86,12 @@ bool SoundEffect::Load()
   return true;
 }
 
-void SoundEffect::Play()
+void SoundEffect::Play(int channel)
 {
+  if (!Valid())
+    return;
+  if (_sound)
+    Mix_PlayChannel(channel, _sound, 0);
 }
 
 bool SoundEffect::IsPlaying()
@@ -139,6 +145,7 @@ void Music::End()
 void Music::SetPath(std::string path)
 {
   _path = path;
+  Load();
 }
 
 std::string Music::GetPath()
