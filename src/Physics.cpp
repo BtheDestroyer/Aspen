@@ -111,7 +111,7 @@ void Rigidbody::operator()()
       Physics *physics = engine->FindChildOfType<Physics>();
       if (physics)
       {
-        Time::Time *time = engine->FindChildOfType<Time::Time>();
+        Time::Time *time = nullptr; //engine->FindChildOfType<Time::Time>();
         double dt;
         if (time)
           dt = time->DeltaTime() * 60.0;
@@ -121,10 +121,12 @@ void Rigidbody::operator()()
         //_velocityStrength *= physics->GetDrag() * dt;
         //SetCartesianVelocity(GetVelocityX() + GetAccelerationX() * dt, GetVelocityY() + GetAccelerationY() * dt);
         //SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
-        double vx = GetVelocityX() * (1 - physics->GetDrag());
-        double vy = GetVelocityY() * (1 - physics->GetDrag());
-        double ax = (GetAccelerationX() + physics->GetGravityX()) * dt;
-        double ay = (GetAccelerationY() + physics->GetGravityY()) * dt;
+        double vx = GetVelocityX();
+        double vy = GetVelocityY();
+        SetCartesianAcceleration(GetAccelerationX() + (physics->GetGravityX() - (vx >= 0 ? 0.5 : -0.5) * vx * vx * physics->GetDrag()) * dt,
+                                 GetAccelerationY() + (physics->GetGravityY() - (vy >= 0 ? 0.5 : -0.5) * vy * vy * physics->GetDrag()) * dt);
+        double ax = GetAccelerationX() * dt;
+        double ay = GetAccelerationY() * dt;
         SetCartesianVelocity(vx + ax, vy + ay);
 
         Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();

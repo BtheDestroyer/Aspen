@@ -77,12 +77,12 @@ void PlayerController_8Way::operator()()
     rb->SetCartesianAcceleration(dx, dy);
 }
 
-void PlayerController_8Way::Speed(double speed)
+void PlayerController_8Way::SetSpeed(double speed)
 {
   _speed = speed;
 }
 
-double PlayerController_8Way::Speed()
+double PlayerController_8Way::GetSpeed()
 {
   return _speed;
 }
@@ -112,5 +112,116 @@ void PlayerController_8Way::PopulateDebugger()
   }
   Object::PopulateDebugger();
 }
+
+/////////////////////////////////////////////////////////
+
+PlayerController_Sidescroller::PlayerController_Sidescroller(Object *parent, std::string name)
+    : PlayerController_Sidescroller(SDLK_a, SDLK_d, SDLK_w, 1.0, 2.0, parent, name)
+{
+}
+
+PlayerController_Sidescroller::PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double jumpStrength, Object *parent, std::string name)
+    : Object(parent, name), _speed(speed), _jumpStrength(jumpStrength), _jumpKey(jump)
+{
+  AddChild(new Input::Axis(right, left, 0.1f, 0.1f, this, "Axis-Horizontal"));
+}
+
+void PlayerController_Sidescroller::operator()()
+{
+  if (!_parent)
+  {
+    Log::Error("%s needs a parent!", Name().c_str());
+    return;
+  }
+  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>();
+  Transform::Transform *tf = nullptr;
+  if (rb)
+  {
+    tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+    {
+      Log::Error("%s needs a parent with a child Transform::Transform!", Name().c_str());
+      return;
+    }
+  }
+  else
+  {
+    Log::Warning("%s works better with a parent with a child Physics::Rigidbody!", Name().c_str());
+    return;
+  }
+
+  Object::operator()();
+
+  Input::Axis *ah = nullptr;
+  for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
+  {
+    if (!ah && a->Name() == "Axis-Horizontal")
+    {
+      ah = a;
+      break;
+    }
+  }
+  if (!ah)
+  {
+    Log::Error("%s requires a child of type Axis named Axis-Horizontal!", Name().c_str());
+    return;
+  }
+  double dx = ah->GetValue() * _speed;
+  if (!rb)
+    tf->ModifyPosition(dx, Input::KeyPressed(_jumpKey) ? -1 * _jumpStrength : 0.0);
+  else
+  {
+    rb->SetCartesianAcceleration(dx, 0);
+    if (Input::KeyPressed(_jumpKey))
+      rb->SetCartesianVelocity(rb->GetVelocityX(), -0.5 * _jumpStrength * _jumpStrength);
+  }
+}
+
+void PlayerController_Sidescroller::SetSpeed(double speed)
+{
+  _speed = speed;
+}
+
+double PlayerController_Sidescroller::GetSpeed()
+{
+  return _jumpStrength;
+}
+
+void PlayerController_Sidescroller::SetJumpStrength(double strength)
+{
+  _jumpStrength = strength;
+}
+
+double PlayerController_Sidescroller::GetJumpStrength()
+{
+  return _jumpStrength;
+}
+
+void PlayerController_Sidescroller::PopulateDebugger()
+{
+  ImGui::Text("Speed: %f", _speed);
+  ImGui::Text("Jump Strength: %f", _jumpStrength);
+  if (_parent)
+  {
+    Input::Axis *av = nullptr;
+    Input::Axis *ah = nullptr;
+    for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
+    {
+      if (!ah && a->Name() == "Axis-Horizontal")
+      {
+        ah = a;
+        break;
+      }
+    }
+    if (av)
+    {
+      double dx = ah->GetValue() * _speed;
+      ImGui::Text("Input: %.3f", dx);
+    }
+    ImGui::Text("Jumping?: %s", Input::KeyPressed(_jumpKey) ? "True" : "False");
+  }
+  Object::PopulateDebugger();
+}
+
 } // namespace Controller
 } // namespace Aspen

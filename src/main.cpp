@@ -37,7 +37,9 @@ public:
     newSprite = new Graphics::Sprite("resources/mario.png", this);
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
     newSprite->CreateChild<Physics::Rigidbody>();
-    newSprite->CreateChild<Controller::PlayerController_8Way>()->Speed(5.0);
+    Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
+    pc->SetSpeed(4.0);
+    pc->SetJumpStrength(5.0);
     AddChild(newSprite);
 
     AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, true, this));
@@ -84,8 +86,8 @@ int main(int argc, char **argv)
   Engine::Engine engine(Engine::START_FLAGS::ALL);
 
   engine.FindChildOfType<GameState::GameStateManager>()->LoadState<MyState>(true);
-  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(3);
-  engine.FindChildOfType<Physics::Physics>()->SetDrag(0.9);
+  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(0);
+  engine.FindChildOfType<Physics::Physics>()->SetDrag(1.05);
   engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 
   while (engine)

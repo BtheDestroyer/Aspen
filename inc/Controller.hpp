@@ -22,8 +22,29 @@ public:
 
   void operator()();
 
-  void Speed(double speed);
-  double Speed();
+  void SetSpeed(double speed);
+  double GetSpeed();
+
+  void PopulateDebugger();
+};
+
+class PlayerController_Sidescroller : public Object::Object
+{
+  double _speed;
+  double _jumpStrength;
+  SDL_Keycode _jumpKey;
+
+public:
+  PlayerController_Sidescroller(Object *parent = nullptr, std::string name = "PlayerController_Sidescroller");
+  PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double jumpStrength, Object *parent = nullptr, std::string name = "PlayerController_Sidescroller");
+
+  void operator()();
+
+  void SetSpeed(double speed);
+  double GetSpeed();
+
+  void SetJumpStrength(double strength);
+  double GetJumpStrength();
 
   void PopulateDebugger();
 };
