@@ -38,6 +38,12 @@ Engine::Engine(int flags, Object *parent, std::string name)
       if (!(flags & START_FLAGS::CREATE_GRAPHICS))
         Log::Warning("    This only works if you are using CREATE_GRAPHICS");
     }
+    if (flags & START_FLAGS::CREATE_GRAPHICS_FONTCACHE)
+    {
+      Log::Info("  CREATE_GRAPHICS_FONTCACHE");
+      if (!(flags & START_FLAGS::CREATE_GRAPHICS))
+        Log::Warning("    This only works if you are using CREATE_GRAPHICS");
+    }
     if (flags & START_FLAGS::CREATE_EVENTHANDLER)
       Log::Info("  CREATE_EVENTHANDLER");
     if (flags & START_FLAGS::CREATE_EVENT_QUIT)
@@ -84,8 +90,10 @@ Engine::Engine(int flags, Object *parent, std::string name)
     if (flags & START_FLAGS::CREATE_GRAPHICS)
     {
       Graphics::Graphics *gfx = CreateChild<Graphics::Graphics>();
-      if (flags & START_FLAGS::CREATE_GRAPHICS)
+      if (flags & START_FLAGS::CREATE_GRAPHICS_DEBUGGER)
         gfx->CreateChild<Debug::Debug>();
+      if (flags & START_FLAGS::CREATE_GRAPHICS_FONTCACHE)
+        gfx->CreateChild<Graphics::FontCache>();
     }
     if (flags & START_FLAGS::CREATE_EVENTHANDLER)
     {

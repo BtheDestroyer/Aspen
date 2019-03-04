@@ -21,10 +21,13 @@ public:
       : GameState(parent, name)
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
+    Graphics::FontCache *fc = gfx->FindChildOfType<Graphics::FontCache>();
+    fc->LoadFont("resources/ABeeZee-Regular.ttf", "abz");
 
     Graphics::Sprite *newSprite = new Graphics::Sprite("resources/hello_world.bmp", this);
     int w, h;
-    SDL_GetWindowSize(engine->FindChildOfType<Graphics::Graphics>()->GetWindow(), &w, &h);
+    SDL_GetWindowSize(gfx->GetWindow(), &w, &h);
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(w / 2, h / 2);
     AddChild(newSprite);
 
@@ -49,6 +52,10 @@ public:
     Graphics::Animation *anim = new Graphics::Animation(new Graphics::UniformSpritesheet("resources/anim.png", 4, this), 0.16f, this);
     anim->FindChildOfType<Transform::Transform>()->SetPosition(50, 0);
     line2->AddChild(anim);
+
+    Graphics::Text *text = new Graphics::Text("Hello world!", "abz", 36, this);
+    text->CreateChild<Transform::Transform>()->SetPosition(w / 2, h / 2);
+    AddChild(text);
   }
 
   void OnUpdate()

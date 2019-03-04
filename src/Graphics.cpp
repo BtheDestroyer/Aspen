@@ -36,44 +36,50 @@ Color::Color(int r, int g, int b, int a)
   Alpha(a);
 }
 
-int Color::Red()
+Uint8 Color::Red()
 {
-  return (COLOR_MASK::RED & _c) >> (8 * 3);
+  return Uint8((COLOR_MASK::RED & _c) >> (8 * 3));
 }
 
-int Color::Green()
+Uint8 Color::Green()
 {
-  return (COLOR_MASK::GREEN & _c) >> (8 * 2);
+  return Uint8((COLOR_MASK::GREEN & _c) >> (8 * 2));
 }
 
-int Color::Blue()
+Uint8 Color::Blue()
 {
-  return (COLOR_MASK::BLUE & _c) >> 8;
+  return Uint8((COLOR_MASK::BLUE & _c) >> 8);
 }
 
-int Color::Alpha()
+Uint8 Color::Alpha()
 {
-  return COLOR_MASK::ALPHA & _c;
+  return Uint8(COLOR_MASK::ALPHA & _c);
 }
 
-void Color::Red(int r)
+void Color::Red(Uint8 r)
 {
   _c |= (r << (8 * 3) | (_c & (COLOR_MASK::BLUE | COLOR_MASK::GREEN | COLOR_MASK::ALPHA)));
 }
 
-void Color::Green(int g)
+void Color::Green(Uint8 g)
 {
   _c |= (g << (8 * 2) | (_c & (COLOR_MASK::RED | COLOR_MASK::BLUE | COLOR_MASK::ALPHA)));
 }
 
-void Color::Blue(int b)
+void Color::Blue(Uint8 b)
 {
   _c |= (b << 8 | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::ALPHA)));
 }
 
-void Color::Alpha(int a)
+void Color::Alpha(Uint8 a)
 {
   _c |= (a | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::BLUE)));
+}
+
+Color::operator SDL_Color()
+{
+  SDL_Color c{Red(), Green(), Blue(), Alpha()};
+  return c;
 }
 
 /////////////////////////////////////////////////////////
@@ -286,6 +292,235 @@ void Line::PopulateDebugger()
 
 /////////////////////////////////////////////////////////
 
+FontCache::FontCache(Object *parent, std::string name)
+    : Object(parent, name)
+{
+}
+
+FontCache::~FontCache()
+{
+  for (std::pair<std::pair<std::string, int>, TTF_Font *> it : _fonts)
+    TTF_CloseFont(it.second);
+  _fonts.clear();
+}
+
+void FontCache::LoadFont(std::string path)
+{
+  LoadFont(path, path);
+}
+
+void FontCache::LoadFont(std::string path, std::string name)
+{
+  if (_paths.find(name) == _paths.end())
+    _paths[name] = path;
+}
+
+void FontCache::UnloadFont(std::string name)
+{
+  for (unsigned i = 0; i < _fonts.size(); ++i)
+  {
+    std::map<std::pair<std::string, int>, TTF_Font *>::iterator it = _fonts.begin();
+    for (unsigned j = 0; j < i; ++j)
+      ++it;
+    if (it->first.first == name)
+    {
+      TTF_CloseFont(it->second);
+      _fonts.erase(it);
+      --i;
+    }
+  }
+  if (_paths.find(name) != _paths.end())
+    _paths.erase(name);
+}
+
+TTF_Font *FontCache::GetFont(std::string name, int size)
+{
+  if (_paths.find(name) != _paths.end())
+  {
+    std::pair<std::string, int> index(_paths[name], size);
+    if (_fonts.find(index) == _fonts.end())
+    {
+      TTF_Font *font = TTF_OpenFont(_paths[name].c_str(), size);
+      if (font)
+        _fonts[index] = font;
+      else
+      {
+        Log::Error("%s couldn't load font from path: %s", _paths[name]);
+        return nullptr;
+      }
+    }
+    return _fonts[index];
+  }
+  Log::Error("%s no path for the font named: %s", name);
+  return nullptr;
+}
+
+/////////////////////////////////////////////////////////
+
+Text::Text(Object *parent, std::string name)
+    : Text("default", parent, name)
+{
+}
+
+Text::Text(std::string text, Object *parent, std::string name)
+    : Text(text, "default", 12, parent, name)
+{
+}
+
+Text::Text(std::string text, std::string font, int size, Object *parent, std::string name)
+    : Text(text, font, size, Colors::BLACK, parent, name)
+{
+}
+
+Text::Text(std::string text, std::string font, int size, Color c, Object *parent, std::string name)
+    : Object(parent, name), _text(text), _font(font), _tex(nullptr), _c(c), _rect({0, 0, 0, 0}), _size(size)
+{
+  GenerateTexture();
+}
+
+Text::~Text()
+{
+  if (_tex)
+  {
+    SDL_DestroyTexture(_tex);
+    _tex = nullptr;
+  }
+}
+
+void Text::operator()()
+{
+  if (!Active())
+    return;
+  if (_tex && !_text.empty())
+  {
+    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    if (engine)
+    {
+      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      if (gfx)
+        gfx->DrawText(this);
+      else
+        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+    }
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
+
+  Object::operator()();
+}
+
+std::string Text::GetText()
+{
+  return _text;
+}
+
+void Text::SetText(std::string text)
+{
+  _text = text;
+  GenerateTexture();
+}
+
+std::string Text::GetFont()
+{
+  return _font;
+}
+
+void Text::SetFont(std::string font)
+{
+  _font = font;
+  GenerateTexture();
+}
+
+Color Text::GetColor()
+{
+  return _c;
+}
+
+void Text::SetColor(Color c)
+{
+  _c = c;
+  GenerateTexture();
+}
+
+SDL_Rect Text::GetRect()
+{
+  return _rect;
+}
+
+int Text::GetSize()
+{
+  return _size;
+}
+
+void Text::SetSize(int size)
+{
+  _size = size;
+  GenerateTexture();
+}
+
+void Text::GenerateTexture()
+{
+  if (_tex)
+  {
+    SDL_DestroyTexture(_tex);
+    _tex = nullptr;
+  }
+  if (_font.empty())
+    return;
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    if (gfx)
+    {
+      FontCache *fc = gfx->FindChildOfType<FontCache>();
+      if (fc)
+      {
+        TTF_Font *f = fc->GetFont(_font, _size);
+        if (f)
+        {
+          SDL_Surface *surface = TTF_RenderText_Solid(f, _text.c_str(), _c);
+          if (surface)
+          {
+            _tex = SDL_CreateTextureFromSurface(gfx->GetRenderer(), surface);
+            if (_tex)
+            {
+              _rect.w = surface->w;
+              _rect.h = surface->h;
+            }
+            else
+              Log::Error("%s couldn't generate texture. Error: %s", Name().c_str(), SDL_GetError());
+            SDL_FreeSurface(surface);
+          }
+          else
+            Log::Error("%s couldn't generate surface. Error: %s", Name().c_str(), TTF_GetError());
+        }
+        else
+          Log::Error("%s FontCache does not contain font: %s", Name().c_str(), _font.c_str());
+      }
+      else
+        Log::Error("%s can't find FontCache in Graphics!", Name().c_str());
+    }
+    else
+      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+  }
+  else
+    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+}
+
+SDL_Texture *Text::GetTexture()
+{
+  return _tex;
+}
+
+void Text::PopulateDebugger()
+{
+  ImGui::Text("Text: %s", _text.c_str());
+  Object::PopulateDebugger();
+}
+
+/////////////////////////////////////////////////////////
+
 unsigned Graphics::_gcount = 0;
 
 Graphics::Graphics(Object *parent, std::string name)
@@ -328,6 +563,13 @@ Graphics::Graphics(int w, int h, Object *parent, std::string name)
       SDL_DestroyWindow(_window);
       _window = nullptr;
       SDL_Quit();
+      _valid = false;
+      return;
+    }
+
+    if (TTF_Init() == -1)
+    {
+      Log::Error("Could not initialize SDL_TTF. TTF_Error: %s", TTF_GetError());
       _valid = false;
       return;
     }
@@ -639,6 +881,52 @@ void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
     if (angle == 0)
       angle = 0.00000001;
     SDL_RenderCopyEx(_renderer, sprite->GetTexture(), &clip, &rect, (angle / M_PI) * 180.0, NULL, SDL_FLIP_NONE);
+  }
+}
+
+void Graphics::DrawText(Text *text)
+{
+  if (text && text->GetTexture())
+  {
+    SDL_Rect rect = text->GetRect();
+    double angle = 0.0;
+    Transform::Transform *tf = text->FindChildOfType<Transform::Transform>();
+    if (tf)
+    {
+      rect.w *= tf->GetXScale();
+      rect.h *= tf->GetYScale();
+      rect.x += tf->GetXPosition();
+      rect.y += tf->GetYPosition();
+      angle += double(tf->GetRotation());
+    }
+    rect.x -= rect.w / 2;
+    rect.y -= rect.h / 2;
+    if (angle == 0)
+      angle = 0.00000001;
+    SDL_RenderCopyEx(_renderer, text->GetTexture(), NULL, &rect, (angle / M_PI) * 180.0, NULL, SDL_FLIP_NONE);
+  }
+}
+
+void Graphics::DrawText(Text *text, SDL_Rect clip)
+{
+  if (text && text->GetTexture())
+  {
+    SDL_Rect rect = text->GetRect();
+    double angle = 0.0;
+    Transform::Transform *tf = text->FindChildOfType<Transform::Transform>();
+    if (tf)
+    {
+      rect.w = clip.w * tf->GetXScale();
+      rect.h = clip.h * tf->GetYScale();
+      rect.x += tf->GetXPosition();
+      rect.y += tf->GetYPosition();
+      angle += double(tf->GetRotation());
+    }
+    rect.x -= rect.w / 2;
+    rect.y -= rect.h / 2;
+    if (angle == 0)
+      angle = 0.00000001;
+    SDL_RenderCopyEx(_renderer, text->GetTexture(), &clip, &rect, (angle / M_PI) * 180.0, NULL, SDL_FLIP_NONE);
   }
 }
 
@@ -959,13 +1247,13 @@ void Animation::operator()()
         }
       }
     }
-  else
-  {
-    if (!gfx)
-      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
     else
-      Log::Error("%s's current frame is less than 0! (%d)", Name().c_str(), _currentFrame);
-  }
+    {
+      if (!gfx)
+        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
+      else
+        Log::Error("%s's current frame is less than 0! (%d)", Name().c_str(), _currentFrame);
+    }
   }
   else
     Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());

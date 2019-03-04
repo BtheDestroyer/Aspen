@@ -2,8 +2,10 @@
 #define __GRAPHICS_HPP
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "Log.hpp"
 #include "Object.hpp"
+#include <map>
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -34,16 +36,27 @@ public:
   Color(int color = 0xFFFFFFFF);
   Color(int r, int g, int b, int a = 0xFF);
 
-  int Red();
-  int Green();
-  int Blue();
-  int Alpha();
+  Uint8 Red();
+  Uint8 Green();
+  Uint8 Blue();
+  Uint8 Alpha();
 
-  void Red(int r);
-  void Green(int g);
-  void Blue(int b);
-  void Alpha(int a);
+  void Red(Uint8 r);
+  void Green(Uint8 g);
+  void Blue(Uint8 b);
+  void Alpha(Uint8 a);
+
+  operator SDL_Color();
 };
+
+namespace Colors
+{
+const Color BLACK = Color(0x000000FF);
+const Color RED   = Color(0xFF0000FF);
+const Color GREEN = Color(0x00FF00FF);
+const Color BLUE  = Color(0x0000FFFF);
+const Color WHITE = Color(0xFFFFFFFF);
+}
 
 class Geometry : public Object::Object
 {
@@ -209,6 +222,59 @@ public:
   void PopulateDebugger();
 };
 
+class FontCache : public Object::Object
+{
+  std::map<std::string, std::string> _paths;
+  std::map<std::pair<std::string, int>, TTF_Font *> _fonts;
+
+public:
+  FontCache(Object *parent = nullptr, std::string name = "FontCache");
+  ~FontCache();
+
+  void LoadFont(std::string path);
+  void LoadFont(std::string path, std::string name);
+  void UnloadFont(std::string name);
+  TTF_Font *GetFont(std::string name, int size);
+};
+
+class Text : public Object::Object
+{
+  std::string _text;
+  std::string _font;
+  SDL_Texture *_tex;
+  Color _c;
+  SDL_Rect _rect;
+  int _size;
+
+public:
+  Text(Object *parent = nullptr, std::string name = "Text");
+  Text(std::string text, Object *parent = nullptr, std::string name = "Text");
+  Text(std::string text, std::string font, int size, Object *parent = nullptr, std::string name = "Text");
+  Text(std::string text, std::string font, int size, Color c, Object *parent = nullptr, std::string name = "Text");
+  ~Text();
+
+  void operator()();
+
+  std::string GetText();
+  void SetText(std::string text);
+
+  std::string GetFont();
+  void SetFont(std::string font);
+
+  Color GetColor();
+  void SetColor(Color c);
+
+  SDL_Rect GetRect();
+
+  int GetSize();
+  void SetSize(int size);
+
+  void GenerateTexture();
+  SDL_Texture *GetTexture();
+
+  void PopulateDebugger();
+};
+
 /// \brief Graphics class
 ///        Holds other classes from Aspen::Graphics as children to draw them to the screen
 class Graphics : public Object::Object
@@ -266,6 +332,9 @@ public:
   /// \param sprite Sprite to draw
   void DrawSprite(Sprite *sprite);
   void DrawSprite(Sprite *sprite, SDL_Rect clip);
+
+  void DrawText(Text *text);
+  void DrawText(Text *text, SDL_Rect clip);
 
   /// \brief Frees the Window and shuts down SDL
   void End();
