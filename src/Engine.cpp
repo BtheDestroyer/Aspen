@@ -19,9 +19,8 @@ namespace Engine
 const Version::Version version(0, 1, 0, Version::TIER::PREALPHA);
 
 Engine::Engine(Object *parent, std::string name)
-  : Engine(START_FLAGS::NONE, parent, name)
+    : Engine(START_FLAGS::NONE, parent, name)
 {
-
 }
 Engine::Engine(int flags, Object *parent, std::string name)
     : Object(parent, name), _debugging(flags & START_FLAGS::DEBUGGING_ON)
@@ -64,6 +63,12 @@ Engine::Engine(int flags, Object *parent, std::string name)
     if (flags & START_FLAGS::CREATE_EVENT_KEYS_FUNCTION)
     {
       Log::Info("  CREATE_EVENT_KEYS_SPECIAL");
+      if (!(flags & START_FLAGS::CREATE_EVENTHANDLER))
+        Log::Warning("    This only works if you are using CREATE_EVENTHANDLER");
+    }
+    if (flags & START_FLAGS::CREATE_EVENT_MOUSE)
+    {
+      Log::Info("  CREATE_EVENT_MOUSE");
       if (!(flags & START_FLAGS::CREATE_EVENTHANDLER))
         Log::Warning("    This only works if you are using CREATE_EVENTHANDLER");
     }
@@ -161,6 +166,8 @@ Engine::Engine(int flags, Object *parent, std::string name)
         eh->AddChild(new Event::KeyEventListener(SDLK_F23, eh, std::string("KeyEventListener-") + SDL_GetKeyName(SDLK_F23)));
         eh->AddChild(new Event::KeyEventListener(SDLK_F24, eh, std::string("KeyEventListener-") + SDL_GetKeyName(SDLK_F24)));
       }
+      if (flags & START_FLAGS::CREATE_EVENT_MOUSE)
+        eh->CreateChild<Event::MouseEventListener>();
     }
     if (flags & START_FLAGS::CREATE_TIME)
       CreateChild<Time::Time>();
@@ -183,7 +190,6 @@ void Engine::operator()()
   Object::operator()();
   OnLateUpdate();
 }
-
 
 bool Engine::Debug()
 {

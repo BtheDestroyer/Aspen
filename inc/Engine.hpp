@@ -45,15 +45,18 @@ const int CREATE_EVENT_KEYS_FUNCTION = 0b0000000010000000;
 /// \brief Synonym for (CREATE_EVENT_KEYS_ALPHA | CREATE_EVENT_KEYS_NUM | CREATE_EVENT_KEYS_SPECIAL | CREATE_EVENT_KEYS_FUNCTION | CREATE_EVENT_KEYS_ALL)
 ///        Must be passed with CREATE_EVENTHANDLER
 const int CREATE_EVENT_KEYS_ALL      = 0b0000000011110000;
+/// \brief Gives the child EventHandler a MouseEventListener
+///        Must be passed with CREATE_EVENTHANDLER
+const int CREATE_EVENT_MOUSE         = 0b0000000100000000;
 /// \brief Synonym for (CREATE_EVENT_QUIT | CREATE_EVENT_KEYS_ALL)
 ///        Must be passed with CREATE_EVENTHANDLER
-const int CREATE_EVENT_ALL           = 0b0000000011111000;
+const int CREATE_EVENT_ALL           = 0b0000000111111000;
 /// \brief Creates an Time::Time Object as a child
-const int CREATE_TIME                = 0b0000000100000000;
+const int CREATE_TIME                = 0b0000001000000000;
 /// \brief Creates an Physics::Physics Object as a child
-const int CREATE_PHYSICS             = 0b0000001000000000;
+const int CREATE_PHYSICS             = 0b0000010000000000;
 /// \brief Creates an GameState::GameStateManager Object as a child
-const int CREATE_GAMESTATE_MANAGER   = 0b0000010000000000;
+const int CREATE_GAMESTATE_MANAGER   = 0b0000100000000000;
 /// \brief Determines if children of the engine should debug
 const int DEBUGGING_ON               = 0b1000000000000000;
 /// \brief Synonym for all START_FLAGS

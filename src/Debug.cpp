@@ -3,6 +3,7 @@
 #include "Debug.hpp"
 #include "Time.hpp"
 #include "Engine.hpp"
+#include "Input.hpp"
 #include "Graphics.hpp"
 #include "imgui_sdl.h"
 
@@ -48,17 +49,16 @@ void Debug::operator()()
   if (engine && engine->Debug())
   {
     //TODO: Get input from an Input wrapper
-    int mouseX,
-        mouseY;
-    const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+    Input::Mouse mouse = Input::GetMouse();
     Time::Time *time = engine->FindChildOfType<Time::Time>();
     if (time)
       _io->DeltaTime = std::max(0.000001, time->DeltaTime());
     else
       _io->DeltaTime = 1.0f / 60.0f;
-    _io->MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
-    _io->MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-    _io->MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+    _io->MousePos = ImVec2(static_cast<float>(mouse.x), static_cast<float>(mouse.y));
+    _io->MouseWheel = mouse.wheel;
+    _io->MouseDown[0] = mouse.left.held;
+    _io->MouseDown[1] = mouse.right.held;
 
     ImGui::NewFrame();
     ImGui::Begin("Object Tree", NULL, ImVec2(400, 400));

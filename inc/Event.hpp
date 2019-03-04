@@ -1,6 +1,7 @@
 #ifndef __EVENT_HPP
 #define __EVENT_HPP
 #include "Object.hpp"
+#include "Input.hpp"
 #include <SDL2/SDL.h>
 
 /// \brief Aspen engine namespace
@@ -61,7 +62,7 @@ class KeyEventListener : public EventListener
 public:
   /// \brief Constructor
   /// \param k Which Key's states to control
-  KeyEventListener(Object *parent = nullptr, std::string name = "EventListener");
+  KeyEventListener(Object *parent = nullptr, std::string name = "KeyEventListener");
   KeyEventListener(SDL_Keycode k, Object *parent = nullptr, std::string name = "KeyEventListener");
   /// \brief Destructor
   ~KeyEventListener();
@@ -69,6 +70,26 @@ public:
   /// \brief Sets _key
   /// \param k Key to control
   void SetKey(SDL_Keycode k);
+  /// \brief Controls the state of Input::Key in the map obtained by Input::GetKey(_key)
+  ///        Does nothing if _key == SDLK_UNKNOWN
+  /// \param event Event to handle
+  void Handle(SDL_Event *event);
+
+  void PopulateDebugger();
+};
+
+class MouseEventListener : public EventListener
+{
+  Input::Mouse &_m;
+
+public:
+  /// \brief Constructor
+  MouseEventListener(Object *parent = nullptr, std::string name = "MouseEventListener");
+  /// \brief Destructor
+  ~MouseEventListener();
+
+  void operator()();
+
   /// \brief Controls the state of Input::Key in the map obtained by Input::GetKey(_key)
   ///        Does nothing if _key == SDLK_UNKNOWN
   /// \param event Event to handle

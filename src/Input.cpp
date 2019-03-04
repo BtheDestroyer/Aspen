@@ -87,5 +87,12 @@ bool KeyReleased(SDL_Keycode k)
 {
   return GetKey(k).released;
 }
+
+Mouse mouse;
+
+Mouse &GetMouse()
+{
+  return mouse;
+}
 } // namespace Input
 } // namespace Aspen

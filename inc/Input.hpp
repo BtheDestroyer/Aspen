@@ -24,6 +24,19 @@ public:
   Key();
 };
 
+class Mouse
+{
+public:
+  int x;
+  int y;
+  int wheel;
+  int dx;
+  int dy;
+  Key left;
+  Key right;
+  Key middle;
+};
+
 class Axis : public Object::Object
 {
   SDL_Keycode _pos;
@@ -59,6 +72,8 @@ bool KeyPressed(SDL_Keycode k);
 /// \param k Keycode to check
 /// \return released state of the Key held at GetKey(k)
 bool KeyReleased(SDL_Keycode k);
+
+Mouse &GetMouse();
 } // namespace Input
 } // namespace Aspen
 
