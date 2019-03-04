@@ -8,6 +8,7 @@
 #include "Debug.hpp"
 #include "Log.hpp"
 #include "GameState.hpp"
+#include "Audio.hpp"
 #include "imgui.h"
 #include <SDL2/SDL.h>
 
@@ -96,8 +97,10 @@ Engine::Engine(int flags, Object *parent, std::string name)
       Log::Info("  CREATE_TIME");
     if (flags & START_FLAGS::CREATE_PHYSICS)
       Log::Info("  CREATE_PHYSICS");
-    if (flags & START_FLAGS::CREATE_GAMESTATE_MANAGER)
-      Log::Info("  CREATE_GAMESTATE_MANAGER");
+    if (flags & START_FLAGS::CREATE_GAMESTATEMANAGER)
+      Log::Info("  CREATE_GAMESTATEMANAGER");
+    if (flags & START_FLAGS::CREATE_AUDIO)
+      Log::Info("  CREATE_AUDIO");
     if (flags & START_FLAGS::DEBUGGING_ON)
       Log::Info("  DEBUGGING_ON");
 
@@ -195,8 +198,10 @@ Engine::Engine(int flags, Object *parent, std::string name)
       CreateChild<Time::Time>();
     if (flags & START_FLAGS::CREATE_PHYSICS)
       CreateChild<Physics::Physics>();
-    if (flags & START_FLAGS::CREATE_GAMESTATE_MANAGER)
+    if (flags & START_FLAGS::CREATE_GAMESTATEMANAGER)
       CreateChild<GameState::GameStateManager>();
+    if (flags & START_FLAGS::CREATE_AUDIO)
+      CreateChild<Audio::Audio>();
   }
 
   ++_ecount;

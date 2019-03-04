@@ -61,7 +61,9 @@ const int CREATE_TIME                = 0b0000010000000000;
 /// \brief Creates an Physics::Physics Object as a child
 const int CREATE_PHYSICS             = 0b0000100000000000;
 /// \brief Creates an GameState::GameStateManager Object as a child
-const int CREATE_GAMESTATE_MANAGER   = 0b0001000000000000;
+const int CREATE_GAMESTATEMANAGER    = 0b0001000000000000;
+/// \brief Creates an Audio::Audio Object as a child
+const int CREATE_AUDIO               = 0b0010000000000000;
 /// \brief Determines if children of the engine should debug
 const int DEBUGGING_ON               = 0b1000000000000000;
 /// \brief Synonym for all START_FLAGS

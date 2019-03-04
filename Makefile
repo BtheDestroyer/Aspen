@@ -30,19 +30,26 @@ CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
 						-Wall -Wextra -Wno-unused-parameter \
-						-D$(PLATFORM) \
-						-Dmain=SDL_main
-ifeq ($(OS),Windows_NT)
-CXXFLAGS += -mwindows
+						-D$(PLATFORM)
 endif
+LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
+						-limgui \
+						-lmingw32 \
+						-lSDL2main -lSDL2 \
+						-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
+						-static-libstdc++
 ifndef RELEASE
 CXXFLAGS += -D__DEBUG
 endif
-endif
-LINKFLAGS :=-LC:/MinGW/lib -Lbuild -limgui -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -static-libstdc++
 ifeq ($(OS),Windows_NT)
+CXXFLAGS += -mwindows
 LINKFLAGS += -mwindows
+ifndef RELEASE
+CXXFLAGS += -mconsole
+LINKFLAGS += -mconsole
 endif
+endif
+
 AR := ar
 ARFLAGS :=
 

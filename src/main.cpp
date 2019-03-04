@@ -22,7 +22,7 @@ public:
       : GameState(parent, name)
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
-    Audio::Audio *audio = engine->CreateChild<Audio::Audio>();
+
     Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
     Graphics::FontCache *fc = gfx->FindChildOfType<Graphics::FontCache>();
     fc->LoadFont("resources/ABeeZee-Regular.ttf", "abz");
@@ -58,6 +58,10 @@ public:
     Graphics::Text *text = new Graphics::Text("Hello world!", "abz", 36, this);
     text->CreateChild<Transform::Transform>()->SetPosition(w / 2, h / 2);
     AddChild(text);
+
+    Audio::Music *music = new Audio::Music("resources/accf.wav", this);
+    AddChild(music);
+    music->Play(true, 2.0);
   }
 
   void OnUpdate()
