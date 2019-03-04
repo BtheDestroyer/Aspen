@@ -36,8 +36,6 @@ public:
 
     newSprite = new Graphics::Sprite("resources/mario.png", this);
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
-    //newSprite->FindChildOfType<Transform::Transform>()->SetScale(0.5, 1);
-    //newSprite->FindChildOfType<Transform::Transform>()->SetRotation(10.0);
     newSprite->CreateChild<Physics::Rigidbody>();
     newSprite->CreateChild<Controller::PlayerController_8Way>()->Speed(5.0);
     AddChild(newSprite);

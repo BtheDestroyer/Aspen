@@ -3,20 +3,22 @@ HEADERS := inc
 BUILD := build
 OBJECTS := $(BUILD)/obj
 ifndef PROJECT
-PROJECT := sdl.exe
+PROJECT := sdl
+LIBRARY := Aspen
+endif
 
 IMGUI_LIB := $(BUILD)/libimgui.a
 IMGUI_CPP := $(wildcard libraries/imgui/*.cpp)
 IMGUI_OBJ := $(patsubst libraries/imgui/%.cpp, $(OBJECTS)/%.o,$(IMGUI_CPP))
 IMGUI_SDL_CPP := $(filter-out libraries/imgui_sdl/example.cpp,$(wildcard libraries/imgui_sdl/*.cpp))
 IMGUI_SDL_OBJ := $(patsubst libraries/imgui_sdl/%.cpp, $(OBJECTS)/%.o,$(IMGUI_SDL_CPP))
-endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
 CXX := g++
 ifndef PLATFORM
 ifeq ($(OS),Windows_NT)
 PLATFORM :=__WIN32
+PROJECT +=.exe
 else
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -26,12 +28,12 @@ ifeq ($(UNAME_S),Darwin)
 PLATFORM :=__OSX
 endif
 endif
+endif
 CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
 						-Wall -Wextra -Wno-unused-parameter \
 						-D$(PLATFORM)
-endif
 LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
 						-limgui \
 						-lmingw32 \
@@ -39,10 +41,11 @@ LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
 						-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
 						-static-libstdc++
 ifndef RELEASE
+export RELEASE
 CXXFLAGS += -D__DEBUG
 endif
 ifeq ($(OS),Windows_NT)
-CXXFLAGS += -mwindows
+CXXFLAGS += -mwindows -Dmain=SDL_main
 LINKFLAGS += -mwindows
 ifndef RELEASE
 CXXFLAGS += -mconsole
@@ -75,6 +78,12 @@ all: project docs
 
 .PHONY: project
 project: $(OUTPUT)
+
+.PHONY: library
+library: $(BUILD)/lib$(LIBRARY).a
+
+$(BUILD)/lib$(LIBRARY).a:
+	$(MAKE) project PROJECT=lib$(LIBRARY).a
 
 .PHONY: setup
 setup: $(SOURCES) $(HEADERS) $(BUILD)
@@ -125,11 +134,12 @@ $(HEADERS)/$(STUB).hpp:
 	@touch $@
 
 .NOTPARALLEL: $(OUTPUT)
-$(OUTPUT): $(OBJECTS) $(OBJFILES) $(IMGUI_LIB)
 ifeq ($(suffix $(PROJECT)),.a)
+$(OUTPUT): $(OBJECTS) $(OBJFILES) $(IMGUI_LIB)
 	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)
 else
-	$(CXX) $(OBJFILES) $(LINKFLAGS) -o $(OUTPUT)
+$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(IMGUI_LIB) $(OBJECTS)/main.o
+	$(CXX) $(OBJECTS)/main.o -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
 	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
