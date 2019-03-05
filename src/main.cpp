@@ -37,13 +37,19 @@ public:
     newSprite = new Graphics::Sprite("resources/mario.png", this);
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
     newSprite->CreateChild<Physics::Rigidbody>();
-    Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
-    //Controller::PlayerController_8Way *pc = newSprite->CreateChild<Controller::PlayerController_8Way>();
-    pc->SetJumpStrength(5.0);
-    pc->SetJumpHeight(0.25);
+    //Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
+    Controller::PlayerController_8Way *pc = newSprite->CreateChild<Controller::PlayerController_8Way>();
+    //pc->SetJumpStrength(5.0);
+    //pc->SetJumpHeight(0.25);
     pc->SetAcceleration(5.0);
     pc->SetSpeed(4.0);
+    newSprite->AddChild(new Physics::CircleCollider(124, this));
     AddChild(newSprite);
+
+    Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{-25, -25, 50, 50}, 0x0000FFFF, true, this, "Bumper");
+    rec->AddChild(new Physics::CircleCollider(25, rec));
+    rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
+    AddChild(rec);
 
     AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, true, this));
     AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, this));
@@ -87,7 +93,7 @@ int main(int argc, char **argv)
   Log::Log::SetFile("./Aspen.log");
 
   Engine::Engine engine(Engine::START_FLAGS::ALL);
-  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(1);
+  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(0);
   engine.FindChildOfType<Physics::Physics>()->SetDrag(0.1);
   engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 

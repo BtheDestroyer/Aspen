@@ -30,6 +30,45 @@ Physics::~Physics()
 void Physics::operator()()
 {
   Object::operator()();
+
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    std::vector<Collider *> colliders = engine->FindDescendentsOfType<Collider>();
+    for (unsigned i = 0; i < colliders.size(); ++i)
+    {
+      for (unsigned j = i + 1; j < colliders.size(); ++j)
+      {
+        Collision c = colliders[i]->TestCollision(colliders[j]);
+        if (c.result == COLLISION_RESULT::SUCCESS)
+        {
+          colliders[i]->ResolveCollision(c);
+          double dx = c.collisionX - colliders[i]->GetX();
+          double dy = c.collisionY - colliders[i]->GetY();
+          c.collisionX = colliders[j]->GetX() + dx;
+          c.collisionY = colliders[j]->GetY() + dy;
+          c.forceDirection += M_PI;
+          colliders[j]->ResolveCollision(c);
+        }
+        else if (c.result == COLLISION_RESULT::CANNOT_HANDLE)
+        {
+          c = colliders[j]->TestCollision(colliders[i]);
+          if (c.result == COLLISION_RESULT::SUCCESS)
+          {
+            colliders[j]->ResolveCollision(c);
+            double dx = c.collisionX - colliders[j]->GetX();
+            double dy = c.collisionY - colliders[j]->GetY();
+            c.collisionX = colliders[i]->GetX() + dx;
+            c.collisionY = colliders[i]->GetY() + dy;
+            c.forceDirection += M_PI;
+            colliders[i]->ResolveCollision(c);
+          }
+        }
+      }
+    }
+  }
+  else
+    Log::Error("%s must have an anscestor of type Engine::Engine!", Name().c_str());
 }
 
 double Physics::GetGravityStrength()
@@ -265,6 +304,195 @@ void Rigidbody::PopulateDebugger()
   }
   ImGui::Text("Acceleration: %.4f, %.4f", _accelerationStrength, _accelerationDirection);
   Object::PopulateDebugger();
+}
+
+/////////////////////////////////////////////////////////
+
+Collision::Collision(Collider *other)
+    : collider(other), collisionX(0), collisionY(0), forceDirection(0), forceStrength(0)
+{
+}
+
+/////////////////////////////////////////////////////////
+
+Collider::Collider(Object *parent, std::string name)
+    : Object(parent, name), _offX(0), _offY(0), _trigger(false)
+{
+}
+
+void Collider::operator()()
+{
+}
+
+Collision Collider::TestCollision(Collider *other)
+{
+  Collision c(this);
+  c.result = COLLISION_RESULT::CANNOT_HANDLE;
+  return c;
+}
+
+void Collider::ResolveCollision(Collision collision)
+{
+}
+
+void Collider::SetOffset(int x, int y)
+{
+  _offX = x;
+  _offY = y;
+}
+
+int Collider::GetOffsetX()
+{
+  return _offX;
+}
+
+int Collider::GetOffsetY()
+{
+  return _offY;
+}
+
+int Collider::GetX()
+{
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!_parent)
+      return _offX;
+    tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return _offX;
+  }
+  return _offX + tf->GetXPosition();
+}
+
+int Collider::GetY()
+{
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!_parent)
+      return _offY;
+    tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return _offY;
+  }
+  return _offY + tf->GetYPosition();
+}
+
+bool Collider::IsTrigger()
+{
+  return _trigger;
+}
+
+void Collider::SetTrigger(bool trigger)
+{
+  _trigger = trigger;
+}
+
+void Collider::PopulateDebugger()
+{
+  ImGui::Text("Offset: %d, %d", _offX, _offY);
+  Object::PopulateDebugger();
+}
+
+/////////////////////////////////////////////////////////
+
+CircleCollider::CircleCollider(Object *parent, std::string name)
+    : CircleCollider(1, parent, name)
+{
+}
+
+CircleCollider::CircleCollider(double radius, Object *parent, std::string name)
+    : Collider(parent, name), _radius(radius)
+{
+}
+
+Collision CircleCollider::TestCollision(Collider *other)
+{
+  Collision c(other);
+  c.result = COLLISION_RESULT::CANNOT_HANDLE;
+
+  if (dynamic_cast<CircleCollider *>(other))
+  {
+    double ox = other->GetX();
+    double oy = other->GetY();
+    double tx = GetX();
+    double ty = GetY();
+    double dx = ox - tx;
+    double dy = oy - ty;
+    double d2 = dx * dx + dy * dy;
+    double oR = dynamic_cast<CircleCollider *>(other)->GetRadius();
+    double r = _radius + oR;
+    if (d2 < r * r)
+    {
+      c.result = COLLISION_RESULT::SUCCESS;
+      double d = std::sqrt(d2);
+      double cd = d - oR;
+      double ca = std::atan2(dy, dx);
+      c.collisionX = std::cos(ca) * cd;
+      c.collisionY = std::sin(ca) * cd;
+    }
+    else
+      c.result = COLLISION_RESULT::FAILURE;
+  }
+
+  return c;
+}
+
+void CircleCollider::ResolveCollision(Collision collision)
+{
+  if (!collision.collider ||
+      collision.result != COLLISION_RESULT::SUCCESS ||
+      _trigger ||
+      collision.collider->IsTrigger())
+    return;
+  Rigidbody *rb = nullptr;
+  Transform::Transform *tf = nullptr;
+  tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!_parent)
+      return;
+    tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return;
+    rb = _parent->FindChildOfType<Rigidbody>();
+  }
+  else
+    rb = FindChildOfType<Rigidbody>();
+
+  Rigidbody *orb = collision.collider->FindChildOfType<Rigidbody>();
+  if (!orb)
+    orb = collision.collider->Parent()->FindChildOfType<Rigidbody>();
+
+  if (rb)
+  {
+    double rx = _radius * std::cos(std::atan2(collision.collisionY, collision.collisionX));
+    double ry = _radius * std::sin(std::atan2(collision.collisionY, collision.collisionX));
+    double dx = rx - collision.collisionX;
+    double dy = ry - collision.collisionY;
+    if (orb)
+      tf->ModifyPosition(-dx / 2, -dy / 2);
+    else
+      tf->ModifyPosition(-dx, -dy);
+    rb->ApplyForce(collision.forceStrength, collision.forceDirection);
+  }
+}
+
+double CircleCollider::GetRadius()
+{
+  return _radius;
+}
+
+void CircleCollider::SetRadius(double radius)
+{
+  _radius = radius;
+}
+
+void CircleCollider::PopulateDebugger()
+{
+  ImGui::Text("Radius: %f", _radius);
+  Collider::PopulateDebugger();
 }
 } // namespace Physics
 } // namespace Aspen

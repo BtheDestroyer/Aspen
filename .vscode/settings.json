@@ -59,6 +59,24 @@
         "cctype": "cpp",
         "clocale": "cpp",
         "cwctype": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "bitset": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp",
+        "cstdarg": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "locale": "cpp",
+        "mutex": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "string_view": "cpp",
+        "unordered_set": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp"
     }
 }

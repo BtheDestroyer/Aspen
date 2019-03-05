@@ -129,7 +129,7 @@ public:
   T *FindChildOfType()
   {
     for (unsigned i = 0; i < _children.size(); ++i)
-      if (_children[i] && dynamic_cast<T *>(_children[i]))
+      if (dynamic_cast<T *>(_children[i]))
         return dynamic_cast<T *>(_children[i]);
     return nullptr;
   }
@@ -144,8 +144,22 @@ public:
   {
     std::vector<T *> vec;
     for (unsigned i = 0; i < _children.size(); ++i)
-      if (_children[i] && dynamic_cast<T *>(_children[i]))
+      if (dynamic_cast<T *>(_children[i]))
         vec.push_back(dynamic_cast<T *>(_children[i]));
+    return vec;
+  }
+
+  template <typename T>
+  std::vector<T *> FindDescendentsOfType()
+  {
+    std::vector<T *> vec;
+    for (unsigned i = 0; i < _children.size(); ++i)
+    {
+      if (dynamic_cast<T *>(_children[i]))
+        vec.push_back(dynamic_cast<T *>(_children[i]));
+      std::vector<T *> cvec = _children[i]->FindDescendentsOfType<T>();
+      vec.insert(vec.end(), cvec.begin(), cvec.end());
+    }
     return vec;
   }
 

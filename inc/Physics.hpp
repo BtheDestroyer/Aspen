@@ -87,6 +87,75 @@ public:
 
   void PopulateDebugger();
 };
+
+/////////////////////////////////////////////////////////
+
+enum COLLISION_RESULT
+{
+  FAILURE,
+  SUCCESS,
+  CANNOT_HANDLE
+};
+
+class Collider;
+
+class Collision
+{
+public:
+  COLLISION_RESULT result;
+  Collider *collider;
+  double collisionX;
+  double collisionY;
+  double forceDirection;
+  double forceStrength;
+
+  Collision(Collider *other);
+};
+
+class Collider : public Object::Object
+{
+protected:
+  int _offX;
+  int _offY;
+  bool _trigger;
+
+public:
+  Collider(Object *parent = nullptr, std::string name = "Collider");
+
+  void operator()();
+
+  virtual Collision TestCollision(Collider *other);
+  virtual void ResolveCollision(Collision collision);
+
+  void SetOffset(int x, int y);
+  int GetOffsetX();
+  int GetOffsetY();
+
+  int GetX();
+  int GetY();
+
+  bool IsTrigger();
+  void SetTrigger(bool trigger);
+
+  void PopulateDebugger();
+};
+
+class CircleCollider : public Collider
+{
+  double _radius;
+
+public:
+  CircleCollider(Object *parent = nullptr, std::string name = "CircleCollider");
+  CircleCollider(double radius, Object *parent = nullptr, std::string name = "CircleCollider");
+
+  Collision TestCollision(Collider *other);
+  void ResolveCollision(Collision collision);
+
+  double GetRadius();
+  void SetRadius(double radius);
+
+  void PopulateDebugger();
+};
 } // namespace Physics
 } // namespace Aspen
 
