@@ -8,14 +8,14 @@
 [![GitHub release](https://img.shields.io/github/release/bthedestroyer/aspen.svg?style=plastic)](https://github.com/bthedestroyer/aspen/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/bthedestroyer/aspen.svg?style=plastic)](https://github.com/bthedestroyer/aspen/releases)
 
-## [![Wiki](https://img.shields.io/badge/-wiki-blue.svg)](https://bthedestroyer.github.io/Aspen/)
+## [![Wiki](https://img.shields.io/badge/-wiki-blue.svg?style=plastic)](https://bthedestroyer.github.io/Aspen/)
 
 ## Backends
 
-[![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg)](#backends)
-[![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg)](#backends)
-[![Input](https://img.shields.io/badge/input-SDL_(keyboard)-green.svg)](#backends)
-[![Audio](https://img.shields.io/badge/audio-SDL-orange.svg)](#backends)
+[![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg?style=plastic)](#backends)
+[![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg?style=plastic)](#backends)
+[![Input](https://img.shields.io/badge/input-SDL_(keyboard)-green.svg?style=plastic)](#backends)
+[![Audio](https://img.shields.io/badge/audio-SDL-orange.svg?style=plastic)](#backends)
 
 ## Prerequisites
 
