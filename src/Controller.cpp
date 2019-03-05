@@ -13,15 +13,20 @@
 
 namespace Aspen
 {
+int Sign(double x)
+{
+  return (x > 0) ? 1 : ((x < 0) ? -1 : 0);
+}
+
 namespace Controller
 {
 PlayerController_8Way::PlayerController_8Way(Object *parent, std::string name)
-    : PlayerController_8Way(SDLK_s, SDLK_w, SDLK_a, SDLK_d, 1.0, parent, name)
+    : PlayerController_8Way(SDLK_s, SDLK_w, SDLK_a, SDLK_d, 4.0, 1.0, parent, name)
 {
 }
 
-PlayerController_8Way::PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, SDL_Keycode left, SDL_Keycode right, double speed, Object *parent, std::string name)
-    : Object(parent, "PlayerController_8Way"), _speed(speed)
+PlayerController_8Way::PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, SDL_Keycode left, SDL_Keycode right, double speed, double acceleration, Object *parent, std::string name)
+    : Object(parent, "PlayerController_8Way"), _acceleration(acceleration), _speed(speed)
 {
   AddChild(new Input::Axis(up, down, 0.1f, 0.1f, this, "Axis-Vertical"));
   AddChild(new Input::Axis(right, left, 0.1f, 0.1f, this, "Axis-Horizontal"));
@@ -69,12 +74,23 @@ void PlayerController_8Way::operator()()
     Log::Error("%s requires two children of type Axis named Axis-Vertical and Axis-Horizontal!", Name().c_str());
     return;
   }
-  double dx = ah->GetValue() * _speed;
-  double dy = av->GetValue() * _speed;
+  double dx = ah->GetValue() * _acceleration;
+  double dy = av->GetValue() * _acceleration;
   if (!rb)
     tf->ModifyPosition(dx, dy);
   else
-    rb->SetCartesianAcceleration(dx, dy);
+    rb->ApplyCartesianForce((std::abs(rb->GetVelocityX()) < _speed || Sign(rb->GetVelocityX()) != Sign(dx)) ? dx : 0,
+                            (std::abs(rb->GetVelocityY()) < _speed || Sign(rb->GetVelocityY()) != Sign(dy)) ? dy : 0);
+}
+
+void PlayerController_8Way::SetAcceleration(double acc)
+{
+  _acceleration = acc;
+}
+
+double PlayerController_8Way::GetAcceleration()
+{
+  return _acceleration;
 }
 
 void PlayerController_8Way::SetSpeed(double speed)
@@ -89,7 +105,7 @@ double PlayerController_8Way::GetSpeed()
 
 void PlayerController_8Way::PopulateDebugger()
 {
-  ImGui::Text("Speed: %f", _speed);
+  ImGui::Text("Speed: %f", _acceleration);
   if (_parent)
   {
     Input::Axis *av = nullptr;
@@ -105,8 +121,8 @@ void PlayerController_8Way::PopulateDebugger()
     }
     if (av && ah)
     {
-      double dx = ah->GetValue() * _speed;
-      double dy = av->GetValue() * _speed;
+      double dx = ah->GetValue() * _acceleration;
+      double dy = av->GetValue() * _acceleration;
       ImGui::Text("Input: (%.3f, %.3f)", dx, dy);
     }
   }
@@ -116,12 +132,12 @@ void PlayerController_8Way::PopulateDebugger()
 /////////////////////////////////////////////////////////
 
 PlayerController_Sidescroller::PlayerController_Sidescroller(Object *parent, std::string name)
-    : PlayerController_Sidescroller(SDLK_a, SDLK_d, SDLK_w, 1.0, 2.0, parent, name)
+    : PlayerController_Sidescroller(SDLK_a, SDLK_d, SDLK_w, 4.0, 1.0, 2.0, 5.0, parent, name)
 {
 }
 
-PlayerController_Sidescroller::PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double jumpStrength, Object *parent, std::string name)
-    : Object(parent, name), _speed(speed), _jumpStrength(jumpStrength), _jumpKey(jump)
+PlayerController_Sidescroller::PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double acceleration, double jumpStrength, double jumpHeight, Object *parent, std::string name)
+    : Object(parent, name), _acceleration(acceleration), _speed(speed), _jumpStrength(jumpStrength), _jumpHeight(jumpHeight), _jumpRemaining(0), _jumpKey(jump)
 {
   AddChild(new Input::Axis(right, left, 0.1f, 0.1f, this, "Axis-Horizontal"));
 }
@@ -152,6 +168,15 @@ void PlayerController_Sidescroller::operator()()
 
   Object::operator()();
 
+  double dt = 1.0;
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  if (engine)
+  {
+    Time::Time *time = engine->FindChildOfType<Time::Time>();
+    if (time)
+      dt = time->DeltaTime() * 60;
+  }
+
   Input::Axis *ah = nullptr;
   for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
   {
@@ -166,15 +191,35 @@ void PlayerController_Sidescroller::operator()()
     Log::Error("%s requires a child of type Axis named Axis-Horizontal!", Name().c_str());
     return;
   }
-  double dx = ah->GetValue() * _speed;
+  double dx = ah->GetValue() * _acceleration * dt;
   if (!rb)
     tf->ModifyPosition(dx, Input::KeyPressed(_jumpKey) ? -1 * _jumpStrength : 0.0);
   else
   {
-    rb->SetCartesianAcceleration(dx, 0);
+    double vx = rb->GetVelocityX();
+    if (std::abs(vx) < _speed || Sign(vx) != Sign(dx))
+      rb->ApplyCartesianForce(dx, 0);
     if (Input::KeyPressed(_jumpKey))
-      rb->SetCartesianVelocity(rb->GetVelocityX(), -0.5 * _jumpStrength * _jumpStrength);
+      _jumpRemaining = _jumpHeight;
+    if (_jumpRemaining > 0)
+    {
+      if (Input::KeyReleased(_jumpKey))
+        _jumpRemaining = 0.0;
+      else
+        _jumpRemaining -= dt / 60.0;
+      rb->SetCartesianVelocity(rb->GetVelocityX(), -0.5 * _jumpStrength * _jumpStrength * dt);
+    }
   }
+}
+
+void PlayerController_Sidescroller::SetAcceleration(double acc)
+{
+  _acceleration = acc;
+}
+
+double PlayerController_Sidescroller::GetAcceleration()
+{
+  return _acceleration;
 }
 
 void PlayerController_Sidescroller::SetSpeed(double speed)
@@ -184,7 +229,7 @@ void PlayerController_Sidescroller::SetSpeed(double speed)
 
 double PlayerController_Sidescroller::GetSpeed()
 {
-  return _jumpStrength;
+  return _speed;
 }
 
 void PlayerController_Sidescroller::SetJumpStrength(double strength)
@@ -197,8 +242,19 @@ double PlayerController_Sidescroller::GetJumpStrength()
   return _jumpStrength;
 }
 
+void PlayerController_Sidescroller::SetJumpHeight(double height)
+{
+  _jumpHeight = height;
+}
+
+double PlayerController_Sidescroller::GetJumpHeight()
+{
+  return _jumpHeight;
+}
+
 void PlayerController_Sidescroller::PopulateDebugger()
 {
+  ImGui::Text("Acceleration: %f", _acceleration);
   ImGui::Text("Speed: %f", _speed);
   ImGui::Text("Jump Strength: %f", _jumpStrength);
   if (_parent)
@@ -215,10 +271,10 @@ void PlayerController_Sidescroller::PopulateDebugger()
     }
     if (av)
     {
-      double dx = ah->GetValue() * _speed;
+      double dx = ah->GetValue() * _acceleration;
       ImGui::Text("Input: %.3f", dx);
     }
-    ImGui::Text("Jumping?: %s", Input::KeyPressed(_jumpKey) ? "True" : "False");
+    ImGui::Text("Jumping: %.3f / %.3f", _jumpRemaining, _jumpHeight);
   }
   Object::PopulateDebugger();
 }

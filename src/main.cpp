@@ -38,8 +38,11 @@ public:
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
     newSprite->CreateChild<Physics::Rigidbody>();
     Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
-    pc->SetSpeed(4.0);
+    //Controller::PlayerController_8Way *pc = newSprite->CreateChild<Controller::PlayerController_8Way>();
     pc->SetJumpStrength(5.0);
+    pc->SetJumpHeight(0.25);
+    pc->SetAcceleration(5.0);
+    pc->SetSpeed(4.0);
     AddChild(newSprite);
 
     AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, true, this));
@@ -84,11 +87,11 @@ int main(int argc, char **argv)
   Log::Log::SetFile("./Aspen.log");
 
   Engine::Engine engine(Engine::START_FLAGS::ALL);
+  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(1);
+  engine.FindChildOfType<Physics::Physics>()->SetDrag(0.1);
+  engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 
   engine.FindChildOfType<GameState::GameStateManager>()->LoadState<MyState>(true);
-  engine.FindChildOfType<Physics::Physics>()->SetGravityStrength(0);
-  engine.FindChildOfType<Physics::Physics>()->SetDrag(1.05);
-  engine.FindChildOfType<Time::Time>()->TargetFramerate(60);
 
   while (engine)
     engine();

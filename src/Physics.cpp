@@ -54,7 +54,7 @@ double Physics::GetGravityY()
 
 void Physics::SetGravityStrength(double strength)
 {
-  _gravStrength = -1 * strength;
+  _gravStrength = strength;
 }
 
 void Physics::SetGravityDirection(double direction)
@@ -111,7 +111,7 @@ void Rigidbody::operator()()
       Physics *physics = engine->FindChildOfType<Physics>();
       if (physics)
       {
-        Time::Time *time = nullptr; //engine->FindChildOfType<Time::Time>();
+        Time::Time *time = engine->FindChildOfType<Time::Time>();
         double dt;
         if (time)
           dt = time->DeltaTime() * 60.0;
@@ -123,10 +123,10 @@ void Rigidbody::operator()()
         //SetCartesianAcceleration(GetAccelerationX() + physics->GetGravityX(), GetAccelerationY() + physics->GetGravityY());
         double vx = GetVelocityX();
         double vy = GetVelocityY();
-        SetCartesianAcceleration(GetAccelerationX() + (physics->GetGravityX() - (vx >= 0 ? 0.5 : -0.5) * vx * vx * physics->GetDrag()) * dt,
-                                 GetAccelerationY() + (physics->GetGravityY() - (vy >= 0 ? 0.5 : -0.5) * vy * vy * physics->GetDrag()) * dt);
-        double ax = GetAccelerationX() * dt;
-        double ay = GetAccelerationY() * dt;
+        vx = std::abs(vx) >= 0.001 ? vx : 0.0;
+        vy = std::abs(vy) >= 0.001 ? vy : 0.0;
+        double ax = (GetAccelerationX() + physics->GetGravityX() - vx * physics->GetDrag()) * dt;
+        double ay = (GetAccelerationY() + physics->GetGravityY() - vy * physics->GetDrag()) * dt;
         SetCartesianVelocity(vx + ax, vy + ay);
 
         Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();
@@ -244,12 +244,12 @@ void Rigidbody::ApplyForce(double force, double angle)
   force /= _mass;
   double fx = std::cos(angle) * force;
   double fy = std::sin(angle) * force;
-  SetAcceleration(GetAccelerationX() + fx, GetAccelerationY() + fy);
+  SetCartesianVelocity(GetVelocityX() + fx, GetVelocityY() + fy);
 }
 
 void Rigidbody::ApplyCartesianForce(double x, double y)
 {
-  SetAcceleration(GetAccelerationX() + x / _mass, GetAccelerationY() + y / _mass);
+  SetCartesianVelocity(GetVelocityX() + x / _mass, GetVelocityY() + y / _mass);
 }
 
 void Rigidbody::PopulateDebugger()

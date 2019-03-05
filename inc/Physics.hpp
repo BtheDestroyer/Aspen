@@ -12,11 +12,11 @@ namespace Physics
 {
 namespace GRAV_DIR
 {
-  const double RIGHT = 0;
-  const double UP = M_PI_2;
-  const double LEFT = M_PI;
-  const double DOWN = 3 * M_PI_2;
-};
+const double LEFT = 0;
+const double DOWN = M_PI_2;
+const double RIGHT = M_PI;
+const double UP = 3 * M_PI_2;
+}; // namespace GRAV_DIR
 
 class Physics : public Object::Object
 {
@@ -84,7 +84,7 @@ public:
 
   void ApplyForce(double force, double angle);
   void ApplyCartesianForce(double x, double y);
-  
+
   void PopulateDebugger();
 };
 } // namespace Physics

@@ -14,13 +14,17 @@ namespace Controller
 {
 class PlayerController_8Way : public Object::Object
 {
+  double _acceleration;
   double _speed;
 
 public:
   PlayerController_8Way(Object *parent = nullptr, std::string name = "PlayerController_8Way");
-  PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, SDL_Keycode left, SDL_Keycode right, double speed, Object *parent = nullptr, std::string name = "PlayerController_8Way");
+  PlayerController_8Way(SDL_Keycode up, SDL_Keycode down, SDL_Keycode left, SDL_Keycode right, double speed, double acceleration, Object *parent = nullptr, std::string name = "PlayerController_8Way");
 
   void operator()();
+
+  void SetAcceleration(double acc);
+  double GetAcceleration();
 
   void SetSpeed(double speed);
   double GetSpeed();
@@ -30,21 +34,30 @@ public:
 
 class PlayerController_Sidescroller : public Object::Object
 {
+  double _acceleration;
   double _speed;
   double _jumpStrength;
+  double _jumpHeight;
+  double _jumpRemaining;
   SDL_Keycode _jumpKey;
 
 public:
   PlayerController_Sidescroller(Object *parent = nullptr, std::string name = "PlayerController_Sidescroller");
-  PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double jumpStrength, Object *parent = nullptr, std::string name = "PlayerController_Sidescroller");
+  PlayerController_Sidescroller(SDL_Keycode left, SDL_Keycode right, SDL_Keycode jump, double speed, double acceleration, double jumpStrength, double jumpHeight, Object *parent = nullptr, std::string name = "PlayerController_Sidescroller");
 
   void operator()();
+
+  void SetAcceleration(double acc);
+  double GetAcceleration();
 
   void SetSpeed(double speed);
   double GetSpeed();
 
   void SetJumpStrength(double strength);
   double GetJumpStrength();
+
+  void SetJumpHeight(double height);
+  double GetJumpHeight();
 
   void PopulateDebugger();
 };
