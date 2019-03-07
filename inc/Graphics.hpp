@@ -275,6 +275,23 @@ public:
   void PopulateDebugger();
 };
 
+class Graphics;
+
+class Camera : public Object::Object
+{
+  Graphics *_gfx;
+
+public:
+  Camera(Object *parent = nullptr, std::string name = "Camera");
+
+  void SelectCamera();
+
+  Graphics *GetGraphics();
+  void SetGraphics(Graphics *gfx);
+
+  void End();
+};
+
 /// \brief Graphics class
 ///        Holds other classes from Aspen::Graphics as children to draw them to the screen
 class Graphics : public Object::Object
@@ -283,11 +300,12 @@ class Graphics : public Object::Object
   ///        Used for determining if SDL should be initialized or closed
   static unsigned _gcount;
   /// \brief Window to be displayed
-  SDL_Window *_window = nullptr;
+  SDL_Window *_window;
   /// \brief Surface of _window
-  SDL_Surface *_surface = nullptr;
-  SDL_Renderer *_renderer = nullptr;
+  SDL_Surface *_surface;
+  SDL_Renderer *_renderer;
   Color _background;
+  Camera *_camera;
 
 public:
   /// \brief Constructor
@@ -335,6 +353,9 @@ public:
 
   void DrawText(Text *text);
   void DrawText(Text *text, SDL_Rect clip);
+
+  void SetCamera(Camera *camera);
+  Camera *GetCamera();
 
   /// \brief Frees the Window and shuts down SDL
   void End();

@@ -42,6 +42,14 @@ public:
   float GetXScale() const;
   float GetYScale() const;
 
+  float GetInverseXPosition() const;
+  float GetInverseYPosition() const;
+  double GetInverseRotation() const;
+  float GetInverseXScale() const;
+  float GetInverseYScale() const;
+
+  Transform Inverse() const;
+
   Transform operator+(const Transform &rhs);
   Transform &operator+=(const Transform &rhs);
 

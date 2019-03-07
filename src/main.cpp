@@ -17,6 +17,7 @@ class MyState : public GameState::GameState
   Graphics::Line *line = nullptr;
   Graphics::Line *line2 = nullptr;
   Audio::SoundEffect *sound = nullptr;
+  Graphics::Camera *cam;
 
 public:
   MyState(Object *parent = nullptr, std::string name = "MyState")
@@ -47,6 +48,7 @@ public:
     AddChild(newSprite);
 
     Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{-25, -25, 50, 50}, 0x0000FFFF, true, this, "Bumper");
+    rec->AddChild(new Physics::Rigidbody());
     rec->AddChild(new Physics::CircleCollider(25, rec));
     rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
     AddChild(rec);
@@ -75,6 +77,10 @@ public:
 
     sound = new Audio::SoundEffect("resources/pop.wav", this);
     AddChild(sound);
+
+    cam = CreateChild<Graphics::Camera>();
+    cam->FindChildOfType<Transform::Transform>()->SetPosition(100, -20);
+    cam->SelectCamera();
   }
 
   void OnUpdate()
@@ -83,6 +89,40 @@ public:
     double dt = M_PI_2 * engine->FindChildOfType<Time::Time>()->CurrentTime();
     line->FindChildOfType<Transform::Transform>()->SetRotation(dt);
     line2->FindChildOfType<Transform::Transform>()->SetRotation(2.0 * dt);
+    if (Input::KeyHeld(SDLK_LEFT))
+    {
+      if (Input::KeyHeld(SDLK_LSHIFT))
+        cam->FindChildOfType<Transform::Transform>()->ModifyXScale(0.99);
+      else
+        cam->FindChildOfType<Transform::Transform>()->ModifyXPosition(-10);
+    }
+    if (Input::KeyHeld(SDLK_RIGHT))
+    {
+      if (Input::KeyHeld(SDLK_LSHIFT))
+        cam->FindChildOfType<Transform::Transform>()->ModifyXScale(1.01);
+      else
+        cam->FindChildOfType<Transform::Transform>()->ModifyXPosition(10);
+    }
+    if (Input::KeyHeld(SDLK_UP))
+    {
+      if (Input::KeyHeld(SDLK_LSHIFT))
+        cam->FindChildOfType<Transform::Transform>()->ModifyYScale(1.01);
+      else
+        cam->FindChildOfType<Transform::Transform>()->ModifyYPosition(-10);
+    }
+    if (Input::KeyHeld(SDLK_DOWN))
+    {
+      if (Input::KeyHeld(SDLK_LSHIFT))
+        cam->FindChildOfType<Transform::Transform>()->ModifyYScale(0.99);
+      else
+        cam->FindChildOfType<Transform::Transform>()->ModifyYPosition(10);
+    }
+
+    if (Input::KeyHeld(SDLK_e))
+      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(0.01 * M_2_PI);
+    if (Input::KeyHeld(SDLK_q))
+      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(-0.01 * M_2_PI);
+
     if (Input::KeyPressed(SDLK_p))
       sound->Play();
   }

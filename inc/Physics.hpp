@@ -106,8 +106,7 @@ public:
   Collider *collider;
   double collisionX;
   double collisionY;
-  double forceDirection;
-  double forceStrength;
+  double collisionAngle;
 
   Collision(Collider *other);
 };
@@ -124,7 +123,7 @@ public:
 
   void operator()();
 
-  virtual Collision TestCollision(Collider *other);
+  virtual std::pair<Collision, Collision> TestCollision(Collider *other);
   virtual void ResolveCollision(Collision collision);
 
   void SetOffset(int x, int y);
@@ -148,7 +147,7 @@ public:
   CircleCollider(Object *parent = nullptr, std::string name = "CircleCollider");
   CircleCollider(double radius, Object *parent = nullptr, std::string name = "CircleCollider");
 
-  Collision TestCollision(Collider *other);
+  std::pair<Collision, Collision> TestCollision(Collider *other);
   void ResolveCollision(Collision collision);
 
   double GetRadius();

@@ -39,29 +39,19 @@ void Physics::operator()()
     {
       for (unsigned j = i + 1; j < colliders.size(); ++j)
       {
-        Collision c = colliders[i]->TestCollision(colliders[j]);
-        if (c.result == COLLISION_RESULT::SUCCESS)
+        std::pair<Collision, Collision> c = colliders[i]->TestCollision(colliders[j]);
+        if (c.first.result == COLLISION_RESULT::SUCCESS)
         {
-          colliders[i]->ResolveCollision(c);
-          double dx = c.collisionX - colliders[i]->GetX();
-          double dy = c.collisionY - colliders[i]->GetY();
-          c.collisionX = colliders[j]->GetX() + dx;
-          c.collisionY = colliders[j]->GetY() + dy;
-          c.forceDirection += M_PI;
-          colliders[j]->ResolveCollision(c);
+          colliders[i]->ResolveCollision(c.first);
+          colliders[j]->ResolveCollision(c.second);
         }
-        else if (c.result == COLLISION_RESULT::CANNOT_HANDLE)
+        else if (c.first.result == COLLISION_RESULT::CANNOT_HANDLE)
         {
           c = colliders[j]->TestCollision(colliders[i]);
-          if (c.result == COLLISION_RESULT::SUCCESS)
+          if (c.first.result == COLLISION_RESULT::SUCCESS)
           {
-            colliders[j]->ResolveCollision(c);
-            double dx = c.collisionX - colliders[j]->GetX();
-            double dy = c.collisionY - colliders[j]->GetY();
-            c.collisionX = colliders[i]->GetX() + dx;
-            c.collisionY = colliders[i]->GetY() + dy;
-            c.forceDirection += M_PI;
-            colliders[i]->ResolveCollision(c);
+            colliders[j]->ResolveCollision(c.first);
+            colliders[i]->ResolveCollision(c.second);
           }
         }
       }
@@ -309,7 +299,7 @@ void Rigidbody::PopulateDebugger()
 /////////////////////////////////////////////////////////
 
 Collision::Collision(Collider *other)
-    : collider(other), collisionX(0), collisionY(0), forceDirection(0), forceStrength(0)
+    : collider(other), collisionX(0), collisionY(0), collisionAngle(0)
 {
 }
 
@@ -324,10 +314,11 @@ void Collider::operator()()
 {
 }
 
-Collision Collider::TestCollision(Collider *other)
+std::pair<Collision, Collision> Collider::TestCollision(Collider *other)
 {
-  Collision c(this);
-  c.result = COLLISION_RESULT::CANNOT_HANDLE;
+  std::pair<Collision, Collision> c(Collision(other), Collision(this));
+  c.first.result = COLLISION_RESULT::CANNOT_HANDLE;
+  c.second.result = COLLISION_RESULT::CANNOT_HANDLE;
   return c;
 }
 
@@ -407,10 +398,11 @@ CircleCollider::CircleCollider(double radius, Object *parent, std::string name)
 {
 }
 
-Collision CircleCollider::TestCollision(Collider *other)
+std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
 {
-  Collision c(other);
-  c.result = COLLISION_RESULT::CANNOT_HANDLE;
+  std::pair<Collision, Collision> c(Collision(other), Collision(this));
+  c.first.result = COLLISION_RESULT::CANNOT_HANDLE;
+  c.second.result = COLLISION_RESULT::CANNOT_HANDLE;
 
   if (dynamic_cast<CircleCollider *>(other))
   {
@@ -425,15 +417,24 @@ Collision CircleCollider::TestCollision(Collider *other)
     double r = _radius + oR;
     if (d2 < r * r)
     {
-      c.result = COLLISION_RESULT::SUCCESS;
+      c.first.result = COLLISION_RESULT::SUCCESS;
+      c.second.result = COLLISION_RESULT::SUCCESS;
       double d = std::sqrt(d2);
       double cd = d - oR;
+      double ocd = d - _radius;
       double ca = std::atan2(dy, dx);
-      c.collisionX = std::cos(ca) * cd;
-      c.collisionY = std::sin(ca) * cd;
+      c.first.collisionX = std::cos(ca) * cd;
+      c.first.collisionY = std::sin(ca) * cd;
+      c.first.collisionAngle = ca;
+      c.second.collisionX = std::cos(M_PI + ca) * ocd;
+      c.second.collisionY = std::sin(M_PI + ca) * ocd;
+      c.second.collisionAngle = -ca;
     }
     else
-      c.result = COLLISION_RESULT::FAILURE;
+    {
+      c.first.result = COLLISION_RESULT::FAILURE;
+      c.second.result = COLLISION_RESULT::FAILURE;
+    }
   }
 
   return c;
@@ -475,7 +476,6 @@ void CircleCollider::ResolveCollision(Collision collision)
       tf->ModifyPosition(-dx / 2, -dy / 2);
     else
       tf->ModifyPosition(-dx, -dy);
-    rb->ApplyForce(collision.forceStrength, collision.forceDirection);
   }
 }
 
