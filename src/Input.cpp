@@ -53,8 +53,8 @@ void Axis::PopulateDebugger()
 {
   ImGui::Text("Positive Key: %s", SDL_GetKeyName(_pos));
   ImGui::Text("Negative Key: %s", SDL_GetKeyName(_neg));
-  ImGui::Text("Gravity: %f", _gravity);
-  ImGui::Text("Weight: %f", _weight);
+  ImGui::DragFloat("Gravity", &_gravity, 0.1f);
+  ImGui::DragFloat("Weight", &_weight, 0.1f);
   ImGui::Text("Value: %f", GetValue());
   Object::PopulateDebugger();
 }

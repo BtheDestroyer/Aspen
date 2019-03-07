@@ -357,7 +357,7 @@ void Transform::PopulateDebugger()
   r = float(_r);
   ImGui::DragFloat("Rotation", &r, M_PI / 180.0f);
   if (std::abs(r - _r) >= M_PI / 180.0f)
-    _r = double(r);
+    _r = r;
   ImGui::DragFloat2("Scale", &_scalex, 0.01f);
   Object::PopulateDebugger();
 }

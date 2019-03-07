@@ -1390,7 +1390,7 @@ int Animation::GetFrameCount()
 void Animation::PopulateDebugger()
 {
   ImGui::Text("Current Frame: %d / %d", _currentFrame, GetFrameCount());
-  ImGui::Text("Frame Delay: %f", _delay);
+  ImGui::InputFloat("Frame Delay", &_delay);
   ImGui::Text("Time till next frame: %f", _remainingDelay);
   Object::PopulateDebugger();
 }

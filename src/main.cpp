@@ -119,9 +119,9 @@ public:
     }
 
     if (Input::KeyHeld(SDLK_e))
-      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(0.01 * M_2_PI);
+      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(0.01 * 2 * M_PI);
     if (Input::KeyHeld(SDLK_q))
-      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(-0.01 * M_2_PI);
+      cam->FindChildOfType<Transform::Transform>()->ModifyRotation(-0.01 * 2 * M_PI);
 
     if (Input::KeyPressed(SDLK_p))
       sound->Play();

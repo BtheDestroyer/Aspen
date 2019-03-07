@@ -114,7 +114,10 @@ void Time::PopulateDebugger()
   ImGui::Text("Last Time: %f", LastTime());
   ImGui::Text("Current Time: %f", CurrentTime());
   ImGui::Text("Delta Time: %f", DeltaTime());
-  ImGui::Text("Target Framerate: %d", TargetFramerate());
+  int tf = int(_targetFramerate);
+  ImGui::InputInt("Target Framerate", &tf, 1, 1);
+  if (std::abs(tf - int(_targetFramerate)) >= 1)
+    _targetFramerate = unsigned(tf);
   Object::PopulateDebugger();
 }
 } // namespace Time

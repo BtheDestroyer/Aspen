@@ -105,7 +105,12 @@ double PlayerController_8Way::GetSpeed()
 
 void PlayerController_8Way::PopulateDebugger()
 {
-  ImGui::Text("Speed: %f", _acceleration);
+  static float a; a = _acceleration;
+  static float s; s = _speed;
+  ImGui::DragFloat("Acceleration", &a, 0.1f);
+  _acceleration = a;
+  ImGui::DragFloat("Speed", &s, 0.1f);
+  _speed = s;
   if (_parent)
   {
     Input::Axis *av = nullptr;
@@ -123,7 +128,8 @@ void PlayerController_8Way::PopulateDebugger()
     {
       double dx = ah->GetValue() * _acceleration;
       double dy = av->GetValue() * _acceleration;
-      ImGui::Text("Input: (%.3f, %.3f)", dx, dy);
+      ImGui::Text("Input X: %.3f", dx);
+      ImGui::Text("Input Y: %.3f", dy);
     }
   }
   Object::PopulateDebugger();
@@ -254,28 +260,35 @@ double PlayerController_Sidescroller::GetJumpHeight()
 
 void PlayerController_Sidescroller::PopulateDebugger()
 {
-  ImGui::Text("Acceleration: %f", _acceleration);
-  ImGui::Text("Speed: %f", _speed);
-  ImGui::Text("Jump Strength: %f", _jumpStrength);
-  if (_parent)
+  static float a; a = _acceleration;
+  static float s; s = _speed;
+  static float js; js = _jumpStrength;
+  static float jh; jh = _jumpHeight;
+  ImGui::DragFloat("Acceleration", &a, 0.1f);
+  _acceleration = a;
+  ImGui::DragFloat("Speed", &s, 0.1f);
+  _speed = s;
+  ImGui::DragFloat("Jump Strength", &js, 0.1f);
+  _jumpStrength = js;
+  ImGui::DragFloat("Jump Height", &jh, 0.1f);
+  _jumpHeight = jh;
+  ImGui::Text("Jump Key: %s", SDL_GetKeyName(_jumpKey));
+  Input::Axis *av = nullptr;
+  Input::Axis *ah = nullptr;
+  for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
   {
-    Input::Axis *av = nullptr;
-    Input::Axis *ah = nullptr;
-    for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
+    if (!ah && a->Name() == "Axis-Horizontal")
     {
-      if (!ah && a->Name() == "Axis-Horizontal")
-      {
-        ah = a;
-        break;
-      }
+      ah = a;
+      break;
     }
-    if (av)
-    {
-      double dx = ah->GetValue() * _acceleration;
-      ImGui::Text("Input: %.3f", dx);
-    }
-    ImGui::Text("Jumping: %.3f / %.3f", _jumpRemaining, _jumpHeight);
   }
+  if (av)
+  {
+    double dx = ah->GetValue() * _acceleration;
+    ImGui::Text("Input X: %.3f", dx);
+  }
+  ImGui::Text("Jumping: %.3f / %.3f", _jumpRemaining, _jumpHeight);
   Object::PopulateDebugger();
 }
 

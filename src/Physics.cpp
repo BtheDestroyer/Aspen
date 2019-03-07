@@ -109,8 +109,18 @@ void Physics::SetDrag(double drag)
 
 void Physics::PopulateDebugger()
 {
-  ImGui::Text("Gravity: %.4f, %.4f", _gravStrength, _gravDirection);
-  ImGui::Text("Drag: %f", _drag);
+  static float gs;
+  gs = _gravStrength;
+  static float gd;
+  gd = _gravDirection;
+  static float d;
+  d = _drag;
+  ImGui::DragFloat("Gravity Strength", &gs);
+  _gravStrength = gs;
+  ImGui::SliderFloat("Gravity Direction", &gd, 0.0f, float(M_2_PI));
+  _gravDirection = gd;
+  ImGui::SliderFloat("Drag", &d, 0.0f, 1.0f);
+  _drag = d;
   Object::PopulateDebugger();
 }
 
@@ -283,8 +293,19 @@ void Rigidbody::ApplyCartesianForce(double x, double y)
 
 void Rigidbody::PopulateDebugger()
 {
-  ImGui::Text("Mass: %f", _mass);
-  ImGui::Text("Velocity: %.4f, %.4f (%.4f, %.4f)", _velocityStrength, _velocityDirection, GetVelocityX(), GetVelocityY());
+  static float m;
+  m = _mass;
+  static float vs;
+  vs = _velocityStrength;
+  static float vd;
+  vd = _velocityDirection;
+  ImGui::DragFloat("Mass", &m, 0.1f, 0.1f, 10000.0f);
+  _mass = m;
+  ImGui::DragFloat("Velocity Strength", &vs, 0.1f);
+  _velocityStrength = vs;
+  ImGui::SliderFloat("Velocity Direction", &vd, 0.0f, float(2 * M_PI));
+  _velocityDirection = vd;
+  ImGui::Text("Cartesian Velocity: (%.4f, %.4f)", GetVelocityX(), GetVelocityY());
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (engine)
   {
@@ -292,7 +313,14 @@ void Rigidbody::PopulateDebugger()
     if (physics)
       ImGui::Text("VDrag: %.4f", _velocityStrength * physics->GetDrag());
   }
-  ImGui::Text("Acceleration: %.4f, %.4f", _accelerationStrength, _accelerationDirection);
+  static float as;
+  as = _accelerationStrength;
+  static float ad;
+  ad = _accelerationDirection;
+  ImGui::DragFloat("Acceleration Strength", &as, 0.1f);
+  _accelerationStrength = as;
+  ImGui::SliderFloat("Acceleration Direction", &ad, 0.0f, float(2 * M_2_PI));
+  _accelerationDirection = ad;
   Object::PopulateDebugger();
 }
 
@@ -382,7 +410,7 @@ void Collider::SetTrigger(bool trigger)
 
 void Collider::PopulateDebugger()
 {
-  ImGui::Text("Offset: %d, %d", _offX, _offY);
+  ImGui::DragInt2("Offset", &_offX, 1.0f);
   Object::PopulateDebugger();
 }
 
@@ -491,7 +519,10 @@ void CircleCollider::SetRadius(double radius)
 
 void CircleCollider::PopulateDebugger()
 {
-  ImGui::Text("Radius: %f", _radius);
+  static float r;
+  r = _radius;
+  ImGui::DragFloat("Radius", &r, 0.5f);
+  _radius = r;
   Collider::PopulateDebugger();
 }
 } // namespace Physics
