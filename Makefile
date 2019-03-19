@@ -1,24 +1,22 @@
-SOURCES := src
-HEADERS := inc
-BUILD := build
+SOURCES := ./src
+HEADERS := ./inc
+BUILD := ./build
 OBJECTS := $(BUILD)/obj
 ifndef PROJECT
 PROJECT := sdl
-LIBRARY := Aspen
 endif
+LIBRARY := Aspen
 
 IMGUI_LIB := $(BUILD)/libimgui.a
 IMGUI_CPP := $(wildcard libraries/imgui/*.cpp)
 IMGUI_OBJ := $(patsubst libraries/imgui/%.cpp, $(OBJECTS)/%.o,$(IMGUI_CPP))
 IMGUI_SDL_CPP := $(filter-out libraries/imgui_sdl/example.cpp,$(wildcard libraries/imgui_sdl/*.cpp))
 IMGUI_SDL_OBJ := $(patsubst libraries/imgui_sdl/%.cpp, $(OBJECTS)/%.o,$(IMGUI_SDL_CPP))
-OUTPUT := $(BUILD)/$(PROJECT)
 
-CXX := g++
 ifndef PLATFORM
 ifeq ($(OS),Windows_NT)
 PLATFORM :=__WIN32
-PROJECT +=.exe
+PROJECT := $(PROJECT).exe
 else
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -29,6 +27,9 @@ PLATFORM :=__OSX
 endif
 endif
 endif
+OUTPUT := $(BUILD)/$(PROJECT)
+
+CXX := g++
 CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
@@ -78,15 +79,14 @@ all: project docs
 
 .PHONY: project
 project: $(OUTPUT)
+	@echo Built: $(OUTPUT)
 
 .PHONY: library
-library: $(BUILD)/lib$(LIBRARY).a
-
-$(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
+library:
 	$(MAKE) project PROJECT=lib$(LIBRARY).a
 
 .PHONY: setup
-setup: $(SOURCES) $(HEADERS) $(BUILD)
+setup: $(SOURCES) $(HEADERS) $(OBJECTS)
 
 .PHONY: newfile
 newfile: newcpp newhpp
@@ -135,10 +135,13 @@ $(HEADERS)/$(STUB).hpp:
 
 .NOTPARALLEL: $(OUTPUT)
 ifeq ($(suffix $(PROJECT)),.a)
-$(OUTPUT): $(OBJECTS) $(OBJFILES) $(IMGUI_LIB)
-	$(AR) rvs $(OUTPUT) $(OBJFILES) $(ARFLAGS)
+$(OUTPUT): $(OBJFILES)
+	$(AR) rvs $@ $^ $(ARFLAGS)
 else
-$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(IMGUI_LIB) $(OBJECTS)/main.o
+$(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
+	$(AR) rvs $@ $^ $(ARFLAGS)
+
+$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB)
 	$(CXX) $(OBJECTS)/main.o -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
 	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
@@ -150,7 +153,9 @@ endif
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-$(OBJECTS): $(BUILD)
+$(OBJFILES) : | $(OBJECTS)
+
+$(OBJECTS): | $(BUILD)
 	@mkdir -p $@
 
 $(SOURCES):
@@ -188,7 +193,7 @@ docs: doxygen
 
 .PHONY: doxygen
 doxygen:
-	@doxygen Doxyfile
+	doxygen Doxyfile
 
 .PHONY: run
 run: $(OUTPUT)
@@ -204,4 +209,4 @@ debug: $(OUTPUT)
 
 .PHONY: count
 count:
-	@cloc $(SOURCES) $(HEADERS) Makefile --quiet
+	cloc $(SOURCES) $(HEADERS) Makefile --quiet
