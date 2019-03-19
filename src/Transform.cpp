@@ -1,6 +1,8 @@
 #define __TRANSFORM_CPP
 
 #include "Transform.hpp"
+#include "Engine.hpp"
+#include "Graphics.hpp"
 #include <cmath>
 #include "imgui.h"
 
@@ -91,222 +93,157 @@ void Transform::ModifyYScale(float y)
 
 float Transform::GetXPosition() const
 {
-  float cx = 0;
-  float cy = 0;
-  std::vector<Transform *> tfs;
-  Object *p = _parent;
+  std::vector<const Transform *> tfs;
+  const Object *p = this;
+  tfs.push_back(this);
   while (p)
   {
-    Transform *tf = dynamic_cast<Transform *>(p);
+    const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
       tf = p->FindChildOfType<Transform>();
     if (tf && tf != this)
       tfs.push_back(tf);
     p = p->Parent();
   }
-  for (unsigned i = tfs.size(); i > 0; --i)
+  float ret = 0.0f;
+  for (const Transform *tf : tfs)
   {
-    Transform *tf = tfs[i - 1];
-    if (i < tfs.size())
-    {
-      float tx = cx + tf->_posx * std::cos(tfs[i]->GetRotation()) - tf->_posy * std::sin(tfs[i]->GetRotation());
-      float ty = cy + tf->_posx * std::sin(tfs[i]->GetRotation()) + tf->_posy * std::cos(tfs[i]->GetRotation());
-      cx = tx;
-      cy = ty;
-    }
-    else
-    {
-      cx = tf->_posx;
-      cy = tf->_posy;
-    }
+    // TODO: Incorporate scale and rotation
+    ret += tf->GetLocalXPosition() * tf->GetXScale() * tf->GetLocalInverseXScale();
   }
-  if (tfs.size() > 0)
-  {
-    float tx = cx + _posx * std::cos(tfs[0]->GetRotation()) - _posy * std::sin(tfs[0]->GetRotation());
-    cx = tx;
-  }
-  else
-  {
-    cx = _posx;
-  }
-  return cx;
+  return ret;
 }
 
 float Transform::GetYPosition() const
 {
-  float cx = 0;
-  float cy = 0;
-  std::vector<Transform *> tfs;
-  Object *p = _parent;
+  std::vector<const Transform *> tfs;
+  const Object *p = this;
+  tfs.push_back(this);
   while (p)
   {
-    Transform *tf = dynamic_cast<Transform *>(p);
+    const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
       tf = p->FindChildOfType<Transform>();
     if (tf && tf != this)
       tfs.push_back(tf);
     p = p->Parent();
   }
-  for (unsigned i = tfs.size(); i > 0; --i)
+  float ret = 0.0f;
+  for (const Transform *tf : tfs)
   {
-    Transform *tf = tfs[i - 1];
-    if (i < tfs.size())
-    {
-      float tx = cx + tf->_posx * std::cos(tfs[i]->GetRotation()) - tf->_posy * std::sin(tfs[i]->GetRotation());
-      float ty = cy + tf->_posx * std::sin(tfs[i]->GetRotation()) + tf->_posy * std::cos(tfs[i]->GetRotation());
-      cx = tx;
-      cy = ty;
-    }
-    else
-    {
-      cx = tf->_posx;
-      cy = tf->_posy;
-    }
+    // TODO: Incorporate scale and rotation
+    ret += tf->GetLocalYPosition() * tf->GetYScale() * tf->GetLocalInverseYScale();
   }
-  if (tfs.size() > 0)
-  {
-    float ty = cy + _posx * std::sin(tfs[0]->GetRotation()) + _posy * std::cos(tfs[0]->GetRotation());
-    cy = ty;
-  }
-  else
-  {
-    cy = _posy;
-  }
-  return cy;
+  return ret;
 }
 
 double Transform::GetRotation() const
 {
-  double r = _r;
-  Object *p = _parent;
+  const Object *p = this;
+  double ret = 0.0;
   while (p)
   {
-    Transform *tf = dynamic_cast<Transform *>(p);
+    const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
       tf = p->FindChildOfType<Transform>();
-    if (tf && tf != this)
-      r += tf->_r;
+    if (tf)
+      ret += tf->GetLocalRotation();
     p = p->Parent();
   }
-  return std::fmod(r, 360.0);
+  return ret;
 }
 
 float Transform::GetXScale() const
 {
-  float r = _scalex;
-  Object *p = _parent;
+  const Object *p = this;
+  double ret = 1.0;
   while (p)
   {
-    Transform *tf = dynamic_cast<Transform *>(p);
+    const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
       tf = p->FindChildOfType<Transform>();
-    if (tf && tf != this)
-      r *= tf->_scalex;
+    if (tf)
+      ret *= tf->GetLocalXScale();
     p = p->Parent();
   }
-  return r;
+  return ret;
 }
 
 float Transform::GetYScale() const
 {
-  float r = _scaley;
-  Object *p = _parent;
+  const Object *p = this;
+  double ret = 1.0;
   while (p)
   {
-    Transform *tf = dynamic_cast<Transform *>(p);
+    const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
       tf = p->FindChildOfType<Transform>();
-    if (tf && tf != this)
-      r *= tf->_scaley;
+    if (tf)
+      ret *= tf->GetLocalYScale();
     p = p->Parent();
   }
-  return r;
+  return ret;
+}
+
+float Transform::GetXPosition(const Transform *camera) const
+{
+  if (!camera)
+    return GetXPosition();
+  int w, h;
+  Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+  if (!e)
+    return GetXPosition() + camera->GetInverseXPosition();
+  Graphics::Graphics *g = e->FindChildOfType<Graphics::Graphics>();
+  if (!g)
+    return GetXPosition() + camera->GetInverseXPosition();
+  SDL_GetWindowSize(g->GetWindow(), &w, &h);
+  return ((GetXPosition() + camera->GetInverseXPosition()) - w / 2.0f) * camera->GetInverseXScale() + w / 2.0f;
+}
+
+float Transform::GetYPosition(const Transform *camera) const
+{
+  if (!camera)
+    return GetYPosition();
+  int w, h;
+  Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+  if (!e)
+    return GetYPosition() + camera->GetInverseYPosition();
+  Graphics::Graphics *g = e->FindChildOfType<Graphics::Graphics>();
+  if (!g)
+    return GetYPosition() + camera->GetInverseYPosition();
+  SDL_GetWindowSize(g->GetWindow(), &w, &h);
+  return ((GetYPosition() + camera->GetInverseYPosition()) - h / 2.0f) * camera->GetInverseYScale() + h / 2.0f;
+}
+
+double Transform::GetRotation(const Transform *camera) const
+{
+  if (!camera)
+    return GetRotation();
+  return GetRotation() + camera->GetInverseRotation();
+}
+
+float Transform::GetXScale(const Transform *camera) const
+{
+  if (!camera)
+    return GetXScale();
+  return GetXScale() * camera->GetInverseXScale();
+}
+
+float Transform::GetYScale(const Transform *camera) const
+{
+  if (!camera)
+    return GetYScale();
+  return GetYScale() * camera->GetInverseYScale();
 }
 
 float Transform::GetInverseXPosition() const
 {
-  float cx = 0;
-  float cy = 0;
-  std::vector<Transform *> tfs;
-  Object *p = _parent;
-  while (p)
-  {
-    Transform *tf = dynamic_cast<Transform *>(p);
-    if (!tf)
-      tf = p->FindChildOfType<Transform>();
-    if (tf && tf != this)
-      tfs.push_back(tf);
-    p = p->Parent();
-  }
-  for (unsigned i = tfs.size(); i > 0; --i)
-  {
-    Transform *tf = tfs[i - 1];
-    if (i < tfs.size())
-    {
-      float tx = cx - tf->_posx * std::cos(-tfs[i]->GetRotation()) + tf->_posy * std::sin(-tfs[i]->GetRotation());
-      float ty = cy - tf->_posx * std::sin(-tfs[i]->GetRotation()) - tf->_posy * std::cos(-tfs[i]->GetRotation());
-      cx = tx;
-      cy = ty;
-    }
-    else
-    {
-      cx = tf->_posx;
-      cy = tf->_posy;
-    }
-  }
-  if (tfs.size() > 0)
-  {
-    float tx = cx - _posx * std::cos(-tfs[0]->GetRotation()) + _posy * std::sin(-tfs[0]->GetRotation());
-    cx = tx;
-  }
-  else
-  {
-    cx = -_posx;
-  }
-  return cx;
+  return -GetXPosition();
 }
 
 float Transform::GetInverseYPosition() const
 {
-  float cx = 0;
-  float cy = 0;
-  std::vector<Transform *> tfs;
-  Object *p = _parent;
-  while (p)
-  {
-    Transform *tf = dynamic_cast<Transform *>(p);
-    if (!tf)
-      tf = p->FindChildOfType<Transform>();
-    if (tf && tf != this)
-      tfs.push_back(tf);
-    p = p->Parent();
-  }
-  for (unsigned i = tfs.size(); i > 0; --i)
-  {
-    Transform *tf = tfs[i - 1];
-    if (i < tfs.size())
-    {
-      float tx = cx - tf->_posx * std::cos(-tfs[i]->GetRotation()) + tf->_posy * std::sin(-tfs[i]->GetRotation());
-      float ty = cy - tf->_posx * std::sin(-tfs[i]->GetRotation()) - tf->_posy * std::cos(-tfs[i]->GetRotation());
-      cx = tx;
-      cy = ty;
-    }
-    else
-    {
-      cx = -tf->_posx;
-      cy = -tf->_posy;
-    }
-  }
-  if (tfs.size() > 0)
-  {
-    float ty = cy - _posx * std::sin(-tfs[0]->GetRotation()) - _posy * std::cos(-tfs[0]->GetRotation());
-    cy = ty;
-  }
-  else
-  {
-    cy = -_posy;
-  }
-  return cy;
+  return -GetYPosition();
 }
 
 double Transform::GetInverseRotation() const
@@ -324,19 +261,69 @@ float Transform::GetInverseYScale() const
   return 1.0f / GetYScale();
 }
 
+float Transform::GetLocalXPosition() const
+{
+  return _posx;
+}
+
+float Transform::GetLocalYPosition() const
+{
+  return _posy;
+}
+
+double Transform::GetLocalRotation() const
+{
+  return _r;
+}
+
+float Transform::GetLocalXScale() const
+{
+  return _scalex;
+}
+
+float Transform::GetLocalYScale() const
+{
+  return _scaley;
+}
+
+float Transform::GetLocalInverseXPosition() const
+{
+  return -GetLocalXPosition();
+}
+
+float Transform::GetLocalInverseYPosition() const
+{
+  return -GetLocalYPosition();
+}
+
+double Transform::GetLocalInverseRotation() const
+{
+  return -GetLocalRotation();
+}
+
+float Transform::GetLocalInverseXScale() const
+{
+  return 1.0f / GetLocalXScale();
+}
+
+float Transform::GetLocalInverseYScale() const
+{
+  return 1.0f / GetLocalYScale();
+}
+
 Transform Transform::Inverse() const
 {
   Transform tf;
 
-  tf._posx = GetInverseXPosition();
-  tf._posy = GetInverseYPosition();
-  tf._r = GetInverseRotation();
-  tf._scalex = GetInverseXScale();
-  tf._scaley = GetInverseYScale();
+  tf._posx = GetLocalInverseXPosition();
+  tf._posy = GetLocalInverseYPosition();
+  tf._r = GetLocalInverseRotation();
+  tf._scalex = GetLocalInverseXScale();
+  tf._scaley = GetLocalInverseYScale();
   return tf;
 }
 
-Transform Transform::operator+(const Transform &rhs)
+Transform Transform::operator+(const Transform &rhs) const
 {
   Transform tf = *this;
   return tf += rhs;

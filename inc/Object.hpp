@@ -109,7 +109,7 @@ public:
   int ParentCount();
 
   template <typename T>
-  T *FindAncestorOfType()
+  T *FindAncestorOfType() const
   {
     Object *p = _parent;
     while (p)
@@ -127,6 +127,15 @@ public:
   ///         If no children match the given type, nullptr is returned
   ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return whichever was added earliest - `A*` or `B*` - as an `A*`
   template <typename T>
+  const T *FindChildOfType() const
+  {
+    for (unsigned i = 0; i < _children.size(); ++i)
+      if (dynamic_cast<T *>(_children[i]))
+        return dynamic_cast<T *>(_children[i]);
+    return nullptr;
+  }
+
+  template <typename T>
   T *FindChildOfType()
   {
     for (unsigned i = 0; i < _children.size(); ++i)
@@ -141,12 +150,36 @@ public:
   ///         If no children match the given type, nullptr is returned
   ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return both `A*` and `B*` as `A*`
   template <typename T>
+  const std::vector<T *> FindChildrenOfType() const
+  {
+    std::vector<T *> vec;
+    for (unsigned i = 0; i < _children.size(); ++i)
+      if (dynamic_cast<T *>(_children[i]))
+        vec.push_back(dynamic_cast<T *>(_children[i]));
+    return vec;
+  }
+
+  template <typename T>
   std::vector<T *> FindChildrenOfType()
   {
     std::vector<T *> vec;
     for (unsigned i = 0; i < _children.size(); ++i)
       if (dynamic_cast<T *>(_children[i]))
         vec.push_back(dynamic_cast<T *>(_children[i]));
+    return vec;
+  }
+
+  template <typename T>
+  const std::vector<T *> FindDescendentsOfType() const
+  {
+    std::vector<T *> vec;
+    for (unsigned i = 0; i < _children.size(); ++i)
+    {
+      if (dynamic_cast<T *>(_children[i]))
+        vec.push_back(dynamic_cast<T *>(_children[i]));
+      std::vector<T *> cvec = _children[i]->FindDescendentsOfType<T>();
+      vec.insert(vec.end(), cvec.begin(), cvec.end());
+    }
     return vec;
   }
 

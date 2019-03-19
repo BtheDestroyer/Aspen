@@ -784,18 +784,24 @@ void Graphics::DrawRectangle(Rectangle *rect)
     SDL_Rect rectangle = rect->GetRect();
     if (tf)
     {
-      rectangle.x += tf->GetXPosition();
-      rectangle.y += tf->GetYPosition();
-      rectangle.w += tf->GetXScale();
-      rectangle.h += tf->GetYScale();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        rectangle.w *= tf->GetXScale(ctf);
+        rectangle.h *= tf->GetYScale(ctf);
+        rectangle.x += tf->GetXPosition(ctf);
+        rectangle.y += tf->GetYPosition(ctf);
+      }
+      else
+      {
+        rectangle.w *= tf->GetXScale();
+        rectangle.h *= tf->GetYScale();
+        rectangle.x += tf->GetXPosition();
+        rectangle.y += tf->GetYPosition();
+      }
     }
-    if (_camera)
-    {
-      rectangle.w *= _camera->FindChildOfType<Transform::Transform>()->GetInverseXScale();
-      rectangle.h *= _camera->FindChildOfType<Transform::Transform>()->GetInverseYScale();
-      rectangle.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      rectangle.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
-    }
+    rectangle.x -= rectangle.w / 2.0f;
+    rectangle.y -= rectangle.h / 2.0f;
     if (rect->Fill())
       SDL_RenderFillRect(_renderer, &rectangle);
     else
@@ -824,13 +830,17 @@ void Graphics::DrawPoint(Point *point)
     SDL_Point p = point->GetPoint();
     if (tf)
     {
-      p.x += tf->GetXPosition();
-      p.y += tf->GetYPosition();
-    }
-    if (_camera)
-    {
-      p.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      p.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        p.x += tf->GetXPosition(ctf);
+        p.y += tf->GetYPosition(ctf);
+      }
+      else
+      {
+        p.x += tf->GetXPosition();
+        p.y += tf->GetYPosition();
+      }
     }
     SDL_RenderDrawPoint(_renderer, p.x, p.y);
   }
@@ -855,7 +865,7 @@ void Graphics::DrawLine(Line *line)
     SDL_Point end = line->GetEnd();
     if (tf)
     {
-      if (_camera)
+      if (_camera && _camera->Active())
       {
         double angle = tf->GetRotation() + _camera->FindChildOfType<Transform::Transform>()->GetInverseRotation();
         SDL_Point center = {int(end.x * line->GetCenter() + start.x * (1.0f - line->GetCenter())),
@@ -914,19 +924,23 @@ void Graphics::DrawSprite(Sprite *sprite)
     Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
     if (tf)
     {
-      rect.w *= tf->GetXScale();
-      rect.h *= tf->GetYScale();
-      rect.x += tf->GetXPosition();
-      rect.y += tf->GetYPosition();
-      angle += tf->GetRotation();
-    }
-    if (_camera)
-    {
-      rect.w *= _camera->FindChildOfType<Transform::Transform>()->GetInverseXScale();
-      rect.h *= _camera->FindChildOfType<Transform::Transform>()->GetInverseYScale();
-      rect.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      rect.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
-      angle += _camera->FindChildOfType<Transform::Transform>()->GetInverseRotation();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        rect.w *= tf->GetXScale(ctf);
+        rect.h *= tf->GetYScale(ctf);
+        rect.x += tf->GetXPosition(ctf);
+        rect.y += tf->GetYPosition(ctf);
+        angle += tf->GetRotation(ctf);
+      }
+      else
+      {
+        rect.w *= tf->GetXScale();
+        rect.h *= tf->GetYScale();
+        rect.x += tf->GetXPosition();
+        rect.y += tf->GetYPosition();
+        angle += tf->GetRotation();
+      }
     }
     rect.x -= rect.w / 2;
     rect.y -= rect.h / 2;
@@ -945,19 +959,23 @@ void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
     Transform::Transform *tf = sprite->FindChildOfType<Transform::Transform>();
     if (tf)
     {
-      rect.w = clip.w * tf->GetXScale();
-      rect.h = clip.h * tf->GetYScale();
-      rect.x += tf->GetXPosition();
-      rect.y += tf->GetYPosition();
-      angle += double(tf->GetRotation());
-    }
-    if (_camera)
-    {
-      rect.w *= _camera->FindChildOfType<Transform::Transform>()->GetInverseXScale();
-      rect.h *= _camera->FindChildOfType<Transform::Transform>()->GetInverseYScale();
-      rect.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      rect.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
-      angle += _camera->FindChildOfType<Transform::Transform>()->GetInverseRotation();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        rect.w = clip.w * tf->GetXScale(ctf);
+        rect.h = clip.h * tf->GetYScale(ctf);
+        rect.x += tf->GetXPosition(ctf);
+        rect.y += tf->GetYPosition(ctf);
+        angle += tf->GetRotation(ctf);
+      }
+      else
+      {
+        rect.w = clip.w *tf->GetXScale();
+        rect.h = clip.h *tf->GetYScale();
+        rect.x += tf->GetXPosition();
+        rect.y += tf->GetYPosition();
+        angle += tf->GetRotation();
+      }
     }
     rect.x -= rect.w / 2;
     rect.y -= rect.h / 2;
@@ -976,19 +994,23 @@ void Graphics::DrawText(Text *text)
     Transform::Transform *tf = text->FindChildOfType<Transform::Transform>();
     if (tf)
     {
-      rect.w *= tf->GetXScale();
-      rect.h *= tf->GetYScale();
-      rect.x += tf->GetXPosition();
-      rect.y += tf->GetYPosition();
-      angle += double(tf->GetRotation());
-    }
-    if (_camera)
-    {
-      rect.w *= _camera->FindChildOfType<Transform::Transform>()->GetInverseXScale();
-      rect.h *= _camera->FindChildOfType<Transform::Transform>()->GetInverseYScale();
-      rect.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      rect.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
-      angle += _camera->FindChildOfType<Transform::Transform>()->GetInverseRotation();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        rect.w *= tf->GetXScale(ctf);
+        rect.h *= tf->GetYScale(ctf);
+        rect.x += tf->GetXPosition(ctf);
+        rect.y += tf->GetYPosition(ctf);
+        angle += tf->GetRotation(ctf);
+      }
+      else
+      {
+        rect.w *= tf->GetXScale();
+        rect.h *= tf->GetYScale();
+        rect.x += tf->GetXPosition();
+        rect.y += tf->GetYPosition();
+        angle += tf->GetRotation();
+      }
     }
     rect.x -= rect.w / 2;
     rect.y -= rect.h / 2;
@@ -1007,19 +1029,23 @@ void Graphics::DrawText(Text *text, SDL_Rect clip)
     Transform::Transform *tf = text->FindChildOfType<Transform::Transform>();
     if (tf)
     {
-      rect.w = clip.w * tf->GetXScale();
-      rect.h = clip.h * tf->GetYScale();
-      rect.x += tf->GetXPosition();
-      rect.y += tf->GetYPosition();
-      angle += double(tf->GetRotation());
-    }
-    if (_camera)
-    {
-      rect.w *= _camera->FindChildOfType<Transform::Transform>()->GetInverseXScale();
-      rect.h *= _camera->FindChildOfType<Transform::Transform>()->GetInverseYScale();
-      rect.x += _camera->FindChildOfType<Transform::Transform>()->GetInverseXPosition();
-      rect.y += _camera->FindChildOfType<Transform::Transform>()->GetInverseYPosition();
-      angle += _camera->FindChildOfType<Transform::Transform>()->GetInverseRotation();
+      if (_camera && _camera->Active())
+      {
+        Transform::Transform *ctf = _camera->FindChildOfType<Transform::Transform>();
+        rect.w = clip.w * tf->GetXScale(ctf);
+        rect.h = clip.h * tf->GetYScale(ctf);
+        rect.x += tf->GetXPosition(ctf);
+        rect.y += tf->GetYPosition(ctf);
+        angle += tf->GetRotation(ctf);
+      }
+      else
+      {
+        rect.w = clip.w * tf->GetXScale();
+        rect.h = clip.h * tf->GetYScale();
+        rect.x += tf->GetXPosition();
+        rect.y += tf->GetYPosition();
+        angle += tf->GetRotation();
+      }
     }
     rect.x -= rect.w / 2;
     rect.y -= rect.h / 2;

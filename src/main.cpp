@@ -14,8 +14,6 @@ using namespace Aspen;
 
 class MyState : public GameState::GameState
 {
-  Graphics::Line *line = nullptr;
-  Graphics::Line *line2 = nullptr;
   Audio::SoundEffect *sound = nullptr;
   Graphics::Camera *cam;
 
@@ -35,37 +33,29 @@ public:
     newSprite->FindChildOfType<Transform::Transform>()->SetPosition(w / 2, h / 2);
     AddChild(newSprite);
 
-    newSprite = new Graphics::Sprite("resources/mario.png", this);
-    newSprite->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
-    newSprite->CreateChild<Physics::Rigidbody>();
-    //Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
-    Controller::PlayerController_8Way *pc = newSprite->CreateChild<Controller::PlayerController_8Way>();
-    //pc->SetJumpStrength(5.0);
-    //pc->SetJumpHeight(0.25);
-    pc->SetAcceleration(5.0);
-    pc->SetSpeed(4.0);
-    newSprite->AddChild(new Physics::CircleCollider(124, this));
-    AddChild(newSprite);
-
-    Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{-25, -25, 50, 50}, 0x0000FFFF, true, this, "Bumper");
+    Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{0, 0, 50, 50}, 0x0000FFFF, true, this, "Bumper");
     rec->AddChild(new Physics::Rigidbody());
     rec->AddChild(new Physics::CircleCollider(25, rec));
     rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
     AddChild(rec);
 
-    AddChild(new Graphics::Rectangle(SDL_Rect{50, 100, 25, 75}, 0xFF000088, true, this));
+    rec = new Graphics::Rectangle(SDL_Rect{0, 0, 25, 75}, 0xFF000088, true, this);
+    rec->FindChildOfType<Transform::Transform>()->SetPosition(25,100);
+    AddChild(rec);
     AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, this));
-
-    line = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.5f, 0x0000FFFF, this);
-    line->FindChildOfType<Transform::Transform>()->SetPosition(100, 100);
-    AddChild(line);
-    line2 = new Graphics::Line(SDL_Point{0, 0}, SDL_Point{50, 0}, 0.0f, 0xFF0000FF, this);
-    line2->FindChildOfType<Transform::Transform>()->SetPosition(25, 0);
-    line->AddChild(line2);
 
     Graphics::Animation *anim = new Graphics::Animation(new Graphics::UniformSpritesheet("resources/anim.png", 4, this), 0.16f, this);
     anim->FindChildOfType<Transform::Transform>()->SetPosition(50, 0);
-    line2->AddChild(anim);
+    anim->FindChildOfType<Transform::Transform>()->SetPosition(200, 200);
+    anim->CreateChild<Physics::Rigidbody>();
+    //Controller::PlayerController_Sidescroller *pc = newSprite->CreateChild<Controller::PlayerController_Sidescroller>();
+    Controller::PlayerController_8Way *pc = anim->CreateChild<Controller::PlayerController_8Way>();
+    //pc->SetJumpStrength(5.0);
+    //pc->SetJumpHeight(0.25);
+    pc->SetAcceleration(5.0);
+    pc->SetSpeed(4.0);
+    anim->AddChild(new Physics::CircleCollider(50, this));
+    AddChild(anim);
 
     Graphics::Text *text = new Graphics::Text("Hello world!", "abz", 36, this);
     text->CreateChild<Transform::Transform>()->SetPosition(w / 2, h / 2);
@@ -85,10 +75,6 @@ public:
 
   void OnUpdate()
   {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
-    double dt = M_PI_2 * engine->FindChildOfType<Time::Time>()->CurrentTime();
-    line->FindChildOfType<Transform::Transform>()->SetRotation(dt);
-    line2->FindChildOfType<Transform::Transform>()->SetRotation(2.0 * dt);
     if (Input::KeyHeld(SDLK_LEFT))
     {
       if (Input::KeyHeld(SDLK_LSHIFT))

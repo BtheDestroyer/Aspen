@@ -17,6 +17,7 @@ class Transform : public Object::Object
   double _r;
   float _scalex;
   float _scaley;
+
 public:
   Transform(Object *parent = nullptr, std::string name = "Transform");
 
@@ -42,15 +43,33 @@ public:
   float GetXScale() const;
   float GetYScale() const;
 
+  float GetXPosition(const Transform *camera) const;
+  float GetYPosition(const Transform *camera) const;
+  double GetRotation(const Transform *camera) const;
+  float GetXScale(const Transform *camera) const;
+  float GetYScale(const Transform *camera) const;
+
   float GetInverseXPosition() const;
   float GetInverseYPosition() const;
   double GetInverseRotation() const;
   float GetInverseXScale() const;
   float GetInverseYScale() const;
 
+  float GetLocalXPosition() const;
+  float GetLocalYPosition() const;
+  double GetLocalRotation() const;
+  float GetLocalXScale() const;
+  float GetLocalYScale() const;
+
+  float GetLocalInverseXPosition() const;
+  float GetLocalInverseYPosition() const;
+  double GetLocalInverseRotation() const;
+  float GetLocalInverseXScale() const;
+  float GetLocalInverseYScale() const;
+
   Transform Inverse() const;
 
-  Transform operator+(const Transform &rhs);
+  Transform operator+(const Transform &rhs) const;
   Transform &operator+=(const Transform &rhs);
 
   void PopulateDebugger();
