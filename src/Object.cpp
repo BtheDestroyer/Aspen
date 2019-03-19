@@ -42,7 +42,7 @@ Object::~Object()
   _children.clear();
 }
 
-Object *Object::Parent()
+Object *Object::Parent() const
 {
   return _parent;
 }
@@ -57,6 +57,14 @@ void Object::SetParent(Object *parent)
 Object *Object::Root()
 {
   Object *root = this;
+  while (root->Parent())
+    root = root->Parent();
+  return root;
+}
+
+const Object *Object::Root() const
+{
+  const Object *root = this;
   while (root->Parent())
     root = root->Parent();
   return root;
