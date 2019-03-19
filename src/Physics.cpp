@@ -525,5 +525,179 @@ void CircleCollider::PopulateDebugger()
   _radius = r;
   Collider::PopulateDebugger();
 }
+
+/////////////////////////////////////////////////////////
+
+AABBCollider::AABBCollider(Object *parent, std::string name)
+    : AABBCollider(1, 1, parent, name)
+{
+}
+
+AABBCollider::AABBCollider(double width, double height, Object *parent, std::string name)
+    : Collider(parent, name), _width(width), _height(height)
+{
+}
+
+std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
+{
+  std::pair<Collision, Collision> c(Collision(other), Collision(this));
+  c.first.result = COLLISION_RESULT::CANNOT_HANDLE;
+  c.second.result = COLLISION_RESULT::CANNOT_HANDLE;
+
+  if (dynamic_cast<AABBCollider *>(other))
+  {
+    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    if (!ttf && Parent())
+    {
+      ttf = Parent()->FindChildOfType<Transform::Transform>();
+      if (!ttf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    Transform::Transform *otf = other->FindChildOfType<Transform::Transform>();
+    if (!otf && other->Parent())
+    {
+      otf = other->Parent()->FindChildOfType<Transform::Transform>();
+      if (!otf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    AABBCollider *oc = dynamic_cast<AABBCollider *>(other);
+    // this's bounds
+    double tl = ttf->GetXPosition() + GetOffsetX() - GetWidth() / 2.0f,
+           tr = ttf->GetXPosition() + GetOffsetX() + GetWidth() / 2.0f,
+           tt = ttf->GetYPosition() + GetOffsetY() - GetHeight() / 2.0f,
+           tb = ttf->GetYPosition() + GetOffsetY() + GetHeight() / 2.0f;
+    // other's bounds
+    double ol = otf->GetXPosition() + oc->GetOffsetX() - oc->GetWidth() / 2.0f,
+           oR = otf->GetXPosition() + oc->GetOffsetX() + oc->GetWidth() / 2.0f,
+           ot = otf->GetYPosition() + oc->GetOffsetY() - oc->GetHeight() / 2.0f,
+           ob = otf->GetYPosition() + oc->GetOffsetY() + oc->GetHeight() / 2.0f;
+
+    if (tr >= ol && tl <= oR &&
+        tb >= ot && tt <= ob)
+    {
+      c.first.result = COLLISION_RESULT::SUCCESS;
+      c.second.result = COLLISION_RESULT::SUCCESS;
+      double tcx = (tl + tr) / 2.0,
+             tcy = (tb + tt) / 2.0;
+      double ocx = (ol + oR) / 2.0,
+             ocy = (ob + ot) / 2.0;
+      double tld = tl - ocx,
+             trd = tr - ocx,
+             ttd = tt - ocy,
+             tbd = tb - ocy;
+      double old = ol - tcx,
+             ord = oR - tcx,
+             otd = ot - tcy,
+             obd = ob - tcy;
+      double dx = tcx - ocx,
+             dy = tcy - ocy,
+             d = std::sqrt(dx * dx + dy * dy);
+      
+      c.first.collisionX = std::abs(tld) < std::abs(trd) ? tld : trd;
+      c.first.collisionY = std::abs(ttd) < std::abs(tbd) ? ttd : tbd;
+      c.first.collisionAngle = std::atan2(c.first.collisionY, c.first.collisionX);
+      c.second.collisionX = std::abs(old) < std::abs(ord) ? old : ord;
+      c.second.collisionY = std::abs(otd) < std::abs(obd) ? otd : obd;
+      c.second.collisionAngle = std::atan2(c.second.collisionY, c.second.collisionX);
+    }
+    else
+    {
+      c.first.result = COLLISION_RESULT::FAILURE;
+      c.second.result = COLLISION_RESULT::FAILURE;
+    }
+  }
+
+  return c;
+}
+
+void AABBCollider::ResolveCollision(Collision collision)
+{
+  if (!collision.collider ||
+      collision.result != COLLISION_RESULT::SUCCESS ||
+      _trigger ||
+      collision.collider->IsTrigger())
+    return;
+  Rigidbody *rb = nullptr;
+  Transform::Transform *tf = nullptr;
+  tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!_parent)
+      return;
+    tf = _parent->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return;
+    rb = _parent->FindChildOfType<Rigidbody>();
+  }
+  else
+    rb = FindChildOfType<Rigidbody>();
+
+  Rigidbody *orb = collision.collider->FindChildOfType<Rigidbody>();
+  if (!orb)
+    orb = collision.collider->Parent()->FindChildOfType<Rigidbody>();
+
+  if (rb)
+  {
+    if (orb)
+    {
+      if (std::abs(std::cos(collision.collisionAngle)) > std::abs(std::sin(collision.collisionAngle)))
+        tf->ModifyXPosition(std::cos(collision.collisionAngle) * ((GetWidth() / 2.0f) - std::abs(collision.collisionX)) / 2.0f);
+      else
+        tf->ModifyYPosition(std::sin(collision.collisionAngle) * ((GetHeight() / 2.0f) - std::abs(collision.collisionY)) / 2.0f);
+    }
+    else
+    {
+      if (std::abs(std::cos(collision.collisionAngle)) > std::abs(std::sin(collision.collisionAngle)))
+        tf->ModifyXPosition(std::cos(collision.collisionAngle) * ((GetWidth() / 2.0f) - std::abs(collision.collisionX)));
+      else
+        tf->ModifyYPosition(std::sin(collision.collisionAngle) * ((GetHeight() / 2.0f) - std::abs(collision.collisionY)));
+    }
+  }
+}
+
+double AABBCollider::GetWidth()
+{
+  return _width;
+}
+
+void AABBCollider::SetWidth(double width)
+{
+  _width = width;
+}
+
+double AABBCollider::GetHeight()
+{
+  return _height;
+}
+
+void AABBCollider::SetHeight(double height)
+{
+  _height = height;
+}
+
+void AABBCollider::SetSize(double width, double height)
+{
+  _width = width;
+  _height = height;
+}
+
+void AABBCollider::PopulateDebugger()
+{
+  static float s[2];
+  s[0] = _width;
+  s[1] = _height;
+  ImGui::DragFloat2("Size", s, 0.5f, 1.0f, 999999.0f);
+  _width = s[0];
+  _height = s[1];
+  Collider::PopulateDebugger();
+}
 } // namespace Physics
 } // namespace Aspen

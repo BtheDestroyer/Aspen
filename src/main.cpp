@@ -35,7 +35,8 @@ public:
 
     Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{0, 0, 50, 50}, 0x0000FFFF, true, this, "Bumper");
     rec->AddChild(new Physics::Rigidbody());
-    rec->AddChild(new Physics::CircleCollider(25, rec));
+    //rec->AddChild(new Physics::CircleCollider(25, rec));
+    rec->AddChild(new Physics::AABBCollider(50, 50, rec));
     rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
     AddChild(rec);
 
@@ -54,7 +55,8 @@ public:
     //pc->SetJumpHeight(0.25);
     pc->SetAcceleration(5.0);
     pc->SetSpeed(4.0);
-    anim->AddChild(new Physics::CircleCollider(50, this));
+    //anim->AddChild(new Physics::CircleCollider(50, this));
+    anim->AddChild(new Physics::AABBCollider(50, 50, rec));
     AddChild(anim);
 
     Graphics::Text *text = new Graphics::Text("Hello world!", "abz", 36, this);

@@ -108,7 +108,7 @@ float Transform::GetXPosition() const
   float ret = 0.0f;
   for (const Transform *tf : tfs)
   {
-    // TODO: Incorporate scale and rotation
+    // TODO: Incorporate rotation
     ret += tf->GetLocalXPosition() * tf->GetXScale() * tf->GetLocalInverseXScale();
   }
   return ret;
@@ -131,7 +131,7 @@ float Transform::GetYPosition() const
   float ret = 0.0f;
   for (const Transform *tf : tfs)
   {
-    // TODO: Incorporate scale and rotation
+    // TODO: Incorporate rotation
     ret += tf->GetLocalYPosition() * tf->GetYScale() * tf->GetLocalInverseYScale();
   }
   return ret;

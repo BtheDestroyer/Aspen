@@ -155,6 +155,28 @@ public:
 
   void PopulateDebugger();
 };
+
+class AABBCollider : public Collider
+{
+  double _width;
+  double _height;
+
+public:
+  AABBCollider(Object *parent = nullptr, std::string name = "AABBCollider");
+  AABBCollider(double width, double height, Object *parent = nullptr, std::string name = "AABBCollider");
+
+  std::pair<Collision, Collision> TestCollision(Collider *other);
+  void ResolveCollision(Collision collision);
+
+  double GetWidth();
+  void SetWidth(double width);
+  double GetHeight();
+  void SetHeight(double height);
+  void SetSize(double width, double height);
+
+  void PopulateDebugger();
+};
+typedef AABBCollider BoxCollider;
 } // namespace Physics
 } // namespace Aspen
 
