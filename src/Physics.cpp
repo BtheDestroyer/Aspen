@@ -456,7 +456,7 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
       c.first.collisionAngle = ca;
       c.second.collisionX = std::cos(M_PI + ca) * ocd;
       c.second.collisionY = std::sin(M_PI + ca) * ocd;
-      c.second.collisionAngle = -ca;
+      c.second.collisionAngle = ca + M_PI;
     }
     else
     {
@@ -496,8 +496,8 @@ void CircleCollider::ResolveCollision(Collision collision)
 
   if (rb)
   {
-    double rx = _radius * std::cos(std::atan2(collision.collisionY, collision.collisionX));
-    double ry = _radius * std::sin(std::atan2(collision.collisionY, collision.collisionX));
+    double rx = _radius * std::cos(collision.collisionAngle);
+    double ry = _radius * std::sin(collision.collisionAngle);
     double dx = rx - collision.collisionX;
     double dy = ry - collision.collisionY;
     if (orb)
@@ -589,24 +589,33 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
              tcy = (tb + tt) / 2.0;
       double ocx = (ol + oR) / 2.0,
              ocy = (ob + ot) / 2.0;
-      double tld = tl - ocx,
-             trd = tr - ocx,
-             ttd = tt - ocy,
-             tbd = tb - ocy;
-      double old = ol - tcx,
-             ord = oR - tcx,
-             otd = ot - tcy,
-             obd = ob - tcy;
-      double dx = tcx - ocx,
-             dy = tcy - ocy,
-             d = std::sqrt(dx * dx + dy * dy);
-      
-      c.first.collisionX = std::abs(tld) < std::abs(trd) ? tld : trd;
-      c.first.collisionY = std::abs(ttd) < std::abs(tbd) ? ttd : tbd;
-      c.first.collisionAngle = std::atan2(c.first.collisionY, c.first.collisionX);
-      c.second.collisionX = std::abs(old) < std::abs(ord) ? old : ord;
-      c.second.collisionY = std::abs(otd) < std::abs(obd) ? otd : obd;
-      c.second.collisionAngle = std::atan2(c.second.collisionY, c.second.collisionX);
+      double dx = ocx - tcx,
+             dy = ocy - tcy;
+      double s;
+      if (dx == 0)
+        s = 0;
+      else
+        s = dy / dx;
+      double ca = std::atan(s);
+      bool h = std::abs(std::cos(ca) / std::max(GetWidth(), oc->GetWidth())) - std::abs(std::sin(ca) / std::max(GetHeight(), oc->GetHeight())) > 0;
+
+      if (h)
+      {
+        c.first.collisionX = (std::abs(dx) - oc->GetWidth() / 2.0f) * (dx > 0 ? 1 : -1);
+        c.first.collisionY = c.first.collisionX * s;
+        c.second.collisionX = (std::abs(dx) - GetWidth() / 2.0f) * (dx > 0 ? -1 : 1);
+        c.second.collisionY = c.second.collisionX * s;
+        c.first.collisionAngle = c.first.collisionX > 0 ? 0 : M_PI;
+      }
+      else
+      {
+        c.first.collisionY = (std::abs(dy) - oc->GetHeight() / 2.0f) * (dy > 0 ? 1 : -1);
+        c.first.collisionX = c.first.collisionY / s;
+        c.second.collisionY = (std::abs(dy) - GetHeight() / 2.0f) * (dy > 0 ? -1 : 1);
+        c.second.collisionX = c.second.collisionY / s;
+        c.first.collisionAngle = (c.first.collisionY > 0 ? 0 : M_PI) + M_PI / 2.0;
+      }
+      c.second.collisionAngle = c.first.collisionAngle + M_PI;
     }
     else
     {
@@ -648,17 +657,13 @@ void AABBCollider::ResolveCollision(Collision collision)
   {
     if (orb)
     {
-      if (std::abs(std::cos(collision.collisionAngle)) > std::abs(std::sin(collision.collisionAngle)))
-        tf->ModifyXPosition(std::cos(collision.collisionAngle) * ((GetWidth() / 2.0f) - std::abs(collision.collisionX)) / 2.0f);
-      else
-        tf->ModifyYPosition(std::sin(collision.collisionAngle) * ((GetHeight() / 2.0f) - std::abs(collision.collisionY)) / 2.0f);
+      tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) / 2.0f * std::cos(collision.collisionAngle),
+                         (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) / 2.0f * std::sin(collision.collisionAngle));
     }
     else
     {
-      if (std::abs(std::cos(collision.collisionAngle)) > std::abs(std::sin(collision.collisionAngle)))
-        tf->ModifyXPosition(std::cos(collision.collisionAngle) * ((GetWidth() / 2.0f) - std::abs(collision.collisionX)));
-      else
-        tf->ModifyYPosition(std::sin(collision.collisionAngle) * ((GetHeight() / 2.0f) - std::abs(collision.collisionY)));
+      tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) * std::cos(collision.collisionAngle),
+                         (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) * std::sin(collision.collisionAngle));
     }
   }
 }

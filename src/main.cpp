@@ -55,8 +55,8 @@ public:
     //pc->SetJumpHeight(0.25);
     pc->SetAcceleration(5.0);
     pc->SetSpeed(4.0);
-    //anim->AddChild(new Physics::CircleCollider(50, this));
-    anim->AddChild(new Physics::AABBCollider(50, 50, rec));
+    //anim->AddChild(new Physics::CircleCollider(20, this));
+    anim->AddChild(new Physics::AABBCollider(64, 205, rec));
     AddChild(anim);
 
     Graphics::Text *text = new Graphics::Text("Hello world!", "abz", 36, this);
