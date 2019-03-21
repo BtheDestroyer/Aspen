@@ -476,8 +476,7 @@ void CircleCollider::ResolveCollision(Collision collision)
       collision.collider->IsTrigger())
     return;
   Rigidbody *rb = nullptr;
-  Transform::Transform *tf = nullptr;
-  tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
   if (!tf)
   {
     if (!_parent)
@@ -635,8 +634,7 @@ void AABBCollider::ResolveCollision(Collision collision)
       collision.collider->IsTrigger())
     return;
   Rigidbody *rb = nullptr;
-  Transform::Transform *tf = nullptr;
-  tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
   if (!tf)
   {
     if (!_parent)

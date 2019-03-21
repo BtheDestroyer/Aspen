@@ -273,7 +273,6 @@ void PlayerController_Sidescroller::PopulateDebugger()
   ImGui::DragFloat("Jump Height", &jh, 0.1f);
   _jumpHeight = jh;
   ImGui::Text("Jump Key: %s", SDL_GetKeyName(_jumpKey));
-  Input::Axis *av = nullptr;
   Input::Axis *ah = nullptr;
   for (Input::Axis *a : FindChildrenOfType<Input::Axis>())
   {
@@ -283,7 +282,7 @@ void PlayerController_Sidescroller::PopulateDebugger()
       break;
     }
   }
-  if (av)
+  if (ah)
   {
     double dx = ah->GetValue() * _acceleration;
     ImGui::Text("Input X: %.3f", dx);

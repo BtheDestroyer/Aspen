@@ -23,11 +23,11 @@ const int DEFAULT_WINDOW_HEIGHT = 480;
 
 /////////////////////////////////////////////////////////
 
-Color::Color(int color)
+Color::Color(unsigned color)
     : _c(color)
 {
 }
-Color::Color(int r, int g, int b, int a)
+Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
     : _c(0)
 {
   Red(r);

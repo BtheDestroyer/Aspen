@@ -41,3 +41,5 @@ lib/
 *.log
 
 imgui\.ini
+
+\.vscode/ipch/

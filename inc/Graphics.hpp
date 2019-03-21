@@ -33,8 +33,8 @@ protected:
   unsigned _c;
 
 public:
-  Color(int color = 0xFFFFFFFF);
-  Color(int r, int g, int b, int a = 0xFF);
+  Color(unsigned color = 0xFFFFFFFF);
+  Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 0xFF);
 
   Uint8 Red();
   Uint8 Green();

@@ -108,7 +108,7 @@ public:
   double collisionY;
   double collisionAngle;
 
-  Collision(Collider *other);
+  explicit Collision(Collider *other);
 };
 
 class Collider : public Object::Object
