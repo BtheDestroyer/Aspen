@@ -12,7 +12,7 @@ namespace Engine
 {
 /// \brief Current engine version
 extern const Version::Version VERSION;
-
+/// \brief SDL_Init flags
 extern const unsigned SDL_INIT_FLAGS;
 
 /// \brief START_FLAGS namespace
@@ -73,22 +73,41 @@ const int ALL                        = 0b1111111111111111;
 /// \brief Engine class
 class Engine : public Object::Object
 {
+  /// \brief Determines if the Engine has debugging turned on
   bool _debugging = false;
+  /// \brief Total number of Engine Objects
   static unsigned _ecount;
 
 public:
   /// \brief Constructor
-  /// \param flags START_FLAGS to instantiate the Engine with
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Engine(Object *parent = nullptr, std::string name = "Engine");
+  /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param flags START_FLAGS to instantiate the Engine with
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Engine(int flags = START_FLAGS::NONE, Object *parent = nullptr, std::string name = "Engine");
   /// \brief Destructor
   ~Engine();
 
+  /// \brief Updates this object and all of its children
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
   void operator()();
 
+  /// \brief Determines if the Engine has debugging turned on
+  /// \return _debugging
   bool Debug();
+  /// \brief Determines if the Engine has debugging turned on
+  /// \param newval New debugging value
   void Debug(bool newval);
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 } // namespace Engine
