@@ -90,27 +90,6 @@ public:
 
 /////////////////////////////////////////////////////////
 
-enum COLLISION_RESULT
-{
-  FAILURE,
-  SUCCESS,
-  CANNOT_HANDLE
-};
-
-class Collider;
-
-class Collision
-{
-public:
-  COLLISION_RESULT result;
-  Collider *collider;
-  double collisionX;
-  double collisionY;
-  double collisionAngle;
-
-  explicit Collision(Collider *other);
-};
-
 class Collider : public Object::Object
 {
 protected:

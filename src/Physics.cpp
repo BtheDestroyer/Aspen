@@ -3,6 +3,7 @@
 #include "Physics.hpp"
 #include "Engine.hpp"
 #include "Transform.hpp"
+#include "Collision.hpp"
 #include "Time.hpp"
 #include "Log.hpp"
 #include "imgui.h"
@@ -322,13 +323,6 @@ void Rigidbody::PopulateDebugger()
   ImGui::SliderFloat("Acceleration Direction", &ad, 0.0f, float(2 * M_2_PI));
   _accelerationDirection = ad;
   Object::PopulateDebugger();
-}
-
-/////////////////////////////////////////////////////////
-
-Collision::Collision(Collider *other)
-    : collider(other), collisionX(0), collisionY(0), collisionAngle(0)
-{
 }
 
 /////////////////////////////////////////////////////////
