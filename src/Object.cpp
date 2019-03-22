@@ -207,7 +207,7 @@ void Object::End()
   _valid = false;
 }
 
-void Object::PrintTree(Log::Log &log)
+void Object::PrintTree(Log::Log &log) const
 {
   static std::string indentation = "";
   static const std::string newindent = "  |    ";
@@ -250,17 +250,17 @@ void Object::PrintTree(Log::Log &log)
   }
 }
 
-void Object::PrintTree()
+void Object::PrintTree() const
 {
   PrintTree(Log::Debug);
 }
 
-std::string Object::Name()
+std::string Object::Name() const
 {
   return _name;
 }
 
-unsigned Object::ChildrenCount()
+unsigned Object::ChildrenCount() const
 {
   return _children.size();
 }
@@ -270,7 +270,16 @@ std::vector<Object *> &Object::Children()
   return _children;
 }
 
-void Object::PopulateDebugger()
+bool Object::HasAncestor(const Object *other) const
+{
+  const Object *p = this;
+  while ((p = p->Parent()))
+    if (p == other)
+      return true;
+  return false;
+}
+
+void Object::PopulateDebugger() const
 {
   ImGui::Text("Children: %d", ChildrenCount());
 }
@@ -308,6 +317,10 @@ void Object::OnDeactivate()
 }
 
 void Object::OnEnd()
+{
+}
+
+void Object::OnCollision(Physics::Collision c)
 {
 }
 } // namespace Object

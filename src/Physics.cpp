@@ -40,9 +40,13 @@ void Physics::operator()()
     {
       for (unsigned j = i + 1; j < colliders.size(); ++j)
       {
+        if (colliders[i]->HasAncestor(colliders[j]->Parent()))
+          continue;
         std::pair<Collision, Collision> c = colliders[i]->TestCollision(colliders[j]);
         if (c.first.result == COLLISION_RESULT::SUCCESS)
         {
+          colliders[i]->Parent()->OnCollision(c.first);
+          colliders[j]->Parent()->OnCollision(c.second);
           colliders[i]->ResolveCollision(c.first);
           colliders[j]->ResolveCollision(c.second);
         }
@@ -458,6 +462,12 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
       c.second.result = COLLISION_RESULT::FAILURE;
     }
   }
+  else if (dynamic_cast<AABBCollider *>(other))
+  {
+    std::pair<Collision, Collision> c2 = dynamic_cast<AABBCollider *>(other)->TestCollision(this);
+    c.first = c2.second;
+    c.second = c2.first;
+  }
 
   return c;
 }
@@ -615,6 +625,84 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
       c.first.result = COLLISION_RESULT::FAILURE;
       c.second.result = COLLISION_RESULT::FAILURE;
     }
+  }
+  else if (dynamic_cast<CircleCollider *>(other))
+  {
+    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    if (!ttf && Parent())
+    {
+      ttf = Parent()->FindChildOfType<Transform::Transform>();
+      if (!ttf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    Transform::Transform *otf = other->FindChildOfType<Transform::Transform>();
+    if (!otf && other->Parent())
+    {
+      otf = other->Parent()->FindChildOfType<Transform::Transform>();
+      if (!otf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    CircleCollider *oc = dynamic_cast<CircleCollider *>(other);
+    double tx = ttf->GetXPosition() + GetOffsetX(),
+           ty = ttf->GetYPosition() + GetOffsetY();
+    double ox = otf->GetXPosition() + oc->GetOffsetX(),
+           oy = otf->GetYPosition() + oc->GetOffsetY();
+    double dx = ox - tx,
+           dy = oy - ty;
+    double d2 = dx * dx + dy * dy,
+           d = std::sqrt(d2);
+    double maxd = std::sqrt(GetWidth() / 2 * GetWidth() / 2 + GetHeight() / 2 * GetHeight() / 2) + oc->GetRadius();
+    // broad check
+    if (d > maxd)
+    {
+      c.first.result = COLLISION_RESULT::FAILURE;
+      c.second.result = COLLISION_RESULT::FAILURE;
+      return c;
+    }
+    double s;
+    if (dx == 0)
+      s = 0;
+    else
+      s = dy / dx;
+    double ca = std::atan2(dy, dx);
+    double odx = cos(ca) * oc->GetRadius(),
+           ody = sin(ca) * oc->GetRadius();
+    double tdx = (dx - odx),
+           tdy = (dy - ody);
+    if (std::abs(tdx) >= GetWidth() / 2 || std::abs(tdy) >= GetHeight() / 2)
+    {
+      c.first.result = COLLISION_RESULT::FAILURE;
+      c.second.result = COLLISION_RESULT::FAILURE;
+      return c;
+    }
+    bool h = std::abs(std::cos(ca) / GetWidth()) - std::abs(std::sin(ca) / GetHeight()) > 0;
+    double td = std::sqrt(tdx * tdx + tdy * tdy);
+    if (h)
+    {
+      odx = (std::abs(dx) - GetWidth() / 2.0f);
+      ody = td * s;
+    }
+    else
+    {
+      ody = (std::abs(dy) - GetHeight() / 2.0f);
+      odx = td / s;
+    }
+    c.first.collisionX = tdx;
+    c.first.collisionY = tdy;
+    c.first.collisionAngle = (h ? (c.first.collisionX > 0 ? 0 : M_PI) : (c.first.collisionY > 0 ? 0 : M_PI) + M_PI / 2.0);
+    c.second.collisionAngle = c.first.collisionAngle + M_PI;
+    c.second.collisionX = odx * std::cos(c.second.collisionAngle);
+    c.second.collisionY = ody * std::sin(c.second.collisionAngle);
+    c.first.result = COLLISION_RESULT::SUCCESS;
+    c.second.result = COLLISION_RESULT::SUCCESS;
   }
 
   return c;

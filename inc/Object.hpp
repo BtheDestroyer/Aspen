@@ -2,6 +2,7 @@
 #define __OBJECT_HPP
 #include <vector>
 #include "Log.hpp"
+#include "Collision.hpp"
 
 /// \brief Aspen engine namespace
 namespace Aspen
@@ -218,17 +219,19 @@ public:
 
   /// \brief Uses Log::Log to print the parent/children tree of this Object
   /// \param log Log::Log to use
-  void PrintTree(Log::Log &log);
+  void PrintTree(Log::Log &log) const;
   /// \brief Uses Log::Log to print the parent/children tree of this Object
   ///        Uses Log::Debug
-  void PrintTree();
+  void PrintTree() const;
 
-  std::string Name();
+  std::string Name() const;
 
-  unsigned ChildrenCount();
+  unsigned ChildrenCount() const;
   std::vector<Object *> &Children();
 
-  virtual void PopulateDebugger();
+  bool HasAncestor(const Object *other) const;
+
+  virtual void PopulateDebugger() const;
 
   virtual void OnStart();
   virtual void OnActivate();
@@ -237,6 +240,7 @@ public:
   virtual void OnLateUpdate();
   virtual void OnDeactivate();
   virtual void OnEnd();
+  virtual void OnCollision(Physics::Collision c);
 };
 } // namespace Object
 } // namespace Aspen

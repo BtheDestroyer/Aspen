@@ -35,8 +35,8 @@ public:
 
     Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{0, 0, 50, 50}, 0x0000FFFF, true, this, "Bumper");
     rec->AddChild(new Physics::Rigidbody());
-    //rec->AddChild(new Physics::CircleCollider(25, rec));
-    rec->AddChild(new Physics::AABBCollider(50, 50, rec));
+    rec->AddChild(new Physics::CircleCollider(25, rec));
+    //rec->AddChild(new Physics::AABBCollider(50, 50, rec));
     rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
     AddChild(rec);
 
