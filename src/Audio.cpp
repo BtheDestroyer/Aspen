@@ -247,7 +247,8 @@ void Music::Stop(double fadeOut)
     Log::Error("%s requires a root Engine with child Audio!", Name().c_str());
     return;
   }
-  audio->StopMusic(fadeOut);
+  if (IsPlaying())
+    audio->StopMusic(fadeOut);
 }
 
 bool Music::IsPlaying()
