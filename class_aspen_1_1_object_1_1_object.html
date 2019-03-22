@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_aspen_1_1_object_1_1_object.html
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,37 +126,57 @@ Inheritance diagram for Aspen::Object::Object:</div>
  <div class="center">
   <img src="class_aspen_1_1_object_1_1_object.png" usemap="#Aspen::Object::Object_map" alt=""/>
   <map id="Aspen::Object::Object_map" name="Aspen::Object::Object_map">
-<area href="class_aspen_1_1_controller_1_1_player_controller__8_way.html" alt="Aspen::Controller::PlayerController_8Way" shape="rect" coords="258,56,506,80"/>
-<area href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. " alt="Aspen::Engine::Engine" shape="rect" coords="258,112,506,136"/>
-<area href="class_aspen_1_1_event_1_1_event_handler.html" title="EventHandler class Passes SDL_Events to children EventListeners. " alt="Aspen::Event::EventHandler" shape="rect" coords="258,168,506,192"/>
-<area href="class_aspen_1_1_event_1_1_event_listener.html" title="EventListener class Parented by EventHandler and used to moduly handle SDL_Events. " alt="Aspen::Event::EventListener" shape="rect" coords="258,224,506,248"/>
-<area href="class_aspen_1_1_graphics_1_1_geometry.html" alt="Aspen::Graphics::Geometry" shape="rect" coords="258,280,506,304"/>
-<area href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class Holds other classes from Aspen::Graphics as children to draw them to the screen..." alt="Aspen::Graphics::Graphics" shape="rect" coords="258,336,506,360"/>
-<area href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. " alt="Aspen::Graphics::Sprite" shape="rect" coords="258,392,506,416"/>
-<area href="class_aspen_1_1_input_1_1_axis.html" alt="Aspen::Input::Axis" shape="rect" coords="258,448,506,472"/>
-<area href="class_aspen_1_1_time_1_1_time.html" alt="Aspen::Time::Time" shape="rect" coords="258,504,506,528"/>
-<area href="class_aspen_1_1_transform_1_1_transform.html" alt="Aspen::Transform::Transform" shape="rect" coords="258,560,506,584"/>
+<area href="class_aspen_1_1_audio_1_1_audio.html" title="Audio class. " alt="Aspen::Audio::Audio" shape="rect" coords="294,56,578,80"/>
+<area href="class_aspen_1_1_audio_1_1_music.html" title="Music class. " alt="Aspen::Audio::Music" shape="rect" coords="294,112,578,136"/>
+<area href="class_aspen_1_1_audio_1_1_sound_effect.html" title="SoundEffect class. " alt="Aspen::Audio::SoundEffect" shape="rect" coords="294,168,578,192"/>
+<area href="class_aspen_1_1_controller_1_1_player_controller__8_way.html" title="8 directional player controller class " alt="Aspen::Controller::PlayerController_8Way" shape="rect" coords="294,224,578,248"/>
+<area href="class_aspen_1_1_controller_1_1_player_controller___sidescroller.html" title="Sidescroller player controller class. " alt="Aspen::Controller::PlayerController_Sidescroller" shape="rect" coords="294,280,578,304"/>
+<area href="class_aspen_1_1_debug_1_1_debug.html" title="Debugger wrapper class for ImGui. " alt="Aspen::Debug::Debug" shape="rect" coords="294,336,578,360"/>
+<area href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. " alt="Aspen::Engine::Engine" shape="rect" coords="294,392,578,416"/>
+<area href="class_aspen_1_1_event_1_1_event_handler.html" title="EventHandler class Passes SDL_Events to children EventListeners. " alt="Aspen::Event::EventHandler" shape="rect" coords="294,448,578,472"/>
+<area href="class_aspen_1_1_event_1_1_event_listener.html" title="EventListener class Parented by EventHandler and used to moduly handle SDL_Events. " alt="Aspen::Event::EventListener" shape="rect" coords="294,504,578,528"/>
+<area href="class_aspen_1_1_game_state_1_1_game_state.html" title="GameState base class Inherit this to create your own states. " alt="Aspen::GameState::GameState" shape="rect" coords="294,560,578,584"/>
+<area href="class_aspen_1_1_game_state_1_1_game_state_manager.html" title="GameStateManager class. " alt="Aspen::GameState::GameStateManager" shape="rect" coords="294,616,578,640"/>
+<area href="class_aspen_1_1_graphics_1_1_animation.html" title="Animation class Gets all animation frames from child Sprite and UniformSpritesheet Objects..." alt="Aspen::Graphics::Animation" shape="rect" coords="294,672,578,696"/>
+<area href="class_aspen_1_1_graphics_1_1_camera.html" title="Camera class. " alt="Aspen::Graphics::Camera" shape="rect" coords="294,728,578,752"/>
+<area href="class_aspen_1_1_graphics_1_1_font_cache.html" title="FontCache class Caches loaded fonts for drawing text with. " alt="Aspen::Graphics::FontCache" shape="rect" coords="294,784,578,808"/>
+<area href="class_aspen_1_1_graphics_1_1_geometry.html" title="Geometry class Base class for creating basic geometry like rectangles. " alt="Aspen::Graphics::Geometry" shape="rect" coords="294,840,578,864"/>
+<area href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class. " alt="Aspen::Graphics::Graphics" shape="rect" coords="294,896,578,920"/>
+<area href="class_aspen_1_1_graphics_1_1_sprite.html" title="Sprite class. " alt="Aspen::Graphics::Sprite" shape="rect" coords="294,952,578,976"/>
+<area href="class_aspen_1_1_graphics_1_1_text.html" title="Text class. " alt="Aspen::Graphics::Text" shape="rect" coords="294,1008,578,1032"/>
+<area href="class_aspen_1_1_input_1_1_axis.html" title="Input axis class. " alt="Aspen::Input::Axis" shape="rect" coords="294,1064,578,1088"/>
+<area href="class_aspen_1_1_physics_1_1_collider.html" title="Collider class. " alt="Aspen::Physics::Collider" shape="rect" coords="294,1120,578,1144"/>
+<area href="class_aspen_1_1_physics_1_1_physics.html" title="Physics class. " alt="Aspen::Physics::Physics" shape="rect" coords="294,1176,578,1200"/>
+<area href="class_aspen_1_1_physics_1_1_rigidbody.html" title="Rigidbody class. " alt="Aspen::Physics::Rigidbody" shape="rect" coords="294,1232,578,1256"/>
+<area href="class_aspen_1_1_time_1_1_time.html" title="Time management class. " alt="Aspen::Time::Time" shape="rect" coords="294,1288,578,1312"/>
+<area href="class_aspen_1_1_transform_1_1_transform.html" title="Transform class. " alt="Aspen::Transform::Transform" shape="rect" coords="294,1344,578,1368"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa3d684c39106f1424bb948046fc38d70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa3d684c39106f1424bb948046fc38d70">Object</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent=nullptr, std::string name=&quot;Object&quot;)</td></tr>
-<tr class="memdesc:aa3d684c39106f1424bb948046fc38d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Derived must should call this in their constructors' initialization list.  <a href="#aa3d684c39106f1424bb948046fc38d70">More...</a><br/></td></tr>
+<tr class="memdesc:aa3d684c39106f1424bb948046fc38d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Derived classes should call this in their constructors' initialization list.  <a href="#aa3d684c39106f1424bb948046fc38d70">More...</a><br/></td></tr>
 <tr class="separator:aa3d684c39106f1424bb948046fc38d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f5c327106d554e043ddcff2ca9bb532"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f5c327106d554e043ddcff2ca9bb532"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a1f5c327106d554e043ddcff2ca9bb532">~Object</a> ()</td></tr>
 <tr class="memdesc:a1f5c327106d554e043ddcff2ca9bb532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor This will End and then delete all child Objects. <br/></td></tr>
 <tr class="separator:a1f5c327106d554e043ddcff2ca9bb532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb702c7b18e161d330fd83dcad35d0e8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#adb702c7b18e161d330fd83dcad35d0e8">Parent</a> () const </td></tr>
+<tr class="memdesc:adb702c7b18e161d330fd83dcad35d0e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the parent of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#adb702c7b18e161d330fd83dcad35d0e8">More...</a><br/></td></tr>
+<tr class="separator:adb702c7b18e161d330fd83dcad35d0e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f224e3d221280d5031c7ddf8010eaa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8f224e3d221280d5031c7ddf8010eaa0">Parent</a> ()</td></tr>
 <tr class="memdesc:a8f224e3d221280d5031c7ddf8010eaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the parent of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#a8f224e3d221280d5031c7ddf8010eaa0">More...</a><br/></td></tr>
 <tr class="separator:a8f224e3d221280d5031c7ddf8010eaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e1fc0eaa176c1fd7d1f5ca11ca30c5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ab8e1fc0eaa176c1fd7d1f5ca11ca30c5">Root</a> () const </td></tr>
+<tr class="memdesc:ab8e1fc0eaa176c1fd7d1f5ca11ca30c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of the parent/child tree this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is a part of.  <a href="#ab8e1fc0eaa176c1fd7d1f5ca11ca30c5">More...</a><br/></td></tr>
+<tr class="separator:ab8e1fc0eaa176c1fd7d1f5ca11ca30c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15247881a7c8816de3bdc9099e8cbe65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a15247881a7c8816de3bdc9099e8cbe65">Root</a> ()</td></tr>
 <tr class="memdesc:a15247881a7c8816de3bdc9099e8cbe65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of the parent/child tree this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is a part of.  <a href="#a15247881a7c8816de3bdc9099e8cbe65">More...</a><br/></td></tr>
 <tr class="separator:a15247881a7c8816de3bdc9099e8cbe65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae827d63a640435d6cf84ef81cd9d1547"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae827d63a640435d6cf84ef81cd9d1547"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ae827d63a640435d6cf84ef81cd9d1547">operator()</a> ()</td></tr>
-<tr class="memdesc:ae827d63a640435d6cf84ef81cd9d1547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates this object and all of its children Derived classes should call this at some point in their operator() This won't run if _valid is false. <br/></td></tr>
+<tr class="memdesc:ae827d63a640435d6cf84ef81cd9d1547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates this object and all of its children Derived classes should call or reimplement this at some point in their operator() This won't run if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> isn't Active. <br/></td></tr>
 <tr class="separator:ae827d63a640435d6cf84ef81cd9d1547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a512d17c7915076e4e15ca73cfbd67971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a512d17c7915076e4e15ca73cfbd67971">AddChild</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child)</td></tr>
 <tr class="memdesc:a512d17c7915076e4e15ca73cfbd67971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds child to this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children This will also set child's _parent to this This will do nothing if child is already in the list of children Useful for adding an already created <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> as a child or passing in the return operator new with parameters.  <a href="#a512d17c7915076e4e15ca73cfbd67971">More...</a><br/></td></tr>
@@ -165,6 +185,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:ab24f1c4ca5364dc22f4be183c945f437"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ab24f1c4ca5364dc22f4be183c945f437">CreateChild</a> ()</td></tr>
 <tr class="memdesc:ab24f1c4ca5364dc22f4be183c945f437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new child of type T Useful for creating an object with no constructor parameters and/or modifying it later.  <a href="#ab24f1c4ca5364dc22f4be183c945f437">More...</a><br/></td></tr>
 <tr class="separator:ab24f1c4ca5364dc22f4be183c945f437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4792dfe9d8a07039167c3643696c81e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af4792dfe9d8a07039167c3643696c81e"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#af4792dfe9d8a07039167c3643696c81e">CreateChild</a> (std::string name)</td></tr>
+<tr class="memdesc:af4792dfe9d8a07039167c3643696c81e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new child of type T Useful for creating an object with no constructor parameters and/or modifying it later.  <a href="#af4792dfe9d8a07039167c3643696c81e">More...</a><br/></td></tr>
+<tr class="separator:af4792dfe9d8a07039167c3643696c81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d1f3ee496a6247a73d24aac9120c61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a31d1f3ee496a6247a73d24aac9120c61">RemoveChild</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *child)</td></tr>
 <tr class="memdesc:a31d1f3ee496a6247a73d24aac9120c61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes child from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children This will also set child's _parent to nullptr This will do nothing if child is not in the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children.  <a href="#a31d1f3ee496a6247a73d24aac9120c61">More...</a><br/></td></tr>
 <tr class="separator:a31d1f3ee496a6247a73d24aac9120c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,45 +207,121 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:abead808465c7004c343fc322e76faa9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abead808465c7004c343fc322e76faa9d">ParentCount</a> ()</td></tr>
 <tr class="memdesc:abead808465c7004c343fc322e76faa9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the generation of this object in the parent/child tree.  <a href="#abead808465c7004c343fc322e76faa9d">More...</a><br/></td></tr>
 <tr class="separator:abead808465c7004c343fc322e76faa9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memTemplParams" colspan="2"><a class="anchor" id="a58a6d5ff7eebf3f687c1a6b985054a81"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FindAncestorOfType</b> ()</td></tr>
-<tr class="separator:a58a6d5ff7eebf3f687c1a6b985054a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55cf1af26ba614118fe422e93e3b0455"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a55cf1af26ba614118fe422e93e3b0455"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a55cf1af26ba614118fe422e93e3b0455">FindAncestorOfType</a> () const </td></tr>
+<tr class="memdesc:a55cf1af26ba614118fe422e93e3b0455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the closest ancestor <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a55cf1af26ba614118fe422e93e3b0455">More...</a><br/></td></tr>
+<tr class="separator:a55cf1af26ba614118fe422e93e3b0455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1fad0d49d72751d9c00a4e8de980d30"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af1fad0d49d72751d9c00a4e8de980d30"><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#af1fad0d49d72751d9c00a4e8de980d30">FindChildOfType</a> () const </td></tr>
+<tr class="memdesc:af1fad0d49d72751d9c00a4e8de980d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#af1fad0d49d72751d9c00a4e8de980d30">More...</a><br/></td></tr>
+<tr class="separator:af1fad0d49d72751d9c00a4e8de980d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a077c6f008bd36517042170c3d589ebfb"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a077c6f008bd36517042170c3d589ebfb">FindChildOfType</a> ()</td></tr>
 <tr class="memdesc:a077c6f008bd36517042170c3d589ebfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested.  <a href="#a077c6f008bd36517042170c3d589ebfb">More...</a><br/></td></tr>
 <tr class="separator:a077c6f008bd36517042170c3d589ebfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66606760f532f5884d7602fb609d92e3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a66606760f532f5884d7602fb609d92e3"><td class="memTemplItemLeft" align="right" valign="top">const std::vector&lt; T * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a66606760f532f5884d7602fb609d92e3">FindChildrenOfType</a> () const </td></tr>
+<tr class="memdesc:a66606760f532f5884d7602fb609d92e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all children Objects of a type applicable to that which was requested.  <a href="#a66606760f532f5884d7602fb609d92e3">More...</a><br/></td></tr>
+<tr class="separator:a66606760f532f5884d7602fb609d92e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0bd3a26e078850907748692d727230b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac0bd3a26e078850907748692d727230b"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ac0bd3a26e078850907748692d727230b">FindChildrenOfType</a> ()</td></tr>
 <tr class="memdesc:ac0bd3a26e078850907748692d727230b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all children Objects of a type applicable to that which was requested.  <a href="#ac0bd3a26e078850907748692d727230b">More...</a><br/></td></tr>
 <tr class="separator:ac0bd3a26e078850907748692d727230b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed051555eb2da0ece3bc29a99cce16c2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aed051555eb2da0ece3bc29a99cce16c2"><td class="memTemplItemLeft" align="right" valign="top">const std::vector&lt; T * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aed051555eb2da0ece3bc29a99cce16c2">FindDescendentsOfType</a> () const </td></tr>
+<tr class="memdesc:aed051555eb2da0ece3bc29a99cce16c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively finds all descendent Objects of a type applicable to that which was requested.  <a href="#aed051555eb2da0ece3bc29a99cce16c2">More...</a><br/></td></tr>
+<tr class="separator:aed051555eb2da0ece3bc29a99cce16c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada57484e6347c265dd2da0c4387f2746"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ada57484e6347c265dd2da0c4387f2746"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ada57484e6347c265dd2da0c4387f2746">FindDescendentsOfType</a> ()</td></tr>
+<tr class="memdesc:ada57484e6347c265dd2da0c4387f2746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively finds all descendent Objects of a type applicable to that which was requested.  <a href="#ada57484e6347c265dd2da0c4387f2746">More...</a><br/></td></tr>
+<tr class="separator:ada57484e6347c265dd2da0c4387f2746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d5e6269408df50277e9377a0ea620de"><td class="memItemLeft" align="right" valign="top">const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a2d5e6269408df50277e9377a0ea620de">Valid</a> () const </td></tr>
 <tr class="memdesc:a2d5e6269408df50277e9377a0ea620de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is valid.  <a href="#a2d5e6269408df50277e9377a0ea620de">More...</a><br/></td></tr>
 <tr class="separator:a2d5e6269408df50277e9377a0ea620de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a79298bba0b00108f411f4ae3521f1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8a79298bba0b00108f411f4ae3521f1e">Active</a> () const </td></tr>
+<tr class="memdesc:a8a79298bba0b00108f411f4ae3521f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is active.  <a href="#a8a79298bba0b00108f411f4ae3521f1e">More...</a><br/></td></tr>
+<tr class="separator:a8a79298bba0b00108f411f4ae3521f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eeafcca30fada9acab786e35f1dad48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8eeafcca30fada9acab786e35f1dad48">SetActive</a> (bool active)</td></tr>
+<tr class="memdesc:a8eeafcca30fada9acab786e35f1dad48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets active status of the object Triggers OnActivate or OnDeactivate appropriately.  <a href="#a8eeafcca30fada9acab786e35f1dad48">More...</a><br/></td></tr>
+<tr class="separator:a8eeafcca30fada9acab786e35f1dad48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa420d270a0d280b24c264ed097170050"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa420d270a0d280b24c264ed097170050"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa420d270a0d280b24c264ed097170050">Activate</a> ()</td></tr>
+<tr class="memdesc:aa420d270a0d280b24c264ed097170050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the object Triggers OnActivate appropriately. <br/></td></tr>
+<tr class="separator:aa420d270a0d280b24c264ed097170050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4276771ce4571b324d87437f1c1e5174"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4276771ce4571b324d87437f1c1e5174"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a4276771ce4571b324d87437f1c1e5174">Deactivate</a> ()</td></tr>
+<tr class="memdesc:a4276771ce4571b324d87437f1c1e5174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates the object Triggers OnDeactivate appropriately. <br/></td></tr>
+<tr class="separator:a4276771ce4571b324d87437f1c1e5174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ca48323f4ac70852f6abdd33042a5b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ca48323f4ac70852f6abdd33042a5b3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8ca48323f4ac70852f6abdd33042a5b3">operator bool</a> () const </td></tr>
 <tr class="memdesc:a8ca48323f4ac70852f6abdd33042a5b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> to bool by calling Valid Example: ``` <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> o; while (o) o(); ```. <br/></td></tr>
 <tr class="separator:a8ca48323f4ac70852f6abdd33042a5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a056bfac305482ed281a5d850a2b2754c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a056bfac305482ed281a5d850a2b2754c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a056bfac305482ed281a5d850a2b2754c">End</a> ()</td></tr>
-<tr class="memdesc:a056bfac305482ed281a5d850a2b2754c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down and invalidates <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> and all of its children An invalid child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> will be deleted by their parent after they update. <br/></td></tr>
-<tr class="separator:a056bfac305482ed281a5d850a2b2754c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ee42bd2031d9e08828046cce044459b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a4ee42bd2031d9e08828046cce044459b">PrintTree</a> (<a class="el" href="class_aspen_1_1_log_1_1_log.html">Log::Log</a> &amp;log)</td></tr>
-<tr class="memdesc:a4ee42bd2031d9e08828046cce044459b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#a4ee42bd2031d9e08828046cce044459b">More...</a><br/></td></tr>
-<tr class="separator:a4ee42bd2031d9e08828046cce044459b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dee1d560eb341422441065654f516e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dee1d560eb341422441065654f516e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3dee1d560eb341422441065654f516e1">PrintTree</a> ()</td></tr>
-<tr class="memdesc:a3dee1d560eb341422441065654f516e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
-<tr class="separator:a3dee1d560eb341422441065654f516e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0911f0fac15417967f2d3cc43b78c86f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0911f0fac15417967f2d3cc43b78c86f"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Name</b> ()</td></tr>
-<tr class="separator:a0911f0fac15417967f2d3cc43b78c86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72178f06503de415423abc32d7cbc467"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72178f06503de415423abc32d7cbc467"></a>
-unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>ChildrenCount</b> ()</td></tr>
-<tr class="separator:a72178f06503de415423abc32d7cbc467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a472c7b19ab8982bb8c4e8d25635972bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a472c7b19ab8982bb8c4e8d25635972bd"></a>
-std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Children</b> ()</td></tr>
-<tr class="separator:a472c7b19ab8982bb8c4e8d25635972bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd507e3a112237e8b27d1a3b2d93f8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7bd507e3a112237e8b27d1a3b2d93f8c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a7bd507e3a112237e8b27d1a3b2d93f8c">End</a> ()</td></tr>
+<tr class="memdesc:a7bd507e3a112237e8b27d1a3b2d93f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down and invalidates <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> and all of its children An invalid child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> will be deleted by their parent after they update. <br/></td></tr>
+<tr class="separator:a7bd507e3a112237e8b27d1a3b2d93f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae75eed313324248ccbf7fbe7bf56b010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ae75eed313324248ccbf7fbe7bf56b010">PrintTree</a> (<a class="el" href="class_aspen_1_1_log_1_1_log.html">Log::Log</a> &amp;log) const </td></tr>
+<tr class="memdesc:ae75eed313324248ccbf7fbe7bf56b010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#ae75eed313324248ccbf7fbe7bf56b010">More...</a><br/></td></tr>
+<tr class="separator:ae75eed313324248ccbf7fbe7bf56b010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ffcf8d5121c3a65f6a9b0a08fbd6e0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ffcf8d5121c3a65f6a9b0a08fbd6e0d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a9ffcf8d5121c3a65f6a9b0a08fbd6e0d">PrintTree</a> () const </td></tr>
+<tr class="memdesc:a9ffcf8d5121c3a65f6a9b0a08fbd6e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log::Log</a> to print the parent/children tree of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Uses <a class="el" href="namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b" title="Used for logging debug info. ">Log::Debug</a>. <br/></td></tr>
+<tr class="separator:a9ffcf8d5121c3a65f6a9b0a08fbd6e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e639a1e1b14495310f91b14ce58f46"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a44e639a1e1b14495310f91b14ce58f46">Name</a> () const </td></tr>
+<tr class="memdesc:a44e639a1e1b14495310f91b14ce58f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s name.  <a href="#a44e639a1e1b14495310f91b14ce58f46">More...</a><br/></td></tr>
+<tr class="separator:a44e639a1e1b14495310f91b14ce58f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaac9dc5ba684bb92262973fd8634dfb3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aaac9dc5ba684bb92262973fd8634dfb3">ChildrenCount</a> () const </td></tr>
+<tr class="memdesc:aaac9dc5ba684bb92262973fd8634dfb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the number of immediate children the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> has.  <a href="#aaac9dc5ba684bb92262973fd8634dfb3">More...</a><br/></td></tr>
+<tr class="separator:aaac9dc5ba684bb92262973fd8634dfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8321ae36e9729433de08ddc6987d9f6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ad8321ae36e9729433de08ddc6987d9f6">Children</a> ()</td></tr>
+<tr class="memdesc:ad8321ae36e9729433de08ddc6987d9f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of Objects that are children of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#ad8321ae36e9729433de08ddc6987d9f6">More...</a><br/></td></tr>
+<tr class="separator:ad8321ae36e9729433de08ddc6987d9f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfe94fdc5c0b3d7a7e29b29e47713815"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#adfe94fdc5c0b3d7a7e29b29e47713815">HasAncestor</a> (const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *other) const </td></tr>
+<tr class="memdesc:adfe94fdc5c0b3d7a7e29b29e47713815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the provided <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is an ancestor of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>.  <a href="#adfe94fdc5c0b3d7a7e29b29e47713815">More...</a><br/></td></tr>
+<tr class="separator:adfe94fdc5c0b3d7a7e29b29e47713815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35495abc0056a59ad0a56e4df847199f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35495abc0056a59ad0a56e4df847199f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a35495abc0056a59ad0a56e4df847199f">PopulateDebugger</a> ()</td></tr>
+<tr class="memdesc:a35495abc0056a59ad0a56e4df847199f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills out the Debugger if it exists with this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s information Derived classes should call their base class's version of this method. <br/></td></tr>
+<tr class="separator:a35495abc0056a59ad0a56e4df847199f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0b38488181022dd1a1569d4189c6f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa0b38488181022dd1a1569d4189c6f8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aaa0b38488181022dd1a1569d4189c6f8">OnStart</a> ()</td></tr>
+<tr class="memdesc:aaa0b38488181022dd1a1569d4189c6f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is created. <br/></td></tr>
+<tr class="separator:aaa0b38488181022dd1a1569d4189c6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98afe64fa70dd1d869900fe2dcbcd7c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98afe64fa70dd1d869900fe2dcbcd7c0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a98afe64fa70dd1d869900fe2dcbcd7c0">OnActivate</a> ()</td></tr>
+<tr class="memdesc:a98afe64fa70dd1d869900fe2dcbcd7c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is activated Run after OnStart. <br/></td></tr>
+<tr class="separator:a98afe64fa70dd1d869900fe2dcbcd7c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a8edeee9c0fdb461dfcdfbec4e2892"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34a8edeee9c0fdb461dfcdfbec4e2892"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a34a8edeee9c0fdb461dfcdfbec4e2892">OnUpdate</a> ()</td></tr>
+<tr class="memdesc:a34a8edeee9c0fdb461dfcdfbec4e2892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run every frame. <br/></td></tr>
+<tr class="separator:a34a8edeee9c0fdb461dfcdfbec4e2892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d0a576b32f7789d3905e20fa08ead8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21d0a576b32f7789d3905e20fa08ead8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a21d0a576b32f7789d3905e20fa08ead8">OnEarlyUpdate</a> ()</td></tr>
+<tr class="memdesc:a21d0a576b32f7789d3905e20fa08ead8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run before OnUpdate. <br/></td></tr>
+<tr class="separator:a21d0a576b32f7789d3905e20fa08ead8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c45a5961952c5307bbde0af12dd847d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c45a5961952c5307bbde0af12dd847d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3c45a5961952c5307bbde0af12dd847d">OnLateUpdate</a> ()</td></tr>
+<tr class="memdesc:a3c45a5961952c5307bbde0af12dd847d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run after OnUpdate. <br/></td></tr>
+<tr class="separator:a3c45a5961952c5307bbde0af12dd847d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad09200a77fe7ef989e14a12a0f189c72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad09200a77fe7ef989e14a12a0f189c72"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#ad09200a77fe7ef989e14a12a0f189c72">OnDeactivate</a> ()</td></tr>
+<tr class="memdesc:ad09200a77fe7ef989e14a12a0f189c72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is deactivated Run before OnEnd. <br/></td></tr>
+<tr class="separator:ad09200a77fe7ef989e14a12a0f189c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a717f882c5af27b231eab02b65ba91c47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a717f882c5af27b231eab02b65ba91c47"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a717f882c5af27b231eab02b65ba91c47">OnEnd</a> ()</td></tr>
+<tr class="memdesc:a717f882c5af27b231eab02b65ba91c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is ended/destroyed. <br/></td></tr>
+<tr class="separator:a717f882c5af27b231eab02b65ba91c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a58b9b42a37ba47a75fd4710be65d55"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8a58b9b42a37ba47a75fd4710be65d55">OnCollision</a> (<a class="el" href="class_aspen_1_1_physics_1_1_collision.html">Physics::Collision</a> c)</td></tr>
+<tr class="memdesc:a8a58b9b42a37ba47a75fd4710be65d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when a collision occurs.  <a href="#a8a58b9b42a37ba47a75fd4710be65d55">More...</a><br/></td></tr>
+<tr class="separator:a8a58b9b42a37ba47a75fd4710be65d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7f42d6ad9f35f323b1c2fea9bac110"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e7f42d6ad9f35f323b1c2fea9bac110"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a0e7f42d6ad9f35f323b1c2fea9bac110">OnMouseClick</a> ()</td></tr>
+<tr class="memdesc:a0e7f42d6ad9f35f323b1c2fea9bac110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the mouse is clicked while over the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. <br/></td></tr>
+<tr class="separator:a0e7f42d6ad9f35f323b1c2fea9bac110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca895622b4d9a76085b2fc0263c243b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca895622b4d9a76085b2fc0263c243b8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aca895622b4d9a76085b2fc0263c243b8">OnMouseRelease</a> ()</td></tr>
+<tr class="memdesc:aca895622b4d9a76085b2fc0263c243b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run when the mouse is released while over the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. <br/></td></tr>
+<tr class="separator:aca895622b4d9a76085b2fc0263c243b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -229,6 +329,14 @@ Protected Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#aa7b58f0e55a3035f9ab1c958343e5857">SetParent</a> (<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *parent)</td></tr>
 <tr class="memdesc:aa7b58f0e55a3035f9ab1c958343e5857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets _parent to the given <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> Used by AddChild, CreateChild, etc. <br/></td></tr>
 <tr class="separator:aa7b58f0e55a3035f9ab1c958343e5857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba222099a975634d2db44527c980d1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adba222099a975634d2db44527c980d1e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#adba222099a975634d2db44527c980d1e">TriggerOnActivate</a> ()</td></tr>
+<tr class="memdesc:adba222099a975634d2db44527c980d1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs OnActivate if the object is currently active. <br/></td></tr>
+<tr class="separator:adba222099a975634d2db44527c980d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc2e3d95cd811d018170e9208051bb8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cc2e3d95cd811d018170e9208051bb8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a8cc2e3d95cd811d018170e9208051bb8">TriggerOnDeactivate</a> ()</td></tr>
+<tr class="memdesc:a8cc2e3d95cd811d018170e9208051bb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs OnDeactivate if the object is currently active (being deactivated) <br/></td></tr>
+<tr class="separator:a8cc2e3d95cd811d018170e9208051bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -248,6 +356,14 @@ std::vector&lt; <a class="el" href="class_aspen_1_1_object_1_1_object.html">Obje
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a758956ae85bfe1316609888657092bd5">_valid</a> = false</td></tr>
 <tr class="memdesc:a758956ae85bfe1316609888657092bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is valid Derived classes can set this to false in their Constructors if they couldn't be created properly. <br/></td></tr>
 <tr class="separator:a758956ae85bfe1316609888657092bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad4b4dcb50406bb56c758a69859089c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ad4b4dcb50406bb56c758a69859089c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#a3ad4b4dcb50406bb56c758a69859089c">_active</a> = true</td></tr>
+<tr class="memdesc:a3ad4b4dcb50406bb56c758a69859089c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is currently updated. <br/></td></tr>
+<tr class="separator:a3ad4b4dcb50406bb56c758a69859089c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf4e78c5793c94b5dcd187412f3a2f00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf4e78c5793c94b5dcd187412f3a2f00"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_object_1_1_object.html#abf4e78c5793c94b5dcd187412f3a2f00">_started</a> = false</td></tr>
+<tr class="memdesc:abf4e78c5793c94b5dcd187412f3a2f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> has been started Set to true during the first update. <br/></td></tr>
+<tr class="separator:abf4e78c5793c94b5dcd187412f3a2f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -283,7 +399,7 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
       </table>
 </div><div class="memdoc">
 
-<p>Constructor Derived must should call this in their constructors' initialization list. </p>
+<p>Constructor Derived classes should call this in their constructors' initialization list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parent</td><td>Parent <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> creating this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
@@ -295,6 +411,24 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a8a79298bba0b00108f411f4ae3521f1e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Aspen::Object::Object::Active </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determines if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is active. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if both valid and active False otherwise </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a512d17c7915076e4e15ca73cfbd67971"></a>
 <div class="memitem">
 <div class="memproto">
@@ -316,6 +450,42 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="ad8321ae36e9729433de08ddc6987d9f6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&gt;&amp; Aspen::Object::Object::Children </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the list of Objects that are children of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Children owned by the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaac9dc5ba684bb92262973fd8634dfb3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Aspen::Object::Object::ChildrenCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determines the number of immediate children the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> has. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of children owned by the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </dd></dl>
 
 </div>
 </div>
@@ -353,6 +523,115 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="af4792dfe9d8a07039167c3643696c81e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* Aspen::Object::Object::CreateChild </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new child of type T Useful for creating an object with no constructor parameters and/or modifying it later. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of child to create Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the new object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Newly created <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a55cf1af26ba614118fe422e93e3b0455"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* Aspen::Object::Object::FindAncestorOfType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds the closest ancestor <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of child to find Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The closest ancestor of type T If no ancestors match the given type, nullptr is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return whichever was added earliest - <code>A*</code> or <code>B*</code> - as an <code>A*</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af1fad0d49d72751d9c00a4e8de980d30"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T* Aspen::Object::Object::FindChildOfType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds the first child <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of a type applicable to that which was requested. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of child to find Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The first child of type T If no children match the given type, nullptr is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return whichever was added earliest - <code>A*</code> or <code>B*</code> - as an <code>A*</code> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a077c6f008bd36517042170c3d589ebfb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -384,6 +663,40 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The first child of type T If no children match the given type, nullptr is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return whichever was added earliest - <code>A*</code> or <code>B*</code> - as an <code>A*</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a66606760f532f5884d7602fb609d92e3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;T *&gt; Aspen::Object::Object::FindChildrenOfType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds all children Objects of a type applicable to that which was requested. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of children to find Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>All children of type T If no children match the given type, nullptr is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return both <code>A*</code> and <code>B*</code> as <code>A*</code> </dd></dl>
 
 </div>
 </div>
@@ -421,6 +734,74 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aed051555eb2da0ece3bc29a99cce16c2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;T *&gt; Aspen::Object::Object::FindDescendentsOfType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively finds all descendent Objects of a type applicable to that which was requested. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of descendent to find Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>All children of type T If no descendents match the given type, an empty vector is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return both <code>A*</code> and <code>B*</code> as <code>A*</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ada57484e6347c265dd2da0c4387f2746"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;T *&gt; Aspen::Object::Object::FindDescendentsOfType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively finds all descendent Objects of a type applicable to that which was requested. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of descendent to find Must inherit <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>All children of type T If no descendents match the given type, an empty vector is returned If <code>class A : public <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a></code> and <code>class B : public A</code>, then <code>FindObjectOfType&lt;A&gt;()</code> will return both <code>A*</code> and <code>B*</code> as <code>A*</code> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="aa5b7c46c48ffc8d44ea3f62dd3fd42b6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -436,6 +817,81 @@ template&lt;typename T &gt; </div>
 
 <p>Gets the youngest child from this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s list of children. </p>
 <dl class="section return"><dt>Returns</dt><dd>Last child of <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> This will return nullptr if the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> has no children </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="adfe94fdc5c0b3d7a7e29b29e47713815"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Aspen::Object::Object::HasAncestor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determines if the provided <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is an ancestor of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Potential ancestor of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if other is an ancestor of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> False otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a44e639a1e1b14495310f91b14ce58f46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Aspen::Object::Object::Name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s name. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> name </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8a58b9b42a37ba47a75fd4710be65d55"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Aspen::Object::Object::OnCollision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_aspen_1_1_physics_1_1_collision.html">Physics::Collision</a>&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Run when a collision occurs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Collision that occured </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -489,6 +945,24 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="adb702c7b18e161d330fd83dcad35d0e8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a>* Aspen::Object::Object::Parent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the parent of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>_parent </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a8f224e3d221280d5031c7ddf8010eaa0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -525,7 +999,7 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4ee42bd2031d9e08828046cce044459b"></a>
+<a class="anchor" id="ae75eed313324248ccbf7fbe7bf56b010"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -534,7 +1008,7 @@ template&lt;typename T &gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_aspen_1_1_log_1_1_log.html">Log::Log</a> &amp;&#160;</td>
           <td class="paramname"><em>log</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -597,6 +1071,24 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ab8e1fc0eaa176c1fd7d1f5ca11ca30c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a>* Aspen::Object::Object::Root </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of the parent/child tree this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is a part of. </p>
+<dl class="section return"><dt>Returns</dt><dd>Root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s tree </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a15247881a7c8816de3bdc9099e8cbe65"></a>
 <div class="memitem">
 <div class="memproto">
@@ -612,6 +1104,30 @@ template&lt;typename T &gt; </div>
 
 <p>Gets the root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of the parent/child tree this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> is a part of. </p>
 <dl class="section return"><dt>Returns</dt><dd>Root <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> of this <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a>'s tree </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8eeafcca30fada9acab786e35f1dad48"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Object::Object::SetActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets active status of the object Triggers OnActivate or OnDeactivate appropriately. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">active</td><td>New active status </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -642,7 +1158,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_object.html">Object</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_object_1_1_object.html">Object</a></li>
-    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
+    <li class="footer">Generated on Fri Mar 22 2019 06:09:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

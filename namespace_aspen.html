@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('namespace_aspen.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,8 +115,14 @@ $(document).ready(function(){initNavTree('namespace_aspen.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespace_aspen_1_1_audio"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_audio.html">Audio</a></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_audio"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_audio_1_1_audio.html" title="Audio class. ">Audio</a> namespace. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_controller.html">Controller</a></td></tr>
-<tr class="memdesc:namespace_aspen_1_1_controller"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_aspen_1_1_controller.html" title="Controller namespace To be replaced after running make newfile NEWFILE=file ">Controller</a> namespace To be replaced after running <code>make newfile NEWFILE=file</code> <br/></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_controller"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_aspen_1_1_controller.html" title="Controller namespace. ">Controller</a> namespace. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_aspen_1_1_debug"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_debug.html">Debug</a></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_debug"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_debug_1_1_debug.html" title="Debugger wrapper class for ImGui. ">Debug</a> namespace. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_engine"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_engine.html">Engine</a></td></tr>
 <tr class="memdesc:namespace_aspen_1_1_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. ">Engine</a> namespace Holds the core <a class="el" href="class_aspen_1_1_engine_1_1_engine.html" title="Engine class. ">Engine</a> class. <br/></td></tr>
@@ -124,8 +130,11 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_aspen_1_1_event"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_event.html">Event</a></td></tr>
 <tr class="memdesc:namespace_aspen_1_1_event"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_aspen_1_1_event.html" title="Event namespace Contains EventListeners and EventHandler Objects. ">Event</a> namespace Contains EventListeners and <a class="el" href="class_aspen_1_1_event_1_1_event_handler.html" title="EventHandler class Passes SDL_Events to children EventListeners. ">EventHandler</a> Objects. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_aspen_1_1_game_state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_game_state.html">GameState</a></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_game_state"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_game_state_1_1_game_state.html" title="GameState base class Inherit this to create your own states. ">GameState</a> namespace. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_graphics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_graphics.html">Graphics</a></td></tr>
-<tr class="memdesc:namespace_aspen_1_1_graphics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class Holds other classes from Aspen::Graphics as children to draw them to the screen...">Graphics</a> namespace Controls and facilitates graphics processing. <br/></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_graphics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html" title="Graphics class. ">Graphics</a> namespace Controls and facilitates graphics processing. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_input"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_input.html">Input</a></td></tr>
 <tr class="memdesc:namespace_aspen_1_1_input"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_aspen_1_1_input.html" title="Input namespace Contains classes and functions for tracking and retrieving user input information...">Input</a> namespace Contains classes and functions for tracking and retrieving user input information. <br/></td></tr>
@@ -136,11 +145,14 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_aspen_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_object.html">Object</a></td></tr>
 <tr class="memdesc:namespace_aspen_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> namespace Contains the <a class="el" href="class_aspen_1_1_object_1_1_object.html" title="General base class Allows for parent/child relationship trees. ">Object</a> base class for most classes of <a class="el" href="namespace_aspen.html" title="Aspen engine namespace. ">Aspen</a>. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_aspen_1_1_physics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_physics.html">Physics</a></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_physics"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_physics_1_1_physics.html" title="Physics class. ">Physics</a> namespace. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_time"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_time.html">Time</a></td></tr>
-<tr class="memdesc:namespace_aspen_1_1_time"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_time_1_1_time.html">Time</a> namespace. <br/></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_time"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_time_1_1_time.html" title="Time management class. ">Time</a> namespace. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_transform.html">Transform</a></td></tr>
-<tr class="memdesc:namespace_aspen_1_1_transform"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_transform_1_1_transform.html">Transform</a> namespace To be replaced after running <code>make newfile NEWFILE=file</code> <br/></td></tr>
+<tr class="memdesc:namespace_aspen_1_1_transform"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_transform_1_1_transform.html" title="Transform class. ">Transform</a> namespace To be replaced after running <code>make newfile NEWFILE=file</code> <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_aspen_1_1_version"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_aspen_1_1_version.html">Version</a></td></tr>
 <tr class="memdesc:namespace_aspen_1_1_version"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_aspen_1_1_version_1_1_version.html" title="Version class Contains version information and comparison operators. ">Version</a> namespace. <br/></td></tr>
@@ -154,7 +166,7 @@ Namespaces</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li>
-    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
+    <li class="footer">Generated on Fri Mar 22 2019 06:09:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

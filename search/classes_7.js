@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['playercontroller_5f8way',['PlayerController_8Way',['../class_aspen_1_1_controller_1_1_player_controller__8_way.html',1,'Aspen::Controller']]]
+  ['line',['Line',['../class_aspen_1_1_graphics_1_1_line.html',1,'Aspen::Graphics']]],
+  ['log',['Log',['../class_aspen_1_1_log_1_1_log.html',1,'Aspen::Log']]]
 ];

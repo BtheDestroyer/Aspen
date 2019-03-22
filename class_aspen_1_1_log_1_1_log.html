@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_aspen_1_1_log_1_1_log.html','');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -139,8 +139,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a97410aa2d712164d125a8f2811d2677e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97410aa2d712164d125a8f2811d2677e"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetFile</b> (std::string path)</td></tr>
+<tr class="memitem:a97410aa2d712164d125a8f2811d2677e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a97410aa2d712164d125a8f2811d2677e">SetFile</a> (std::string path)</td></tr>
+<tr class="memdesc:a97410aa2d712164d125a8f2811d2677e"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the current logfile  <a href="#a97410aa2d712164d125a8f2811d2677e">More...</a><br/></td></tr>
 <tr class="separator:a97410aa2d712164d125a8f2811d2677e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -165,7 +165,8 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr class="memdesc:ab55feb33b8b72e94f7407ccda132e5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current line number. <br/></td></tr>
 <tr class="separator:ab55feb33b8b72e94f7407ccda132e5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2adac4891202cc519d90f6acd7de85f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2adac4891202cc519d90f6acd7de85f6"></a>
-static std::fstream&#160;</td><td class="memItemRight" valign="bottom"><b>_file</b></td></tr>
+static std::fstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_log_1_1_log.html#a2adac4891202cc519d90f6acd7de85f6">_file</a></td></tr>
+<tr class="memdesc:a2adac4891202cc519d90f6acd7de85f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output filestream shared across all <a class="el" href="class_aspen_1_1_log_1_1_log.html" title="Log functor class Used for logging information to the console. ">Log</a> classes. <br/></td></tr>
 <tr class="separator:a2adac4891202cc519d90f6acd7de85f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -280,6 +281,39 @@ static std::fstream&#160;</td><td class="memItemRight" valign="bottom"><b>_file<
 
 </div>
 </div>
+<a class="anchor" id="a97410aa2d712164d125a8f2811d2677e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Aspen::Log::Log::SetFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>sets the current logfile </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Output filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Success of opening the output file </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>inc/<a class="el" href="_log_8hpp_source.html">Log.hpp</a></li>
 </ul>
@@ -289,7 +323,7 @@ static std::fstream&#160;</td><td class="memItemRight" valign="bottom"><b>_file<
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_log.html">Log</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_log_1_1_log.html">Log</a></li>
-    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
+    <li class="footer">Generated on Fri Mar 22 2019 06:09:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

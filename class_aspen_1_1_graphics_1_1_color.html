@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_aspen_1_1_graphics_1_1_color.htm
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,46 +113,301 @@ $(document).ready(function(){initNavTree('class_aspen_1_1_graphics_1_1_color.htm
 <div class="title">Aspen::Graphics::Color Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_aspen_1_1_graphics_1_1_color.html" title="Color class that is used to store RGBA8 color information. ">Color</a> class that is used to store RGBA8 color information.  
+ <a href="class_aspen_1_1_graphics_1_1_color.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_graphics_8hpp_source.html">Graphics.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d0484992f4fdee7f53f2358f0a92be5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d0484992f4fdee7f53f2358f0a92be5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Color</b> (int color=0xFFFFFFFF)</td></tr>
-<tr class="separator:a0d0484992f4fdee7f53f2358f0a92be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd0d474e36596b4c88e3a57ed8d61e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accd0d474e36596b4c88e3a57ed8d61e7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Color</b> (int r, int g, int b, int a=0xFF)</td></tr>
-<tr class="separator:accd0d474e36596b4c88e3a57ed8d61e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aca00fb36cfd30fa52f2d9a4a5378bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6aca00fb36cfd30fa52f2d9a4a5378bc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Red</b> ()</td></tr>
-<tr class="separator:a6aca00fb36cfd30fa52f2d9a4a5378bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2d0e0b9ff97cb0daa945a4bd0abaa53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2d0e0b9ff97cb0daa945a4bd0abaa53"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Green</b> ()</td></tr>
-<tr class="separator:ac2d0e0b9ff97cb0daa945a4bd0abaa53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb28444697427d538e2ad4512c9f4641"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb28444697427d538e2ad4512c9f4641"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Blue</b> ()</td></tr>
-<tr class="separator:afb28444697427d538e2ad4512c9f4641"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a827156b28270a73f2cb64cd6696edccf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a827156b28270a73f2cb64cd6696edccf"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Alpha</b> ()</td></tr>
-<tr class="separator:a827156b28270a73f2cb64cd6696edccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0fc57e146c7b5204f5c230266620cec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0fc57e146c7b5204f5c230266620cec"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Red</b> (int r)</td></tr>
-<tr class="separator:ae0fc57e146c7b5204f5c230266620cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fc3f26bc80bc36e3433c071dd4cb789"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1fc3f26bc80bc36e3433c071dd4cb789"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Green</b> (int g)</td></tr>
-<tr class="separator:a1fc3f26bc80bc36e3433c071dd4cb789"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36d96b23a69375c1938184ce1382bb45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36d96b23a69375c1938184ce1382bb45"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Blue</b> (int b)</td></tr>
-<tr class="separator:a36d96b23a69375c1938184ce1382bb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1476da208be199a48627e7c228baa6bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1476da208be199a48627e7c228baa6bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Alpha</b> (int a)</td></tr>
-<tr class="separator:a1476da208be199a48627e7c228baa6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90fa937affe8e80d39e1c731788d1a6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a90fa937affe8e80d39e1c731788d1a6b">Color</a> (unsigned color=0xFFFFFFFF)</td></tr>
+<tr class="memdesc:a90fa937affe8e80d39e1c731788d1a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a90fa937affe8e80d39e1c731788d1a6b">More...</a><br/></td></tr>
+<tr class="separator:a90fa937affe8e80d39e1c731788d1a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0709b2a5a1fe1ef7bbbdd18712ee55f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a0709b2a5a1fe1ef7bbbdd18712ee55f0">Color</a> (unsigned char r, unsigned char g, unsigned char b, unsigned char a=0xFF)</td></tr>
+<tr class="memdesc:a0709b2a5a1fe1ef7bbbdd18712ee55f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a0709b2a5a1fe1ef7bbbdd18712ee55f0">More...</a><br/></td></tr>
+<tr class="separator:a0709b2a5a1fe1ef7bbbdd18712ee55f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac895805eff2b54ca5bf12b1b5defba35"><td class="memItemLeft" align="right" valign="top">Uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#ac895805eff2b54ca5bf12b1b5defba35">Red</a> ()</td></tr>
+<tr class="memdesc:ac895805eff2b54ca5bf12b1b5defba35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets red of the color.  <a href="#ac895805eff2b54ca5bf12b1b5defba35">More...</a><br/></td></tr>
+<tr class="separator:ac895805eff2b54ca5bf12b1b5defba35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d101f0e86a703d18de1e18ab90e3906"><td class="memItemLeft" align="right" valign="top">Uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a9d101f0e86a703d18de1e18ab90e3906">Green</a> ()</td></tr>
+<tr class="memdesc:a9d101f0e86a703d18de1e18ab90e3906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets green of the color.  <a href="#a9d101f0e86a703d18de1e18ab90e3906">More...</a><br/></td></tr>
+<tr class="separator:a9d101f0e86a703d18de1e18ab90e3906"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd22abf5e4f6949f855c6eb368ef4060"><td class="memItemLeft" align="right" valign="top">Uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#abd22abf5e4f6949f855c6eb368ef4060">Blue</a> ()</td></tr>
+<tr class="memdesc:abd22abf5e4f6949f855c6eb368ef4060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets blue of the color.  <a href="#abd22abf5e4f6949f855c6eb368ef4060">More...</a><br/></td></tr>
+<tr class="separator:abd22abf5e4f6949f855c6eb368ef4060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a593620643e84ffb5bcc19941ea6e0e"><td class="memItemLeft" align="right" valign="top">Uint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a4a593620643e84ffb5bcc19941ea6e0e">Alpha</a> ()</td></tr>
+<tr class="memdesc:a4a593620643e84ffb5bcc19941ea6e0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets alpha of the color.  <a href="#a4a593620643e84ffb5bcc19941ea6e0e">More...</a><br/></td></tr>
+<tr class="separator:a4a593620643e84ffb5bcc19941ea6e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad26da64bad43c2a7ba8b42a36731c7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#aad26da64bad43c2a7ba8b42a36731c7b">Red</a> (Uint8 r)</td></tr>
+<tr class="memdesc:aad26da64bad43c2a7ba8b42a36731c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets red of the color.  <a href="#aad26da64bad43c2a7ba8b42a36731c7b">More...</a><br/></td></tr>
+<tr class="separator:aad26da64bad43c2a7ba8b42a36731c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a288025aa8ee581b84934983f586ee45f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a288025aa8ee581b84934983f586ee45f">Green</a> (Uint8 g)</td></tr>
+<tr class="memdesc:a288025aa8ee581b84934983f586ee45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets green of the color.  <a href="#a288025aa8ee581b84934983f586ee45f">More...</a><br/></td></tr>
+<tr class="separator:a288025aa8ee581b84934983f586ee45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a211c4a55c48096f1dc8803fb7687e39e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a211c4a55c48096f1dc8803fb7687e39e">Blue</a> (Uint8 b)</td></tr>
+<tr class="memdesc:a211c4a55c48096f1dc8803fb7687e39e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets blue of the color.  <a href="#a211c4a55c48096f1dc8803fb7687e39e">More...</a><br/></td></tr>
+<tr class="separator:a211c4a55c48096f1dc8803fb7687e39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea94b2ecb3659d09c9a1e5af910da663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#aea94b2ecb3659d09c9a1e5af910da663">Alpha</a> (Uint8 a)</td></tr>
+<tr class="memdesc:aea94b2ecb3659d09c9a1e5af910da663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets alpha of the color.  <a href="#aea94b2ecb3659d09c9a1e5af910da663">More...</a><br/></td></tr>
+<tr class="separator:aea94b2ecb3659d09c9a1e5af910da663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54154bd2a2185bc6e7a194c782bf8215"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54154bd2a2185bc6e7a194c782bf8215"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a54154bd2a2185bc6e7a194c782bf8215">operator SDL_Color</a> ()</td></tr>
+<tr class="memdesc:a54154bd2a2185bc6e7a194c782bf8215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implicitly converts this class to SDL's color class. <br/></td></tr>
+<tr class="separator:a54154bd2a2185bc6e7a194c782bf8215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a8d583d19d22d8fcb480513f7d97130a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d583d19d22d8fcb480513f7d97130a2"></a>
-unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>_c</b></td></tr>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a8d583d19d22d8fcb480513f7d97130a2">_c</a></td></tr>
+<tr class="memdesc:a8d583d19d22d8fcb480513f7d97130a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">RGBA8 color. <br/></td></tr>
 <tr class="separator:a8d583d19d22d8fcb480513f7d97130a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_aspen_1_1_graphics_1_1_color.html" title="Color class that is used to store RGBA8 color information. ">Color</a> class that is used to store RGBA8 color information. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a90fa937affe8e80d39e1c731788d1a6b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspen::Graphics::Color::Color </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>color</em> = <code>0xFFFFFFFF</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>RGBA8 color to use as data Defaults to fully white </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0709b2a5a1fe1ef7bbbdd18712ee55f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspen::Graphics::Color::Color </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>a</em> = <code>0xFF</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component </td></tr>
+    <tr><td class="paramname">g</td><td>Green component </td></tr>
+    <tr><td class="paramname">b</td><td>Blue component </td></tr>
+    <tr><td class="paramname">a</td><td>Alpha component Defaults to fully opaque </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a4a593620643e84ffb5bcc19941ea6e0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint8 Aspen::Graphics::Color::Alpha </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets alpha of the color. </p>
+<dl class="section return"><dt>Returns</dt><dd>Alpha component of the color </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aea94b2ecb3659d09c9a1e5af910da663"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Graphics::Color::Alpha </td>
+          <td>(</td>
+          <td class="paramtype">Uint8&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets alpha of the color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Alpha component of the color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abd22abf5e4f6949f855c6eb368ef4060"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint8 Aspen::Graphics::Color::Blue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets blue of the color. </p>
+<dl class="section return"><dt>Returns</dt><dd>Blue component of the color </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a211c4a55c48096f1dc8803fb7687e39e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Graphics::Color::Blue </td>
+          <td>(</td>
+          <td class="paramtype">Uint8&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets blue of the color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Blue component of the color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9d101f0e86a703d18de1e18ab90e3906"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint8 Aspen::Graphics::Color::Green </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets green of the color. </p>
+<dl class="section return"><dt>Returns</dt><dd>Green component of the color </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a288025aa8ee581b84934983f586ee45f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Graphics::Color::Green </td>
+          <td>(</td>
+          <td class="paramtype">Uint8&#160;</td>
+          <td class="paramname"><em>g</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets green of the color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>Green component of the color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac895805eff2b54ca5bf12b1b5defba35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint8 Aspen::Graphics::Color::Red </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets red of the color. </p>
+<dl class="section return"><dt>Returns</dt><dd>Red component of the color </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aad26da64bad43c2a7ba8b42a36731c7b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aspen::Graphics::Color::Red </td>
+          <td>(</td>
+          <td class="paramtype">Uint8&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets red of the color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component of the color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>inc/<a class="el" href="_graphics_8hpp_source.html">Graphics.hpp</a></li>
 </ul>
@@ -162,7 +417,7 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>_c</b></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_aspen.html">Aspen</a></li><li class="navelem"><a class="el" href="namespace_aspen_1_1_graphics.html">Graphics</a></li><li class="navelem"><a class="el" href="class_aspen_1_1_graphics_1_1_color.html">Color</a></li>
-    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
+    <li class="footer">Generated on Fri Mar 22 2019 06:09:24 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

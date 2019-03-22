@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nightly',['NIGHTLY',['../namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83a65fdff36ac2cd7fa8c4020cf0597d9d2',1,'Aspen::Version']]]
+  ['failure',['FAILURE',['../namespace_aspen_1_1_physics.html#a3c1ec6c43c8b14eace56a487d1256a5ba9a7fb66c94d943e4ce625eaab8f6dcd6',1,'Aspen::Physics']]]
 ];

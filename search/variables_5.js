@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['held',['held',['../class_aspen_1_1_input_1_1_key.html#aaa91fee2391f8dbf66eb14e069f2b84b',1,'Aspen::Input::Key']]]
+  ['error',['Error',['../namespace_aspen_1_1_log.html#a7e12106a7c3e1195824d3b7bcda5845c',1,'Aspen::Log']]]
 ];

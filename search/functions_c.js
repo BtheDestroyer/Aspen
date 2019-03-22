@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quiteventlistener',['QuitEventListener',['../class_aspen_1_1_event_1_1_quit_event_listener.html#ad39e22aa41539123b9ff2304e188eb77',1,'Aspen::Event::QuitEventListener']]]
+  ['name',['Name',['../class_aspen_1_1_object_1_1_object.html#a44e639a1e1b14495310f91b14ce58f46',1,'Aspen::Object::Object']]]
 ];

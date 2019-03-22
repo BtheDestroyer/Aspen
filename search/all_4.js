@@ -1,8 +1,19 @@
 var searchData=
 [
-  ['debug',['Debug',['../namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b',1,'Aspen::Log']]],
+  ['deactivate',['Deactivate',['../class_aspen_1_1_object_1_1_object.html#a4276771ce4571b324d87437f1c1e5174',1,'Aspen::Object::Object']]],
+  ['deactivatestate',['DeactivateState',['../class_aspen_1_1_game_state_1_1_game_state_manager.html#a45048afcda78d6c026a163985393c041',1,'Aspen::GameState::GameStateManager::DeactivateState(unsigned i)'],['../class_aspen_1_1_game_state_1_1_game_state_manager.html#a453a57e702ffd436d12a180de829217a',1,'Aspen::GameState::GameStateManager::DeactivateState(GameState *state)'],['../class_aspen_1_1_game_state_1_1_game_state_manager.html#aca5512126c3b09c13f667d68fddbb698',1,'Aspen::GameState::GameStateManager::DeactivateState(std::string name)']]],
+  ['debug',['Debug',['../class_aspen_1_1_debug_1_1_debug.html',1,'Aspen::Debug']]],
+  ['debug',['Debug',['../class_aspen_1_1_debug_1_1_debug.html#a037c22ddbc28ed7999aa39c7023bffe9',1,'Aspen::Debug::Debug::Debug()'],['../class_aspen_1_1_engine_1_1_engine.html#a02f1ce0e8eed466119933ccb79629789',1,'Aspen::Engine::Engine::Debug()'],['../class_aspen_1_1_engine_1_1_engine.html#af3bb4989ba7525194fa75be83c20f801',1,'Aspen::Engine::Engine::Debug(bool newval)'],['../namespace_aspen_1_1_log.html#ad6a082e9097a93151b93666c131fc03b',1,'Aspen::Log::Debug()']]],
   ['debugging_5fon',['DEBUGGING_ON',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html#ae974195869cf9f720fb0d3c44c81bf17',1,'Aspen::Engine::START_FLAGS']]],
   ['default_5fwindow_5fheight',['DEFAULT_WINDOW_HEIGHT',['../namespace_aspen_1_1_graphics.html#ab62e6f5934b2faa93d88c0674b6a3ea7',1,'Aspen::Graphics']]],
   ['default_5fwindow_5fwidth',['DEFAULT_WINDOW_WIDTH',['../namespace_aspen_1_1_graphics.html#a987c853ce7e6cedd0fec5cab4cbb1ddc',1,'Aspen::Graphics']]],
-  ['drawsprite',['DrawSprite',['../class_aspen_1_1_graphics_1_1_graphics.html#adca0e0af6e335deccadc1576a7f4d88a',1,'Aspen::Graphics::Graphics']]]
+  ['deltatime',['DeltaTime',['../class_aspen_1_1_time_1_1_time.html#ad2fcdcba6cfbb35adf59b5931116ede8',1,'Aspen::Time::Time']]],
+  ['down',['DOWN',['../namespace_aspen_1_1_physics_1_1_g_r_a_v___d_i_r.html#a42cfad5784d2dff1983e5ec12002525f',1,'Aspen::Physics::GRAV_DIR']]],
+  ['drawline',['DrawLine',['../class_aspen_1_1_graphics_1_1_graphics.html#ab38947a3df9325e0bb0835671ce0820a',1,'Aspen::Graphics::Graphics::DrawLine(Line *line)'],['../class_aspen_1_1_graphics_1_1_graphics.html#abb962df53b251ed009f3a4a8c3b2eb17',1,'Aspen::Graphics::Graphics::DrawLine(SDL_Point *start, SDL_Point *end, Color c)']]],
+  ['drawpoint',['DrawPoint',['../class_aspen_1_1_graphics_1_1_graphics.html#ab273bb2e31383080d975674b8532fc30',1,'Aspen::Graphics::Graphics::DrawPoint(Point *point)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a2fba00f1baac159704d7341aaf2a82a5',1,'Aspen::Graphics::Graphics::DrawPoint(SDL_Point *point, Color c)']]],
+  ['drawrectangle',['DrawRectangle',['../class_aspen_1_1_graphics_1_1_graphics.html#a5db28ef2ef24774cdebffeab6f6312b3',1,'Aspen::Graphics::Graphics::DrawRectangle(Rectangle *rect)'],['../class_aspen_1_1_graphics_1_1_graphics.html#ac17c3a4d5dc8658b72547f1761133b35',1,'Aspen::Graphics::Graphics::DrawRectangle(SDL_Rect *rect, Color c, bool fill=true)']]],
+  ['drawsprite',['DrawSprite',['../class_aspen_1_1_graphics_1_1_graphics.html#adca0e0af6e335deccadc1576a7f4d88a',1,'Aspen::Graphics::Graphics::DrawSprite(Sprite *sprite)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a91509c5bb62e70a8a21f7fa6fd02d6a3',1,'Aspen::Graphics::Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)']]],
+  ['drawtext',['DrawText',['../class_aspen_1_1_graphics_1_1_graphics.html#a736b5bd1c530f14b68e3ae02f2f20534',1,'Aspen::Graphics::Graphics::DrawText(Text *text)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a7f557150df66b5a0c5308675f5be1fe2',1,'Aspen::Graphics::Graphics::DrawText(Text *text, SDL_Rect clip)']]],
+  ['dx',['dx',['../class_aspen_1_1_input_1_1_mouse.html#a3d1f3aaa2bab0c54c13d0fba68682cb3',1,'Aspen::Input::Mouse']]],
+  ['dy',['dy',['../class_aspen_1_1_input_1_1_mouse.html#ac0db96176d71decbb2c9c8941aae8ea0',1,'Aspen::Input::Mouse']]]
 ];

@@ -78,6 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespacemembers.html"><span>All</span></a></li>
       <li><a href="namespacemembers_func.html"><span>Functions</span></a></li>
       <li><a href="namespacemembers_vars.html"><span>Variables</span></a></li>
+      <li><a href="namespacemembers_type.html"><span>Typedefs</span></a></li>
       <li><a href="namespacemembers_enum.html"><span>Enumerations</span></a></li>
       <li class="current"><a href="namespacemembers_eval.html"><span>Enumerator</span></a></li>
     </ul>
@@ -102,7 +103,7 @@ $(document).ready(function(){initNavTree('namespacemembers_eval.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,13 +115,26 @@ $(document).ready(function(){initNavTree('namespacemembers_eval.html','');});
 <div class="contents">
 &#160;<ul>
 <li>ALPHA
-: <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83ae275ddff385ea6368d3f775faa019ffd">Aspen::Version</a>
+: <a class="el" href="namespace_aspen_1_1_graphics.html#ab7f543a7182433f497af83469ebe3f3aafc829f227f0a07d0893d188e34e54e08">Aspen::Graphics</a>
+, <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83ae275ddff385ea6368d3f775faa019ffd">Aspen::Version</a>
 </li>
 <li>BETA
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83aeb36ba85a9aaac35bcae54fad55dd8a8">Aspen::Version</a>
 </li>
+<li>BLUE
+: <a class="el" href="namespace_aspen_1_1_graphics.html#ab7f543a7182433f497af83469ebe3f3aa653b75752c558b860478110dc6b06264">Aspen::Graphics</a>
+</li>
+<li>CANNOT_HANDLE
+: <a class="el" href="namespace_aspen_1_1_physics.html#a3c1ec6c43c8b14eace56a487d1256a5baa72afc4842dd91276fadc720eeb8624b">Aspen::Physics</a>
+</li>
+<li>FAILURE
+: <a class="el" href="namespace_aspen_1_1_physics.html#a3c1ec6c43c8b14eace56a487d1256a5ba9a7fb66c94d943e4ce625eaab8f6dcd6">Aspen::Physics</a>
+</li>
 <li>GAMMA
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83a249a2537e406c1d25043652f592c0757">Aspen::Version</a>
+</li>
+<li>GREEN
+: <a class="el" href="namespace_aspen_1_1_graphics.html#ab7f543a7182433f497af83469ebe3f3aadf090af944e6c72d2f4e29ec9133ed22">Aspen::Graphics</a>
 </li>
 <li>NIGHTLY
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83a65fdff36ac2cd7fa8c4020cf0597d9d2">Aspen::Version</a>
@@ -128,8 +142,14 @@ $(document).ready(function(){initNavTree('namespacemembers_eval.html','');});
 <li>PREALPHA
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83ab3b6cafeccce28fd2a3796e0d37e5627">Aspen::Version</a>
 </li>
+<li>RED
+: <a class="el" href="namespace_aspen_1_1_graphics.html#ab7f543a7182433f497af83469ebe3f3aa9b51d73d7010ddfcae6592c86eec0dd8">Aspen::Graphics</a>
+</li>
 <li>RELEASE
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83a1dd58fdcd30ec52c31756f80fd591798">Aspen::Version</a>
+</li>
+<li>SUCCESS
+: <a class="el" href="namespace_aspen_1_1_physics.html#a3c1ec6c43c8b14eace56a487d1256a5ba5aa347b4671d52148be8f8079c1770d9">Aspen::Physics</a>
 </li>
 <li>TOTAL
 : <a class="el" href="namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83adcada41e2d4bc4ffcdf7d4f59ff90868">Aspen::Version</a>
@@ -143,7 +163,7 @@ $(document).ready(function(){initNavTree('namespacemembers_eval.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Feb 25 2019 05:38:24 for Aspen by
+    <li class="footer">Generated on Fri Mar 22 2019 06:09:25 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
