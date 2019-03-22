@@ -209,12 +209,12 @@ Engine::Engine(int flags, Object *parent, std::string name)
 
 Engine::~Engine()
 {
+  End();
   for (Object *child : _children)
     delete child;
   _children.clear();
   if (_ecount-- == 1 && SDL_WasInit(SDL_INIT_FLAGS) == SDL_INIT_FLAGS)
     SDL_Quit();
-  End();
 }
 
 void Engine::operator()()

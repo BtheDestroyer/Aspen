@@ -16,7 +16,7 @@ SoundEffect::SoundEffect(Object *parent, std::string name)
 }
 
 SoundEffect::SoundEffect(std::string path, Object *parent, std::string name)
-    : Object(parent, name), _path(path), _sound(nullptr), _playing(false)
+    : Object(parent, name), _path(path), _sound(nullptr)
 {
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (!engine)
@@ -45,6 +45,7 @@ void SoundEffect::End()
 {
   if (_sound)
   {
+    Stop();
     Mix_FreeChunk(_sound);
     _sound = nullptr;
   }
@@ -91,15 +92,52 @@ void SoundEffect::Play(int channel)
   if (!Valid())
     return;
   if (_sound)
-    Mix_PlayChannel(channel, _sound, 0);
+    _channels.push_back(Mix_PlayChannel(channel, _sound, 0));
+}
+
+void SoundEffect::Stop()
+{
+  if (!Valid())
+    return;
+  if (_sound)
+    for (unsigned i = 0; i < _channels.size(); ++i)
+    {
+      if (IsPlayingOn(_channels[i]))
+        Mix_HaltChannel(_channels[i]);
+      _channels.erase(_channels.begin() + i--);
+    }
+}
+
+bool SoundEffect::IsPlayingOn(int channel)
+{
+  return Mix_GetChunk(channel) == _sound && Mix_Playing(channel);
 }
 
 bool SoundEffect::IsPlaying()
 {
-  return _playing;
+  bool r = false;
+  if (_sound)
+  {
+    for (unsigned i = 0; i < _channels.size(); ++i)
+      if (IsPlayingOn(_channels[i]))
+      {
+        if (!r)
+          r = true;
+      }
+      else
+        _channels.erase(_channels.begin() + i--);
+  }
+  return r;
+}
+
+void SoundEffect::OnDeactivate()
+{
+  Stop();
 }
 
 /////////////////////////////////////////////////////////
+
+Music *Music::_lastPlayed = nullptr;
 
 Music::Music(Object *parent, std::string name)
     : Music("", parent, name)
@@ -107,7 +145,7 @@ Music::Music(Object *parent, std::string name)
 }
 
 Music::Music(std::string path, Object *parent, std::string name)
-    : Object(parent, name), _path(path), _music(nullptr), _playing(false)
+    : Object(parent, name), _path(path), _music(nullptr)
 {
   Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
   if (!engine)
@@ -183,8 +221,11 @@ void Music::Play(bool loop, double fadeIn)
     return;
   if (_music)
   {
+    if (_lastPlayed)
+      _lastPlayed->Stop();
+    _lastPlayed = this;
     if (fadeIn <= 0.0)
-      Mix_PlayMusic(_music, loop ? -1 : 0);
+        Mix_PlayMusic(_music, loop ? -1 : 0);
     else
       Mix_FadeInMusic(_music, loop ? -1 : 0, int(fadeIn * 1000));
   }
@@ -211,7 +252,12 @@ void Music::Stop(double fadeOut)
 
 bool Music::IsPlaying()
 {
-  return Mix_PlayingMusic();
+  return Mix_PlayingMusic() && _lastPlayed == this;
+}
+
+void Music::OnDeactivate()
+{
+  Stop();
 }
 
 /////////////////////////////////////////////////////////
@@ -242,19 +288,19 @@ Audio::Audio(Object *parent, std::string name)
 
 Audio::~Audio()
 {
+  End();
   for (Object *child : _children)
     delete child;
   _children.clear();
-  End();
 }
 
 void Audio::End()
 {
   if (!Valid())
     return;
+  Object::End();
   if (_acount-- == 1)
     Mix_Quit();
-  Object::End();
 }
 
 bool Audio::IsPlayingMusic()

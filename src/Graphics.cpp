@@ -299,6 +299,7 @@ FontCache::FontCache(Object *parent, std::string name)
 
 FontCache::~FontCache()
 {
+  End();
   for (std::pair<std::pair<std::string, int>, TTF_Font *> it : _fonts)
     TTF_CloseFont(it.second);
   _fonts.clear();
@@ -542,11 +543,12 @@ void Camera::SetGraphics(Graphics *gfx)
 {
   if (_gfx == gfx)
     return;
-  if (_gfx)
-    _gfx->SetCamera(nullptr);
+  Graphics *ogfx = _gfx;
   _gfx = gfx;
-  if (_gfx && gfx->GetCamera() != this)
-    _gfx->SetCamera(this);
+  if (ogfx)
+    ogfx->SetCamera(nullptr);
+  if (gfx && gfx->GetCamera() != this)
+    gfx->SetCamera(this);
 }
 
 void Camera::End()
@@ -683,10 +685,10 @@ Graphics::Graphics(int w, int h, Object *parent, std::string name)
 
 Graphics::~Graphics()
 {
+  End();
   for (Object *child : _children)
     delete child;
   _children.clear();
-  End();
 }
 
 void Graphics::operator()()
@@ -1059,11 +1061,12 @@ void Graphics::SetCamera(Camera *camera)
 {
   if (_camera == camera)
     return;
-  if (_camera)
-    _camera->SetGraphics(nullptr);
+  Camera *ocamera = _camera;
   _camera = camera;
-  if (_camera && _camera->GetGraphics() != this)
-    _camera->SetGraphics(this);
+  if (ocamera)
+    ocamera->SetGraphics(nullptr);
+  if (camera && camera->GetGraphics() != this)
+    camera->SetGraphics(this);
 }
 
 Camera *Graphics::GetCamera()

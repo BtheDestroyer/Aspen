@@ -14,7 +14,7 @@ class SoundEffect : public Object::Object
 {
   std::string _path;
   Mix_Chunk *_sound;
-  bool _playing;
+  std::vector<unsigned> _channels;
 
 public:
   SoundEffect(Object *parent = nullptr, std::string name = "SoundEffect");
@@ -29,14 +29,18 @@ public:
 
   bool Load();
   void Play(int channel = -1);
+  void Stop();
+  bool IsPlayingOn(int channel);
   bool IsPlaying();
+
+  void OnDeactivate();
 };
 
 class Music : public Object::Object
 {
+  static Music *_lastPlayed;
   std::string _path;
   Mix_Music *_music;
-  bool _playing;
 
 public:
   Music(Object *parent = nullptr, std::string name = "Music");
@@ -53,6 +57,8 @@ public:
   void Play(bool loop = false, double fadeIn = 0.0);
   void Stop(double fadeOut = 0.0);
   bool IsPlaying();
+
+  void OnDeactivate();
 };
 
 class Audio : public Object::Object

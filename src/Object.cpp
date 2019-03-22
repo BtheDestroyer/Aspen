@@ -202,8 +202,9 @@ void Object::End()
 {
   if (!Valid())
     return;
-
   OnEnd();
+  for (Object *c : _children)
+    c->End();
   _valid = false;
 }
 
