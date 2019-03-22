@@ -12,10 +12,10 @@
 
 ## Backends
 
-[![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg?style=plastic)](#backends)
-[![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg?style=plastic)](#backends)
-[![Input](https://img.shields.io/badge/input-SDL_(keyboard)-green.svg?style=plastic)](#backends)
-[![Audio](https://img.shields.io/badge/audio-SDL__Mixer-orange.svg?style=plastic)](#backends)
+[![Graphics](https://img.shields.io/badge/graphics-SDL-blue.svg?style=plastic)](https://bthedestroyer.github.io/Aspen/namespace_aspen_1_1_graphics.html)
+[![Physics](https://img.shields.io/badge/physics-Custom-yellow.svg?style=plastic)](https://bthedestroyer.github.io/Aspen/namespace_aspen_1_1_physics.html)
+[![Input](https://img.shields.io/badge/input-SDL_(mouse/keyboard)-green.svg?style=plastic)](https://bthedestroyer.github.io/Aspen/namespace_aspen_1_1_input.html)
+[![Audio](https://img.shields.io/badge/audio-SDL__Mixer-orange.svg?style=plastic)](https://bthedestroyer.github.io/Aspen/namespace_aspen_1_1_audio.html)
 
 ## Prerequisites
 
