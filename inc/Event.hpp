@@ -17,7 +17,10 @@ class EventListener : public Object::Object
 {
 public:
   /// \brief Constructor
-  /// \param name Object name (Same as type)
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   EventListener(Object *parent = nullptr, std::string name = "EventListener");
   /// \brief Destructor
   ~EventListener();
@@ -33,6 +36,8 @@ public:
   /// \param event Event to handle
   virtual void Handle(SDL_Event *event);
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 
@@ -41,6 +46,10 @@ class QuitEventListener : public EventListener
 {
 public:
   /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   QuitEventListener(Object *parent = nullptr, std::string name = "QuitEventListener");
   /// \brief Destructor
   ~QuitEventListener();
@@ -49,6 +58,8 @@ public:
   /// \param event Event to handle
   void Handle(SDL_Event *event);
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 
@@ -61,12 +72,25 @@ class KeyEventListener : public EventListener
 
 public:
   /// \brief Constructor
-  /// \param k Which Key's states to control
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   KeyEventListener(Object *parent = nullptr, std::string name = "KeyEventListener");
+  /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param k Which Key's states to control
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   KeyEventListener(SDL_Keycode k, Object *parent = nullptr, std::string name = "KeyEventListener");
   /// \brief Destructor
   ~KeyEventListener();
-  
+
+  /// \brief Functions like Object::operator() if event != nullptr
+  ///        Calls Handle(event) if event != nullptr
+  ///        This is called twice (once with an event, once without) by a parent EventHandler
+  /// \param event Event to handle
   void operator()();
 
   /// \brief Sets _key
@@ -77,6 +101,8 @@ public:
   /// \param event Event to handle
   void Handle(SDL_Event *event);
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 
@@ -86,10 +112,18 @@ class MouseEventListener : public EventListener
 
 public:
   /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   MouseEventListener(Object *parent = nullptr, std::string name = "MouseEventListener");
   /// \brief Destructor
   ~MouseEventListener();
 
+  /// \brief Functions like Object::operator() if event != nullptr
+  ///        Calls Handle(event) if event != nullptr
+  ///        This is called twice (once with an event, once without) by a parent EventHandler
+  /// \param event Event to handle
   void operator()();
 
   /// \brief Controls the state of Input::Key in the map obtained by Input::GetKey(_key)
@@ -97,6 +131,8 @@ public:
   /// \param event Event to handle
   void Handle(SDL_Event *event);
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 
@@ -106,12 +142,19 @@ class EventHandler : public Object::Object
 {
 public:
   /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   EventHandler(Object *parent = nullptr, std::string name = "EventHandler");
   /// \brief Destructor
   ~EventHandler();
+
   /// \brief Polls SDL_Events and passes them to all child EventListeners
   void operator()();
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 } // namespace Event
