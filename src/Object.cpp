@@ -23,8 +23,6 @@ Object::Object(Object *parent, std::string name)
     Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
 
   _valid = true;
-  OnStart();
-  OnActivate();
 }
 
 Object::~Object()
@@ -75,6 +73,12 @@ void Object::operator()()
 {
   if (!Active())
     return;
+  if (!_started)
+  {
+    OnStart();
+    OnActivate();
+    _started = true;
+  }
   OnUpdate();
   for (unsigned i = 0; i < _children.size(); ++i)
   {

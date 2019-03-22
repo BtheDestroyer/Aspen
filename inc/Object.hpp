@@ -28,6 +28,7 @@ protected:
   ///        Derived classes can set this to false in their Constructors if they couldn't be created properly
   bool _valid = false;
   bool _active = true;
+  bool _started = false;
   /// \brief Sets _parent to the given Object
   ///        Used by AddChild, CreateChild, etc.
   void SetParent(Object *parent);
