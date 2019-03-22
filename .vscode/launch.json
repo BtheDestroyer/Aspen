@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/sdl.exe",
+            "program": "${workspaceFolder}/build/aspen.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

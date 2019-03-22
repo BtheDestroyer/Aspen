@@ -24,6 +24,7 @@ Object::Object(Object *parent, std::string name)
 
   _valid = true;
   OnStart();
+  OnActivate();
 }
 
 Object::~Object()
@@ -217,6 +218,7 @@ void Object::End()
 {
   if (!Valid())
     return;
+  OnDeactivate();
   OnEnd();
   for (Object *c : _children)
     c->End();

@@ -16,6 +16,7 @@ class MyState : public GameState::GameState
 {
   Audio::SoundEffect *sound = nullptr;
   Graphics::Camera *cam;
+  Audio::Music *music;
 
 public:
   MyState(Object *parent = nullptr, std::string name = "MyState")
@@ -35,13 +36,13 @@ public:
 
     Graphics::Rectangle *rec = new Graphics::Rectangle(SDL_Rect{0, 0, 50, 50}, 0x0000FFFF, true, this, "Bumper");
     rec->AddChild(new Physics::Rigidbody());
-    rec->AddChild(new Physics::CircleCollider(25, rec));
-    //rec->AddChild(new Physics::AABBCollider(50, 50, rec));
+    //rec->AddChild(new Physics::CircleCollider(25, rec));
+    rec->AddChild(new Physics::AABBCollider(50, 50, rec));
     rec->FindChildOfType<Transform::Transform>()->SetPosition(500, 200);
     AddChild(rec);
 
     rec = new Graphics::Rectangle(SDL_Rect{0, 0, 25, 75}, 0xFF000088, true, this);
-    rec->FindChildOfType<Transform::Transform>()->SetPosition(25,100);
+    rec->FindChildOfType<Transform::Transform>()->SetPosition(25, 100);
     AddChild(rec);
     AddChild(new Graphics::Point(SDL_Point{75, 25}, 0x660099FF, this));
 
@@ -63,9 +64,8 @@ public:
     text->CreateChild<Transform::Transform>()->SetPosition(w / 2, h / 2);
     AddChild(text);
 
-    Audio::Music *music = new Audio::Music("resources/mus.ogg", this);
+    music = new Audio::Music("resources/mus.ogg", this);
     AddChild(music);
-    music->Play(true, 2.0);
 
     sound = new Audio::SoundEffect("resources/pop.wav", this);
     AddChild(sound);
@@ -113,6 +113,11 @@ public:
 
     if (Input::KeyPressed(SDLK_p))
       sound->Play();
+  }
+
+  void OnActivate()
+  {
+    music->Play(true, 2.0);
   }
 };
 
