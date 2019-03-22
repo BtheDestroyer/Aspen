@@ -106,8 +106,10 @@ public:
   void PopulateDebugger();
 };
 
+/// \brief MouseEventListener class
 class MouseEventListener : public EventListener
 {
+  /// \brief Reference to mouse data
   Input::Mouse &_m;
 
 public:
@@ -150,7 +152,10 @@ public:
   /// \brief Destructor
   ~EventHandler();
 
-  /// \brief Polls SDL_Events and passes them to all child EventListeners
+  /// \brief Updates this object and all of its children
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
+  ///        Polls SDL_Events and passes them to all child EventListeners
   void operator()();
 
   /// \brief Fills out the Debugger if it exists with this Object's information
