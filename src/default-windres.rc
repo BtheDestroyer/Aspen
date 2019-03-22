@@ -1,0 +1,23 @@
+AppIcon ICON "./resources/Aspen_Logo.ico"
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  0,1,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "Aspen developer"
+      VALUE "FileDescription", "Application made with the Aspen game engine"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "aspen_app"
+      VALUE "OriginalFilename", "aspen.exe"
+      VALUE "ProductName", "Aspen App"
+      VALUE "ProductVersion", "0.1"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END

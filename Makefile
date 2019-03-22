@@ -3,7 +3,7 @@ HEADERS := ./inc
 BUILD := ./build
 OBJECTS := $(BUILD)/obj
 ifndef PROJECT
-PROJECT := sdl
+PROJECT := aspen
 endif
 LIBRARY := Aspen
 
@@ -70,7 +70,11 @@ ifeq ($(suffix $(PROJECT)),.a)
 CPPFILES := $(filter-out $(SOURCES)/main.cpp, $(CPPFILES))
 endif
 HPPFILES := $(filter-out $(HEADERS)/$(STUB).hpp, $(wildcard $(HEADERS)/*.hpp))
+RCFILES := $(wildcard $(SOURCES)/*.rc)
 OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
+ifeq ($(suffix $(PROJECT)),.exe)
+OBJFILES := $(OBJFILES) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
+endif
 
 ###############################################################
 
@@ -141,8 +145,8 @@ else
 $(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
 	$(AR) rvs $@ $^ $(ARFLAGS)
 
-$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB)
-	$(CXX) $(OBJECTS)/main.o -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
+$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
+	$(CXX) $(OBJECTS)/main.o $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES)) -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
 	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
@@ -152,6 +156,11 @@ endif
 
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(OBJECTS)/%.o: $(SOURCES)/%.rc
+ifeq ($(PLATFORM),__WIN32)
+	windres $< -o $@
+endif
 
 $(OBJFILES) : | $(OBJECTS)
 
