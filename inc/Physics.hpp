@@ -104,6 +104,7 @@ public:
 
   virtual std::pair<Collision, Collision> TestCollision(Collider *other);
   virtual void ResolveCollision(Collision collision);
+  virtual bool InCollision(int x, int y);
 
   void SetOffset(int x, int y);
   int GetOffsetX();
@@ -128,6 +129,7 @@ public:
 
   std::pair<Collision, Collision> TestCollision(Collider *other);
   void ResolveCollision(Collision collision);
+  bool InCollision(int x, int y);
 
   double GetRadius();
   void SetRadius(double radius);
@@ -146,6 +148,7 @@ public:
 
   std::pair<Collision, Collision> TestCollision(Collider *other);
   void ResolveCollision(Collision collision);
+  bool InCollision(int x, int y);
 
   double GetWidth();
   void SetWidth(double width);

@@ -231,7 +231,7 @@ public:
 
   bool HasAncestor(const Object *other) const;
 
-  virtual void PopulateDebugger() const;
+  virtual void PopulateDebugger();
 
   virtual void OnStart();
   virtual void OnActivate();
@@ -241,6 +241,8 @@ public:
   virtual void OnDeactivate();
   virtual void OnEnd();
   virtual void OnCollision(Physics::Collision c);
+  virtual void OnMouseClick();
+  virtual void OnMouseRelease();
 };
 } // namespace Object
 } // namespace Aspen

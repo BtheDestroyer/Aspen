@@ -14,6 +14,8 @@ class Debug : public Object::Object
 {
   ImGuiIO *_io;
   static unsigned _dcount;
+  std::vector<const Object *> _toClose;
+  std::vector<const Object *> _toOpen;
 
 public:
   Debug(Object *parent = nullptr, std::string name = "Debug");
@@ -21,6 +23,10 @@ public:
   void operator()();
   void MakeTree(Object *o);
   ~Debug();
+
+  void CloseAll();
+  void Close(Object *o);
+  void Open(Object *o);
 
   void PopulateDebugger();
 };

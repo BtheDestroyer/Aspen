@@ -184,9 +184,9 @@ void Music::Play(bool loop, double fadeIn)
   if (_music)
   {
     if (fadeIn <= 0.0)
-      Mix_PlayMusic(_music, loop ? 0 : -1);
+      Mix_PlayMusic(_music, loop ? -1 : 0);
     else
-      Mix_FadeInMusic(_music, loop ? 0 : -1, int(fadeIn * 1000));
+      Mix_FadeInMusic(_music, loop ? -1 : 0, int(fadeIn * 1000));
   }
 }
 

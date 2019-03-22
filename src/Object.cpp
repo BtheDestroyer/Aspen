@@ -279,7 +279,7 @@ bool Object::HasAncestor(const Object *other) const
   return false;
 }
 
-void Object::PopulateDebugger() const
+void Object::PopulateDebugger()
 {
   ImGui::Text("Children: %d", ChildrenCount());
 }
@@ -321,6 +321,14 @@ void Object::OnEnd()
 }
 
 void Object::OnCollision(Physics::Collision c)
+{
+}
+
+void Object::OnMouseClick()
+{
+}
+
+void Object::OnMouseRelease()
 {
 }
 } // namespace Object

@@ -4,7 +4,10 @@
 #include "Engine.hpp"
 #include "Transform.hpp"
 #include "Collision.hpp"
+#include "Graphics.hpp"
 #include "Time.hpp"
+#include "Input.hpp"
+#include "Debug.hpp"
 #include "Log.hpp"
 #include "imgui.h"
 
@@ -338,6 +341,40 @@ Collider::Collider(Object *parent, std::string name)
 
 void Collider::operator()()
 {
+  if (Parent())
+  {
+    Input::Mouse &m = Input::GetMouse();
+    if (m.left.pressed | m.middle.pressed | m.right.pressed)
+    {
+      if (InCollision(m.x, m.y))
+      {
+        Parent()->OnMouseClick();
+        if (m.middle.pressed)
+        {
+          Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+          if (e)
+          {
+            Debug::Debug *d = e->FindChildOfType<Debug::Debug>();
+            if (!d)
+            {
+              Graphics::Graphics *g = e->FindChildOfType<Graphics::Graphics>();
+              if (g)
+                d = g->FindChildOfType<Debug::Debug>();
+            }
+            if (d)
+            {
+              d->CloseAll();
+              d->Open(Parent());
+            }
+          }
+        }
+      }
+    }
+    if (m.left.released | m.middle.released | m.right.released)
+      if (InCollision(m.x, m.y))
+        Parent()->OnMouseRelease();
+  }
+  Object::operator()();
 }
 
 std::pair<Collision, Collision> Collider::TestCollision(Collider *other)
@@ -350,6 +387,20 @@ std::pair<Collision, Collision> Collider::TestCollision(Collider *other)
 
 void Collider::ResolveCollision(Collision collision)
 {
+}
+
+bool Collider::InCollision(int x, int y)
+{
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!Parent())
+      return false;
+    tf = Parent()->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return false;
+  }
+  return x == (tf->GetXPosition() + GetOffsetX()) && y == (tf->GetYPosition() + GetOffsetY());
 }
 
 void Collider::SetOffset(int x, int y)
@@ -508,6 +559,45 @@ void CircleCollider::ResolveCollision(Collision collision)
     else
       tf->ModifyPosition(-dx, -dy);
   }
+}
+
+bool CircleCollider::InCollision(int x, int y)
+{
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!Parent())
+      return false;
+    tf = Parent()->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return false;
+  }
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Transform::Transform *ctf = nullptr;
+  if (engine)
+  {
+    Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
+    if (gfx)
+    {
+      Graphics::Camera *cam = gfx->GetCamera();
+      if (cam)
+        ctf = cam->FindChildOfType<Transform::Transform>();
+    }
+  }
+  if (ctf)
+  {
+    x -= (tf->GetXPosition(ctf) + GetOffsetX());
+    y -= (tf->GetYPosition(ctf) + GetOffsetY());
+  }
+  else
+  {
+    x -= (tf->GetXPosition() + GetOffsetX());
+    y -= (tf->GetYPosition() + GetOffsetY());
+  }
+  double d2 = x * x + y * y;
+  double r2 = GetRadius();
+  r2 *= r2;
+  return d2 <= r2;
 }
 
 double CircleCollider::GetRadius()
@@ -746,6 +836,44 @@ void AABBCollider::ResolveCollision(Collision collision)
                          (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) * std::sin(collision.collisionAngle));
     }
   }
+}
+
+bool AABBCollider::InCollision(int x, int y)
+{
+  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  if (!tf)
+  {
+    if (!Parent())
+      return false;
+    tf = Parent()->FindChildOfType<Transform::Transform>();
+    if (!tf)
+      return false;
+  }
+  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Transform::Transform *ctf = nullptr;
+  if (engine)
+  {
+    Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
+    if (gfx)
+    {
+      Graphics::Camera *cam = gfx->GetCamera();
+      if (cam)
+        ctf = cam->FindChildOfType<Transform::Transform>();
+    }
+  }
+  if (ctf)
+  {
+    x -= (tf->GetXPosition(ctf) + GetOffsetX());
+    y -= (tf->GetYPosition(ctf) + GetOffsetY());
+  }
+  else
+  {
+    x -= (tf->GetXPosition() + GetOffsetX());
+    y -= (tf->GetYPosition() + GetOffsetY());
+  }
+  x = std::abs(x) * 2;
+  y = std::abs(y) * 2;
+  return x <= GetWidth() && y <= GetHeight();
 }
 
 double AABBCollider::GetWidth()

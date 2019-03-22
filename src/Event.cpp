@@ -3,7 +3,9 @@
 #include "Event.hpp"
 #include "Log.hpp"
 #include "Input.hpp"
+#include "Graphics.hpp"
 #include "Engine.hpp"
+#include "Transform.hpp"
 #include "imgui.h"
 
 #undef __EVENT_CPP
@@ -173,10 +175,6 @@ void MouseEventListener::operator()()
   _m.dx = 0;
   _m.dy = 0;
   _m.wheel = 0;
-}
-
-void MouseEventListener::Handle(SDL_Event *event)
-{
   if (_m.left.pressed)
     _m.left.pressed = false;
   if (_m.right.pressed)
@@ -189,15 +187,17 @@ void MouseEventListener::Handle(SDL_Event *event)
     _m.right.released = false;
   if (_m.middle.released)
     _m.middle.released = false;
-  if (event->type == SDL_MOUSEMOTION)
-  {
-    int oldx = _m.x;
-    int oldy = _m.y;
-    SDL_GetMouseState(&_m.x, &_m.y);
-    _m.dx = _m.x - oldx;
-    _m.dy = _m.y - oldy;
-  }
-  else if (event->type == SDL_MOUSEBUTTONDOWN)
+  int oldx = _m.x;
+  int oldy = _m.y;
+  SDL_GetMouseState(&_m.x, &_m.y);
+  _m.dx = _m.x - oldx;
+  _m.dy = _m.y - oldy;
+  Object::operator()();
+}
+
+void MouseEventListener::Handle(SDL_Event *event)
+{
+  if (event->type == SDL_MOUSEBUTTONDOWN)
   {
     if (event->button.button == SDL_BUTTON_LEFT && !_m.left.held)
     {
@@ -247,13 +247,13 @@ void MouseEventListener::Handle(SDL_Event *event)
 
 void MouseEventListener::PopulateDebugger()
 {
-  ImGui::Text("Position: (%d, %d)", _m.x, _m.y);
+  ImGui::Text("World Position: (%d, %d)", _m.x, _m.y);
   ImGui::Text("Delta: (%d, %d)", _m.dx, _m.dy);
   ImGui::Text("Wheel: %d", _m.wheel);
   ImGui::Text("LMB: [%s] [%s] [%s]", _m.left.pressed ? "Pressed" : "", _m.left.held ? "Held" : "", _m.left.released ? "Released" : "");
   ImGui::Text("RMB: [%s] [%s] [%s]", _m.right.pressed ? "Pressed" : "", _m.right.held ? "Held" : "", _m.right.released ? "Released" : "");
   ImGui::Text("MMB: [%s] [%s] [%s]", _m.middle.pressed ? "Pressed" : "", _m.middle.held ? "Held" : "", _m.middle.released ? "Released" : "");
-  Object::PopulateDebugger();
+  EventListener::PopulateDebugger();
 }
 } // namespace Event
 } // namespace Aspen
