@@ -21,6 +21,8 @@ class MyState : public GameState::GameState
 public:
   MyState(Object *parent = nullptr, std::string name = "MyState")
       : GameState(parent, name)
+  {}
+  void OnStart()
   {
     Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
 

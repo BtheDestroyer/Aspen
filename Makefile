@@ -147,6 +147,7 @@ $(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
 
 $(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
 	$(CXX) $(OBJECTS)/main.o $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES)) -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
+	cp C:/MinGW/bin/libpng16-16.dll $(BUILD)/
 	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
 	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
