@@ -54,10 +54,15 @@ public:
 
   /// \brief Gets the parent of this Object
   /// \return _parent
-  Object *Parent() const;
+  const Object *Parent() const;
+  /// \brief Gets the parent of this Object
+  /// \return _parent
+  Object *Parent();
   /// \brief Gets the root Object of the parent/child tree this Object is a part of
   /// \return Root Object of this Object's tree
   const Object *Root() const;
+  /// \brief Gets the root Object of the parent/child tree this Object is a part of
+  /// \return Root Object of this Object's tree
   Object *Root();
 
   /// \brief Updates this object and all of its children

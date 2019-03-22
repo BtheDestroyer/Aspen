@@ -41,7 +41,12 @@ Object::~Object()
   _children.clear();
 }
 
-Object *Object::Parent() const
+const Object *Object::Parent() const
+{
+  return _parent;
+}
+
+Object *Object::Parent()
 {
   return _parent;
 }
