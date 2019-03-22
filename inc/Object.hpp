@@ -205,6 +205,9 @@ public:
   void SetActive(bool active);
   void Activate();
   void Deactivate();
+  void TriggerOnActivate();
+  void TriggerOnDeactivate();
+  
   /// \brief Converts Object to bool by calling Valid
   ///        Example:
   ///        ```

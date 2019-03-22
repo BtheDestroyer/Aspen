@@ -166,21 +166,18 @@ bool Object::Active() const
 
 void Object::SetActive(bool active)
 {
-  if (_active != active)
-  {
-    if (active)
-      OnActivate();
-    else
-      OnDeactivate();
-  }
+  if (active)
+    Activate();
+  else
+    Deactivate();
 }
 
 void Object::Activate()
 {
   if (!_active)
   {
-    OnActivate();
     _active = true;
+    TriggerOnActivate();
   }
 }
 
@@ -188,9 +185,27 @@ void Object::Deactivate()
 {
   if (_active)
   {
-    OnDeactivate();
+    TriggerOnDeactivate();
     _active = false;
   }
+}
+
+void Object::TriggerOnActivate()
+{
+  if (!Active())
+    return;
+  for (Object *c : _children)
+    c->TriggerOnActivate();
+  OnActivate();
+}
+
+void Object::TriggerOnDeactivate()
+{
+  if (!Active())
+    return;
+  for (Object *c : _children)
+    c->TriggerOnDeactivate();
+  OnDeactivate();
 }
 
 Object::operator bool() const
