@@ -93,8 +93,7 @@ public:
 class Collider : public Object::Object
 {
 protected:
-  int _offX;
-  int _offY;
+  /// \brief Determines if the collider is a trigger or solid object
   bool _trigger;
 
 public:
@@ -104,15 +103,11 @@ public:
 
   virtual std::pair<Collision, Collision> TestCollision(Collider *other);
   virtual void ResolveCollision(Collision collision);
-  virtual bool InCollision(int x, int y);
+  /// \brief InCollider
+  virtual bool InCollider(int x, int y);
 
-  void SetOffset(int x, int y);
-  int GetOffsetX();
-  int GetOffsetY();
-
-  int GetX();
-  int GetY();
-
+  /// \brief Determines if the collider is a trigger or solid object
+  /// \return _trigger
   bool IsTrigger();
   void SetTrigger(bool trigger);
 
@@ -129,7 +124,7 @@ public:
 
   std::pair<Collision, Collision> TestCollision(Collider *other);
   void ResolveCollision(Collision collision);
-  bool InCollision(int x, int y);
+  bool InCollider(int x, int y);
 
   double GetRadius();
   void SetRadius(double radius);
@@ -148,7 +143,7 @@ public:
 
   std::pair<Collision, Collision> TestCollision(Collider *other);
   void ResolveCollision(Collision collision);
-  bool InCollision(int x, int y);
+  bool InCollider(int x, int y);
 
   double GetWidth();
   void SetWidth(double width);

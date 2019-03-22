@@ -346,7 +346,7 @@ void Collider::operator()()
     Input::Mouse &m = Input::GetMouse();
     if (m.left.pressed | m.middle.pressed | m.right.pressed)
     {
-      if (InCollision(m.x, m.y))
+      if (InCollider(m.x, m.y))
       {
         Parent()->OnMouseClick();
         if (m.middle.pressed)
@@ -371,7 +371,7 @@ void Collider::operator()()
       }
     }
     if (m.left.released | m.middle.released | m.right.released)
-      if (InCollision(m.x, m.y))
+      if (InCollider(m.x, m.y))
         Parent()->OnMouseRelease();
   }
   Object::operator()();
@@ -389,7 +389,7 @@ void Collider::ResolveCollision(Collision collision)
 {
 }
 
-bool Collider::InCollision(int x, int y)
+bool Collider::InCollider(int x, int y)
 {
   Transform::Transform *tf = FindChildOfType<Transform::Transform>();
   if (!tf)
@@ -541,7 +541,7 @@ void CircleCollider::ResolveCollision(Collision collision)
   }
 }
 
-bool CircleCollider::InCollision(int x, int y)
+bool CircleCollider::InCollider(int x, int y)
 {
   Transform::Transform *tf = FindChildOfType<Transform::Transform>();
   if (!tf)
@@ -818,7 +818,7 @@ void AABBCollider::ResolveCollision(Collision collision)
   }
 }
 
-bool AABBCollider::InCollision(int x, int y)
+bool AABBCollider::InCollider(int x, int y)
 {
   Transform::Transform *tf = FindChildOfType<Transform::Transform>();
   if (!tf)
