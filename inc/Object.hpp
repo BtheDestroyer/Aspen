@@ -27,15 +27,23 @@ protected:
   /// \brief Determines if the Object is valid
   ///        Derived classes can set this to false in their Constructors if they couldn't be created properly
   bool _valid = false;
+  /// \brief Determines if the Object is currently updated
   bool _active = true;
+  /// \brief Determines if the Object has been started
+  ///        Set to true during the first update
   bool _started = false;
+
   /// \brief Sets _parent to the given Object
   ///        Used by AddChild, CreateChild, etc.
   void SetParent(Object *parent);
+  /// \brief Runs OnActivate if the object is currently active
+  void TriggerOnActivate();
+  /// \brief Runs OnDeactivate if the object is currently active (being deactivated)
+  void TriggerOnDeactivate();
 
 public:
   /// \brief Constructor
-  ///        Derived must should call this in their constructors' initialization list
+  ///        Derived classes should call this in their constructors' initialization list
   /// \param parent Parent Object creating this Object
   /// \param name Object name
   ///             Set by derived classes to a string representation of their type
@@ -53,8 +61,8 @@ public:
   Object *Root();
 
   /// \brief Updates this object and all of its children
-  ///        Derived classes should call this at some point in their operator()
-  ///        This won't run if _valid is false
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
   virtual void operator()();
 
   /// \brief Adds child to this Object's list of children
@@ -75,6 +83,12 @@ public:
     AddChild(o);
     return o;
   }
+  /// \brief Creates a new child of type T
+  ///        Useful for creating an object with no constructor parameters and/or modifying it later
+  /// \tparam T Type of child to create
+  ///           Must inherit Object
+  /// \param name Name of the new object
+  /// \return Newly created Object
   template <typename T>
   T *CreateChild(std::string name)
   {
@@ -110,6 +124,12 @@ public:
   /// \return Generation index of this Object (0 = root)
   int ParentCount();
 
+  /// \brief Finds the closest ancestor Object of a type applicable to that which was requested
+  /// \tparam T Type of child to find
+  ///           Must inherit Object
+  /// \return The closest ancestor of type T
+  ///         If no ancestors match the given type, nullptr is returned
+  ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return whichever was added earliest - `A*` or `B*` - as an `A*`
   template <typename T>
   T *FindAncestorOfType() const
   {
@@ -136,7 +156,12 @@ public:
         return dynamic_cast<T *>(_children[i]);
     return nullptr;
   }
-
+  /// \brief Finds the first child Object of a type applicable to that which was requested
+  /// \tparam T Type of child to find
+  ///           Must inherit Object
+  /// \return The first child of type T
+  ///         If no children match the given type, nullptr is returned
+  ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return whichever was added earliest - `A*` or `B*` - as an `A*`
   template <typename T>
   T *FindChildOfType()
   {
@@ -160,7 +185,12 @@ public:
         vec.push_back(dynamic_cast<T *>(_children[i]));
     return vec;
   }
-
+  /// \brief Finds all children Objects of a type applicable to that which was requested
+  /// \tparam T Type of children to find
+  ///           Must inherit Object
+  /// \return All children of type T
+  ///         If no children match the given type, nullptr is returned
+  ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return both `A*` and `B*` as `A*`
   template <typename T>
   std::vector<T *> FindChildrenOfType()
   {
@@ -170,7 +200,12 @@ public:
         vec.push_back(dynamic_cast<T *>(_children[i]));
     return vec;
   }
-
+  /// \brief Recursively finds all descendent Objects of a type applicable to that which was requested
+  /// \tparam T Type of descendent to find
+  ///           Must inherit Object
+  /// \return All children of type T
+  ///         If no descendents match the given type, an empty vector is returned
+  ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return both `A*` and `B*` as `A*`
   template <typename T>
   const std::vector<T *> FindDescendentsOfType() const
   {
@@ -184,7 +219,12 @@ public:
     }
     return vec;
   }
-
+  /// \brief Recursively finds all descendent Objects of a type applicable to that which was requested
+  /// \tparam T Type of descendent to find
+  ///           Must inherit Object
+  /// \return All children of type T
+  ///         If no descendents match the given type, an empty vector is returned
+  ///         If `class A : public Object` and `class B : public A`, then `FindObjectOfType<A>()` will return both `A*` and `B*` as `A*`
   template <typename T>
   std::vector<T *> FindDescendentsOfType()
   {
@@ -202,12 +242,20 @@ public:
   /// \brief Determines if the Object is valid
   /// \return Const reference to _valid
   const bool &Valid() const;
+  /// \brief Determines if the Object is active
+  /// \return True if both valid and active
+  ///         False otherwise
   bool Active() const;
+  /// \brief Sets active status of the object
+  ///        Triggers OnActivate or OnDeactivate appropriately
+  /// \param active New active status
   void SetActive(bool active);
+  /// \brief Activates the object
+  ///        Triggers OnActivate appropriately
   void Activate();
+  /// \brief Deactivates the object
+  ///        Triggers OnDeactivate appropriately
   void Deactivate();
-  void TriggerOnActivate();
-  void TriggerOnDeactivate();
   
   /// \brief Converts Object to bool by calling Valid
   ///        Example:
@@ -228,24 +276,50 @@ public:
   ///        Uses Log::Debug
   void PrintTree() const;
 
+  /// \brief Gets the Object's name
+  /// \return Object name
   std::string Name() const;
 
+  /// \brief Determines the number of immediate children the Object has
+  /// \return Number of children owned by the Object
   unsigned ChildrenCount() const;
+  /// \brief Gets the list of Objects that are children of this Object
+  /// \return Children owned by the Object
   std::vector<Object *> &Children();
 
+  /// \brief Determines if the provided Object is an ancestor of this Object
+  /// \param other Potential ancestor of this Object
+  /// \return True if other is an ancestor of this Object
+  ///         False otherwise
   bool HasAncestor(const Object *other) const;
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   virtual void PopulateDebugger();
 
+  /// \brief Run when the Object is created
   virtual void OnStart();
+  /// \brief Run when the Object is activated
+  ///        Run after OnStart
   virtual void OnActivate();
+  /// \brief Run every frame
   virtual void OnUpdate();
+  /// \brief Run before OnUpdate
   virtual void OnEarlyUpdate();
+  /// \brief Run after OnUpdate
   virtual void OnLateUpdate();
+  /// \brief Run when the Object is deactivated
+  ///        Run before OnEnd
   virtual void OnDeactivate();
+  /// \brief Run when the Object is ended/destroyed
   virtual void OnEnd();
+
+  /// \brief Run when a collision occurs
+  /// \param c Collision that occured
   virtual void OnCollision(Physics::Collision c);
+  /// \brief Run when the mouse is clicked while over the Object
   virtual void OnMouseClick();
+  /// \brief Run when the mouse is released while over the Object
   virtual void OnMouseRelease();
 };
 } // namespace Object
