@@ -69,12 +69,14 @@ double Time::CurrentTime()
 
 double Time::DeltaTime()
 {
+  if (_targetFramerate > 0)
+    return std::min(std::max(0.0, double(_deltaTime.count()) / 1000000.0), 1.0 / _targetFramerate);
   return std::max(0.0, double(_deltaTime.count()) / 1000000.0);
 }
 
 double Time::FPS()
 {
-  double r = 1.0 / std::max(DeltaTime(), 0.00000001);
+  double r = 1.0 / std::max(std::max(0.0, double(_deltaTime.count()) / 1000000.0), 0.00000001);
   return r;
 }
 
