@@ -24,35 +24,70 @@ public:
   Key();
 };
 
+/// \brief Mouse data
 class Mouse
 {
 public:
+  /// \brief World x position
   int x;
+  /// \brief World y position
   int y;
+  /// \brief Mouse wheel status
   int wheel;
+  /// \brief Delta x since last frame
   int dx;
+  /// \brief Delta y since last frame
   int dy;
+  /// \brief Left mouse button status
   Key left;
+  /// \brief Right mouse button status
   Key right;
+  /// \brief Middle mouse button status
   Key middle;
 };
 
+/// \brief Input axis class
 class Axis : public Object::Object
 {
+  /// \brief Positive key
   SDL_Keycode _pos;
+  /// \brief Negative key
   SDL_Keycode _neg;
+  /// \brief Lerp speed to 0
   float _gravity;
+  /// \brief Lerp speed to 1/-1
   float _weight;
+  /// \brief Current value of the axis
   float _value;
 
 public:
+  /// \brief Constructor
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Axis(Object *parent = nullptr, std::string name = "Axis");
-  Axis(SDL_Keycode posiive = SDLK_UNKNOWN, SDL_Keycode negative = SDLK_UNKNOWN, float _gravity = 0.5f, float _weight = 0.5f, Object *parent = nullptr, std::string name = "Axis");
+  /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param positive Positive key
+  /// \param negative Negative key
+  /// \param gravity Lerp speed to 0
+  /// \param weight Lerp speed to 1/-1
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
+  Axis(SDL_Keycode positive = SDLK_UNKNOWN, SDL_Keycode negative = SDLK_UNKNOWN, float gravity = 0.5f, float weight = 0.5f, Object *parent = nullptr, std::string name = "Axis");
 
+  /// \brief Updates this object and all of its children
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
   void operator()();
 
+  /// \brief Gets the current value of the axis
+  /// \return _value
   float GetValue();
 
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 
@@ -73,6 +108,8 @@ bool KeyPressed(SDL_Keycode k);
 /// \return released state of the Key held at GetKey(k)
 bool KeyReleased(SDL_Keycode k);
 
+/// \brief Gets the mouse data
+/// \return Mouse data
 Mouse &GetMouse();
 } // namespace Input
 } // namespace Aspen

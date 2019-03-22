@@ -511,6 +511,7 @@ public:
   ///        Derived classes should call this in their constructors' initialization list
   /// \param text Text to draw
   /// \param font Font in which to draw
+  /// \param size Size of the text in pt
   /// \param parent Parent Object to be passed to Object constructor
   /// \param name Object name
   ///             Set by derived classes to a string representation of their type
@@ -519,6 +520,7 @@ public:
   ///        Derived classes should call this in their constructors' initialization list
   /// \param text Text to draw
   /// \param font Font in which to draw
+  /// \param size Size of the text in pt
   /// \param c Color of text
   /// \param parent Parent Object to be passed to Object constructor
   /// \param name Object name

@@ -22,7 +22,7 @@ class Log
   std::string _suf;
   /// \brief Determines if calls to operator() are completed
   bool _print;
-  
+  /// \brief Output filestream shared across all Log classes
   static std::fstream _file;
 
 public:
@@ -41,6 +41,9 @@ public:
   /// \brief Toggles _print
   void TogglePrint();
 
+  /// \brief sets the current logfile
+  /// \param path Output filepath
+  /// \return Success of opening the output file
   static bool SetFile(std::string path);
 };
 

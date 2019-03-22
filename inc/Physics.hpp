@@ -321,7 +321,8 @@ public:
   AABBCollider(Object *parent = nullptr, std::string name = "AABBCollider");
   /// \brief Constructor
   ///        Derived classes should call this in their constructors' initialization list
-  /// \param radius Radius of the collider
+  /// \param width Width of the collider
+  /// \param height Height of the collider
   /// \param parent Parent Object to be passed to Object constructor
   /// \param name Object name
   ///             Set by derived classes to a string representation of their type

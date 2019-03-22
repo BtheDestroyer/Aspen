@@ -87,10 +87,9 @@ public:
   /// \brief Destructor
   ~KeyEventListener();
 
-  /// \brief Functions like Object::operator() if event != nullptr
-  ///        Calls Handle(event) if event != nullptr
-  ///        This is called twice (once with an event, once without) by a parent EventHandler
-  /// \param event Event to handle
+  /// \brief Updates this object and all of its children
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
   void operator()();
 
   /// \brief Sets _key
@@ -122,10 +121,9 @@ public:
   /// \brief Destructor
   ~MouseEventListener();
 
-  /// \brief Functions like Object::operator() if event != nullptr
-  ///        Calls Handle(event) if event != nullptr
-  ///        This is called twice (once with an event, once without) by a parent EventHandler
-  /// \param event Event to handle
+  /// \brief Updates this object and all of its children
+  ///        Derived classes should call or reimplement this at some point in their operator()
+  ///        This won't run if the Object isn't Active
   void operator()();
 
   /// \brief Controls the state of Input::Key in the map obtained by Input::GetKey(_key)
@@ -155,7 +153,6 @@ public:
   /// \brief Updates this object and all of its children
   ///        Derived classes should call or reimplement this at some point in their operator()
   ///        This won't run if the Object isn't Active
-  ///        Polls SDL_Events and passes them to all child EventListeners
   void operator()();
 
   /// \brief Fills out the Debugger if it exists with this Object's information
