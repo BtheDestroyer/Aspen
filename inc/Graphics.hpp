@@ -722,8 +722,8 @@ public:
   /// \brief Frees the Window and shuts down SDL if this is the last Graphics object
   void End();
 
-  /// \brief Shuts down and invalidates Object and all of its children
-  ///        An invalid child Object will be deleted by their parent after they update
+  /// \brief Fills out the Debugger if it exists with this Object's information
+  ///        Derived classes should call their base class's version of this method
   void PopulateDebugger();
 };
 } // namespace Graphics
