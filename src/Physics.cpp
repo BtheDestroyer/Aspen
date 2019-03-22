@@ -335,7 +335,7 @@ void Rigidbody::PopulateDebugger()
 /////////////////////////////////////////////////////////
 
 Collider::Collider(Object *parent, std::string name)
-    : Object(parent, name), _offX(0), _offY(0), _trigger(false)
+    : Object(parent, name), _trigger(false)
 {
 }
 
@@ -400,51 +400,7 @@ bool Collider::InCollision(int x, int y)
     if (!tf)
       return false;
   }
-  return x == (tf->GetXPosition() + GetOffsetX()) && y == (tf->GetYPosition() + GetOffsetY());
-}
-
-void Collider::SetOffset(int x, int y)
-{
-  _offX = x;
-  _offY = y;
-}
-
-int Collider::GetOffsetX()
-{
-  return _offX;
-}
-
-int Collider::GetOffsetY()
-{
-  return _offY;
-}
-
-int Collider::GetX()
-{
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
-  if (!tf)
-  {
-    if (!_parent)
-      return _offX;
-    tf = _parent->FindChildOfType<Transform::Transform>();
-    if (!tf)
-      return _offX;
-  }
-  return _offX + tf->GetXPosition();
-}
-
-int Collider::GetY()
-{
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
-  if (!tf)
-  {
-    if (!_parent)
-      return _offY;
-    tf = _parent->FindChildOfType<Transform::Transform>();
-    if (!tf)
-      return _offY;
-  }
-  return _offY + tf->GetYPosition();
+  return x == tf->GetXPosition() && y == tf->GetYPosition();
 }
 
 bool Collider::IsTrigger()
@@ -459,7 +415,7 @@ void Collider::SetTrigger(bool trigger)
 
 void Collider::PopulateDebugger()
 {
-  ImGui::DragInt2("Offset", &_offX, 1.0f);
+  ImGui::Checkbox("Trigger", &_trigger);
   Object::PopulateDebugger();
 }
 
@@ -483,10 +439,34 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
 
   if (dynamic_cast<CircleCollider *>(other))
   {
-    double ox = other->GetX();
-    double oy = other->GetY();
-    double tx = GetX();
-    double ty = GetY();
+    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    if (!ttf)
+    {
+      if (Parent())
+        ttf = Parent()->FindChildOfType<Transform::Transform>();
+      if (!ttf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    Transform::Transform *otf = FindChildOfType<Transform::Transform>();
+    if (!otf)
+    {
+      if (Parent())
+        otf = Parent()->FindChildOfType<Transform::Transform>();
+      if (!otf)
+      {
+        c.first.result = COLLISION_RESULT::FAILURE;
+        c.second.result = COLLISION_RESULT::FAILURE;
+        return c;
+      }
+    }
+    double ox = otf->GetXPosition();
+    double oy = otf->GetYPosition();
+    double tx = ttf->GetXPosition();
+    double ty = ttf->GetYPosition();
     double dx = ox - tx;
     double dy = oy - ty;
     double d2 = dx * dx + dy * dy;
@@ -586,13 +566,13 @@ bool CircleCollider::InCollision(int x, int y)
   }
   if (ctf)
   {
-    x -= (tf->GetXPosition(ctf) + GetOffsetX());
-    y -= (tf->GetYPosition(ctf) + GetOffsetY());
+    x -= tf->GetXPosition(ctf);
+    y -= tf->GetYPosition(ctf);
   }
   else
   {
-    x -= (tf->GetXPosition() + GetOffsetX());
-    y -= (tf->GetYPosition() + GetOffsetY());
+    x -= tf->GetXPosition();
+    y -= tf->GetYPosition();
   }
   double d2 = x * x + y * y;
   double r2 = GetRadius();
@@ -663,15 +643,15 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
     }
     AABBCollider *oc = dynamic_cast<AABBCollider *>(other);
     // this's bounds
-    double tl = ttf->GetXPosition() + GetOffsetX() - GetWidth() / 2.0f,
-           tr = ttf->GetXPosition() + GetOffsetX() + GetWidth() / 2.0f,
-           tt = ttf->GetYPosition() + GetOffsetY() - GetHeight() / 2.0f,
-           tb = ttf->GetYPosition() + GetOffsetY() + GetHeight() / 2.0f;
+    double tl = ttf->GetXPosition() - GetWidth() / 2.0f,
+           tr = ttf->GetXPosition() + GetWidth() / 2.0f,
+           tt = ttf->GetYPosition() - GetHeight() / 2.0f,
+           tb = ttf->GetYPosition() + GetHeight() / 2.0f;
     // other's bounds
-    double ol = otf->GetXPosition() + oc->GetOffsetX() - oc->GetWidth() / 2.0f,
-           oR = otf->GetXPosition() + oc->GetOffsetX() + oc->GetWidth() / 2.0f,
-           ot = otf->GetYPosition() + oc->GetOffsetY() - oc->GetHeight() / 2.0f,
-           ob = otf->GetYPosition() + oc->GetOffsetY() + oc->GetHeight() / 2.0f;
+    double ol = otf->GetXPosition() - oc->GetWidth() / 2.0f,
+           oR = otf->GetXPosition() + oc->GetWidth() / 2.0f,
+           ot = otf->GetYPosition() - oc->GetHeight() / 2.0f,
+           ob = otf->GetYPosition() + oc->GetHeight() / 2.0f;
 
     if (tr >= ol && tl <= oR &&
         tb >= ot && tt <= ob)
@@ -741,10 +721,10 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
       }
     }
     CircleCollider *oc = dynamic_cast<CircleCollider *>(other);
-    double tx = ttf->GetXPosition() + GetOffsetX(),
-           ty = ttf->GetYPosition() + GetOffsetY();
-    double ox = otf->GetXPosition() + oc->GetOffsetX(),
-           oy = otf->GetYPosition() + oc->GetOffsetY();
+    double tx = ttf->GetXPosition(),
+           ty = ttf->GetYPosition();
+    double ox = otf->GetXPosition(),
+           oy = otf->GetYPosition();
     double dx = ox - tx,
            dy = oy - ty;
     double d2 = dx * dx + dy * dy,
@@ -863,13 +843,13 @@ bool AABBCollider::InCollision(int x, int y)
   }
   if (ctf)
   {
-    x -= (tf->GetXPosition(ctf) + GetOffsetX());
-    y -= (tf->GetYPosition(ctf) + GetOffsetY());
+    x -= tf->GetXPosition(ctf);
+    y -= tf->GetYPosition(ctf);
   }
   else
   {
-    x -= (tf->GetXPosition() + GetOffsetX());
-    y -= (tf->GetYPosition() + GetOffsetY());
+    x -= tf->GetXPosition();
+    y -= tf->GetYPosition();
   }
   x = std::abs(x) * 2;
   y = std::abs(y) * 2;
