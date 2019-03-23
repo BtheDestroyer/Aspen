@@ -12,6 +12,7 @@ namespace GameState
 GameState::GameState(Object *parent, std::string name)
     : Object(parent, name)
 {
+  StateName(name);
 }
 
 const std::string GameState::StateName()

@@ -204,6 +204,11 @@ void Object::TriggerOnActivate()
 {
   if (!Active())
     return;
+  if (!_started)
+  {
+    OnStart();
+    _started = true;
+  }
   for (Object *c : _children)
     c->TriggerOnActivate();
   OnActivate();
