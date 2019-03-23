@@ -322,6 +322,12 @@ public:
   /// \brief Run when a collision occurs
   /// \param c Collision that occured
   virtual void OnCollision(Physics::Collision c);
+  /// \brief Run when the mouse enters the Object
+  virtual void OnMouseEnter();
+  /// \brief Run while the mouse is over the Object
+  virtual void OnMouseOver();
+  /// \brief Run when the mouse leaves the Object
+  virtual void OnMouseExit();
   /// \brief Run when the mouse is clicked while over the Object
   virtual void OnMouseClick();
   /// \brief Run when the mouse is released while over the Object

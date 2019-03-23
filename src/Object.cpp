@@ -351,6 +351,18 @@ void Object::OnCollision(Physics::Collision c)
 {
 }
 
+void Object::OnMouseEnter()
+{
+}
+
+void Object::OnMouseExit()
+{
+}
+
+void Object::OnMouseOver()
+{
+}
+
 void Object::OnMouseClick()
 {
 }

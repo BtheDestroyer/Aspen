@@ -337,6 +337,7 @@ void Rigidbody::PopulateDebugger()
 Collider::Collider(Object *parent, std::string name)
     : Object(parent, name), _trigger(false)
 {
+  CreateChild<Transform::Transform>();
 }
 
 void Collider::operator()()
@@ -344,9 +345,15 @@ void Collider::operator()()
   if (Parent())
   {
     Input::Mouse &m = Input::GetMouse();
-    if (m.left.pressed | m.middle.pressed | m.right.pressed)
+    if (InCollider(m.x, m.y))
     {
-      if (InCollider(m.x, m.y))
+      if (!_mouseOver)
+      {
+        _mouseOver = true;
+        Parent()->OnMouseEnter();
+      }
+      Parent()->OnMouseOver();
+      if (m.left.pressed | m.middle.pressed | m.right.pressed)
       {
         Parent()->OnMouseClick();
         if (m.middle.pressed)
@@ -370,6 +377,12 @@ void Collider::operator()()
         }
       }
     }
+    else if (_mouseOver)
+    {
+      _mouseOver = false;
+      Parent()->OnMouseExit();
+    }
+
     if (m.left.released | m.middle.released | m.right.released)
       if (InCollider(m.x, m.y))
         Parent()->OnMouseRelease();
@@ -858,6 +871,8 @@ bool AABBCollider::InCollider(int x, int y)
 
 double AABBCollider::GetWidth()
 {
+  if (FindChildOfType<Transform::Transform>())
+    return _width * FindChildOfType<Transform::Transform>()->GetLocalXScale();
   return _width;
 }
 
@@ -868,6 +883,8 @@ void AABBCollider::SetWidth(double width)
 
 double AABBCollider::GetHeight()
 {
+  if (FindChildOfType<Transform::Transform>())
+    return _height * FindChildOfType<Transform::Transform>()->GetLocalYScale();
   return _height;
 }
 

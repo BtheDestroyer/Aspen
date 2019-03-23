@@ -217,6 +217,8 @@ class Collider : public Object::Object
 protected:
   /// \brief Determines if the collider is a trigger or solid object
   bool _trigger;
+  /// \brief Determines if the collider is being moused over
+  bool _mouseOver;
 
 public:
   /// \brief Constructor
