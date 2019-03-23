@@ -38,6 +38,7 @@ Engine::Engine(int flags, Object *parent, std::string name)
       _valid = false;
       return;
     }
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
   }
 
   Log::Info("Creating Engine with the following flags:");
