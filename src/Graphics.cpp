@@ -36,22 +36,22 @@ Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
   Alpha(a);
 }
 
-Uint8 Color::Red()
+Uint8 Color::Red() const
 {
   return Uint8((COLOR_MASK::RED & _c) >> (8 * 3));
 }
 
-Uint8 Color::Green()
+Uint8 Color::Green() const
 {
   return Uint8((COLOR_MASK::GREEN & _c) >> (8 * 2));
 }
 
-Uint8 Color::Blue()
+Uint8 Color::Blue() const
 {
   return Uint8((COLOR_MASK::BLUE & _c) >> 8);
 }
 
-Uint8 Color::Alpha()
+Uint8 Color::Alpha() const
 {
   return Uint8(COLOR_MASK::ALPHA & _c);
 }
@@ -76,10 +76,15 @@ void Color::Alpha(Uint8 a)
   _c |= (a | (_c & (COLOR_MASK::RED | COLOR_MASK::GREEN | COLOR_MASK::BLUE)));
 }
 
-Color::operator SDL_Color()
+Color::operator SDL_Color() const
 {
   SDL_Color c{Red(), Green(), Blue(), Alpha()};
   return c;
+}
+
+bool Color::operator==(const Color &rhs) const
+{
+  return _c == rhs._c;
 }
 
 /////////////////////////////////////////////////////////
@@ -120,6 +125,11 @@ void Geometry::Color(int r, int g, int b, int a)
 bool Geometry::Fill()
 {
   return _fill;
+}
+
+void Geometry::SetFill(bool fill)
+{
+  _fill = fill;
 }
 
 void Geometry::PopulateDebugger()
@@ -375,6 +385,7 @@ Text::Text(std::string text, std::string font, int size, Object *parent, std::st
 Text::Text(std::string text, std::string font, int size, Color c, Object *parent, std::string name)
     : Object(parent, name), _text(text), _font(font), _tex(nullptr), _c(c), _rect({0, 0, 0, 0}), _size(size)
 {
+  CreateChild<Aspen::Transform::Transform>();
   GenerateTexture();
 }
 
@@ -479,9 +490,12 @@ void Text::GenerateTexture()
         TTF_Font *f = fc->GetFont(_font, _size);
         if (f)
         {
-          SDL_Surface *surface = TTF_RenderText_Solid(f, _text.c_str(), _c);
+          Color tc = _c;
+          tc.Alpha(0);
+          SDL_Surface *surface = TTF_RenderText_Shaded(f, _text.c_str(), _c, tc);
           if (surface)
           {
+            SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, tc.Red(), tc.Green(), tc.Blue()));
             _tex = SDL_CreateTextureFromSurface(gfx->GetRenderer(), surface);
             if (_tex)
             {
@@ -972,8 +986,8 @@ void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
       }
       else
       {
-        rect.w = clip.w *tf->GetXScale();
-        rect.h = clip.h *tf->GetYScale();
+        rect.w = clip.w * tf->GetXScale();
+        rect.h = clip.h * tf->GetYScale();
         rect.x += tf->GetXPosition();
         rect.y += tf->GetYPosition();
         angle += tf->GetRotation();

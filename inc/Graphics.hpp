@@ -54,16 +54,16 @@ public:
 
   /// \brief Gets red of the color
   /// \return Red component of the color
-  Uint8 Red();
+  Uint8 Red() const;
   /// \brief Gets green of the color
   /// \return Green component of the color
-  Uint8 Green();
+  Uint8 Green() const;
   /// \brief Gets blue of the color
   /// \return Blue component of the color
-  Uint8 Blue();
+  Uint8 Blue() const;
   /// \brief Gets alpha of the color
   /// \return Alpha component of the color
-  Uint8 Alpha();
+  Uint8 Alpha() const;
 
   /// \brief Sets red of the color
   /// \param r Red component of the color
@@ -79,7 +79,9 @@ public:
   void Alpha(Uint8 a);
 
   /// \brief Implicitly converts this class to SDL's color class
-  operator SDL_Color();
+  operator SDL_Color() const;
+
+  bool operator==(const Color &rhs) const;
 };
 
 /// \brief Colors namespace
@@ -96,6 +98,8 @@ const Color GREEN = Color(0x00FF00FF);
 const Color BLUE = Color(0x0000FFFF);
 /// \brief White
 const Color WHITE = Color(0xFFFFFFFF);
+/// \brief Fully transparent
+const Color TRANSPARENT = Color(0x00000000);
 } // namespace Colors
 
 /// \brief Geometry class
@@ -141,6 +145,9 @@ public:
   /// \return True if the object is filled
   ///         False if the object is outlined
   bool Fill();
+  /// \brief Sets the fill value of the object
+  /// \param fill If the geometry should be filled
+  void SetFill(bool fill);
 
   /// \brief Fills out the Debugger if it exists with this Object's information
   ///        Derived classes should call their base class's version of this method
