@@ -136,13 +136,12 @@ bool GameStateManager::SetCurrentState(std::string name)
     GameState *gs = dynamic_cast<GameState *>(_children[j]);
     if (gs)
     {
+      gs->Deactivate();
       if (gs->StateName() == name)
       {
         success = true;
         gs->Activate();
       }
-      else
-        gs->Deactivate();
     }
   }
   return success;
