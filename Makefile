@@ -71,7 +71,7 @@ CPPFILES := $(filter-out $(SOURCES)/main.cpp, $(CPPFILES))
 endif
 HPPFILES := $(filter-out $(HEADERS)/$(STUB).hpp, $(wildcard $(HEADERS)/*.hpp))
 RCFILES := $(wildcard $(SOURCES)/*.rc)
-OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
+OBJFILES := $(filter-out $(OBJECTS)/main.o,$(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES)))
 ifeq ($(suffix $(PROJECT)),.exe)
 OBJFILES := $(OBJFILES) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
 endif
