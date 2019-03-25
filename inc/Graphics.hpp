@@ -81,6 +81,10 @@ public:
   /// \brief Implicitly converts this class to SDL's color class
   operator SDL_Color() const;
 
+  /// \brief Equality operator
+  /// \param rhs Color to the right of the operator
+  /// \return True if both colors are equivalent
+  ///         False otherwise
   bool operator==(const Color &rhs) const;
 };
 
