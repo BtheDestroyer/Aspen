@@ -41,8 +41,9 @@ LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
 						-lSDL2main -lSDL2 \
 						-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
 						-static-libstdc++
-ifndef RELEASE
-export RELEASE
+ifdef RELEASE
+CXXFLAGS += -O2
+else
 CXXFLAGS += -D__DEBUG
 endif
 ifeq ($(OS),Windows_NT)
