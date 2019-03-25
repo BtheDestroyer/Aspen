@@ -10,5 +10,6 @@ var searchData=
   ['tostring',['ToString',['../class_aspen_1_1_version_1_1_version.html#a27aae0cff50813778eda4cd802293723',1,'Aspen::Version::Version']]],
   ['transform',['Transform',['../class_aspen_1_1_transform_1_1_transform.html#a70d6c02b13c777ee708648c4c739ba30',1,'Aspen::Transform::Transform']]],
   ['triggeronactivate',['TriggerOnActivate',['../class_aspen_1_1_object_1_1_object.html#adba222099a975634d2db44527c980d1e',1,'Aspen::Object::Object']]],
-  ['triggerondeactivate',['TriggerOnDeactivate',['../class_aspen_1_1_object_1_1_object.html#a8cc2e3d95cd811d018170e9208051bb8',1,'Aspen::Object::Object']]]
+  ['triggerondeactivate',['TriggerOnDeactivate',['../class_aspen_1_1_object_1_1_object.html#a8cc2e3d95cd811d018170e9208051bb8',1,'Aspen::Object::Object']]],
+  ['triggeronstart',['TriggerOnStart',['../class_aspen_1_1_object_1_1_object.html#a87e37b3211076c647617ecfd1bc452ff',1,'Aspen::Object::Object']]]
 ];

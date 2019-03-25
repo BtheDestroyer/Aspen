@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version',['VERSION',['../namespace_aspen_1_1_engine.html#a4ada1203c9c29fffb474f81d1fe24dbc',1,'Aspen::Engine']]]
+  ['up',['UP',['../namespace_aspen_1_1_physics_1_1_g_r_a_v___d_i_r.html#a3b5325163e285ddb1eda41d288bd4c99',1,'Aspen::Physics::GRAV_DIR']]]
 ];

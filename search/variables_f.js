@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['up',['UP',['../namespace_aspen_1_1_physics_1_1_g_r_a_v___d_i_r.html#a3b5325163e285ddb1eda41d288bd4c99',1,'Aspen::Physics::GRAV_DIR']]]
+  ['transparent',['TRANSPARENT',['../namespace_aspen_1_1_graphics_1_1_colors.html#a664ee1f7f842bc3392bfad4f6a9d6daf',1,'Aspen::Graphics::Colors']]]
 ];

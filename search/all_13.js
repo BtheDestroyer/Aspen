@@ -13,6 +13,8 @@ var searchData=
   ['total',['TOTAL',['../namespace_aspen_1_1_version.html#ae2687745f4fdc4bc4dccad8cfbb32a83adcada41e2d4bc4ffcdf7d4f59ff90868',1,'Aspen::Version']]],
   ['transform',['Transform',['../class_aspen_1_1_transform_1_1_transform.html#a70d6c02b13c777ee708648c4c739ba30',1,'Aspen::Transform::Transform']]],
   ['transform',['Transform',['../class_aspen_1_1_transform_1_1_transform.html',1,'Aspen::Transform']]],
+  ['transparent',['TRANSPARENT',['../namespace_aspen_1_1_graphics_1_1_colors.html#a664ee1f7f842bc3392bfad4f6a9d6daf',1,'Aspen::Graphics::Colors']]],
   ['triggeronactivate',['TriggerOnActivate',['../class_aspen_1_1_object_1_1_object.html#adba222099a975634d2db44527c980d1e',1,'Aspen::Object::Object']]],
-  ['triggerondeactivate',['TriggerOnDeactivate',['../class_aspen_1_1_object_1_1_object.html#a8cc2e3d95cd811d018170e9208051bb8',1,'Aspen::Object::Object']]]
+  ['triggerondeactivate',['TriggerOnDeactivate',['../class_aspen_1_1_object_1_1_object.html#a8cc2e3d95cd811d018170e9208051bb8',1,'Aspen::Object::Object']]],
+  ['triggeronstart',['TriggerOnStart',['../class_aspen_1_1_object_1_1_object.html#a87e37b3211076c647617ecfd1bc452ff',1,'Aspen::Object::Object']]]
 ];
