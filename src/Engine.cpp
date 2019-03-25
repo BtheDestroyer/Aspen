@@ -18,7 +18,7 @@ namespace Aspen
 {
 namespace Engine
 {
-const Version::Version VERSION(0, 1, 2, Version::TIER::RELEASE);
+const Version::Version VERSION(0, 2, 0, Version::TIER::PREALPHA);
 const unsigned SDL_INIT_FLAGS = SDL_INIT_VIDEO | SDL_INIT_AUDIO;
 
 unsigned Engine::_ecount = 0;
