@@ -2,6 +2,8 @@
 
 #include "Object.hpp"
 #include "Engine.hpp"
+#include "Transform.hpp"
+#include "Physics.hpp"
 #include <algorithm>
 #include <iomanip>
 #include "imgui.h"
@@ -15,7 +17,9 @@ namespace Object
 int Object::_count = 0;
 
 Object::Object(Object *parent, std::string name)
-    : _name(name), _parent(parent)
+    : _name(name), _parent(parent),
+      _children(), _valid(false), _active(true), _started(false),
+      _transform(nullptr), _collider(nullptr), _rigidbody(nullptr)
 {
   ++_count;
   if ((dynamic_cast<Engine::Engine *>(this) && dynamic_cast<Engine::Engine *>(this)->Debug()) ||
@@ -74,6 +78,36 @@ const Object *Object::Root() const
   return root;
 }
 
+Transform::Transform *Object::GetTransform()
+{
+  return _transform;
+}
+
+const Transform::Transform *Object::GetTransform() const
+{
+  return _transform;
+}
+
+Physics::Collider *Object::GetCollider()
+{
+  return _collider;
+}
+
+const Physics::Collider *Object::GetCollider() const
+{
+  return _collider;
+}
+
+Physics::Rigidbody *Object::GetRigidbody()
+{
+  return _rigidbody;
+}
+
+const Physics::Rigidbody *Object::GetRigidbody() const
+{
+  return _rigidbody;
+}
+
 void Object::operator()()
 {
   if (!Active())
@@ -107,6 +141,12 @@ void Object::AddChild(Object *child)
     child->SetParent(this);
     _children.push_back(child);
   }
+  if (!_transform && dynamic_cast<Transform::Transform *>(child))
+    _transform = dynamic_cast<Transform::Transform *>(child);
+  else if (!_collider && dynamic_cast<Physics::Collider *>(child))
+    _collider = dynamic_cast<Physics::Collider *>(child);
+  else if (!_rigidbody && dynamic_cast<Physics::Rigidbody *>(child))
+    _rigidbody = dynamic_cast<Physics::Rigidbody *>(child);
 }
 
 void Object::RemoveChild(Object *child)
@@ -119,6 +159,12 @@ void Object::RemoveChild(Object *child)
     (*it)->_parent = nullptr;
     _children.erase(it);
   }
+  if (_transform == child)
+    _transform = nullptr;
+  else if (_collider == child)
+    _collider = nullptr;
+  else if (_rigidbody == child)
+    _rigidbody = nullptr;
 }
 
 void Object::RemoveChild(unsigned index)
@@ -126,6 +172,12 @@ void Object::RemoveChild(unsigned index)
   if (index < _children.size())
   {
     _children[index]->_parent = nullptr;
+    if (_transform == _children[index])
+      _transform = nullptr;
+    else if (_collider == _children[index])
+      _collider = nullptr;
+    else if (_rigidbody == _children[index])
+      _rigidbody = nullptr;
     _children.erase(_children.begin() + index);
   }
 }
@@ -171,7 +223,11 @@ const bool &Object::Valid() const
 
 bool Object::Active() const
 {
-  return _valid && _active;
+  if (!_valid || !_active)
+    return false;
+  if (_parent)
+    return _parent->Active();
+  return true;
 }
 
 void Object::SetActive(bool active)
@@ -200,15 +256,24 @@ void Object::Deactivate()
   }
 }
 
-void Object::TriggerOnActivate()
+void Object::TriggerOnStart()
 {
   if (!Active())
     return;
+  for (Object *c : _children)
+    c->TriggerOnStart();
   if (!_started)
   {
     OnStart();
     _started = true;
   }
+}
+
+void Object::TriggerOnActivate()
+{
+  if (!Active())
+    return;
+  TriggerOnStart();
   for (Object *c : _children)
     c->TriggerOnActivate();
   OnActivate();

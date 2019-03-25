@@ -7,6 +7,23 @@
 /// \brief Aspen engine namespace
 namespace Aspen
 {
+/// \brief Forward declaration
+namespace Transform
+{
+/// \brief Forward declaration
+class Transform;
+}; // namespace Transform
+/// \brief Forward declaration
+namespace Physics
+{
+/// \brief Forward declaration
+class Collider;
+/// \brief Forward declaration
+class Rigidbody;
+}; // namespace Physics
+
+/////////////////////////////////////////////////////////
+
 /// \brief Object namespace
 ///        Contains the Object base class for most classes of Aspen
 namespace Object
@@ -26,16 +43,25 @@ protected:
   std::vector<Object *> _children;
   /// \brief Determines if the Object is valid
   ///        Derived classes can set this to false in their Constructors if they couldn't be created properly
-  bool _valid = false;
+  bool _valid;
   /// \brief Determines if the Object is currently updated
-  bool _active = true;
+  bool _active;
   /// \brief Determines if the Object has been started
   ///        Set to true during the first update
-  bool _started = false;
+  bool _started;
+
+  /// \brief First child Transform::Transform
+  Transform::Transform *_transform;
+  /// \brief First child Physics::Collider
+  Physics::Collider *_collider;
+  /// \brief First child Physics::Rigidbody
+  Physics::Rigidbody *_rigidbody;
 
   /// \brief Sets _parent to the given Object
   ///        Used by AddChild, CreateChild, etc.
   void SetParent(Object *parent);
+  /// \brief Runs OnStart if the object is currently active for the first time
+  void TriggerOnStart();
   /// \brief Runs OnActivate if the object is currently active
   void TriggerOnActivate();
   /// \brief Runs OnDeactivate if the object is currently active (being deactivated)
@@ -64,6 +90,25 @@ public:
   /// \brief Gets the root Object of the parent/child tree this Object is a part of
   /// \return Root Object of this Object's tree
   Object *Root();
+
+  /// \brief Gets the first child Transform::Transform
+  /// \return Child Transform
+  Transform::Transform *GetTransform();
+  /// \brief Gets the first child Transform::Transform
+  /// \return Child Transform
+  const Transform::Transform *GetTransform() const;
+  /// \brief Gets the first child Physics::Collider
+  /// \return Child Collider
+  Physics::Collider *GetCollider();
+  /// \brief Gets the first child Physics::Collider
+  /// \return Child Collider
+  const Physics::Collider *GetCollider() const;
+  /// \brief Gets the first child Physics::Rigidbody
+  /// \return Child Rigidbody
+  Physics::Rigidbody *GetRigidbody();
+  /// \brief Gets the first child Physics::Rigidbody
+  /// \return Child Rigidbody
+  const Physics::Rigidbody *GetRigidbody() const;
 
   /// \brief Updates this object and all of its children
   ///        Derived classes should call or reimplement this at some point in their operator()
@@ -175,6 +220,7 @@ public:
         return dynamic_cast<T *>(_children[i]);
     return nullptr;
   }
+
   /// \brief Finds all children Objects of a type applicable to that which was requested
   /// \tparam T Type of children to find
   ///           Must inherit Object
@@ -261,7 +307,7 @@ public:
   /// \brief Deactivates the object
   ///        Triggers OnDeactivate appropriately
   void Deactivate();
-  
+
   /// \brief Converts Object to bool by calling Valid
   ///        Example:
   ///        ```

@@ -39,11 +39,11 @@ void PlayerController_8Way::operator()()
     Log::Error("%s needs a parent!", Name().c_str());
     return;
   }
-  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>();
+  Physics::Rigidbody *rb = _parent->GetRigidbody();
   Transform::Transform *tf = nullptr;
   if (rb)
   {
-    tf = _parent->FindChildOfType<Transform::Transform>();
+    tf = _parent->GetTransform();
     if (!tf)
     {
       Log::Error("%s needs a parent with a child Transform::Transform!", Name().c_str());
@@ -155,11 +155,11 @@ void PlayerController_Sidescroller::operator()()
     Log::Error("%s needs a parent!", Name().c_str());
     return;
   }
-  Physics::Rigidbody *rb = _parent->FindChildOfType<Physics::Rigidbody>();
+  Physics::Rigidbody *rb = _parent->GetRigidbody();
   Transform::Transform *tf = nullptr;
   if (rb)
   {
-    tf = _parent->FindChildOfType<Transform::Transform>();
+    tf = _parent->GetTransform();
     if (!tf)
     {
       Log::Error("%s needs a parent with a child Transform::Transform!", Name().c_str());

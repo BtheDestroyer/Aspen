@@ -40,6 +40,9 @@ void Physics::operator()()
   {
     std::vector<Collider *> colliders = engine->FindDescendentsOfType<Collider>();
     for (unsigned i = 0; i < colliders.size(); ++i)
+      if (!colliders[i]->Active())
+        colliders.erase(colliders.begin() + i--);
+    for (unsigned i = 0; i < colliders.size(); ++i)
     {
       for (unsigned j = i + 1; j < colliders.size(); ++j)
       {
@@ -176,7 +179,7 @@ void Rigidbody::operator()()
         double ay = (GetAccelerationY() + physics->GetGravityY() - vy * physics->GetDrag()) * dt;
         SetCartesianVelocity(vx + ax, vy + ay);
 
-        Transform::Transform *tf = _parent->FindChildOfType<Transform::Transform>();
+        Transform::Transform *tf = _parent->GetTransform();
         if (tf)
           tf->ModifyPosition(GetVelocityX(), GetVelocityY());
         else
@@ -404,12 +407,12 @@ void Collider::ResolveCollision(Collision collision)
 
 bool Collider::InCollider(int x, int y)
 {
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = GetTransform();
   if (!tf)
   {
     if (!Parent())
       return false;
-    tf = Parent()->FindChildOfType<Transform::Transform>();
+    tf = Parent()->GetTransform();
     if (!tf)
       return false;
   }
@@ -452,11 +455,11 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
 
   if (dynamic_cast<CircleCollider *>(other))
   {
-    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    Transform::Transform *ttf = GetTransform();
     if (!ttf)
     {
       if (Parent())
-        ttf = Parent()->FindChildOfType<Transform::Transform>();
+        ttf = Parent()->GetTransform();
       if (!ttf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -464,11 +467,11 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
         return c;
       }
     }
-    Transform::Transform *otf = FindChildOfType<Transform::Transform>();
+    Transform::Transform *otf = GetTransform();
     if (!otf)
     {
       if (Parent())
-        otf = Parent()->FindChildOfType<Transform::Transform>();
+        otf = Parent()->GetTransform();
       if (!otf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -524,22 +527,22 @@ void CircleCollider::ResolveCollision(Collision collision)
       collision.collider->IsTrigger())
     return;
   Rigidbody *rb = nullptr;
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = GetTransform();
   if (!tf)
   {
     if (!_parent)
       return;
-    tf = _parent->FindChildOfType<Transform::Transform>();
+    tf = _parent->GetTransform();
     if (!tf)
       return;
-    rb = _parent->FindChildOfType<Rigidbody>();
+    rb = _parent->GetRigidbody();
   }
   else
-    rb = FindChildOfType<Rigidbody>();
+    rb = GetRigidbody();
 
-  Rigidbody *orb = collision.collider->FindChildOfType<Rigidbody>();
+  Rigidbody *orb = collision.collider->GetRigidbody();
   if (!orb)
-    orb = collision.collider->Parent()->FindChildOfType<Rigidbody>();
+    orb = collision.collider->Parent()->GetRigidbody();
 
   if (rb)
   {
@@ -556,12 +559,12 @@ void CircleCollider::ResolveCollision(Collision collision)
 
 bool CircleCollider::InCollider(int x, int y)
 {
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = GetTransform();
   if (!tf)
   {
     if (!Parent())
       return false;
-    tf = Parent()->FindChildOfType<Transform::Transform>();
+    tf = Parent()->GetTransform();
     if (!tf)
       return false;
   }
@@ -574,7 +577,7 @@ bool CircleCollider::InCollider(int x, int y)
     {
       Graphics::Camera *cam = gfx->GetCamera();
       if (cam)
-        ctf = cam->FindChildOfType<Transform::Transform>();
+        ctf = cam->GetTransform();
     }
   }
   if (ctf)
@@ -632,10 +635,10 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
 
   if (dynamic_cast<AABBCollider *>(other))
   {
-    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    Transform::Transform *ttf = GetTransform();
     if (!ttf && Parent())
     {
-      ttf = Parent()->FindChildOfType<Transform::Transform>();
+      ttf = Parent()->GetTransform();
       if (!ttf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -643,10 +646,10 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
         return c;
       }
     }
-    Transform::Transform *otf = other->FindChildOfType<Transform::Transform>();
+    Transform::Transform *otf = other->GetTransform();
     if (!otf && other->Parent())
     {
-      otf = other->Parent()->FindChildOfType<Transform::Transform>();
+      otf = other->Parent()->GetTransform();
       if (!otf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -711,10 +714,10 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
   }
   else if (dynamic_cast<CircleCollider *>(other))
   {
-    Transform::Transform *ttf = FindChildOfType<Transform::Transform>();
+    Transform::Transform *ttf = GetTransform();
     if (!ttf && Parent())
     {
-      ttf = Parent()->FindChildOfType<Transform::Transform>();
+      ttf = Parent()->GetTransform();
       if (!ttf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -722,10 +725,10 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
         return c;
       }
     }
-    Transform::Transform *otf = other->FindChildOfType<Transform::Transform>();
+    Transform::Transform *otf = other->GetTransform();
     if (!otf && other->Parent())
     {
-      otf = other->Parent()->FindChildOfType<Transform::Transform>();
+      otf = other->Parent()->GetTransform();
       if (!otf)
       {
         c.first.result = COLLISION_RESULT::FAILURE;
@@ -799,22 +802,22 @@ void AABBCollider::ResolveCollision(Collision collision)
       collision.collider->IsTrigger())
     return;
   Rigidbody *rb = nullptr;
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = GetTransform();
   if (!tf)
   {
     if (!_parent)
       return;
-    tf = _parent->FindChildOfType<Transform::Transform>();
+    tf = _parent->GetTransform();
     if (!tf)
       return;
-    rb = _parent->FindChildOfType<Rigidbody>();
+    rb = _parent->GetRigidbody();
   }
   else
-    rb = FindChildOfType<Rigidbody>();
+    rb = GetRigidbody();
 
-  Rigidbody *orb = collision.collider->FindChildOfType<Rigidbody>();
+  Rigidbody *orb = collision.collider->GetRigidbody();
   if (!orb)
-    orb = collision.collider->Parent()->FindChildOfType<Rigidbody>();
+    orb = collision.collider->Parent()->GetRigidbody();
 
   if (rb)
   {
@@ -833,12 +836,12 @@ void AABBCollider::ResolveCollision(Collision collision)
 
 bool AABBCollider::InCollider(int x, int y)
 {
-  Transform::Transform *tf = FindChildOfType<Transform::Transform>();
+  Transform::Transform *tf = GetTransform();
   if (!tf)
   {
     if (!Parent())
       return false;
-    tf = Parent()->FindChildOfType<Transform::Transform>();
+    tf = Parent()->GetTransform();
     if (!tf)
       return false;
   }
@@ -851,7 +854,7 @@ bool AABBCollider::InCollider(int x, int y)
     {
       Graphics::Camera *cam = gfx->GetCamera();
       if (cam)
-        ctf = cam->FindChildOfType<Transform::Transform>();
+        ctf = cam->GetTransform();
     }
   }
   if (ctf)
@@ -871,8 +874,8 @@ bool AABBCollider::InCollider(int x, int y)
 
 double AABBCollider::GetWidth()
 {
-  if (FindChildOfType<Transform::Transform>())
-    return _width * FindChildOfType<Transform::Transform>()->GetLocalXScale();
+  if (GetTransform())
+    return _width * GetTransform()->GetLocalXScale();
   return _width;
 }
 
@@ -883,8 +886,8 @@ void AABBCollider::SetWidth(double width)
 
 double AABBCollider::GetHeight()
 {
-  if (FindChildOfType<Transform::Transform>())
-    return _height * FindChildOfType<Transform::Transform>()->GetLocalYScale();
+  if (GetTransform())
+    return _height * GetTransform()->GetLocalYScale();
   return _height;
 }
 

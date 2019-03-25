@@ -100,7 +100,7 @@ float Transform::GetXPosition() const
   {
     const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
-      tf = p->FindChildOfType<Transform>();
+      tf = p->GetTransform();
     if (tf && tf != this)
       tfs.push_back(tf);
     p = p->Parent();
@@ -123,7 +123,7 @@ float Transform::GetYPosition() const
   {
     const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
-      tf = p->FindChildOfType<Transform>();
+      tf = p->GetTransform();
     if (tf && tf != this)
       tfs.push_back(tf);
     p = p->Parent();
@@ -145,7 +145,7 @@ double Transform::GetRotation() const
   {
     const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
-      tf = p->FindChildOfType<Transform>();
+      tf = p->GetTransform();
     if (tf)
       ret += tf->GetLocalRotation();
     p = p->Parent();
@@ -161,7 +161,7 @@ float Transform::GetXScale() const
   {
     const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
-      tf = p->FindChildOfType<Transform>();
+      tf = p->GetTransform();
     if (tf)
       ret *= tf->GetLocalXScale();
     p = p->Parent();
@@ -177,7 +177,7 @@ float Transform::GetYScale() const
   {
     const Transform *tf = dynamic_cast<const Transform *>(p);
     if (!tf)
-      tf = p->FindChildOfType<Transform>();
+      tf = p->GetTransform();
     if (tf)
       ret *= tf->GetLocalYScale();
     p = p->Parent();
