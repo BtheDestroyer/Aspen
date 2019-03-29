@@ -15,6 +15,8 @@ namespace Aspen
 {
 namespace Time
 {
+Time *Time::_main = nullptr;
+
 std::chrono::microseconds GetTime()
 {
   auto tse = std::chrono::steady_clock::now().time_since_epoch();
@@ -34,6 +36,11 @@ Time::Time(unsigned targetFramerate, Object *parent, std::string name)
 
 Time::~Time()
 {
+}
+
+Time *Time::Get()
+{
+  return _main;
 }
 
 void Time::operator()()

@@ -77,6 +77,8 @@ class Engine : public Object::Object
   bool _debugging = false;
   /// \brief Total number of Engine Objects
   static unsigned _ecount;
+  /// \brief First created Engine object
+  static Engine *_main;
 
 public:
   /// \brief Constructor
@@ -93,6 +95,10 @@ public:
   Engine(int flags = START_FLAGS::NONE, Object *parent = nullptr, std::string name = "Engine");
   /// \brief Destructor
   ~Engine();
+
+  /// \brief Gets the main engine object
+  /// \return _main
+  static Engine *Get();
 
   /// \brief Updates this object and all of its children
   ///        Derived classes should call or reimplement this at some point in their operator()

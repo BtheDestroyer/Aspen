@@ -407,6 +407,7 @@ void Camera::End()
 /////////////////////////////////////////////////////////
 
 unsigned Graphics::_gcount = 0;
+Graphics *Graphics::_main = nullptr;
 
 Graphics::Graphics(Object *parent, std::string name)
     : Graphics(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, parent, name)
@@ -527,6 +528,8 @@ Graphics::Graphics(int w, int h, Object *parent, std::string name)
     }
   }
   SetBGColor(0xFF, 0xFF, 0xFF);
+  if (!_main)
+    _main = this;
   ++_gcount;
 }
 
@@ -536,6 +539,11 @@ Graphics::~Graphics()
   for (Object *child : _children)
     delete child;
   _children.clear();
+}
+
+Graphics *Graphics::Get()
+{
+  return _main;
 }
 
 void Graphics::operator()()
@@ -599,6 +607,8 @@ void Graphics::End()
   _surface = nullptr;
   if (_gcount-- == 1)
     IMG_Quit();
+  if (_main == this)
+    _main = nullptr;
   Object::End();
 }
 

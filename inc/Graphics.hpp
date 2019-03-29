@@ -550,6 +550,8 @@ class Graphics : public Object::Object
   Color _background;
   /// \brief Currently selected camera
   Camera *_camera;
+  /// \brief First created Graphics object
+  static Graphics *_main;
 
 public:
   /// \brief Constructor
@@ -567,6 +569,10 @@ public:
   Graphics(int w, int h, Object *parent = nullptr, std::string name = "Graphics");
   /// \brief Destructor
   ~Graphics();
+
+  /// \brief Gets the main graphics object
+  /// \return _main
+  static Graphics *Get();
 
   /// \brief Updates this object and all of its children
   ///        Derived classes should call or reimplement this at some point in their operator()

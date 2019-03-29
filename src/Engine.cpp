@@ -22,6 +22,7 @@ const Version::Version VERSION(0, 2, 0, Version::TIER::PREALPHA);
 const unsigned SDL_INIT_FLAGS = SDL_INIT_VIDEO | SDL_INIT_AUDIO;
 
 unsigned Engine::_ecount = 0;
+Engine *Engine::_main = nullptr;
 
 Engine::Engine(Object *parent, std::string name)
     : Engine(START_FLAGS::NONE, parent, name)
@@ -206,6 +207,8 @@ Engine::Engine(int flags, Object *parent, std::string name)
   }
 
   ++_ecount;
+  if (!_main)
+    _main = this;
 }
 
 Engine::~Engine()
@@ -214,8 +217,15 @@ Engine::~Engine()
   for (Object *child : _children)
     delete child;
   _children.clear();
+  if (_main == this)
+    _main = nullptr;
   if (_ecount-- == 1 && SDL_WasInit(SDL_INIT_FLAGS) == SDL_INIT_FLAGS)
     SDL_Quit();
+}
+
+Engine *Engine::Get()
+{
+  return _main;
 }
 
 void Engine::operator()()

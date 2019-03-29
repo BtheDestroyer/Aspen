@@ -24,6 +24,8 @@ class Time : public Object::Object
   /// \brief Target framerate
   ///        Typically refresh rate of memory
   unsigned _targetFramerate;
+  /// \brief First created Time object
+  static Time *_main;
 
 public:
   /// \brief Constructor
@@ -42,6 +44,10 @@ public:
   Time(unsigned targetFramerate, Object *parent = nullptr, std::string name = "Time");
   /// \brief Destructor
   ~Time();
+
+  /// \brief Gets the main time object
+  /// \return _main
+  static Time *Get();
 
   /// \brief Updates this object and all of its children
   ///        Derived classes should call or reimplement this at some point in their operator()
