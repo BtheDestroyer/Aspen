@@ -116,32 +116,77 @@ public:
 
 /// \brief Forward declaration
 class Button;
-/// \breif Synonym/shorthand function typedef
+/// \brief Synonym/shorthand function typedef
 ///        Used by buttons when they're clicked
 typedef std::function<void(Button *)> ButtonCallback;
 
+/// \brief Clickable Button class
 class Button : public Object::Object
 {
+  /// \brief Text to display
   std::string _text;
+  /// \brief Shortcut to child text object
   Text *_textObj;
+  /// \brief Shortcut to child collider to be clicked on
   Physics::AABBCollider *_collider;
+  /// \brief Shortcut to child rectangle to be drawn behind text
   Rectangle *_rectangle;
+  /// \brief Function to call when the button is clicked on
   ButtonCallback _onClick;
 
 public:
+  /// \brief Constructor
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Button(Object *parent = nullptr, std::string name = "Button");
+  /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param text Text of the button
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Button(std::string text, Object *parent = nullptr, std::string name = "Button");
+  /// \brief Constructor
+  ///        Derived classes should call this in their constructors' initialization list
+  /// \param text Text of the button
+  /// \param size Size of the text
+  /// \param parent Parent Object to be passed to Object constructor
+  /// \param name Object name
+  ///             Set by derived classes to a string representation of their type
   Button(std::string text, int size, Object *parent = nullptr, std::string name = "Button");
 
+  /// \brief Sets the text of the button
+  /// \param text Text to set
+  /// \param size Size of the text
   void SetText(std::string text, int size);
+  /// \brief Sets the text of the button
+  /// \param text Text to set
+  /// \param font Font of the text
+  ///             Loaded from Graphics::FontCache
   void SetText(std::string text, std::string font);
+  /// \brief Sets the text of the button
+  /// \param text Text to set
+  /// \param size Size of the text
+  /// \param font Font of the text
+  ///             Loaded from Graphics::FontCache
   void SetText(std::string text, int size, std::string font);
+  /// \brief Sets the text of the button
+  /// \param text Text to set
   void SetText(std::string text);
 
+  /// \brief Sets the callback to run when the button is clicked
+  /// \param cb Function to call
   void SetOnClick(ButtonCallback cb);
 
+  /// \brief Object callback used to color the button when the mouse starts hovering over it
+  ///        Derived classes should call or reimplement this
   void OnMouseEnter();
+  /// \brief Object callback used to color the button when the mouse stops hovering over it
+  ///        Derived classes should call or reimplement this
   void OnMouseExit();
+  /// \brief Calls associated ButtonCallback if it's set
+  ///        Derived classes should call or reimplement this
   void OnMouseClick();
 };
 } // namespace UI
