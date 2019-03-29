@@ -18,7 +18,7 @@ SoundEffect::SoundEffect(Object *parent, std::string name)
 SoundEffect::SoundEffect(std::string path, Object *parent, std::string name)
     : Object(parent, name), _path(path), _sound(nullptr)
 {
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (!engine)
   {
     Log::Error("%s requires a root Engine with child Audio!", Name().c_str());
@@ -147,7 +147,7 @@ Music::Music(Object *parent, std::string name)
 Music::Music(std::string path, Object *parent, std::string name)
     : Object(parent, name), _path(path), _music(nullptr)
 {
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (!engine)
   {
     Log::Error("%s requires a root Engine with child Audio!", Name().c_str());
@@ -235,7 +235,7 @@ void Music::Stop(double fadeOut)
 {
   if (!Valid())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (!engine)
   {
     Log::Error("%s requires a root Engine with child Audio!", Name().c_str());

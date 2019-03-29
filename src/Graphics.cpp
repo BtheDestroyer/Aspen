@@ -163,10 +163,10 @@ void Rectangle::operator()()
 {
   if (!Active())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    Graphics *gfx = Graphics::Get();
     if (gfx)
       gfx->DrawRectangle(this);
     else
@@ -211,10 +211,10 @@ void Point::operator()()
 {
   if (!Active())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    Graphics *gfx = Graphics::Get();
     if (gfx)
       gfx->DrawPoint(this);
     else
@@ -257,10 +257,10 @@ void Line::operator()()
 {
   if (!Active())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    Graphics *gfx = Graphics::Get();
     if (gfx)
       gfx->DrawLine(this);
     else
@@ -376,9 +376,9 @@ Camera::Camera(Object *parent, std::string name)
 
 void Camera::SelectCamera()
 {
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
-    SetGraphics(engine->FindChildOfType<Graphics>());
+    SetGraphics(Graphics::Get());
 }
 
 Graphics *Camera::GetGraphics()
@@ -1018,10 +1018,10 @@ void Sprite::GenerateTexture()
       SDL_DestroyTexture(_tex);
       _tex = nullptr;
     }
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Engine::Engine *engine = Engine::Engine::Get();
     if (engine)
     {
-      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      Graphics *gfx = Graphics::Get();
       if (gfx)
       {
         _tex = SDL_CreateTextureFromSurface(gfx->GetRenderer(), _surface);
@@ -1044,10 +1044,10 @@ void Sprite::operator()()
 {
   if (Active())
   {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Engine::Engine *engine = Engine::Engine::Get();
     if (engine)
     {
-      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      Graphics *gfx = Graphics::Get();
       if (gfx)
         gfx->DrawSprite(this);
       else
@@ -1126,10 +1126,10 @@ void UniformSpritesheet::operator()()
 {
   if (Active())
   {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Engine::Engine *engine = Engine::Engine::Get();
     if (engine)
     {
-      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      Graphics *gfx = Graphics::Get();
       if (gfx)
         gfx->DrawSprite(this, GetClipRectangle(0));
       else
@@ -1186,7 +1186,7 @@ void Animation::operator()()
 {
   if (!Active())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
     Time::Time *time = engine->FindAncestorOfType<Time::Time>();
@@ -1204,7 +1204,7 @@ void Animation::operator()()
         _currentFrame = 0;
     }
 
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    Graphics *gfx = Graphics::Get();
     if (gfx && _currentFrame >= 0)
     {
       int f = _currentFrame;

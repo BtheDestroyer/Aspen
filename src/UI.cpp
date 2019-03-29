@@ -49,10 +49,10 @@ void Text::operator()()
     return;
   if (_tex && !_text.empty())
   {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Engine::Engine *engine = Engine::Engine::Get();
     if (engine)
     {
-      Graphics *gfx = engine->FindChildOfType<Graphics>();
+      Graphics *gfx = Graphics::Get();
       if (gfx)
         gfx->DrawText(this);
       else
@@ -123,10 +123,10 @@ void Text::GenerateTexture()
   }
   if (_font.empty())
     return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
+    Graphics *gfx = Graphics::Get();
     if (gfx)
     {
       FontCache *fc = gfx->FindChildOfType<FontCache>();

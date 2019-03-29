@@ -35,7 +35,7 @@ void Physics::operator()()
 {
   Object::operator()();
 
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
     std::vector<Collider *> colliders = engine->FindDescendentsOfType<Collider>();
@@ -155,13 +155,13 @@ void Rigidbody::operator()()
 {
   if (_parent)
   {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+    Engine::Engine *engine = Engine::Engine::Get();
     if (engine)
     {
       Physics *physics = engine->FindChildOfType<Physics>();
       if (physics)
       {
-        Time::Time *time = engine->FindChildOfType<Time::Time>();
+        Time::Time *time = Time::Get();
         double dt;
         if (time)
           dt = time->DeltaTime() * 60.0;
@@ -317,7 +317,7 @@ void Rigidbody::PopulateDebugger()
   ImGui::SliderFloat("Velocity Direction", &vd, 0.0f, float(2 * M_PI));
   _velocityDirection = vd;
   ImGui::Text("Cartesian Velocity: (%.4f, %.4f)", GetVelocityX(), GetVelocityY());
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
     Physics *physics = engine->FindChildOfType<Physics>();
@@ -361,7 +361,7 @@ void Collider::operator()()
         Parent()->OnMouseClick();
         if (m.middle.pressed)
         {
-          Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+          Engine::Engine *e = Engine::Engine::Get();
           if (e)
           {
             Debug::Debug *d = e->FindChildOfType<Debug::Debug>();
@@ -568,11 +568,11 @@ bool CircleCollider::InCollider(int x, int y)
     if (!tf)
       return false;
   }
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   Transform::Transform *ctf = nullptr;
   if (engine)
   {
-    Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
+    Graphics::Graphics *gfx = Graphics::Graphics::Get();
     if (gfx)
     {
       Graphics::Camera *cam = gfx->GetCamera();
@@ -845,11 +845,11 @@ bool AABBCollider::InCollider(int x, int y)
     if (!tf)
       return false;
   }
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   Transform::Transform *ctf = nullptr;
   if (engine)
   {
-    Graphics::Graphics *gfx = engine->FindChildOfType<Graphics::Graphics>();
+    Graphics::Graphics *gfx = Graphics::Graphics::Get();
     if (gfx)
     {
       Graphics::Camera *cam = gfx->GetCamera();

@@ -26,9 +26,9 @@ Axis::Axis(SDL_Keycode positive, SDL_Keycode negative, float gravity, float weig
 void Axis::operator()()
 {
   Time::Time *time = nullptr;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
-    time = engine->FindChildOfType<Time::Time>();
+    time = Time::Get();
   if (!time) 
   {
     Log::Error("Axis Object can't find an Engine ancestor with a Time child or a Time ancestor!");

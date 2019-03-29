@@ -99,14 +99,14 @@ void KeyEventListener::Handle(SDL_Event *event)
       {
         k.pressed = true;
         k.held = true;
-        if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+        if (Engine::Engine::Get() && Engine::Engine::Get()->Debug())
           Log::Debug("Key down: %s", SDL_GetKeyName(_key));
       }
       else if (event->type == SDL_KEYUP && k.held)
       {
         k.held = false;
         k.released = true;
-        if (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug())
+        if (Engine::Engine::Get() && Engine::Engine::Get()->Debug())
           Log::Debug("Key up: %s", SDL_GetKeyName(_key));
       }
     }

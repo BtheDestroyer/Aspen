@@ -190,7 +190,7 @@ float Transform::GetXPosition(const Transform *camera) const
   if (!camera)
     return GetXPosition();
   int w, h;
-  Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *e = Engine::Engine::Get();
   if (!e)
     return GetXPosition() + camera->GetInverseXPosition();
   Graphics::Graphics *g = e->FindChildOfType<Graphics::Graphics>();
@@ -205,7 +205,7 @@ float Transform::GetYPosition(const Transform *camera) const
   if (!camera)
     return GetYPosition();
   int w, h;
-  Engine::Engine *e = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *e = Engine::Engine::Get();
   if (!e)
     return GetYPosition() + camera->GetInverseYPosition();
   Graphics::Graphics *g = e->FindChildOfType<Graphics::Graphics>();

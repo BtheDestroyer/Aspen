@@ -175,10 +175,10 @@ void PlayerController_Sidescroller::operator()()
   Object::operator()();
 
   double dt = 1.0;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Time::Time *time = engine->FindChildOfType<Time::Time>();
+    Time::Time *time = Time::Get();
     if (time)
       dt = time->DeltaTime() * 60;
   }

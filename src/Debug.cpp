@@ -46,12 +46,12 @@ void Debug::operator()()
   else
     return;
 
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
+  Engine::Engine *engine = Engine::Engine::Get();
   if (engine && engine->Debug())
   {
     //TODO: Get input from an Input wrapper
     Input::Mouse mouse = Input::GetMouse();
-    Time::Time *time = engine->FindChildOfType<Time::Time>();
+    Time::Time *time = Time::Get();
     if (time)
       _io->DeltaTime = std::max(0.000001, time->DeltaTime());
     else

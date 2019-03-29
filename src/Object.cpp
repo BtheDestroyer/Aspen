@@ -23,7 +23,7 @@ Object::Object(Object *parent, std::string name)
 {
   ++_count;
   if ((dynamic_cast<Engine::Engine *>(this) && dynamic_cast<Engine::Engine *>(this)->Debug()) ||
-      (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug()))
+      (Engine::Engine::Get() && Engine::Engine::Get()->Debug()))
     Log::Debug("Creating %s:  %p  %d", _name.c_str(), this, _count);
 
   _valid = true;
@@ -33,7 +33,7 @@ Object::~Object()
 {
   --_count;
   if ((dynamic_cast<Engine::Engine *>(this) && dynamic_cast<Engine::Engine *>(this)->Debug()) ||
-      (FindAncestorOfType<Engine::Engine>() && FindAncestorOfType<Engine::Engine>()->Debug()))
+      (Engine::Engine::Get() && Engine::Engine::Get()->Debug()))
   {
     Log::Debug("Destroying %s:  %p  %d", _name.c_str(), this, _count);
     if (_count == 0)
