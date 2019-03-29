@@ -160,11 +160,11 @@ void Object::RemoveChild(Object *child)
     _children.erase(it);
   }
   if (_transform == child)
-    _transform = nullptr;
+    _transform = FindChildOfType<Transform::Transform>();
   else if (_collider == child)
-    _collider = nullptr;
+    _collider = FindChildOfType<Physics::Collider>();
   else if (_rigidbody == child)
-    _rigidbody = nullptr;
+    _rigidbody = FindChildOfType<Physics::Rigidbody>();
 }
 
 void Object::RemoveChild(unsigned index)
@@ -173,11 +173,11 @@ void Object::RemoveChild(unsigned index)
   {
     _children[index]->_parent = nullptr;
     if (_transform == _children[index])
-      _transform = nullptr;
+      _transform = FindChildOfType<Transform::Transform>();
     else if (_collider == _children[index])
-      _collider = nullptr;
+      _collider = FindChildOfType<Physics::Collider>();
     else if (_rigidbody == _children[index])
-      _rigidbody = nullptr;
+      _rigidbody = FindChildOfType<Physics::Rigidbody>();
     _children.erase(_children.begin() + index);
   }
 }
