@@ -1,5 +1,6 @@
 #include "Engine.hpp"
 #include "Graphics.hpp"
+#include "UI.hpp"
 #include "Transform.hpp"
 #include "Controller.hpp"
 #include "Physics.hpp"
@@ -8,7 +9,6 @@
 #include "Audio.hpp"
 #include "Input.hpp"
 #include "GameState.hpp"
-#include <functional>
 #include <iostream>
 
 using Aspen::Engine::Engine;
@@ -17,99 +17,7 @@ using Aspen::GameState::GameStateManager;
 using Aspen::Graphics::Graphics;
 using Aspen::Object::Object;
 
-namespace UI
-{
-class Button;
-typedef std::function<void(Button *)> ButtonCallback;
-
-class Button : public Object
-{
-  std::string _text;
-  Aspen::Graphics::Text *_textObj;
-  Aspen::Physics::AABBCollider *_collider;
-  Aspen::Graphics::Rectangle *_rectangle;
-  ButtonCallback _onClick;
-
-public:
-  Button(Object *parent = nullptr, std::string name = "Button")
-      : Button("Button", parent, name)
-  {
-  }
-
-  Button(std::string text, Object *parent = nullptr, std::string name = "Button")
-      : Button("Button", 16, parent, name) {}
-  Button(std::string text, int size, Object *parent = nullptr, std::string name = "Button")
-      : Object(parent, name)
-  {
-    CreateChild<Aspen::Transform::Transform>();
-    _rectangle = CreateChild<Aspen::Graphics::Rectangle>();
-    _rectangle->SetFill(true);
-    _rectangle->GetTransform()->SetScale(0.3f, 0.3f);
-    _textObj = CreateChild<Aspen::Graphics::Text>();
-    _textObj->SetFont("default");
-    _textObj->SetSize(size * 20);
-    _textObj->GetTransform()->SetScale(0.3f, 0.3f);
-    _collider = CreateChild<Aspen::Physics::AABBCollider>();
-    _collider->GetTransform()->SetScale(0.3f, 0.3f);
-    SetText(text);
-    _rectangle->Color(0xAAAAAAFF);
-  }
-
-  void SetText(std::string text, int size)
-  {
-    _textObj->SetSize(size * 20);
-    SetText(text);
-  }
-
-  void SetText(std::string text, std::string font)
-  {
-    _textObj->SetFont(font);
-    SetText(text);
-  }
-
-  void SetText(std::string text, int size, std::string font)
-  {
-    _textObj->SetSize(size * 20);
-    _textObj->SetFont(font);
-    SetText(text);
-  }
-
-  void SetText(std::string text)
-  {
-    if (_text == text)
-      return;
-    _text = text;
-    _textObj->SetText(_text);
-    _rectangle->GetRect().w = _textObj->GetRect().w + 40;
-    _rectangle->GetRect().h = _textObj->GetRect().h + 20;
-    _collider->SetSize(_rectangle->GetRect().w * _rectangle->GetTransform()->GetLocalXScale(),
-                       _rectangle->GetRect().h * _rectangle->GetTransform()->GetLocalYScale());
-  }
-
-  void SetOnClick(ButtonCallback cb)
-  {
-    _onClick = cb;
-  }
-
-  void OnMouseEnter()
-  {
-    _rectangle->Color(0x777777FF);
-  }
-
-  void OnMouseExit()
-  {
-    _rectangle->Color(0xAAAAAAFF);
-  }
-
-  void OnMouseClick()
-  {
-    if (Aspen::Input::GetMouse().left.pressed && _onClick)
-      _onClick(this);
-  }
-};
-} // namespace UI
-
-void ChangeScene(UI::Button *button, std::string scene, GameStateManager *gsm)
+void ChangeScene(Aspen::Graphics::UI::Button *button, std::string scene, GameStateManager *gsm)
 {
   gsm->SetCurrentState(scene);
 }
@@ -126,11 +34,11 @@ public:
     music = new Aspen::Audio::Music("resources/mus.ogg", this);
     AddChild(music);
 
-    Aspen::Graphics::Text *title = new Aspen::Graphics::Text("Notris", "default", 64, this, "Title");
+    Aspen::Graphics::UI::Text *title = new Aspen::Graphics::UI::Text("Notris", "default", 64, this, "Title");
     title->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH * 0.5f,
                                        Aspen::Graphics::DEFAULT_WINDOW_HEIGHT * 0.25f);
     AddChild(title);
-    UI::Button *startbutton = CreateChild<UI::Button>();
+    Aspen::Graphics::UI::Button *startbutton = CreateChild<Aspen::Graphics::UI::Button>();
     startbutton->SetText("Start");
     startbutton->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH * 0.5f,
                                              Aspen::Graphics::DEFAULT_WINDOW_HEIGHT * 0.5f);
@@ -222,7 +130,7 @@ class Game : public GameState
 {
   Aspen::Audio::Music *music;
   Aspen::Audio::SoundEffect *sound;
-  Aspen::Graphics::Text *scoreText;
+  Aspen::Graphics::UI::Text *scoreText;
   unsigned score = 0;
   Tile *grid[20][10];
 
@@ -243,10 +151,10 @@ public:
     sound = new Aspen::Audio::SoundEffect("resources/pop.wav", this);
     AddChild(sound);
 
-    UI::Button *quitbutton = CreateChild<UI::Button>();
+    Aspen::Graphics::UI::Button *quitbutton = CreateChild<Aspen::Graphics::UI::Button>();
     quitbutton->SetText("Quit");
     quitbutton->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH * 0.75f, Aspen::Graphics::DEFAULT_WINDOW_HEIGHT * 0.75f);
-    scoreText = CreateChild<Aspen::Graphics::Text>();
+    scoreText = CreateChild<Aspen::Graphics::UI::Text>();
     scoreText->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH * 0.75f, Aspen::Graphics::DEFAULT_WINDOW_HEIGHT * 0.25f);
     scoreText->SetSize(32);
     Engine *e = FindAncestorOfType<Engine>();

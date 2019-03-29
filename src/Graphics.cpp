@@ -1,6 +1,7 @@
 #define __GRAPHICS_CPP
 
 #include "Graphics.hpp"
+#include "UI.hpp"
 #include "Engine.hpp"
 #include "Transform.hpp"
 #include "Debug.hpp"
@@ -363,174 +364,6 @@ TTF_Font *FontCache::GetFont(std::string name, int size)
   }
   Log::Error("%s no path for the font named: %s", name);
   return nullptr;
-}
-
-/////////////////////////////////////////////////////////
-
-Text::Text(Object *parent, std::string name)
-    : Text("default", parent, name)
-{
-}
-
-Text::Text(std::string text, Object *parent, std::string name)
-    : Text(text, "default", 12, parent, name)
-{
-}
-
-Text::Text(std::string text, std::string font, int size, Object *parent, std::string name)
-    : Text(text, font, size, Colors::BLACK, parent, name)
-{
-}
-
-Text::Text(std::string text, std::string font, int size, Color c, Object *parent, std::string name)
-    : Object(parent, name), _text(text), _font(font), _tex(nullptr), _c(c), _rect({0, 0, 0, 0}), _size(size)
-{
-  CreateChild<Aspen::Transform::Transform>();
-  GenerateTexture();
-}
-
-Text::~Text()
-{
-  if (_tex)
-  {
-    SDL_DestroyTexture(_tex);
-    _tex = nullptr;
-  }
-}
-
-void Text::operator()()
-{
-  if (!Active())
-    return;
-  if (_tex && !_text.empty())
-  {
-    Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
-    if (engine)
-    {
-      Graphics *gfx = engine->FindChildOfType<Graphics>();
-      if (gfx)
-        gfx->DrawText(this);
-      else
-        Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
-    }
-    else
-      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
-  }
-
-  Object::operator()();
-}
-
-std::string Text::GetText()
-{
-  return _text;
-}
-
-void Text::SetText(std::string text)
-{
-  _text = text;
-  GenerateTexture();
-}
-
-std::string Text::GetFont()
-{
-  return _font;
-}
-
-void Text::SetFont(std::string font)
-{
-  _font = font;
-  GenerateTexture();
-}
-
-Color Text::GetColor()
-{
-  return _c;
-}
-
-void Text::SetColor(Color c)
-{
-  _c = c;
-  GenerateTexture();
-}
-
-SDL_Rect Text::GetRect()
-{
-  return _rect;
-}
-
-int Text::GetSize()
-{
-  return _size;
-}
-
-void Text::SetSize(int size)
-{
-  _size = size;
-  GenerateTexture();
-}
-
-void Text::GenerateTexture()
-{
-  if (_tex)
-  {
-    SDL_DestroyTexture(_tex);
-    _tex = nullptr;
-  }
-  if (_font.empty())
-    return;
-  Engine::Engine *engine = FindAncestorOfType<Engine::Engine>();
-  if (engine)
-  {
-    Graphics *gfx = engine->FindChildOfType<Graphics>();
-    if (gfx)
-    {
-      FontCache *fc = gfx->FindChildOfType<FontCache>();
-      if (fc)
-      {
-        TTF_Font *f = fc->GetFont(_font, _size);
-        if (f)
-        {
-          Color tc = _c;
-          tc.Alpha(0);
-          SDL_Surface *surface = TTF_RenderText_Shaded(f, _text.c_str(), _c, tc);
-          if (surface)
-          {
-            SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, tc.Red(), tc.Green(), tc.Blue()));
-            _tex = SDL_CreateTextureFromSurface(gfx->GetRenderer(), surface);
-            if (_tex)
-            {
-              _rect.w = surface->w;
-              _rect.h = surface->h;
-            }
-            else
-              Log::Error("%s couldn't generate texture. Error: %s", Name().c_str(), SDL_GetError());
-            SDL_FreeSurface(surface);
-          }
-          else
-            Log::Error("%s couldn't generate surface. Error: %s", Name().c_str(), TTF_GetError());
-        }
-        else
-          Log::Error("%s FontCache does not contain font: %s", Name().c_str(), _font.c_str());
-      }
-      else
-        Log::Error("%s can't find FontCache in Graphics!", Name().c_str());
-    }
-    else
-      Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
-  }
-  else
-    Log::Error("%s requires an ancestor Engine with child Graphics!", Name().c_str());
-}
-
-SDL_Texture *Text::GetTexture()
-{
-  return _tex;
-}
-
-void Text::PopulateDebugger()
-{
-  ImGui::Text("Text: %s", _text.c_str());
-  Object::PopulateDebugger();
 }
 
 /////////////////////////////////////////////////////////
@@ -1001,7 +834,7 @@ void Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)
   }
 }
 
-void Graphics::DrawText(Text *text)
+void Graphics::DrawText(UI::Text *text)
 {
   if (text && text->GetTexture())
   {
@@ -1036,7 +869,7 @@ void Graphics::DrawText(Text *text)
   }
 }
 
-void Graphics::DrawText(Text *text, SDL_Rect clip)
+void Graphics::DrawText(UI::Text *text, SDL_Rect clip)
 {
   if (text && text->GetTexture())
   {

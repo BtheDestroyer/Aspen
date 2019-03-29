@@ -14,6 +14,13 @@ namespace Aspen
 ///        Controls and facilitates graphics processing
 namespace Graphics
 {
+/// \brief UI namespace
+namespace UI
+{
+/// \brief Forward declaration
+class Text;
+} // namespace UI
+
 /// \brief Default created window width
 extern const int DEFAULT_WINDOW_WIDTH;
 /// \brief Default created window height
@@ -490,102 +497,6 @@ public:
   TTF_Font *GetFont(std::string name, int size);
 };
 
-/// \brief Text class
-class Text : public Object::Object
-{
-  /// \brief Text to draw
-  std::string _text;
-  /// \brief Font name in which to draw text
-  std::string _font;
-  /// \brief Texture text is drawn to
-  SDL_Texture *_tex;
-  /// \brief Color of text
-  Color _c;
-  /// \brief Rectangle to draw _tex with
-  SDL_Rect _rect;
-  /// \brief Size of text
-  int _size;
-
-public:
-  /// \brief Constructor
-  /// \param parent Parent Object to be passed to Object constructor
-  /// \param name Object name
-  ///             Set by derived classes to a string representation of their type
-  Text(Object *parent = nullptr, std::string name = "Text");
-  /// \brief Constructor
-  /// \param text Text to draw
-  /// \param parent Parent Object to be passed to Object constructor
-  /// \param name Object name
-  ///             Set by derived classes to a string representation of their type
-  Text(std::string text, Object *parent = nullptr, std::string name = "Text");
-  /// \brief Constructor
-  ///        Derived classes should call this in their constructors' initialization list
-  /// \param text Text to draw
-  /// \param font Font in which to draw
-  /// \param size Size of the text in pt
-  /// \param parent Parent Object to be passed to Object constructor
-  /// \param name Object name
-  ///             Set by derived classes to a string representation of their type
-  Text(std::string text, std::string font, int size, Object *parent = nullptr, std::string name = "Text");
-  /// \brief Constructor
-  ///        Derived classes should call this in their constructors' initialization list
-  /// \param text Text to draw
-  /// \param font Font in which to draw
-  /// \param size Size of the text in pt
-  /// \param c Color of text
-  /// \param parent Parent Object to be passed to Object constructor
-  /// \param name Object name
-  ///             Set by derived classes to a string representation of their type
-  Text(std::string text, std::string font, int size, Color c, Object *parent = nullptr, std::string name = "Text");
-  /// \brief Destructor
-  ~Text();
-
-  /// \brief Draws the sprite to the parent Object's window if parent is of type Graphics
-  void operator()();
-
-  /// \brief Gets the text of the object
-  /// \return Text of the object
-  std::string GetText();
-  /// \brief Sets the text of the object
-  /// \param text New text of the object
-  void SetText(std::string text);
-
-  /// \brief Gets the font of the text
-  /// \return Font of the text
-  std::string GetFont();
-  /// \brief Sets the font of the text
-  /// \param font New font of the text
-  void SetFont(std::string font);
-
-  /// \brief Gets the color of the text
-  /// \return Color of the text
-  Color GetColor();
-  /// \brief Sets the color of the text
-  /// \param c New color of the text
-  void SetColor(Color c);
-
-  /// \brief Gets the rectangle _tex is drawn to
-  /// \return Reference to _rect
-  SDL_Rect GetRect();
-
-  /// \brief Gets the text size
-  /// \return Size of the text
-  int GetSize();
-  /// \brief Sets the text size
-  /// \param size New size of the text
-  void SetSize(int size);
-
-  /// \brief Generates _tex
-  void GenerateTexture();
-  /// \brief Gets the generated texture
-  /// \return Generated texture
-  SDL_Texture *GetTexture();
-
-  /// \brief Fills out the Debugger if it exists with this Object's information
-  ///        Derived classes should call their base class's version of this method
-  void PopulateDebugger();
-};
-
 /// \brief Forward declaration
 class Graphics;
 
@@ -719,11 +630,11 @@ public:
 
   /// \brief Draws text
   /// \param text Text to draw
-  void DrawText(Text *text);
+  void DrawText(UI::Text *text);
   /// \brief Draws text
   /// \param text Text to draw
   /// \param clip Clipping rectangle to apply as a mask
-  void DrawText(Text *text, SDL_Rect clip);
+  void DrawText(UI::Text *text, SDL_Rect clip);
 
   /// \brief Sets the current camera
   /// \param camera Camera to use
