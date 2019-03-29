@@ -200,6 +200,7 @@ Button::Button(std::string text, int size, Object *parent, std::string name)
   _textObj->SetSize(size * 20);
   _textObj->GetTransform()->SetScale(0.3f, 0.3f);
   _collider = CreateChild<Physics::AABBCollider>();
+  _collider->SetTrigger(true);
   _collider->GetTransform()->SetScale(0.3f, 0.3f);
   SetText(text);
   _rectangle->Color(0xAAAAAAFF);
