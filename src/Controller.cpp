@@ -178,7 +178,7 @@ void PlayerController_Sidescroller::operator()()
   Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
   {
-    Time::Time *time = Time::Get();
+    Time::Time *time = Time::Time::Get();
     if (time)
       dt = time->DeltaTime() * 60;
   }

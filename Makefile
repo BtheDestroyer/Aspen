@@ -29,11 +29,12 @@ endif
 endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
-CXX := g++
+CXX := i686-w64-mingw32-g++.exe
 CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
 						-Wall -Wextra -Wno-unused-parameter \
+						-std=c++11 \
 						-D$(PLATFORM)
 LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
 						-limgui \
@@ -148,12 +149,12 @@ $(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
 
 $(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
 	$(CXX) $(OBJECTS)/main.o $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES)) -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
-	cp C:/MinGW/bin/libpng16-16.dll $(BUILD)/
-	cp C:/MinGW/bin/zlib1.dll $(BUILD)/
-	cp C:/MinGW/bin/SDL2.dll $(BUILD)/
-	cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
-	cp C:/MinGW/bin/SDL2_ttf.dll $(BUILD)/
-	cp C:/MinGW/bin/SDL2_mixer.dll $(BUILD)/
+	#cp C:/MinGW/bin/libpng16-16.dll $(BUILD)/
+	#cp C:/MinGW/bin/zlib1.dll $(BUILD)/
+	#cp C:/MinGW/bin/SDL2.dll $(BUILD)/
+	#cp C:/MinGW/bin/SDL2_Image.dll $(BUILD)/
+	#cp C:/MinGW/bin/SDL2_ttf.dll $(BUILD)/
+	#cp C:/MinGW/bin/SDL2_mixer.dll $(BUILD)/
 endif
 
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp

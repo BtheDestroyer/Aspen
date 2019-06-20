@@ -28,7 +28,7 @@ void Axis::operator()()
   Time::Time *time = nullptr;
   Engine::Engine *engine = Engine::Engine::Get();
   if (engine)
-    time = Time::Get();
+    time = Time::Time::Get();
   if (!time) 
   {
     Log::Error("Axis Object can't find an Engine ancestor with a Time child or a Time ancestor!");

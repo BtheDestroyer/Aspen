@@ -2,6 +2,7 @@
 #define __PHYSICS_HPP
 #include "Object.hpp"
 #include <string>
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 /// \brief Aspen engine namespace

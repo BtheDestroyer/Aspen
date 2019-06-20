@@ -51,7 +51,7 @@ void Debug::operator()()
   {
     //TODO: Get input from an Input wrapper
     Input::Mouse mouse = Input::GetMouse();
-    Time::Time *time = Time::Get();
+    Time::Time *time = Time::Time::Get();
     if (time)
       _io->DeltaTime = std::max(0.000001, time->DeltaTime());
     else
