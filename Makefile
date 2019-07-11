@@ -34,11 +34,11 @@ CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
 						-Wall -Wextra -Wno-unused-parameter \
-						-std=c++11 \
+						-std=c++14 \
 						-D$(PLATFORM)
-LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
-						-limgui \
+LINKFLAGS :=-LC:\mingw32\mingw32\i686-w64-mingw32\lib -Lbuild\
 						-lmingw32 \
+						-limgui \
 						-lSDL2main -lSDL2 \
 						-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
 						-static-libstdc++
@@ -75,7 +75,7 @@ HPPFILES := $(filter-out $(HEADERS)/$(STUB).hpp, $(wildcard $(HEADERS)/*.hpp))
 RCFILES := $(wildcard $(SOURCES)/*.rc)
 OBJFILES := $(filter-out $(OBJECTS)/main.o,$(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES)))
 ifeq ($(suffix $(PROJECT)),.exe)
-OBJFILES := $(OBJFILES) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
+#OBJFILES := $(OBJFILES) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
 endif
 
 ###############################################################
@@ -147,8 +147,8 @@ else
 $(BUILD)/lib$(LIBRARY).a: $(OBJFILES)
 	$(AR) rvs $@ $^ $(ARFLAGS)
 
-$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB) $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES))
-	$(CXX) $(OBJECTS)/main.o $(patsubst $(SOURCES)/%.rc, $(OBJECTS)/%.o,$(RCFILES)) -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
+$(OUTPUT): $(BUILD)/lib$(LIBRARY).a $(OBJECTS)/main.o $(IMGUI_LIB)
+	$(CXX) $(OBJECTS)/main.o -l$(LIBRARY) $(LINKFLAGS) -o $(OUTPUT)
 	#cp C:/MinGW/bin/libpng16-16.dll $(BUILD)/
 	#cp C:/MinGW/bin/zlib1.dll $(BUILD)/
 	#cp C:/MinGW/bin/SDL2.dll $(BUILD)/
@@ -162,7 +162,7 @@ $(OBJECTS)/%.o: $(SOURCES)/%.cpp
 
 $(OBJECTS)/%.o: $(SOURCES)/%.rc
 ifeq ($(PLATFORM),__WIN32)
-	windres $< -o $@
+#	windres $< -o $@
 endif
 
 $(OBJFILES) : | $(OBJECTS)
