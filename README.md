@@ -21,5 +21,6 @@
 
 * [SDL2 Development Libraries](https://www.libsdl.org/download-2.0.php)
 * [SDL2_image Development Libraries](https://www.libsdl.org/projects/SDL_image/)
+  * The most recent release has been giving people issues. You should get [this version instead](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.4-mingw.tar.gz).
 * [SDL2_ttf Development Libraries](https://www.libsdl.org/projects/SDL_ttf/)
 * [SDL_mixer Development Libraries](https://www.libsdl.org/projects/SDL_mixer/)
