@@ -10,6 +10,7 @@
 #include "Debug.hpp"
 #include "Log.hpp"
 #include "imgui.h"
+#include <limits>
 
 #undef __PHYSICS_CPP
 
@@ -681,11 +682,17 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
       double dx = ocx - tcx,
              dy = ocy - tcy;
       double s;
+      double ca;
       if (dx == 0)
-        s = 0;
+      {
+        s = std::numeric_limits<double>::max();
+        ca = M_PI_2;
+      }
       else
+      {
         s = dy / dx;
-      double ca = std::atan(s);
+        ca = std::atan(s);
+      }
       bool h = std::abs(std::cos(ca) / std::max(GetWidth(), oc->GetWidth())) - std::abs(std::sin(ca) / std::max(GetHeight(), oc->GetHeight())) > 0;
 
       if (h)
@@ -702,7 +709,7 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
         c.first.collisionX = c.first.collisionY / s;
         c.second.collisionY = (std::abs(dy) - GetHeight() / 2.0f) * (dy > 0 ? -1 : 1);
         c.second.collisionX = c.second.collisionY / s;
-        c.first.collisionAngle = (c.first.collisionY > 0 ? 0 : M_PI) + M_PI / 2.0;
+        c.first.collisionAngle = (c.first.collisionY > 0 ? 0 : M_PI) + M_PI_2;
       }
       c.second.collisionAngle = c.first.collisionAngle + M_PI;
     }
@@ -801,19 +808,24 @@ void AABBCollider::ResolveCollision(Collision collision)
       _trigger ||
       collision.collider->IsTrigger())
     return;
-  Rigidbody *rb = nullptr;
+  Rigidbody *rb = GetRigidbody();
   Transform::Transform *tf = GetTransform();
-  if (!tf)
+  if (!rb)
   {
     if (!_parent)
       return;
-    tf = _parent->GetTransform();
-    if (!tf)
+    if (!rb)
+      rb = Parent()->GetRigidbody();
+    if (!rb)
       return;
-    rb = _parent->GetRigidbody();
+    tf = Parent()->GetTransform();
+    if (!tf)
+    {
+      GetTransform();
+      if (!tf)
+        return;
+    }
   }
-  else
-    rb = GetRigidbody();
 
   Rigidbody *orb = collision.collider->GetRigidbody();
   if (!orb)
