@@ -144,7 +144,7 @@ Rigidbody::Rigidbody(Object *parent, std::string name)
 }
 
 Rigidbody::Rigidbody(double mass, Object *parent, std::string name)
-    : Object(parent, name), _mass(mass), _velocityStrength(0), _velocityDirection(0), _accelerationStrength(0), _accelerationDirection(0)
+    : Object(parent, name), _mass(mass), _velocityStrength(0), _velocityDirection(0), _accelerationStrength(0), _accelerationDirection(0), _gravityScale(1)
 {
 }
 
@@ -176,8 +176,8 @@ void Rigidbody::operator()()
         double vy = GetVelocityY();
         vx = std::abs(vx) >= 0.001 ? vx : 0.0;
         vy = std::abs(vy) >= 0.001 ? vy : 0.0;
-        double ax = (GetAccelerationX() + physics->GetGravityX() - vx * physics->GetDrag()) * dt;
-        double ay = (GetAccelerationY() + physics->GetGravityY() - vy * physics->GetDrag()) * dt;
+        double ax = (GetAccelerationX() + physics->GetGravityX() * _gravityScale - vx * physics->GetDrag()) * dt;
+        double ay = (GetAccelerationY() + physics->GetGravityY() * _gravityScale - vy * physics->GetDrag()) * dt;
         SetCartesianVelocity(vx + ax, vy + ay);
 
         Transform::Transform *tf = _parent->GetTransform();
@@ -301,6 +301,16 @@ void Rigidbody::ApplyForce(double force, double angle)
 void Rigidbody::ApplyCartesianForce(double x, double y)
 {
   SetCartesianVelocity(GetVelocityX() + x / _mass, GetVelocityY() + y / _mass);
+}
+
+double Rigidbody::GetGravityScale()
+{
+  return _gravityScale;
+}
+
+void Rigidbody::SetGravityScale(double scale)
+{
+  _gravityScale = scale;
 }
 
 void Rigidbody::PopulateDebugger()
@@ -487,8 +497,8 @@ std::pair<Collision, Collision> CircleCollider::TestCollision(Collider *other)
     double dx = ox - tx;
     double dy = oy - ty;
     double d2 = dx * dx + dy * dy;
-    double oR = dynamic_cast<CircleCollider *>(other)->GetRadius();
-    double r = _radius + oR;
+    double oR = dynamic_cast<CircleCollider *>(other)->GetRadius() * (otf->GetXScale() + otf->GetYScale()) * 0.5f;
+    double r = _radius * (ttf->GetXScale() + ttf->GetYScale()) * 0.5f + oR;
     if (d2 < r * r)
     {
       c.first.result = COLLISION_RESULT::SUCCESS;
@@ -667,15 +677,15 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
     }
     AABBCollider *oc = dynamic_cast<AABBCollider *>(other);
     // this's bounds
-    double tl = ttf->GetXPosition() - GetWidth() / 2.0f,
-           tr = ttf->GetXPosition() + GetWidth() / 2.0f,
-           tt = ttf->GetYPosition() - GetHeight() / 2.0f,
-           tb = ttf->GetYPosition() + GetHeight() / 2.0f;
+    double tl = ttf->GetXPosition() - GetWidth() * ttf->GetXScale() / 2.0f,
+           tr = ttf->GetXPosition() + GetWidth() * ttf->GetXScale() / 2.0f,
+           tt = ttf->GetYPosition() - GetHeight() * ttf->GetYScale() / 2.0f,
+           tb = ttf->GetYPosition() + GetHeight() * ttf->GetYScale() / 2.0f;
     // other's bounds
-    double ol = otf->GetXPosition() - oc->GetWidth() / 2.0f,
-           oR = otf->GetXPosition() + oc->GetWidth() / 2.0f,
-           ot = otf->GetYPosition() - oc->GetHeight() / 2.0f,
-           ob = otf->GetYPosition() + oc->GetHeight() / 2.0f;
+    double ol = otf->GetXPosition() - oc->GetWidth() * otf->GetXScale() / 2.0f,
+           oR = otf->GetXPosition() + oc->GetWidth() * otf->GetXScale() / 2.0f,
+           ot = otf->GetYPosition() - oc->GetHeight() * otf->GetYScale() / 2.0f,
+           ob = otf->GetYPosition() + oc->GetHeight() * otf->GetYScale() / 2.0f;
 
     if (tr >= ol && tl <= oR &&
         tb >= ot && tt <= ob)
@@ -700,7 +710,7 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
         s = dy / dx;
         ca = std::atan(s);
       }
-      bool h = std::abs(std::cos(ca) / std::max(GetWidth(), oc->GetWidth())) - std::abs(std::sin(ca) / std::max(GetHeight(), oc->GetHeight())) > 0;
+      bool h = std::abs(std::cos(ca) / std::max(GetWidth() * ttf->GetXScale(), oc->GetWidth() * otf->GetXScale())) - std::abs(std::sin(ca) / std::max(GetHeight() * ttf->GetYScale(), oc->GetHeight() * otf->GetYScale())) > 0;
 
       if (h)
       {
@@ -759,7 +769,7 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
            dy = oy - ty;
     double d2 = dx * dx + dy * dy,
            d = std::sqrt(d2);
-    double maxd = std::sqrt(GetWidth() / 2 * GetWidth() / 2 + GetHeight() / 2 * GetHeight() / 2) + oc->GetRadius();
+    double maxd = std::sqrt(GetWidth() * ttf->GetXScale() / 2 * GetWidth() * ttf->GetXScale() / 2 + GetHeight() * ttf->GetYScale() / 2 * GetHeight() * ttf->GetYScale() / 2) + oc->GetRadius() * (otf->GetXScale() + otf->GetYScale()) * 0.5f;
     // broad check
     if (d > maxd)
     {
@@ -783,16 +793,16 @@ std::pair<Collision, Collision> AABBCollider::TestCollision(Collider *other)
       c.second.result = COLLISION_RESULT::FAILURE;
       return c;
     }
-    bool h = std::abs(std::cos(ca) / GetWidth()) - std::abs(std::sin(ca) / GetHeight()) > 0;
+    bool h = std::abs(std::cos(ca) / GetWidth() * ttf->GetXScale()) - std::abs(std::sin(ca) / GetHeight() * ttf->GetYScale()) > 0;
     double td = std::sqrt(tdx * tdx + tdy * tdy);
     if (h)
     {
-      odx = (std::abs(dx) - GetWidth() / 2.0f);
+      odx = (std::abs(dx) - GetWidth() * ttf->GetXScale() / 2.0f);
       ody = td * s;
     }
     else
     {
-      ody = (std::abs(dy) - GetHeight() / 2.0f);
+      ody = (std::abs(dy) - GetHeight() * ttf->GetYScale() / 2.0f);
       odx = td / s;
     }
     c.first.collisionX = tdx;

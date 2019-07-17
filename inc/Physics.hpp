@@ -113,6 +113,8 @@ class Rigidbody : public Object::Object
   double _accelerationStrength;
   /// \brief Direction of acceleration
   double _accelerationDirection;
+  /// \brief Amount gravity affects this object
+  double _gravityScale;
 
 public:
   /// \brief Constructor
@@ -204,6 +206,13 @@ public:
   /// \param x Horizontal strength of the force
   /// \param y Vertical strength of the force
   void ApplyCartesianForce(double x, double y);
+
+  /// \brief Sets the object's gravity scale
+  /// \return Object's gravity scale
+  double GetGravityScale();
+  /// \brief Sets the object's gravity scale
+  /// \param mass New gravity scale
+  void SetGravityScale(double scale);
 
   /// \brief Fills out the Debugger if it exists with this Object's information
   ///        Derived classes should call their base class's version of this method
