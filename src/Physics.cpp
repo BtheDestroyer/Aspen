@@ -527,34 +527,41 @@ void CircleCollider::ResolveCollision(Collision collision)
       _trigger ||
       collision.collider->IsTrigger())
     return;
-  Rigidbody *rb = nullptr;
+  Rigidbody *rb = GetRigidbody();
   Transform::Transform *tf = GetTransform();
-  if (!tf)
+  if (!rb)
   {
     if (!_parent)
       return;
-    tf = _parent->GetTransform();
-    if (!tf)
+    if (!rb)
+      rb = Parent()->GetRigidbody();
+    if (!rb)
       return;
-    rb = _parent->GetRigidbody();
+    tf = Parent()->GetTransform();
+    if (!tf)
+    {
+      GetTransform();
+      if (!tf)
+        return;
+    }
   }
-  else
-    rb = GetRigidbody();
 
   Rigidbody *orb = collision.collider->GetRigidbody();
   if (!orb)
     orb = collision.collider->Parent()->GetRigidbody();
 
-  if (rb)
+  double rx = _radius * std::cos(collision.collisionAngle);
+  double ry = _radius * std::sin(collision.collisionAngle);
+  double dx = rx - collision.collisionX;
+  double dy = ry - collision.collisionY;
+  if (orb)
   {
-    double rx = _radius * std::cos(collision.collisionAngle);
-    double ry = _radius * std::sin(collision.collisionAngle);
-    double dx = rx - collision.collisionX;
-    double dy = ry - collision.collisionY;
-    if (orb)
-      tf->ModifyPosition(-dx / 2, -dy / 2);
-    else
-      tf->ModifyPosition(-dx, -dy);
+    tf->ModifyPosition(-dx / 2, -dy / 2);
+  }
+  else
+  {
+    tf->ModifyPosition(-dx, -dy);
+    rb->SetCartesianVelocity(rb->GetVelocityX() * std::sin(collision.collisionAngle), rb->GetVelocityY() * std::cos(collision.collisionAngle));
   }
 }
 
@@ -831,18 +838,16 @@ void AABBCollider::ResolveCollision(Collision collision)
   if (!orb)
     orb = collision.collider->Parent()->GetRigidbody();
 
-  if (rb)
+  if (orb)
   {
-    if (orb)
-    {
-      tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) / 2.0f * std::cos(collision.collisionAngle),
-                         (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) / 2.0f * std::sin(collision.collisionAngle));
-    }
-    else
-    {
-      tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) * std::cos(collision.collisionAngle),
-                         (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) * std::sin(collision.collisionAngle));
-    }
+    tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) / 2.0f * std::cos(collision.collisionAngle),
+                       (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) / 2.0f * std::sin(collision.collisionAngle));
+  }
+  else
+  {
+    tf->ModifyPosition((std::abs(collision.collisionX) - (GetWidth() / 2.0f)) * std::cos(collision.collisionAngle),
+                       (std::abs(collision.collisionY) - (GetHeight() / 2.0f)) * std::sin(collision.collisionAngle));
+    rb->SetCartesianVelocity(rb->GetVelocityX() * std::sin(collision.collisionAngle), rb->GetVelocityY() * std::cos(collision.collisionAngle));
   }
 }
 
