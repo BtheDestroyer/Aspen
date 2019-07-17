@@ -133,18 +133,18 @@ Now that `main.cpp` is open, push Ctrl+A to select everything and push backspace
 
 What you should know by now is that every program needs a `main` function, so let's make one:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 // If you don't know why there's argc and argv here, don't worry about it
 int main(int argc, char **argv)
 {
 
     return 0;
 }
-```
+~~~~~~~~~~~~~
 
 The first thing we want to do is start up Aspen's Engine. Go ahead and add the following `include` and code:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 #include "Engine.cpp"
 
 int main(int argc, char **argv)
@@ -153,11 +153,11 @@ int main(int argc, char **argv)
     Aspen::Engine::Engine engine(Aspen::Engine::START_FLAGS::ALL);
     return 0;
 }
-```
+~~~~~~~~~~~~~
 
 Finally, we have to have some kind of loop to keep our game from closing immediately:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 #include "Engine.cpp"
 
 int main(int argc, char **argv)
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
         engine();  // Continue running it
     return 0;
 }
-```
+~~~~~~~~~~~~~
 
 Now open a terminal from within VS Code with Ctrl+\` and type `make run` to build and run your project. This should create a graphics window with an "Object Tree" subwindow and output a bunch of information to the terminal.
 
@@ -180,7 +180,7 @@ Aspen uses GameStates to differentiate between different... game states.
 
 In order to create our own GameState, we can make a new `class` that inherits `Aspen::GameState::GameState`
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 // main.cpp
 
 // other includes...
@@ -200,11 +200,11 @@ public:
 };
 
 // other code
-```
+~~~~~~~~~~~~~
 
 Now we can create *other* objects within our state's constructor. Let's start with something basic - a black square. I'll split this up over multiple lines so each step can be commented
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 // main.cpp
 
 // includes
@@ -231,11 +231,11 @@ public:
 };
 
 // other code
-```
+~~~~~~~~~~~~~
 
 Now we just have to add our GameState to the list of states within the Engine. We can do this by adding it to the GameStateManager. Again, this is split across multiple lines for commenting
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 // main.cpp
 
 // includes
@@ -257,7 +257,7 @@ int main(int argc, char **argv)
         engine();
     return 0;
 }
-```
+~~~~~~~~~~~~~
 
 Now go ahead and `make run` again to build and run your project and there should be a black square in the top left (0, 0).
 
@@ -273,7 +273,7 @@ You can also view certain uneditable properties of objects. This will be useful 
 
 Speaking of debugging, let's try debug printing to get some information to the terminal. Aspen has its own wrapper around the normal C++ printing methods in the namespace Aspen::Log. We can call them like this:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 // ... code ...
 
 // [####] is the current line number
@@ -283,11 +283,11 @@ Aspen::Log::Warning("Hello"); // Prints "[####] WAR: Hello"
 Aspen::Log::Error("Hello"); // Prints "[####] ERR: Hello"
 
 // ... code ...
-```
+~~~~~~~~~~~~~
 
 If you want to disable printing certain levels of messages, you can use `Log.TogglePrint()`:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 Aspen::Log::Debug("Hello"); // Prints "[####] DBG: Hello"
 Aspen::Log::Info("World"); // Prints "[####] INF: World"
 
@@ -295,21 +295,77 @@ Aspen::Log::Debug.TogglePrint(); // Toggles Debug off
 
 Aspen::Log::Debug("Hello"); // Doesn't print
 Aspen::Log::Info("World"); // Prints "[####] INF: World"
-```
+~~~~~~~~~~~~~
 
 We can also set an output file with the following line. It's recommended to do this as the first thing in main before you create the Engine so you can also log any information from that to the file:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 Aspen::Log::Log::SetFile("./Aspen.log");
 
 // ... code ...
-```
+~~~~~~~~~~~~~
 
 Finally, we can create our *own* log objects as well:
 
-```cpp
+~~~~~~~~~~~~~{.cpp}
 //                    message prefix      message suffix
 Aspen::Log::Log MyLog("My own log: ", " That's all, folks!");
 
 MyLog("Hello world!"); // Prints "[####] My own log: Hello world! That's all, folks!"
-```
+~~~~~~~~~~~~~
+
+## 1.4. Custom Objects and Events {#hello-objects}
+
+*TODO*
+
+## 1.5. Input {#hello-input}
+
+*TODO*
+
+# 2. Drawing Images {#images}
+
+*TODO*
+
+## 2.1. Static Images {#images-static}
+
+*TODO*
+
+## 2.2. Animations {#images-animations}
+
+*TODO*
+
+# 3. Physics {#physics}
+
+*TODO*
+
+## 3.1. The Rigidbody {#physics-rigidbody}
+
+*TODO*
+
+## 3.2. Circle Colliders {#physics-circle}
+
+*TODO*
+
+## 3.3. Box/AABB Colliders {#physics-aabb}
+
+*TODO*
+
+## 3.4. Collision Events {#physics-aabb}
+
+*TODO*
+
+# 4. Audio {#audio}
+
+*TODO*
+
+# 4.1. Sound Effects {#audio-sfx}
+
+*TODO*
+
+# 4.2. Music {#audio-music}
+
+*TODO*
+
+# 5. Managing States {#state-management}
+
+*TODO*
