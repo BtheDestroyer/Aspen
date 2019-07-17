@@ -1172,7 +1172,7 @@ Animation::Animation(Object *parent, std::string name)
 }
 
 Animation::Animation(UniformSpritesheet *spritesheet, float frameDelay, Object *parent, std::string name)
-    : Object(parent, name), _currentFrame(0), _delay(frameDelay), _remainingDelay(_delay)
+    : Object(parent, name), _currentFrame(0), _delay(frameDelay), _remainingDelay(_delay), _done(false)
 {
   AddChild(spritesheet);
   CreateChild<Transform::Transform>();
@@ -1190,18 +1190,26 @@ void Animation::operator()()
   if (engine)
   {
     Time::Time *time = engine->FindAncestorOfType<Time::Time>();
-    float dt;
-    if (time)
-      dt = time->DeltaTime();
-    else
-      dt = 1 / 60.0f;
-
-    _remainingDelay -= dt;
-    while (_remainingDelay <= 0.0f)
+    if (_done)
+      _done = false;
+    if (_delay > 0)
     {
-      _remainingDelay += _delay;
-      if (++_currentFrame >= GetFrameCount())
-        _currentFrame = 0;
+      float dt;
+      if (time)
+        dt = time->DeltaTime();
+      else
+        dt = 1 / 60.0f;
+
+      _remainingDelay += dt;
+      while (_remainingDelay >= _delay)
+      {
+        _remainingDelay -= _delay;
+        if (++_currentFrame >= GetFrameCount())
+        {
+          _currentFrame = 0;
+          _done = true;
+        }
+      }
     }
 
     Graphics *gfx = Graphics::Get();
@@ -1271,6 +1279,31 @@ int Animation::GetFrameCount()
       ++count;
   }
   return count;
+}
+
+int Animation::GetFrame()
+{
+  return _currentFrame;
+}
+
+void Animation::SetFrame(int frame)
+{
+  _currentFrame = frame % GetFrameCount();
+}
+
+float Animation::GetFrameDelay()
+{
+  return _delay;
+}
+
+void Animation::SetFrameDelay(float delay)
+{
+  _delay = delay;
+}
+
+bool Animation::Done()
+{
+  return _done;
 }
 
 void Animation::PopulateDebugger()

@@ -428,6 +428,8 @@ class Animation : public Object::Object
   float _delay;
   /// \brief Delay in seconds before the next frame change
   float _remainingDelay;
+  /// \brief True if the animation just looped
+  bool _done;
 
 public:
   /// \brief Constructor
@@ -454,6 +456,23 @@ public:
   ///        Calculates this by combining the frames of all Sprite and UniformSpritesheet children
   /// \return Total number of frames
   int GetFrameCount();
+
+  /// \brief Gets the current frame
+  /// \return Current frame
+  int GetFrame();
+  /// \brief Sets the current frame
+  /// \param frame New frame
+  void SetFrame(int frame);
+
+  /// \brief Gets the current frame delay
+  /// \return Current frame delay
+  float GetFrameDelay();
+  /// \brief Sets the frame delay
+  /// \param frame New frame delay
+  void SetFrameDelay(float delay);
+
+  /// \brief True if the animation just looped
+  bool Done();
 
   /// \brief Fills out the Debugger if it exists with this Object's information
   ///        Derived classes should call their base class's version of this method
