@@ -8,12 +8,13 @@ var searchData=
   ['default_5fwindow_5fheight',['DEFAULT_WINDOW_HEIGHT',['../namespace_aspen_1_1_graphics.html#ab62e6f5934b2faa93d88c0674b6a3ea7',1,'Aspen::Graphics']]],
   ['default_5fwindow_5fwidth',['DEFAULT_WINDOW_WIDTH',['../namespace_aspen_1_1_graphics.html#a987c853ce7e6cedd0fec5cab4cbb1ddc',1,'Aspen::Graphics']]],
   ['deltatime',['DeltaTime',['../class_aspen_1_1_time_1_1_time.html#ad2fcdcba6cfbb35adf59b5931116ede8',1,'Aspen::Time::Time']]],
+  ['done',['Done',['../class_aspen_1_1_graphics_1_1_animation.html#aa63954653160f70fa53ebf067d61f8f9',1,'Aspen::Graphics::Animation']]],
   ['down',['DOWN',['../namespace_aspen_1_1_physics_1_1_g_r_a_v___d_i_r.html#a42cfad5784d2dff1983e5ec12002525f',1,'Aspen::Physics::GRAV_DIR']]],
   ['drawline',['DrawLine',['../class_aspen_1_1_graphics_1_1_graphics.html#ab38947a3df9325e0bb0835671ce0820a',1,'Aspen::Graphics::Graphics::DrawLine(Line *line)'],['../class_aspen_1_1_graphics_1_1_graphics.html#abb962df53b251ed009f3a4a8c3b2eb17',1,'Aspen::Graphics::Graphics::DrawLine(SDL_Point *start, SDL_Point *end, Color c)']]],
   ['drawpoint',['DrawPoint',['../class_aspen_1_1_graphics_1_1_graphics.html#ab273bb2e31383080d975674b8532fc30',1,'Aspen::Graphics::Graphics::DrawPoint(Point *point)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a2fba00f1baac159704d7341aaf2a82a5',1,'Aspen::Graphics::Graphics::DrawPoint(SDL_Point *point, Color c)']]],
   ['drawrectangle',['DrawRectangle',['../class_aspen_1_1_graphics_1_1_graphics.html#a5db28ef2ef24774cdebffeab6f6312b3',1,'Aspen::Graphics::Graphics::DrawRectangle(Rectangle *rect)'],['../class_aspen_1_1_graphics_1_1_graphics.html#ac17c3a4d5dc8658b72547f1761133b35',1,'Aspen::Graphics::Graphics::DrawRectangle(SDL_Rect *rect, Color c, bool fill=true)']]],
   ['drawsprite',['DrawSprite',['../class_aspen_1_1_graphics_1_1_graphics.html#adca0e0af6e335deccadc1576a7f4d88a',1,'Aspen::Graphics::Graphics::DrawSprite(Sprite *sprite)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a91509c5bb62e70a8a21f7fa6fd02d6a3',1,'Aspen::Graphics::Graphics::DrawSprite(Sprite *sprite, SDL_Rect clip)']]],
-  ['drawtext',['DrawText',['../class_aspen_1_1_graphics_1_1_graphics.html#a736b5bd1c530f14b68e3ae02f2f20534',1,'Aspen::Graphics::Graphics::DrawText(Text *text)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a7f557150df66b5a0c5308675f5be1fe2',1,'Aspen::Graphics::Graphics::DrawText(Text *text, SDL_Rect clip)']]],
+  ['drawtext',['DrawText',['../class_aspen_1_1_graphics_1_1_graphics.html#a2aa8060643396abb5878ddfd1d870a37',1,'Aspen::Graphics::Graphics::DrawText(UI::Text *text)'],['../class_aspen_1_1_graphics_1_1_graphics.html#a0e56b4bc4d2153c6d672a8b40f5ef429',1,'Aspen::Graphics::Graphics::DrawText(UI::Text *text, SDL_Rect clip)']]],
   ['dx',['dx',['../class_aspen_1_1_input_1_1_mouse.html#a3d1f3aaa2bab0c54c13d0fba68682cb3',1,'Aspen::Input::Mouse']]],
   ['dy',['dy',['../class_aspen_1_1_input_1_1_mouse.html#ac0db96176d71decbb2c9c8941aae8ea0',1,'Aspen::Input::Mouse']]]
 ];

@@ -14,10 +14,10 @@ var searchData=
   ['applyforce',['ApplyForce',['../class_aspen_1_1_physics_1_1_rigidbody.html#ab9ffa92808d6d0e55ec9500c822050b3',1,'Aspen::Physics::Rigidbody']]],
   ['aspen',['Aspen',['../namespace_aspen.html',1,'']]],
   ['audio',['Audio',['../class_aspen_1_1_audio_1_1_audio.html#a9251fa4b7416bedb94e630cbbf121e52',1,'Aspen::Audio::Audio']]],
-  ['audio',['Audio',['../namespace_aspen_1_1_audio.html',1,'Aspen']]],
   ['audio',['Audio',['../class_aspen_1_1_audio_1_1_audio.html',1,'Aspen::Audio']]],
-  ['axis',['Axis',['../class_aspen_1_1_input_1_1_axis.html#a4fec67793f8aee3861085bf9e1f0c995',1,'Aspen::Input::Axis::Axis(Object *parent=nullptr, std::string name=&quot;Axis&quot;)'],['../class_aspen_1_1_input_1_1_axis.html#a4281e99f373992078ed6752e66ba16f0',1,'Aspen::Input::Axis::Axis(SDL_Keycode positive=SDLK_UNKNOWN, SDL_Keycode negative=SDLK_UNKNOWN, float gravity=0.5f, float weight=0.5f, Object *parent=nullptr, std::string name=&quot;Axis&quot;)']]],
+  ['audio',['Audio',['../namespace_aspen_1_1_audio.html',1,'Aspen']]],
   ['axis',['Axis',['../class_aspen_1_1_input_1_1_axis.html',1,'Aspen::Input']]],
+  ['axis',['Axis',['../class_aspen_1_1_input_1_1_axis.html#a4fec67793f8aee3861085bf9e1f0c995',1,'Aspen::Input::Axis::Axis(Object *parent=nullptr, std::string name=&quot;Axis&quot;)'],['../class_aspen_1_1_input_1_1_axis.html#a4281e99f373992078ed6752e66ba16f0',1,'Aspen::Input::Axis::Axis(SDL_Keycode positive=SDLK_UNKNOWN, SDL_Keycode negative=SDLK_UNKNOWN, float gravity=0.5f, float weight=0.5f, Object *parent=nullptr, std::string name=&quot;Axis&quot;)']]],
   ['colors',['Colors',['../namespace_aspen_1_1_graphics_1_1_colors.html',1,'Aspen::Graphics']]],
   ['controller',['Controller',['../namespace_aspen_1_1_controller.html',1,'Aspen']]],
   ['debug',['Debug',['../namespace_aspen_1_1_debug.html',1,'Aspen']]],
@@ -33,5 +33,6 @@ var searchData=
   ['start_5fflags',['START_FLAGS',['../namespace_aspen_1_1_engine_1_1_s_t_a_r_t___f_l_a_g_s.html',1,'Aspen::Engine']]],
   ['time',['Time',['../namespace_aspen_1_1_time.html',1,'Aspen']]],
   ['transform',['Transform',['../namespace_aspen_1_1_transform.html',1,'Aspen']]],
+  ['ui',['UI',['../namespace_aspen_1_1_graphics_1_1_u_i.html',1,'Aspen::Graphics']]],
   ['version',['Version',['../namespace_aspen_1_1_version.html',1,'Aspen']]]
 ];

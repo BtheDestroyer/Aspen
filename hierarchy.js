@@ -33,7 +33,8 @@ var hierarchy =
       [ "Aspen::Graphics::Sprite", "class_aspen_1_1_graphics_1_1_sprite.html", [
         [ "Aspen::Graphics::UniformSpritesheet", "class_aspen_1_1_graphics_1_1_uniform_spritesheet.html", null ]
       ] ],
-      [ "Aspen::Graphics::Text", "class_aspen_1_1_graphics_1_1_text.html", null ],
+      [ "Aspen::Graphics::UI::Button", "class_aspen_1_1_graphics_1_1_u_i_1_1_button.html", null ],
+      [ "Aspen::Graphics::UI::Text", "class_aspen_1_1_graphics_1_1_u_i_1_1_text.html", null ],
       [ "Aspen::Input::Axis", "class_aspen_1_1_input_1_1_axis.html", null ],
       [ "Aspen::Physics::Collider", "class_aspen_1_1_physics_1_1_collider.html", [
         [ "Aspen::Physics::AABBCollider", "class_aspen_1_1_physics_1_1_a_a_b_b_collider.html", null ],

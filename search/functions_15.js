@@ -19,7 +19,7 @@ var searchData=
   ['_7erectangle',['~Rectangle',['../class_aspen_1_1_graphics_1_1_rectangle.html#af7238d8b0e0f2e9035b5e395b78b8066',1,'Aspen::Graphics::Rectangle']]],
   ['_7erigidbody',['~Rigidbody',['../class_aspen_1_1_physics_1_1_rigidbody.html#aaf8335e4f2a0a8dd1b4f034e6cfa15f1',1,'Aspen::Physics::Rigidbody']]],
   ['_7esprite',['~Sprite',['../class_aspen_1_1_graphics_1_1_sprite.html#a99a5744ec1642049eb86df2b8ff443be',1,'Aspen::Graphics::Sprite']]],
-  ['_7etext',['~Text',['../class_aspen_1_1_graphics_1_1_text.html#a916afab373fc1939db9197761788ebbd',1,'Aspen::Graphics::Text']]],
+  ['_7etext',['~Text',['../class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#a35dc94b0438876fde968723ad244822a',1,'Aspen::Graphics::UI::Text']]],
   ['_7etime',['~Time',['../class_aspen_1_1_time_1_1_time.html#a3d9c997770d9d7f633af5f22a83626c8',1,'Aspen::Time::Time']]],
   ['_7euniformspritesheet',['~UniformSpritesheet',['../class_aspen_1_1_graphics_1_1_uniform_spritesheet.html#a7863878a0f8d622b3b3aeba75d4b201b',1,'Aspen::Graphics::UniformSpritesheet']]],
   ['_7eversion',['~Version',['../class_aspen_1_1_version_1_1_version.html#a3368f55e9a8ca619683cc03c9ab81aa2',1,'Aspen::Version::Version']]]

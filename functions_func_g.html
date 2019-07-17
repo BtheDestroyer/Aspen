@@ -46,6 +46,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -128,7 +129,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -149,10 +150,15 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>GenerateTexture()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#adc96455c0ed7b999ce14c7091952fc58">Aspen::Graphics::Sprite</a>
-, <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a7fd19c2dee8af74d09d738bdb05b1cae">Aspen::Graphics::Text</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#a053220e25f339d8e3df6bf99afd5e94a">Aspen::Graphics::UI::Text</a>
 </li>
 <li>Geometry()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_geometry.html#a95ef0c2d48a9f6ec2738e1af62598f31">Aspen::Graphics::Geometry</a>
+</li>
+<li>Get()
+: <a class="el" href="class_aspen_1_1_engine_1_1_engine.html#a97ad1e8783f39e4f76b0fda10b2d6f21">Aspen::Engine::Engine</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a0645a1ec714c5b8a0070030ad02a598e">Aspen::Graphics::Graphics</a>
+, <a class="el" href="class_aspen_1_1_time_1_1_time.html#a0cacf4a8c808a16faff7a6f2ba6dcc64">Aspen::Time::Time</a>
 </li>
 <li>GetAcceleration()
 : <a class="el" href="class_aspen_1_1_controller_1_1_player_controller__8_way.html#a265bdeac08f62792188f962a0e558f5d">Aspen::Controller::PlayerController_8Way</a>
@@ -183,7 +189,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a1c0052449596279616c9ec86b240f6be">Aspen::Object::Object</a>
 </li>
 <li>GetColor()
-: <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#abbbb22abe0c5bd368f07a5dbc17da4c4">Aspen::Graphics::Text</a>
+: <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#af8e33e3eeaad5ec37c84512041848a5d">Aspen::Graphics::UI::Text</a>
 </li>
 <li>GetDrag()
 : <a class="el" href="class_aspen_1_1_physics_1_1_physics.html#a7813b0c097d9802be64a13f1b5539315">Aspen::Physics::Physics</a>
@@ -193,17 +199,26 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>GetFont()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_font_cache.html#a86e8befdde34a4506dd9cea3ee520e8e">Aspen::Graphics::FontCache</a>
-, <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a6590e3da083fb1cf7cd3b2da3d4addac">Aspen::Graphics::Text</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#acc75f7ea52229cdad0dfd4a9a887be8b">Aspen::Graphics::UI::Text</a>
+</li>
+<li>GetFrame()
+: <a class="el" href="class_aspen_1_1_graphics_1_1_animation.html#a6c3cdb0c2ba91bdda203b8d544ca0d6e">Aspen::Graphics::Animation</a>
 </li>
 <li>GetFrameCount()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_animation.html#a200bf5e4ff7c5e8acd42eada1822fd92">Aspen::Graphics::Animation</a>
 , <a class="el" href="class_aspen_1_1_graphics_1_1_uniform_spritesheet.html#ad09378e7b41fa4fb45cf55cc354ffa26">Aspen::Graphics::UniformSpritesheet</a>
+</li>
+<li>GetFrameDelay()
+: <a class="el" href="class_aspen_1_1_graphics_1_1_animation.html#ab31c272cfb3c0ce2b882bacca5ddc441">Aspen::Graphics::Animation</a>
 </li>
 <li>GetGraphics()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_camera.html#affea9627eeb034b8c6cb50b84629718e">Aspen::Graphics::Camera</a>
 </li>
 <li>GetGravityDirection()
 : <a class="el" href="class_aspen_1_1_physics_1_1_physics.html#a926fd00a5f33e8db74e13e001d4e586b">Aspen::Physics::Physics</a>
+</li>
+<li>GetGravityScale()
+: <a class="el" href="class_aspen_1_1_physics_1_1_rigidbody.html#a69fb2ee3bc36d59abb5df3fe2bdc70bf">Aspen::Physics::Rigidbody</a>
 </li>
 <li>GetGravityStrength()
 : <a class="el" href="class_aspen_1_1_physics_1_1_physics.html#a6cfb813533373c14bdc627e7570db7f6">Aspen::Physics::Physics</a>
@@ -291,7 +306,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>GetRect()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_rectangle.html#a8f220a61a4696f33420e8ab3f4db81aa">Aspen::Graphics::Rectangle</a>
 , <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a030c77eb2b7ebaf87d44402496b2ce23">Aspen::Graphics::Sprite</a>
-, <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a4c03f0e8a13c66324670bbe1357d937e">Aspen::Graphics::Text</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#a38ec87425f68b38e3631b6924dd49874">Aspen::Graphics::UI::Text</a>
 </li>
 <li>GetRenderer()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a227633c48b4f81181677800397d26d3b">Aspen::Graphics::Graphics</a>
@@ -300,10 +315,10 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="class_aspen_1_1_object_1_1_object.html#a484a321196f85eb79bc9cf7e60ba8d79">Aspen::Object::Object</a>
 </li>
 <li>GetRotation()
-: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a4e15b55d805592c86cabbcc59bd3bbf6">Aspen::Transform::Transform</a>
+: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a47ba4c556af89040ea82b4b8a4cb8e25">Aspen::Transform::Transform</a>
 </li>
 <li>GetSize()
-: <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a699d1b42c0c66a810a21f232c2fc8d89">Aspen::Graphics::Text</a>
+: <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#acfae7fb77dc031a8b07f94a43d22801b">Aspen::Graphics::UI::Text</a>
 </li>
 <li>GetSound()
 : <a class="el" href="class_aspen_1_1_audio_1_1_sound_effect.html#a1c8f67df078a78242b3c0b179945ad04">Aspen::Audio::SoundEffect</a>
@@ -323,14 +338,14 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a4e2dbcf2dd4ec0760adb048b0713fa3c">Aspen::Graphics::Sprite</a>
 </li>
 <li>GetText()
-: <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a8dc23a6050cd35f33547cd40f22acf7c">Aspen::Graphics::Text</a>
+: <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#a55bfbf8fe9777eea4b96c5f31d4be804">Aspen::Graphics::UI::Text</a>
 </li>
 <li>GetTexture()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_sprite.html#a8f55967115e38395cbd03abc6326b291">Aspen::Graphics::Sprite</a>
-, <a class="el" href="class_aspen_1_1_graphics_1_1_text.html#a5efb1631d68cb3eb1745bc1ffb0081ac">Aspen::Graphics::Text</a>
+, <a class="el" href="class_aspen_1_1_graphics_1_1_u_i_1_1_text.html#aafbbfbbaeffab30b983a2561f9a3ff64">Aspen::Graphics::UI::Text</a>
 </li>
 <li>GetTransform()
-: <a class="el" href="class_aspen_1_1_object_1_1_object.html#a4516b5a808d6726c1cc8de72d3032579">Aspen::Object::Object</a>
+: <a class="el" href="class_aspen_1_1_object_1_1_object.html#a3f1f833c4e54b56a11aec184e3b9e2a0">Aspen::Object::Object</a>
 </li>
 <li>GetValue()
 : <a class="el" href="class_aspen_1_1_input_1_1_axis.html#af39e64a345bf0aa6c1fd23de65c028b2">Aspen::Input::Axis</a>
@@ -354,19 +369,19 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a8d9158217dd776323ad1073bddd90275">Aspen::Graphics::Graphics</a>
 </li>
 <li>GetXPosition()
-: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a31c2eaf135f7e76fbce5b0ed3da8ad4d">Aspen::Transform::Transform</a>
+: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a1200b2b6a54641e39d31895eb6d7f61c">Aspen::Transform::Transform</a>
 </li>
 <li>GetXScale()
-: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a02c9039acf5ca41b1f2341b3eb443280">Aspen::Transform::Transform</a>
+: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a57f8d052e70a09e52718ad5a05cd3c7f">Aspen::Transform::Transform</a>
 </li>
 <li>GetYPosition()
 : <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a7af299146d427c39454c1b553c844e20">Aspen::Transform::Transform</a>
 </li>
 <li>GetYScale()
-: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a4e41ea3493dcf44746c17cc9e13e8c48">Aspen::Transform::Transform</a>
+: <a class="el" href="class_aspen_1_1_transform_1_1_transform.html#a0b89d6fb386b0eeddbece5d700e7abf8">Aspen::Transform::Transform</a>
 </li>
 <li>Graphics()
-: <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a458de01d3de7aa6ca7b615d97e488447">Aspen::Graphics::Graphics</a>
+: <a class="el" href="class_aspen_1_1_graphics_1_1_graphics.html#a7f9d21b1790d48988300a539222eaf36">Aspen::Graphics::Graphics</a>
 </li>
 <li>Green()
 : <a class="el" href="class_aspen_1_1_graphics_1_1_color.html#a288025aa8ee581b84934983f586ee45f">Aspen::Graphics::Color</a>
@@ -377,7 +392,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Mar 25 2019 01:33:20 for Aspen by
+    <li class="footer">Generated on Wed Jul 17 2019 14:15:53 for Aspen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

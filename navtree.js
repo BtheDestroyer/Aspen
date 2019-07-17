@@ -1,6 +1,37 @@
 var NAVTREE =
 [
   [ "Aspen", "index.html", [
+    [ "Tutorial", "md_wiki_tutorial.html", [
+      [ "Foreward: So you've decided to try Aspen", "md_wiki_tutorial.html#foreward", null ],
+      [ "0. Compiling Aspen", "md_wiki_tutorial.html#compiling", [
+        [ "0.0. Installing MinGW", "md_wiki_tutorial.html#installing-mingw", null ],
+        [ "0.1. Installing Visual Studio Code", "md_wiki_tutorial.html#installing-vsc", null ],
+        [ "0.2. Installing Git", "md_wiki_tutorial.html#installing-git", null ],
+        [ "0.3. Downloading the SDL Development Libraries", "md_wiki_tutorial.html#downloading-sdl", null ],
+        [ "0.4. Downloading Aspen", "md_wiki_tutorial.html#downloading-aspen", null ]
+      ] ],
+      [ "1. Aspen's \"Hello World\"", "md_wiki_tutorial.html#hello-world", [
+        [ "1.1. Creating a Window", "md_wiki_tutorial.html#hello-window", null ],
+        [ "1.1. Creating a GameState", "md_wiki_tutorial.html#hello-gamestate", null ],
+        [ "1.2. The Debugger", "md_wiki_tutorial.html#hello-debugger", null ],
+        [ "1.3. Logs", "md_wiki_tutorial.html#hello-logs", null ],
+        [ "1.4. Custom Objects and Events", "md_wiki_tutorial.html#hello-objects", null ],
+        [ "1.5. Input", "md_wiki_tutorial.html#hello-input", null ]
+      ] ],
+      [ "2. Drawing Images", "md_wiki_tutorial.html#images", [
+        [ "2.1. Static Images", "md_wiki_tutorial.html#images-static", null ],
+        [ "2.2. Animations", "md_wiki_tutorial.html#images-animations", null ]
+      ] ],
+      [ "3. Physics", "md_wiki_tutorial.html#physics", [
+        [ "3.1. The Rigidbody", "md_wiki_tutorial.html#physics-rigidbody", null ],
+        [ "3.2. Circle Colliders", "md_wiki_tutorial.html#physics-circle", null ],
+        [ "3.3. Box/AABB Colliders", "md_wiki_tutorial.html#physics-aabb", null ]
+      ] ],
+      [ "4. Audio", "md_wiki_tutorial.html#audio", null ],
+      [ "4.1. Sound Effects", "md_wiki_tutorial.html#audio-sfx", null ],
+      [ "4.2. Music", "md_wiki_tutorial.html#audio-music", null ],
+      [ "5. Managing States", "md_wiki_tutorial.html#state-management", null ]
+    ] ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -31,8 +62,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_audio_8hpp_source.html",
-"class_aspen_1_1_graphics_1_1_line.html#a7cf38d6f6c4fa8167edb07b5afe9737d",
-"class_aspen_1_1_physics_1_1_rigidbody.html#a06e6647dd31b7615f596149277575910"
+"class_aspen_1_1_graphics_1_1_graphics.html#abb962df53b251ed009f3a4a8c3b2eb17",
+"class_aspen_1_1_physics_1_1_collision.html",
+"namespace_aspen_1_1_game_state.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
