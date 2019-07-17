@@ -29,7 +29,7 @@ endif
 endif
 OUTPUT := $(BUILD)/$(PROJECT)
 
-CXX := i686-w64-mingw32-g++.exe
+CXX := g++.exe
 CXXFLAGS := -g -I$(HEADERS) \
 						-Ilibraries/imgui \
 						-Ilibraries/imgui_sdl \
