@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 The first thing we want to do is start up Aspen's Engine. Go ahead and add the following `include` and code:
 
 ~~~~~~~~~~~~~{.cpp}
-#include "Engine.cpp"
+#include "Engine.hpp"
 
 int main(int argc, char **argv)
 {
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 Finally, we have to have some kind of loop to keep our game from closing immediately:
 
 ~~~~~~~~~~~~~{.cpp}
-#include "Engine.cpp"
+#include "Engine.hpp"
 
 int main(int argc, char **argv)
 {
@@ -259,7 +259,7 @@ int main(int argc, char **argv)
 }
 ~~~~~~~~~~~~~
 
-Now go ahead and `make run` again to build and run your project and there should be a black square in the top left (0, 0).
+We'll get back to the ideas of GameStates and the GameStateManager later. For now, go ahead and `make run` again to build and run your project and there should be a black square in the top left (0, 0).
 
 ## 1.2. The Debugger {#hello-debugger}
 
@@ -316,11 +316,257 @@ MyLog("Hello world!"); // Prints "[####] My own log: Hello world! That's all, fo
 
 ## 1.4. Custom Objects and Events {#hello-objects}
 
-*TODO*
+Now we have a Rectangle in our GameState so we can try moving it. One method of doing that is by controlling it from within the state using the [OnUpdate](https://bthedestroyer.github.io/Aspen/class_aspen_1_1_object_1_1_object.html#a34a8edeee9c0fdb461dfcdfbec4e2892) method:
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyState : public Aspen::GameState::GameState
+{
+  Aspen::Graphics::Rectangle *rectangle;
+
+public:
+    MyState(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::GameState::GameState(parent, name)
+    {
+        rectangle = new Aspen::Graphics::Rectangle(SDL_Rect({0, 0, 32, 32}), Aspen::Graphics::Colors::BLACK, true, this, "Rectangle");
+        AddChild(rectangle);
+    }
+
+    void OnUpdate()
+    {
+      // This will add 1 to the rectangle's x position every frame
+      rectangle->GetTransform()->ModifyXPosition(1);
+    }
+};
+
+// main function
+~~~~~~~~~~~~~
+
+This *will* work, but causes problems in the future. For example, what if we later make multiple states/levels that all have the same player character in them? We'd have to copy-paste a whole lot of code for moving that player around and determining how it interacts with everything else. So instead of writing everything within our GameState, we can create a new type of Object by inheriting any Object class into our own.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyObject : Aspen::Graphics::Rectangle
+{
+public:
+    MyObject(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::Graphics::Rectangle(SDL_Rect({0, 0, 32, 32}), Aspen::Graphics::Colors::BLACK, true, parent, name)
+    {
+    }
+    
+    void OnUpdate()
+    {
+      // Now that our object is updating itself rather than being controlled externally
+      // we don't have to write "rectangle->" at the start of this line
+      GetTransform()->ModifyXPosition(1);
+    }
+};
+
+class MyState : public Aspen::GameState::GameState
+{
+public:
+    MyState(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::GameState::GameState(parent, name)
+    {
+        AddChild(new MyObject());
+        // Since our object doesn't have any required parameters, you can also use this line:
+        // CreateChild<MyObject>()
+    }
+};
+
+// main function
+~~~~~~~~~~~~~
+
+One important note is that if you try to get a child of an object that doesn't exist, the request function (such as `GetTransform()`) will return `nullptr` (`0x0`). While most Objects create their own Transform, the base Aspen::Object::Object *does not*. If you're creating more abstract "Container Objects" by inheriting Aspen::Object::Object, make sure you use `CreateChild<Aspen::Transform::Transform>()` within its constructor so future `GetTransform()` calls don't cause a crash.
 
 ## 1.5. Input {#hello-input}
 
-*TODO*
+Rather than just moving objects in one direction, let's take input from the user to control our object.
+
+**Note:** Most forms of input require certain "event listeners" to exist and store input. This isn't an issue if you're still using `Aspen::Engine::START_FLAGS::ALL` when you create the Engine as they're automatically created for you.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+#include "Input.hpp"
+
+class MyObject : Aspen::Graphics::Rectangle
+{
+public:
+    // Constructor
+
+    void OnUpdate()
+    {
+      // Aspen uses SDL's events for keyboard input, so we use their SDLK names
+      if (Aspen::Input::KeyHeld(SDLK_w))
+        // In 2D graphics, (0, 0) is the top left of the window which is vertically flipped from standard 2D graphs
+        // This means -y is actually up
+        GetTransform()->ModifyYPosition(-1);
+      if (Aspen::Input::KeyHeld(SDLK_a))
+        GetTransform()->ModifyXPosition(-1);
+      if (Aspen::Input::KeyHeld(SDLK_s))
+        GetTransform()->ModifyYPosition(1);
+      if (Aspen::Input::KeyHeld(SDLK_d))
+        GetTransform()->ModifyXPosition(1);
+    }
+};
+
+// GameState class
+
+// main function
+~~~~~~~~~~~~~
+
+The above code will move any `MyObject` class using WASD input by utilizing the `Aspen::Input::KeyHeld` function which returns `true` so long as the given key is held. There are also `KeyPressed` and `KeyReleased` functions which return `true` on the first frame and after the last frame a key is pressed respectively.
+
+For mouse input, there's a little more work we have to do. First, we have to get a reference to the global `Aspen::Input::Mouse` object with `Aspen::Input::GetMouse()`. From there, we can get data from the mouse:
+
+| Property | Description |
+|----------|-------------|
+| .x | World X position of the cursor |
+| .y | World Y position of the cursor |
+| .dx | Horizontal distacne the cursor moved since last frame |
+| .dy | Vertical distacne the cursor moved since last frame |
+| .wheel | Amount the mouse wheel was scrolled since last frame (positive, negative, or zero) |
+| .left | "Key" containing a `.held`, `.pressed`, and `.released` for the left mouse button |
+| .right | "Key" containing a `.held`, `.pressed`, and `.released` for the right mouse button |
+| .middle | "Key" containing a `.held`, `.pressed`, and `.released` for the middle mouse button |
+
+You can use these properties to take mouse input and act off of it. For example, you can use `Aspen::Input::GetMouse().left.held` to determine if the left mouse button is being held or `Aspen::Input::GetMouse().wheel` to determine if the mouse wheel is being scrolled up or down.
+
+## 1.6. The Architecture of Aspen {#hello-architecture}
+
+*TBA*
+
+## 1.7. Multi-File Aspen Projects {#hello-multi-file}
+
+Programming is way faster if projects are split across multiple files rather than all in one big `main.cpp`. For one, you can organize your code so that you're not scrolling through thousands of lines every time you're looking for one function; and two, `make` only has to compile files that have been modified rather than the entire project.
+
+-# Make a new folder with nothing in it in Documents (*NOT IN ASPEN'S FOLDER*) called "FirstAspenProject".
+
+-# Now inside of that folder, let's make folders called "src", "inc", "libraries", and "resources".
+
+-# Now make a new file called "Makefile". *Note:* make sure it doesn't have the `.txt` extension. Windows hides this by default, so if you don't see file extensions like `.txt`, `.png`, `.docx`, etc. on your computer, click "View" at the top of your file explorer and then make sure "File name extensions" is checked.
+
+-# Now copy your `main.cpp` from the old "src" into the new "src".
+
+-# Copy `libAspen.a` and `libimgui.a` from your old "build" folder into the new "libraries" folder.
+
+-# Copy the old "inc" folder into the new "libraries" folder.
+
+This should now be your new folder's struture:
+
+~~~~~~~~~~~~~~~~~~~
+FirstAspenProject
+│   Makefile
+│
+├───inc
+├───libraries
+│   │   libAspen.a
+│   │   libimgui.a
+│   │
+│   └───inc
+│       │   Audio.hpp
+│       │   ****.hpp
+│       │   Version.hpp
+│       │
+│       └───SDL2
+│               ***.h
+│
+├───resources
+└───src
+        main.cpp
+~~~~~~~~~~~~~~~~~~~
+
+Now let's edit that Makefile so `make` can build our project correctly. For now, just use this one:
+
+~~~~~~~~~~~~~~~~~~~~~{Makefile}
+# Set up some variables
+SOURCES := ./src
+HEADERS := ./inc
+BUILD := ./build
+OBJECTS := $(BUILD)/obj
+# Rename aspen.exe if you want
+OUTPUT := $(BUILD)/aspen.exe
+PLATFORM :=__WIN32
+
+CXX := g++.exe
+CXXFLAGS := -g -I$(HEADERS) \
+			-Ilibraries/inc \
+			-Wall -Wextra -Wno-unused-parameter \
+			-std=c++14 \
+			-D$(PLATFORM) \
+			-mwindows -Dmain=SDL_main
+LINKFLAGS :=-LC:/MinGW/lib -L./libraries\
+            -lAspen \
+			-lmingw32 \
+			-limgui \
+			-lSDL2main -lSDL2 \
+			-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
+			-static-libstdc++ \
+            -mwindows
+ifdef RELEASE
+CXXFLAGS += -O2
+else
+CXXFLAGS += -D__DEBUG -mconsole
+LINKFLAGS += -mconsole
+endif
+
+# Find all source files
+CPPFILES := $(wildcard $(SOURCES)/*.cpp)
+HPPFILES := $(wildcard $(HEADERS)/*.hpp) $(wildcard $(HEADERS)/*.h)
+OBJFILES := $(patsubst $(SOURCES)/%.cpp, $(OBJECTS)/%.o,$(CPPFILES))
+
+#################################
+
+# Default build
+.PHONY: project
+project: $(OUTPUT)
+	@echo Built: $(OUTPUT)
+
+# Builds the executable
+$(OUTPUT): $(OBJFILES)
+	$(CXX) $(OBJFILES) $(LINKFLAGS) -o $(OUTPUT)
+	cp C:/MinGW/bin/SDL2.dll $(BUILD)
+	cp C:/MinGW/bin/SDL2_image.dll $(BUILD)
+	cp C:/MinGW/bin/SDL2_mixer.dll $(BUILD)
+	cp C:/MinGW/bin/SDL2_ttf.dll $(BUILD)
+
+# Compiles all cpp source files
+$(OBJECTS)/%.o: $(SOURCES)/%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+  
+# Auto generates required folder
+$(OBJFILES) : | $(OBJECTS)
+
+# Auto generates required folder
+$(OBJECTS): | $(BUILD)
+	@mkdir -p $@
+
+# Auto generates required folder
+$(BUILD):
+	@mkdir -p $@
+  
+# Helps with clean up
+.PHONY: clean
+clean:
+	rm -rf $(BUILD)
+
+# Helps with running
+.PHONY: run
+run: $(OUTPUT)
+	$(OUTPUT)
+~~~~~~~~~~~~~~~~~~~~~
+
+With that out of the way, let's try to run `make run` in our new folder. It should compile and run our project just like before. If not, make sure you copied all of the files and the `Makefile` source correctly.
+
+With this new setup, we can treat Aspen as any other precompiled library rather than working within the limitations of its example `Makefile`. We can now create as many header and source files we want within "inc" and "src" respectively and use them like any other multi-file aspen project.
 
 # 2. Drawing Images {#images}
 
@@ -331,6 +577,10 @@ MyLog("Hello world!"); // Prints "[####] My own log: Hello world! That's all, fo
 *TODO*
 
 ## 2.2. Animations {#images-animations}
+
+*TODO*
+
+## 2.3. Custom Window Size {#images-window}
 
 *TODO*
 
@@ -358,14 +608,34 @@ MyLog("Hello world!"); // Prints "[####] My own log: Hello world! That's all, fo
 
 *TODO*
 
-# 4.1. Sound Effects {#audio-sfx}
+## 4.1. Sound Effects {#audio-sfx}
 
 *TODO*
 
-# 4.2. Music {#audio-music}
+## 4.2. Music {#audio-music}
 
 *TODO*
 
-# 5. Managing States {#state-management}
+# 5. Game State Manager {#state-manager}
+
+*TODO*
+
+## 5.1. Loading multiple states {#state-load}
+
+*TODO*
+
+## 5.2. Swapping States {#state-swap}
+
+*TODO*
+
+## 5.3. Reloading States {#state-reload}
+
+*TODO*
+
+# 6. Event Manager {#event-manager}
+
+*TODO*
+
+## 6.1. Custom Events {#event-custom}
 
 *TODO*

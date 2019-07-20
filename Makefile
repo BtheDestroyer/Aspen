@@ -31,17 +31,17 @@ OUTPUT := $(BUILD)/$(PROJECT)
 
 CXX := g++.exe
 CXXFLAGS := -g -I$(HEADERS) \
-						-Ilibraries/imgui \
-						-Ilibraries/imgui_sdl \
-						-Wall -Wextra -Wno-unused-parameter \
-						-std=c++14 \
-						-D$(PLATFORM)
-LINKFLAGS :=-LC:\mingw32\mingw32\i686-w64-mingw32\lib -Lbuild\
-						-lmingw32 \
-						-limgui \
-						-lSDL2main -lSDL2 \
-						-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
-						-static-libstdc++
+			-Ilibraries/imgui \
+			-Ilibraries/imgui_sdl \
+			-Wall -Wextra -Wno-unused-parameter \
+			-std=c++14 \
+			-D$(PLATFORM)
+LINKFLAGS :=-LC:/MinGW/lib -Lbuild\
+			-lmingw32 \
+			-limgui \
+			-lSDL2main -lSDL2 \
+			-lSDL2_image -lSDL2_ttf -lSDL2_mixer \
+			-static-libstdc++
 ifdef RELEASE
 CXXFLAGS += -O2
 else
