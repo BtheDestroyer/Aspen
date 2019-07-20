@@ -115,6 +115,7 @@ Now let's finally download Aspen!
 -# If you got no errors, you should now have a `build` folder in Aspen's folder.
   -# If you got errors about SDL, redo [0.3](#downloading-sdl).
   -# If you got errors about imgui or imgui_sdl, delete the `Aspen` folder you created and reclone the project with `--recurse-submodules`.
+  -# If you *still* get errors about imgui or imgui_sdl, download the precompiled `libimgui.a` from [here](https://github.com/BtheDestroyer/Aspen/releases/download/v0.1.2/libimgui.a);
 -# This will contain a file called `aspen.exe` which you can run to see the example project.
   -# If you get an error with the title "aspen.exe - Entry Point Not Found", go back to the folder from [0.3](#downloading-sdl) that you copied into your MinGW instalation (either `i686-***` or `x86_64-***`) and open the `bin` folder.
   -# Copy all of the `.dll` files into `Aspen\build`.
