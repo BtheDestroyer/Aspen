@@ -5,7 +5,7 @@ var class_aspen_1_1_graphics_1_1_sprite =
     [ "~Sprite", "class_aspen_1_1_graphics_1_1_sprite.html#a99a5744ec1642049eb86df2b8ff443be", null ],
     [ "End", "class_aspen_1_1_graphics_1_1_sprite.html#a75e59469fcc8e8116ec2189f01342298", null ],
     [ "GenerateTexture", "class_aspen_1_1_graphics_1_1_sprite.html#adc96455c0ed7b999ce14c7091952fc58", null ],
-    [ "GetPath", "class_aspen_1_1_graphics_1_1_sprite.html#a465f0cab7f12bcf4c4ebc5de59446517", null ],
+    [ "GetPath", "class_aspen_1_1_graphics_1_1_sprite.html#a7913b15120b42d0e146b4db5367c86da", null ],
     [ "GetRect", "class_aspen_1_1_graphics_1_1_sprite.html#a030c77eb2b7ebaf87d44402496b2ce23", null ],
     [ "GetSurface", "class_aspen_1_1_graphics_1_1_sprite.html#a4e2dbcf2dd4ec0760adb048b0713fa3c", null ],
     [ "GetTexture", "class_aspen_1_1_graphics_1_1_sprite.html#a8f55967115e38395cbd03abc6326b291", null ],

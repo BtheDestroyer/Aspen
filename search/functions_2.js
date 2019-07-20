@@ -2,7 +2,7 @@ var searchData=
 [
   ['camera',['Camera',['../class_aspen_1_1_graphics_1_1_camera.html#adc9c6587ceea67aeaea020d41d32a045',1,'Aspen::Graphics::Camera']]],
   ['children',['Children',['../class_aspen_1_1_object_1_1_object.html#ad8321ae36e9729433de08ddc6987d9f6',1,'Aspen::Object::Object']]],
-  ['childrencount',['ChildrenCount',['../class_aspen_1_1_object_1_1_object.html#aaac9dc5ba684bb92262973fd8634dfb3',1,'Aspen::Object::Object']]],
+  ['childrencount',['ChildrenCount',['../class_aspen_1_1_object_1_1_object.html#a36e744e2119a182b1fea4c7a426db111',1,'Aspen::Object::Object']]],
   ['circlecollider',['CircleCollider',['../class_aspen_1_1_physics_1_1_circle_collider.html#a1577fba919f6c42e258c0ab67fc42771',1,'Aspen::Physics::CircleCollider::CircleCollider(Object *parent=nullptr, std::string name=&quot;CircleCollider&quot;)'],['../class_aspen_1_1_physics_1_1_circle_collider.html#aac6d3e880bea1abfe602b166c7612869',1,'Aspen::Physics::CircleCollider::CircleCollider(double radius, Object *parent=nullptr, std::string name=&quot;CircleCollider&quot;)']]],
   ['close',['Close',['../class_aspen_1_1_debug_1_1_debug.html#acc2c146c3d04dc831b7b58ebf37a3f0f',1,'Aspen::Debug::Debug']]],
   ['closeall',['CloseAll',['../class_aspen_1_1_debug_1_1_debug.html#a573601d3dbcf58660e5e62ae16f8640e',1,'Aspen::Debug::Debug']]],
