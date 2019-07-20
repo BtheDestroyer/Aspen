@@ -46,7 +46,8 @@ var NAVTREE =
       [ "2. Drawing Images", "md_wiki_tutorial.html#images", [
         [ "2.1. Static Images", "md_wiki_tutorial.html#images-static", null ],
         [ "2.2. Animations", "md_wiki_tutorial.html#images-animations", null ],
-        [ "2.3. Custom Window Size", "md_wiki_tutorial.html#images-window", null ]
+        [ "2.3. Custom Window Size", "md_wiki_tutorial.html#images-window", null ],
+        [ "2.4. Cameras", "md_wiki_tutorial.html#images-camera", null ]
       ] ],
       [ "3. Physics", "md_wiki_tutorial.html#physics", [
         [ "3.1. The Rigidbody", "md_wiki_tutorial.html#physics-rigidbody", null ],

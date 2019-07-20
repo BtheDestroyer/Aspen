@@ -230,6 +230,7 @@ var NAVTREEINDEX2 =
 "md_wiki_tutorial.html#hello-world":[0,2],
 "md_wiki_tutorial.html#images":[0,3],
 "md_wiki_tutorial.html#images-animations":[0,3,1],
+"md_wiki_tutorial.html#images-camera":[0,3,3],
 "md_wiki_tutorial.html#images-static":[0,3,0],
 "md_wiki_tutorial.html#images-window":[0,3,2],
 "md_wiki_tutorial.html#installing-git":[0,1,2],
@@ -243,11 +244,10 @@ var NAVTREEINDEX2 =
 "md_wiki_tutorial.html#state-manager":[0,6],
 "md_wiki_tutorial.html#state-reload":[0,6,2],
 "md_wiki_tutorial.html#state-swap":[0,6,1],
-"namespace_aspen.html":[1,0,0],
 "namespace_aspen.html":[2,0,0],
-"namespace_aspen_1_1_audio.html":[2,0,0,0],
+"namespace_aspen.html":[1,0,0],
 "namespace_aspen_1_1_audio.html":[1,0,0,0],
-"namespace_aspen_1_1_controller.html":[1,0,0,1],
+"namespace_aspen_1_1_audio.html":[2,0,0,0],
 "namespace_aspen_1_1_controller.html":[2,0,0,1],
-"namespace_aspen_1_1_debug.html":[1,0,0,2]
+"namespace_aspen_1_1_controller.html":[1,0,0,1]
 };
