@@ -443,7 +443,7 @@ You can use these properties to take mouse input and act off of it. For example,
 
 ## 1.6. The Architecture of Aspen {#hello-architecture}
 
-![Architecture](./Architecture.png)
+First, [middle-click (or ctrl+click) this link to view a graph of Aspen's architecture in a new tab](https://raw.githubusercontent.com/BtheDestroyer/Aspen/master/wiki/Architecture.png).
 
 Don't get intimidated by this image! Let's break things down a bit:
 
@@ -655,7 +655,7 @@ This should create your image in the center of the window.
 
 Animations are a little trickier as the have to take another Object as a parameter called a Spritesheet. Currently, there's only the UniformSpritesheet, so use that.
 
-If you don't have a spritesheet file to test with or don't know what "uniform" means in that context, take a look at these ones by @ScissorMarks: https://arks.itch.io/dino-characters
+If you don't have a spritesheet file to test with or don't know what "uniform" means in that context, take a look at these ones by \@ScissorMarks: https://arks.itch.io/dino-characters
 
 The "Uniform" of UniformSpritesheet just means every frame of an animation is equally sized and directly next to each other in a grid. Frames of animation may be split across multiple lines, so long as the line break is at the horizontal end of the image (not randomly in the middle of it). You can only have one animation per file with UniformSpritesheets, so if you download one with multiple animations, make sure you split it up.
 
@@ -706,9 +706,146 @@ public:
 
 If you want to check when an Animation loops (making sure it only runs a certain number of times, for example), then you can use its `Done()` method which is true for 1 update cycle after an Animation loops.
 
+To add different animations to a character, you can create a more generic Object class and then attach multiple animations to it as children. From there you can switch between animations by `Activate()`ing and `Deactivate()`ing different animations.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyObject : public Aspen::Object::Object
+{
+  Aspen::Graphics::Animation *idle;
+  Aspen::Graphics::Animation *walking;
+
+public:
+  MyObject(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+    : Aspen::Object::Object(parent, name)
+  {
+      //We have to give our object a transform
+      CreateChild<Aspen::Transform::Transform>();
+      // Make sure you move the MyObject transform and not the animation transforms!
+      // This will make all of the animations stay in place
+      GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH / 2, Aspen::Graphics::DEFAULT_WINDOW_HEIGHT / 2);
+
+      // Create a new Animation
+      walking = new Aspen::Graphics::Animation(
+        new Aspen::Graphics::UniformSpritesheet("./resources/dino - walk.png", 24, 24, 7, nullptr, "Dino Walk Sheet"),
+        1.0f / 12.0f, this, "Dino Walk Animation");
+      AddChild(walking);
+      walking->Deactivate();
+
+      // Create another new Animation
+      idle = new Aspen::Graphics::Animation(
+        new Aspen::Graphics::UniformSpritesheet("./resources/dino - idle.png", 24, 24, 1, nullptr, "Dino Idle Sheet"),
+        1.0f / 12.0f, this, "Dino Idle Animation");
+      AddChild(idle);
+  }
+
+  void OnUpdate()
+  {
+    // "walk" when A is pressed
+    if (Aspen::Input::KeyPressed(SDLK_a))
+    {
+      walking->Activate();
+      idle->Deactivate();
+    }
+    // "idle" when D is pressed
+    if (Aspen::Input::KeyPressed(SDLK_d))
+    {
+      walking->Deactivate();
+      idle->Activate();
+    }
+  }
+}
+
+class MyState : public Aspen::GameState::GameState
+{
+public:
+    MyState(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::GameState::GameState(parent, name)
+    {
+        CreateChild<MyObject>();
+    }
+};
+
+// main function
+~~~~~~~~~~~~~
+
 ## 2.3. Custom Window Size {#images-window}
 
-*TODO*
+Now that we've got some images displaying and animating, let's change the size of our window when we create it. In order to do that, we actually have to tell the Engine to *not* make a window, then we can attach our own later. We can deselect certain START_FLAGS options with the bitwise XOR operator (`^`) and bitwise OR operator (`|`).
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+// custom object
+
+// custom state
+
+int main(int argc, char **argv)
+{
+    Aspen::Engine::Engine engine(Aspen::Engine::START_FLAGS::ALL ^ (
+      // Disable graphics creation
+      Aspen::Engine::START_FLAGS::CREATE_GRAPHICS |
+      // We also have to disable the debugger and fontcache since they rely on graphics
+      Aspen::Engine::START_FLAGS::CREATE_GRAPHICS_DEBUGGER |
+      Aspen::Engine::START_FLAGS::CREATE_GRAPHICS_FONTCACHE));
+
+    // Create a new graphics window at a given size. 720p, 16:9 in this case
+    Aspen::Graphics::Graphics *gfx = new Aspen::Graphics::Graphics(1280, 720);
+    // Re-add the debugger and fontcache to our graphics
+    gfx->CreateChild<Aspen::Debug::Debug>();
+    gfx->CreateChild<Aspen::Graphics::FontCache>();
+    // Add the graphics to the engine
+    engine.AddChild(gfx);
+    
+    engine.FindChildOfType<Aspen::GameState::GameStateManager>()->LoadState<MyState>(true);
+
+    while (engine)
+        engine();
+    return 0;
+}
+~~~~~~~~~~~~~
+
+## 2.4. Cameras {#images-camera}
+
+If we wanted to move the "camera" right now in our game, we would have to move the "world" (ie: all other objects) of our game around our player character rather than actually moving the player character. Instead, we can create a Camera object and just have our player character be the parent. That way, the camera will inherit the transformation properties of its parent and "follow" the player around.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyObject : public Aspen::Object::Object
+{
+  // animations
+
+public:
+  MyObject(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+    : Aspen::Object::Object(parent, name)
+  {
+      // Set up animations
+
+      Aspen::Graphics::Camera *cam = new Aspen::Graphics::Camera();
+      cam->SelectCamera();
+      // Move the camera to be offset by half of the window resolution
+      // This way our MyObject is centered rather than located at the top left corner
+      cam->GetTransform()->SetPosition(-1280 / 2, -720 / 2);
+      AddChild(cam);
+  }
+
+  // OnUpdate
+}
+
+// custom state class
+
+// main function
+~~~~~~~~~~~~~
+
+Once that's taken care of, we should have our created object at the center of the window. At this point if you move it, it shouldn't *appear* to be moving because the camera is moving with it, but if you add some Rectangles or Sprites to your state at different positions, you should see all of them moving instead.
 
 # 3. Physics {#physics}
 
