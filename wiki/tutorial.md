@@ -208,6 +208,7 @@ Now we can create *other* objects within our state's constructor. Let's start wi
 // main.cpp
 
 // includes
+#include "Graphics.hpp"
 
 class MyState : public Aspen::GameState::GameState
 {
@@ -442,7 +443,49 @@ You can use these properties to take mouse input and act off of it. For example,
 
 ## 1.6. The Architecture of Aspen {#hello-architecture}
 
-*TBA*
+![Architecture](./Architecture.png)
+
+Don't get intimidated by this image! Let's break things down a bit:
+
+### Why and how?
+
+Everything you see in this tree is in *some way* an Object (Aspen::Object::Object) through inheritence. The idea here is that Objects have a list of children (internally, std::vector<Aspen::Object::Object *>) and a parent (internally, Aspen::Object::Object *) to organize and order execution of their code. This can be a little confusing, but it can also be extremely useful. For example, we've been creating Objects using dynamic memory allocation through `new`, but we never have to free them with `delete` because they are freed by their parent automatically. It also means we can use special methods that are automatically run like `OnUpdate`, `OnCollision`, `OnMouseClick`, etc. We can also go up the tree with methods like `Parent()` and `FindAncestorOfType<CLASS>()`; we can go down the tree with methods like `Children()`, `FindChildOfType<CLASS>()`, and `FindDescendentOfType<CLASS>()`.
+
+There are a few non-Object classes in Aspen, though they act statically (eg: Aspen::Log::Log).
+
+### Engine and Modules
+
+The core of the Aspen engine is... the Engine class! It doesn't do much on its own, but it does have some advantages over a regular Object.
+
+* It has ways to automatically set up *all* of the built-in objects (that's what the START_FLAGS are for).
+* Rather than going all the way up the tree every time we want to find it, we can instead use `Aspen::Engine::Engine::Get()` to immediately get the core Engine.
+  * This is useful if you need to access any of the core modules.
+
+I've used the term "module" a few times. What that term means is "any object that's a direct child of Engine." The intention is that modules allow Aspen to be... well, modular; to allow custom "plugin" modules to act as extensions if certain functionality doesn't exist in the core engine or even replacing the default, say, Physics module with your own custom implementation.
+
+### EventHandler
+
+This distributes events from the system (and potentially other Objects) to the appropriate EventListener. Built-in Listeners include those for tracking keyboard and mouse input.
+
+### Audio
+
+Handles audio like sound effects and music.
+
+### Physics
+
+Assists in physics calculation and collision detection/resolution.
+
+### Time
+
+Tracks time properties (like `DeltaTime()`) and limits the framerate if requested.
+
+### Graphics
+
+Creates and handles windows. Contains Debug for viewing the Object-tree in-application and the FontCache for loading/storing ttf fonts.
+
+### GameStateManager
+
+This is the big one. This contains different GameStates classes that have been loaded which contain different Objects. Objects can also have children which inherit their parent's transformation properties.
 
 ## 1.7. Multi-File Aspen Projects {#hello-multi-file}
 
@@ -537,6 +580,7 @@ $(OUTPUT): $(OBJFILES)
 	cp C:/MinGW/bin/SDL2_image.dll $(BUILD)
 	cp C:/MinGW/bin/SDL2_mixer.dll $(BUILD)
 	cp C:/MinGW/bin/SDL2_ttf.dll $(BUILD)
+  cp resources $(BUilD)
 
 # Compiles all cpp source files
 $(OBJECTS)/%.o: $(SOURCES)/%.cpp
@@ -566,19 +610,101 @@ run: $(OUTPUT)
 
 With that out of the way, let's try to run `make run` in our new folder. It should compile and run our project just like before. If not, make sure you copied all of the files and the `Makefile` source correctly.
 
-With this new setup, we can treat Aspen as any other precompiled library rather than working within the limitations of its example `Makefile`. We can now create as many header and source files we want within "inc" and "src" respectively and use them like any other multi-file aspen project.
+With this new setup, we can treat Aspen as any other precompiled library rather than working within the limitations of its example `Makefile`. We can now create as many header and source files we want within "inc" and "src" respectively and use them like any other multi-file C++ project.
 
 # 2. Drawing Images {#images}
 
-*TODO*
+There are a few types of ways we can draw images. Static/unchanging images are called Sprites while images that change from frame to frame are called Animations.
 
 ## 2.1. Static Images {#images-static}
 
-*TODO*
+To make a Sprite, we'll need an image. If you don't have one, you can use [Aspen's logo](https://github.com/BtheDestroyer/Aspen/blob/master/Aspen_Logo.256.png) for now. Make sure whatever image you use is located in "resources" and that it's either a `.png` or `.bmp`. Currently Aspen does *not* have jpg support.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+// object class
+
+class MyState : public Aspen::GameState::GameState
+{
+public:
+    MyState(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::GameState::GameState(parent, name)
+    {
+        // Create a new Sprite
+        Aspen::Graphics::Sprite *sprite = new Aspen::Graphics::Sprite(
+          // First parameter is the path
+          "./resources/aspen.png",
+          // Final parameters are standard and optional
+          this, "Aspen Icon");
+        // Center the image
+        sprite->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH / 2, Aspen::Graphics::DEFAULT_WINDOW_HEIGHT / 2)
+        // Add the sprite as a child of the state
+        AddChild(sprite);
+    }
+};
+
+// main function
+~~~~~~~~~~~~~
+
+This should create your image in the center of the window.
 
 ## 2.2. Animations {#images-animations}
 
-*TODO*
+Animations are a little trickier as the have to take another Object as a parameter called a Spritesheet. Currently, there's only the UniformSpritesheet, so use that.
+
+If you don't have a spritesheet file to test with or don't know what "uniform" means in that context, take a look at these ones by @ScissorMarks: https://arks.itch.io/dino-characters
+
+The "Uniform" of UniformSpritesheet just means every frame of an animation is equally sized and directly next to each other in a grid. Frames of animation may be split across multiple lines, so long as the line break is at the horizontal end of the image (not randomly in the middle of it). You can only have one animation per file with UniformSpritesheets, so if you download one with multiple animations, make sure you split it up.
+
+The below code should create an Animation at the center of your window. If your program crashes or nothing shows up, make sure you have your files named correctly and are inputting the correct frame sizes and count.
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+// object class
+
+class MyState : public Aspen::GameState::GameState
+{
+public:
+    MyState(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+      : Aspen::GameState::GameState(parent, name)
+    {
+        // Create a new Spritesheet
+        Aspen::Graphics::UniformSpritesheet *sheet = new Aspen::Graphics::UniformSpritesheet(
+          // First parameter is the path
+          "./resources/dino - walk.png",
+          // Then the size of each frame
+          24, 24,
+          // Now the number of frames
+          7,
+          // Final parameters are standard and optional
+          nullptr, "Dino Walk Sheet");
+
+        // Create a new Animation
+        Aspen::Graphics::Animation *anim = new Aspen::Graphics::Animation(
+          // First parameter is the Spritesheet
+          sheet,
+          // Then enter the number of seconds each frame should be displayed
+          // You can enter "1.0f / FPS" to convert frames per second into seconds per frame
+          1.0f / 12.0f,
+          // Final parameters are standard and optional
+          this, "Dino Walk Animation");
+        // Center the image
+        anim->GetTransform()->SetPosition(Aspen::Graphics::DEFAULT_WINDOW_WIDTH / 2, Aspen::Graphics::DEFAULT_WINDOW_HEIGHT / 2)
+        // Add the sprite as a child of the state
+        AddChild(anim);
+    }
+};
+
+// main function
+~~~~~~~~~~~~~
+
+If you want to check when an Animation loops (making sure it only runs a certain number of times, for example), then you can use its `Done()` method which is true for 1 update cycle after an Animation loops.
 
 ## 2.3. Custom Window Size {#images-window}
 
