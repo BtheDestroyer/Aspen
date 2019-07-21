@@ -864,21 +864,80 @@ Once that's taken care of, we should have our created object at the center of th
 
 *TODO*
 
-## 3.4. Collision Events {#physics-aabb}
+## 3.4. Collision Events {#physics-collision}
 
 *TODO*
 
 # 4. Audio {#audio}
 
-*TODO*
+Audio is actually fairly easy to implement in Aspen since all of the set up, clean up, and playback tracking is taken care of already.
 
 ## 4.1. Sound Effects {#audio-sfx}
 
-*TODO*
+We can play sound effects with Aspen::Audio::SoundEffect like this:
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyObject : public Aspen::Object::Object
+{
+  Aspen::Audio::SoundEffect *sound;
+
+public:
+  MyObject(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+    : Aspen::Object::Object(parent, name)
+  {
+      // Load the sound by providing a file path
+      sound = new Aspen::Audio::SoundEffect("./resources/sound.wav");
+      AddChild(sound);
+      // Play the sound like this
+      sound->Play();
+  }
+}
+
+// custom state class
+
+// main function
+~~~~~~~~~~~~~
+
+SoundEffects can be played multiple times and will automatically select an open channel (unless one is specified: `sound->Play(3)`).
 
 ## 4.2. Music {#audio-music}
 
-*TODO*
+We can play music with Aspen::Audio::Music like this:
+
+~~~~~~~~~~~~~{.cpp}
+// main.cpp
+
+// includes
+
+class MyObject : public Aspen::Object::Object
+{
+  Aspen::Audio::Music *sound;
+
+public:
+  MyObject(Aspen::Object::Object *parent = nullptr, std::string name = "My State")
+    : Aspen::Object::Object(parent, name)
+  {
+      // Load the sound by providing a file path
+      sound = new Aspen::Audio::Music("./resources/sound.wav");
+      AddChild(sound);
+      sound->Play(
+        // Loop = true
+        true,
+        // 1 second of fade-in
+        1.0f);
+  }
+}
+
+// custom state class
+
+// main function
+~~~~~~~~~~~~~
+
+Only one Music can play at a time and they're streamed rather than buffered, so there's not much that you can do other than play them.
 
 # 5. Game State Manager {#state-manager}
 
