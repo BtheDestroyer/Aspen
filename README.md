@@ -24,3 +24,15 @@
   * The most recent release has been giving people issues. You should get [this version instead](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.4-mingw.tar.gz).
 * [SDL2_ttf Development Libraries](https://www.libsdl.org/projects/SDL_ttf/)
 * [SDL_mixer Development Libraries](https://www.libsdl.org/projects/SDL_mixer/)
+
+## Things Made with Aspen
+
+* https://github.com/BigCrocsOnFEET419point9/sologame
+* https://github.com/D4ni3136599/PikuseruProject
+* https://github.com/sOlBo/IBF
+* https://github.com/Clacaeno/60SecondSlayer
+* https://github.com/rabu870/jack-eli
+* https://github.com/swimfan72/Guitar-God
+* https://github.com/Ivorchu/Super-Bruhs
+* https://github.com/filmamthedude/Shoerunbyonlyshawn
+* https://github.com/Corvuon/TeamGame2
